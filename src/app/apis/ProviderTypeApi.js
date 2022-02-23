@@ -7,7 +7,7 @@ const controllerName = 'providertypes';
 const baseUrl = `https://192.168.2.169:5001/api/v${ver}/${controllerName}`;
 
 
-export class ProviderType {
+export class ProviderTypeApi {
   async getAll() {
     try {
       const res = await axios({

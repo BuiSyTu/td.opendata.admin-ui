@@ -9,11 +9,13 @@ const CategoriesPage = () => {
   const LoaiDiaDiemPage = lazy(() => import('./loai-dia-diem/LoaiDiaDiemPage'));
   const DiaDiemPage = lazy(() => import('./dia-diem/DiaDiemPage'));
   const GioiTinhPage = lazy(() => import('./gioi-tinh/GioiTinhPage'));
-  const LoaiDuLieuPage = lazy(() => import('./loai-du-lieu/LoaiDuLieuPage'))
+  const LoaiDuLieuPage = lazy(() => import('./loai-du-lieu/LoaiDuLieuPage'));
+  const HinhThucCungCapPage = lazy(() => import('./hinh-thuc-cung-cap/HinhThucCungCapPage'))
   return (
     <Switch>
       <Route path='/categories/data-type' component={LoaiDuLieuPage}></Route>
       <Route path='/categories/fields' component={LinhVucPage}></Route>
+      <Route path='/categories/provider-type' component={HinhThucCungCapPage}></Route>
       <Route path='/categories/genders' component={GioiTinhPage}></Route>
       <Route path='/categories/identitytypes' component={LoaiGiayToPage}></Route>
       <Route path='/categories/maritalstatus' component={TinhTrangHonNhanPage}></Route>

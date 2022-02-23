@@ -8,12 +8,12 @@ import {
   Modal,
   Spin,
 } from 'antd';
-import {CategoryApi} from '../../../../apis/CategoryApi';
+import {ProviderTypeApi} from '../../../../apis/ProviderTypeApi';
 
 const {TextArea} = Input;
 const {Text} = Typography;
 
-const categoryApi = new CategoryApi();
+const providerTypeApi = new ProviderTypeApi();
 
 const ModalCategory = (props) => {
   const {modalVisible, setModalVisible, modalId, setModalId, typeModal, setTypeModal, setUpdate} = props;
@@ -29,7 +29,7 @@ const ModalCategory = (props) => {
     const fetchData = async () => {
       try {
         setIsLoading(true);
-        var res = await categoryApi.getById(modalId);
+        var res = await providerTypeApi.getById(modalId);
         if (res?.data) {
           form.setFieldsValue(res?.data);
         }
@@ -63,7 +63,7 @@ const ModalCategory = (props) => {
   const postData = async (data) => {
     try {
       setButtonLoading(true);
-      var res = await categoryApi.add(data);
+      var res = await providerTypeApi.add(data);
       if (res) {
         notification.success({
           message: 'Thêm mới thành công!',
@@ -86,7 +86,7 @@ const ModalCategory = (props) => {
   const putData = async (data) => {
     try {
       setButtonLoading(true);
-      var res = await categoryApi.update(modalId, data);
+      var res = await providerTypeApi.update(modalId, data);
       if (res) {
         notification.success({
           message: 'Cập nhập thành công!',
