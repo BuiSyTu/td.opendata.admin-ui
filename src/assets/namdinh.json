@@ -1,0 +1,1207 @@
+[{
+    "level1_id":"36",
+    "name":"Tỉnh Nam Định",
+    "type":"Tỉnh",
+    "children":[
+       {
+          "level2_id":"356",
+          "name":"Thành phố Nam Định",
+          "type":"Thành phố",
+          "children":[
+             {
+                "level3_id":"13633",
+                "name":"Phường Hạ Long",
+                "type":"Phường"
+             },
+             {
+                "level3_id":"13636",
+                "name":"Phường Trần Tế Xương",
+                "type":"Phường"
+             },
+             {
+                "level3_id":"13639",
+                "name":"Phường Vị Hoàng",
+                "type":"Phường"
+             },
+             {
+                "level3_id":"13642",
+                "name":"Phường Vị Xuyên",
+                "type":"Phường"
+             },
+             {
+                "level3_id":"13645",
+                "name":"Phường Quang Trung",
+                "type":"Phường"
+             },
+             {
+                "level3_id":"13648",
+                "name":"Phường Cửa Bắc",
+                "type":"Phường"
+             },
+             {
+                "level3_id":"13651",
+                "name":"Phường Nguyễn Du",
+                "type":"Phường"
+             },
+             {
+                "level3_id":"13654",
+                "name":"Phường Bà Triệu",
+                "type":"Phường"
+             },
+             {
+                "level3_id":"13657",
+                "name":"Phường Trường Thi",
+                "type":"Phường"
+             },
+             {
+                "level3_id":"13660",
+                "name":"Phường Phan Đình Phùng",
+                "type":"Phường"
+             },
+             {
+                "level3_id":"13663",
+                "name":"Phường Ngô Quyền",
+                "type":"Phường"
+             },
+             {
+                "level3_id":"13666",
+                "name":"Phường Trần Hưng Đạo",
+                "type":"Phường"
+             },
+             {
+                "level3_id":"13669",
+                "name":"Phường Trần Đăng Ninh",
+                "type":"Phường"
+             },
+             {
+                "level3_id":"13672",
+                "name":"Phường Năng Tĩnh",
+                "type":"Phường"
+             },
+             {
+                "level3_id":"13675",
+                "name":"Phường Văn Miếu",
+                "type":"Phường"
+             },
+             {
+                "level3_id":"13678",
+                "name":"Phường Trần Quang Khải",
+                "type":"Phường"
+             },
+             {
+                "level3_id":"13681",
+                "name":"Phường Thống Nhất",
+                "type":"Phường"
+             },
+             {
+                "level3_id":"13684",
+                "name":"Phường Lộc Hạ",
+                "type":"Phường"
+             },
+             {
+                "level3_id":"13687",
+                "name":"Phường Lộc Vượng",
+                "type":"Phường"
+             },
+             {
+                "level3_id":"13690",
+                "name":"Phường Cửa Nam",
+                "type":"Phường"
+             },
+             {
+                "level3_id":"13693",
+                "name":"Phường Lộc Hòa",
+                "type":"Phường"
+             },
+             {
+                "level3_id":"13696",
+                "name":"Xã Nam Phong",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13699",
+                "name":"Phường Mỹ Xá",
+                "type":"Phường"
+             },
+             {
+                "level3_id":"13702",
+                "name":"Xã Lộc An",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13705",
+                "name":"Xã Nam Vân",
+                "type":"Xã"
+             }
+          ]
+       },
+       {
+          "level2_id":"358",
+          "name":"Huyện Mỹ Lộc",
+          "type":"Huyện",
+          "children":[
+             {
+                "level3_id":"13708",
+                "name":"Thị trấn Mỹ Lộc",
+                "type":"Thị trấn"
+             },
+             {
+                "level3_id":"13711",
+                "name":"Xã Mỹ Hà",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13714",
+                "name":"Xã Mỹ Tiến",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13717",
+                "name":"Xã Mỹ Thắng",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13720",
+                "name":"Xã Mỹ Trung",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13723",
+                "name":"Xã Mỹ Tân",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13726",
+                "name":"Xã Mỹ Phúc",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13729",
+                "name":"Xã Mỹ Hưng",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13732",
+                "name":"Xã Mỹ Thuận",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13735",
+                "name":"Xã Mỹ Thịnh",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13738",
+                "name":"Xã Mỹ Thành",
+                "type":"Xã"
+             }
+          ]
+       },
+       {
+          "level2_id":"359",
+          "name":"Huyện Vụ Bản",
+          "type":"Huyện",
+          "children":[
+             {
+                "level3_id":"13741",
+                "name":"Thị trấn Gôi",
+                "type":"Thị trấn"
+             },
+             {
+                "level3_id":"13744",
+                "name":"Xã Minh Thuận",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13747",
+                "name":"Xã Hiển Khánh",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13750",
+                "name":"Xã Tân Khánh",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13753",
+                "name":"Xã Hợp Hưng",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13756",
+                "name":"Xã Đại An",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13759",
+                "name":"Xã Tân Thành",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13762",
+                "name":"Xã Cộng Hòa",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13765",
+                "name":"Xã Trung Thành",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13768",
+                "name":"Xã Quang Trung",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13771",
+                "name":"Xã Minh Tân",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13774",
+                "name":"Xã Liên Bảo",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13777",
+                "name":"Xã Thành Lợi",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13780",
+                "name":"Xã Kim Thái",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13783",
+                "name":"Xã Liên Minh",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13786",
+                "name":"Xã Đại Thắng",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13789",
+                "name":"Xã Tam Thanh",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13792",
+                "name":"Xã Vĩnh Hào",
+                "type":"Xã"
+             }
+          ]
+       },
+       {
+          "level2_id":"360",
+          "name":"Huyện Ý Yên",
+          "type":"Huyện",
+          "children":[
+             {
+                "level3_id":"13795",
+                "name":"Thị trấn Lâm",
+                "type":"Thị trấn"
+             },
+             {
+                "level3_id":"13798",
+                "name":"Xã Yên Trung",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13801",
+                "name":"Xã Yên Thành",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13804",
+                "name":"Xã Yên Tân",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13807",
+                "name":"Xã Yên Lợi",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13810",
+                "name":"Xã Yên Thọ",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13813",
+                "name":"Xã Yên Nghĩa",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13816",
+                "name":"Xã Yên Minh",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13819",
+                "name":"Xã Yên Phương",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13822",
+                "name":"Xã Yên Chính",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13825",
+                "name":"Xã Yên Bình",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13828",
+                "name":"Xã Yên Phú",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13831",
+                "name":"Xã Yên Mỹ",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13834",
+                "name":"Xã Yên Dương",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13840",
+                "name":"Xã Yên Hưng",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13843",
+                "name":"Xã Yên Khánh",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13846",
+                "name":"Xã Yên Phong",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13849",
+                "name":"Xã Yên Ninh",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13852",
+                "name":"Xã Yên Lương",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13855",
+                "name":"Xã Yên Hồng",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13858",
+                "name":"Xã Yên Quang",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13861",
+                "name":"Xã Yên Tiến",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13864",
+                "name":"Xã Yên Thắng",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13867",
+                "name":"Xã Yên Phúc",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13870",
+                "name":"Xã Yên Cường",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13873",
+                "name":"Xã Yên Lộc",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13876",
+                "name":"Xã Yên Bằng",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13879",
+                "name":"Xã Yên Đồng",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13882",
+                "name":"Xã Yên Khang",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13885",
+                "name":"Xã Yên Nhân",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13888",
+                "name":"Xã Yên Trị",
+                "type":"Xã"
+             }
+          ]
+       },
+       {
+          "level2_id":"361",
+          "name":"Huyện Nghĩa Hưng",
+          "type":"Huyện",
+          "children":[
+             {
+                "level3_id":"13891",
+                "name":"Thị trấn Liễu Đề",
+                "type":"Thị trấn"
+             },
+             {
+                "level3_id":"13894",
+                "name":"Thị trấn Rạng Đông",
+                "type":"Thị trấn"
+             },
+             {
+                "level3_id":"13897",
+                "name":"Xã Nghĩa Đồng",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13900",
+                "name":"Xã Nghĩa Thịnh",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13903",
+                "name":"Xã Nghĩa Minh",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13906",
+                "name":"Xã Nghĩa Thái",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13909",
+                "name":"Xã Hoàng Nam",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13912",
+                "name":"Xã Nghĩa Châu",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13915",
+                "name":"Xã Nghĩa Trung",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13918",
+                "name":"Xã Nghĩa Sơn",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13921",
+                "name":"Xã Nghĩa Lạc",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13924",
+                "name":"Xã Nghĩa Hồng",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13927",
+                "name":"Xã Nghĩa Phong",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13930",
+                "name":"Xã Nghĩa Phú",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13933",
+                "name":"Xã Nghĩa Bình",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13936",
+                "name":"Thị trấn Quỹ Nhất",
+                "type":"Thị trấn"
+             },
+             {
+                "level3_id":"13939",
+                "name":"Xã Nghĩa Tân",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13942",
+                "name":"Xã Nghĩa Hùng",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13945",
+                "name":"Xã Nghĩa Lâm",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13948",
+                "name":"Xã Nghĩa Thành",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13951",
+                "name":"Xã Phúc Thắng",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13954",
+                "name":"Xã Nghĩa Lợi",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13957",
+                "name":"Xã Nghĩa Hải",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13963",
+                "name":"Xã Nam Điền",
+                "type":"Xã"
+             }
+          ]
+       },
+       {
+          "level2_id":"362",
+          "name":"Huyện Nam Trực",
+          "type":"Huyện",
+          "children":[
+             {
+                "level3_id":"13966",
+                "name":"Thị trấn Nam Giang",
+                "type":"Thị trấn"
+             },
+             {
+                "level3_id":"13969",
+                "name":"Xã Nam Mỹ",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13972",
+                "name":"Xã Điền Xá",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13975",
+                "name":"Xã Nghĩa An",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13978",
+                "name":"Xã Nam Thắng",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13981",
+                "name":"Xã Nam Toàn",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13984",
+                "name":"Xã Hồng Quang",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13987",
+                "name":"Xã Tân Thịnh",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13990",
+                "name":"Xã Nam Cường",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13993",
+                "name":"Xã Nam Hồng",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13996",
+                "name":"Xã Nam Hùng",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"13999",
+                "name":"Xã Nam Hoa",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14002",
+                "name":"Xã Nam Dương",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14005",
+                "name":"Xã Nam Thanh",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14008",
+                "name":"Xã Nam Lợi",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14011",
+                "name":"Xã Bình Minh",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14014",
+                "name":"Xã Đồng Sơn",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14017",
+                "name":"Xã Nam Tiến",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14020",
+                "name":"Xã Nam Hải",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14023",
+                "name":"Xã Nam Thái",
+                "type":"Xã"
+             }
+          ]
+       },
+       {
+          "level2_id":"363",
+          "name":"Huyện Trực Ninh",
+          "type":"Huyện",
+          "children":[
+             {
+                "level3_id":"14026",
+                "name":"Thị trấn Cổ Lễ",
+                "type":"Thị trấn"
+             },
+             {
+                "level3_id":"14029",
+                "name":"Xã Phương Định",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14032",
+                "name":"Xã Trực Chính",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14035",
+                "name":"Xã Trung Đông",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14038",
+                "name":"Xã Liêm Hải",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14041",
+                "name":"Xã Trực Tuấn",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14044",
+                "name":"Xã Việt Hùng",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14047",
+                "name":"Xã Trực Đạo",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14050",
+                "name":"Xã Trực Hưng",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14053",
+                "name":"Xã Trực Nội",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14056",
+                "name":"Thị trấn Cát Thành",
+                "type":"Thị trấn"
+             },
+             {
+                "level3_id":"14059",
+                "name":"Xã Trực Thanh",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14062",
+                "name":"Xã Trực Khang",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14065",
+                "name":"Xã Trực Thuận",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14068",
+                "name":"Xã Trực Mỹ",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14071",
+                "name":"Xã Trực Đại",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14074",
+                "name":"Xã Trực Cường",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14077",
+                "name":"Thị trấn Ninh Cường",
+                "type":"Thị trấn"
+             },
+             {
+                "level3_id":"14080",
+                "name":"Xã Trực Thái",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14083",
+                "name":"Xã Trực Hùng",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14086",
+                "name":"Xã Trực Thắng",
+                "type":"Xã"
+             }
+          ]
+       },
+       {
+          "level2_id":"364",
+          "name":"Huyện Xuân Trường",
+          "type":"Huyện",
+          "children":[
+             {
+                "level3_id":"14089",
+                "name":"Thị trấn Xuân Trường",
+                "type":"Thị trấn"
+             },
+             {
+                "level3_id":"14092",
+                "name":"Xã Xuân Châu",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14095",
+                "name":"Xã Xuân Hồng",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14098",
+                "name":"Xã Xuân Thành",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14101",
+                "name":"Xã Xuân Thượng",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14104",
+                "name":"Xã Xuân Phong",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14107",
+                "name":"Xã Xuân Đài",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14110",
+                "name":"Xã Xuân Tân",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14113",
+                "name":"Xã Xuân Thủy",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14116",
+                "name":"Xã Xuân Ngọc",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14119",
+                "name":"Xã Xuân Bắc",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14122",
+                "name":"Xã Xuân Phương",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14125",
+                "name":"Xã Thọ Nghiệp",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14128",
+                "name":"Xã Xuân Phú",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14131",
+                "name":"Xã Xuân Trung",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14134",
+                "name":"Xã Xuân Vinh",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14137",
+                "name":"Xã Xuân Kiên",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14140",
+                "name":"Xã Xuân Tiến",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14143",
+                "name":"Xã Xuân Ninh",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14146",
+                "name":"Xã Xuân Hòa",
+                "type":"Xã"
+             }
+          ]
+       },
+       {
+          "level2_id":"365",
+          "name":"Huyện Giao Thủy",
+          "type":"Huyện",
+          "children":[
+             {
+                "level3_id":"14149",
+                "name":"Thị trấn Ngô Đồng",
+                "type":"Thị trấn"
+             },
+             {
+                "level3_id":"14152",
+                "name":"Thị trấn Quất Lâm",
+                "type":"Thị trấn"
+             },
+             {
+                "level3_id":"14155",
+                "name":"Xã Giao Hương",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14158",
+                "name":"Xã Hồng Thuận",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14161",
+                "name":"Xã Giao Thiện",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14164",
+                "name":"Xã Giao Thanh",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14167",
+                "name":"Xã Hoành Sơn",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14170",
+                "name":"Xã Bình Hòa",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14173",
+                "name":"Xã Giao Tiến",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14176",
+                "name":"Xã Giao Hà",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14179",
+                "name":"Xã Giao Nhân",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14182",
+                "name":"Xã Giao An",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14185",
+                "name":"Xã Giao Lạc",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14188",
+                "name":"Xã Giao Châu",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14191",
+                "name":"Xã Giao Tân",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14194",
+                "name":"Xã Giao Yến",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14197",
+                "name":"Xã Giao Xuân",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14200",
+                "name":"Xã Giao Thịnh",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14203",
+                "name":"Xã Giao Hải",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14206",
+                "name":"Xã Bạch Long",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14209",
+                "name":"Xã Giao Long",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14212",
+                "name":"Xã Giao Phong",
+                "type":"Xã"
+             }
+          ]
+       },
+       {
+          "level2_id":"366",
+          "name":"Huyện Hải Hậu",
+          "type":"Huyện",
+          "children":[
+             {
+                "level3_id":"14215",
+                "name":"Thị trấn Yên Định",
+                "type":"Thị trấn"
+             },
+             {
+                "level3_id":"14218",
+                "name":"Thị trấn Cồn",
+                "type":"Thị trấn"
+             },
+             {
+                "level3_id":"14221",
+                "name":"Thị trấn Thịnh Long",
+                "type":"Thị trấn"
+             },
+             {
+                "level3_id":"14224",
+                "name":"Xã Hải Nam",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14227",
+                "name":"Xã Hải Trung",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14230",
+                "name":"Xã Hải Vân",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14233",
+                "name":"Xã Hải Minh",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14236",
+                "name":"Xã Hải Anh",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14239",
+                "name":"Xã Hải Hưng",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14242",
+                "name":"Xã Hải Bắc",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14245",
+                "name":"Xã Hải Phúc",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14248",
+                "name":"Xã Hải Thanh",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14251",
+                "name":"Xã Hải Hà",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14254",
+                "name":"Xã Hải Long",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14257",
+                "name":"Xã Hải Phương",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14260",
+                "name":"Xã Hải Đường",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14263",
+                "name":"Xã Hải Lộc",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14266",
+                "name":"Xã Hải Quang",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14269",
+                "name":"Xã Hải Đông",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14272",
+                "name":"Xã Hải Sơn",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14275",
+                "name":"Xã Hải Tân",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14281",
+                "name":"Xã Hải Phong",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14284",
+                "name":"Xã Hải An",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14287",
+                "name":"Xã Hải Tây",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14290",
+                "name":"Xã Hải Lý",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14293",
+                "name":"Xã Hải Phú",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14296",
+                "name":"Xã Hải Giang",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14299",
+                "name":"Xã Hải Cường",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14302",
+                "name":"Xã Hải Ninh",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14305",
+                "name":"Xã Hải Chính",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14308",
+                "name":"Xã Hải Xuân",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14311",
+                "name":"Xã Hải Châu",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14314",
+                "name":"Xã Hải Triều",
+                "type":"Xã"
+             },
+             {
+                "level3_id":"14317",
+                "name":"Xã Hải Hòa",
+                "type":"Xã"
+             }
+          ]
+       }
+    ]
+ }]

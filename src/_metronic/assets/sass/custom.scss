@@ -1,0 +1,75 @@
+.aside-dark {
+  background-color: #2f549f !important;
+  background: -webkit-linear-gradient(60deg, rgb(0, 55, 144) 0%, rgb(45, 133, 195) 100%) !important;
+  .aside-logo {
+    background-color: #2f549f !important;
+  }
+
+  .aside-toggle svg [fill]:not(.permanent):not(g) {
+    transition: fill 0.3s ease;
+    fill: #fdfdfd !important;
+  }
+
+  .menu {
+    .menu-item {
+      .menu-section {
+        color: #4c4e6f !important;
+      }
+
+      //$title-color, $icon-color, $bullet-color, $arrow-color, $bg-color
+      @include menu-link-default-state($white, $white, #9899ac, #9899ac, null);
+      @include menu-link-hover-state(#f4f444, #f4f444, $primary, $white, #1b5c95);
+      @include menu-link-show-state($white, $primary, $primary, $white, #1f568a);
+      @include menu-link-active-state(#f4f444, #f4f444, $primary, $white, #184b78);
+    }
+    /*  .menu-item:not(:nth-child(2)) {
+      border-top: 1px dashed rgba(255, 255, 255, 0.3);
+    } */
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  .tdheader {
+    .header-fixed & {
+      background-color: #2b81c1 !important;
+    }
+  }
+}
+
+@include media-breakpoint-down(lg) {
+  .tdheader {
+    .header-tablet-and-mobile-fixed & {
+      background-color: #2b81c1 !important;
+    }
+  }
+}
+
+.menu-state-bg-td {
+  .menu-item {
+    @include menu-link-default-state(#fff, #fff, #f4f444, null, null);
+    @include menu-link-hover-state(#fff, #fff, #f4f444, null, #0000001a);
+    @include menu-link-show-state(#fff, #fff, null, null, #0000001a);
+    @include menu-link-active-state(#fff, #f4f444, $primary, $white, #0000001a);
+
+    /*  @include menu-link-active-state(
+      null,
+      null,
+      null,
+      null,
+      get($menu, link, self, bg-color, active)
+    ); */
+    .menu-sub {
+      @include menu-link-default-state(#716aca, #716aca, #d40d0d, null, null);
+      @include menu-link-hover-state(#716aca, #716aca, #d40d0d, null, #0000001a);
+      @include menu-link-show-state(#716aca, #716aca, null, null, #0000001a);
+      @include menu-link-active-state(#716aca, #716aca, $primary, $white, #0000001a);
+    }
+  }
+}
+.btn-sm,
+.btn-group-sm > .btn {
+  border-radius: 0.25rem;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}

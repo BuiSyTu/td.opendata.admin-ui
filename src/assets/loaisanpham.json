@@ -1,0 +1,34 @@
+[
+  {
+    "name": "Tất cả",
+    "type": "Tất cả"
+  },
+  {
+    "name": "Rau, củ, quả",
+    "type": "Rau, củ quả",
+    "children": [
+      {
+        "name": "Rau, củ, quả tươi",
+        "type": "Rau, củ, quả tươi"
+      },
+      {
+        "name": "Hoa quả tươi",
+        "type": "Hoa quả tươi"
+      }
+    ]
+  },
+  {
+    "name": "Thịt gia súc, gia cầm",
+    "type": "Thịt gia súc, gia cầm",
+    "children": [
+      {
+        "name": "Thịt lợn",
+        "type": "Thịt lợn"
+      },
+      {
+        "name": "Thịt bò",
+        "type": "Thịt bò"
+      }
+    ]
+  }
+]

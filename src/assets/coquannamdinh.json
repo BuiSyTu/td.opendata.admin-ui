@@ -1,0 +1,1222 @@
+[{
+  "level1_id":"36",
+  "name":"UBND Tỉnh Nam Định",
+  "type":"Tỉnh",
+  "children":[
+    {
+      "level2_id":"0",
+        "name":"Sở Y tế Nam Định",
+        "type":"Sở"
+    },
+    {
+      "level2_id":"1",
+        "name":"Sở NN&PTNT Nam Định",
+        "type":"Sở"
+    },
+    {
+      "level2_id":"2",
+        "name":"Sở Công thương Nam Định",
+        "type":"Sở"
+    },
+     {
+        "level2_id":"356",
+        "name":"UBND Thành phố Nam Định",
+        "type":"Thành phố",
+        "children":[
+           {
+              "level3_id":"13633",
+              "name":"UBND Phường Hạ Long",
+              "type":"Phường"
+           },
+           {
+              "level3_id":"13636",
+              "name":"UBND Phường Trần Tế Xương",
+              "type":"Phường"
+           },
+           {
+              "level3_id":"13639",
+              "name":"UBND Phường Vị Hoàng",
+              "type":"Phường"
+           },
+           {
+              "level3_id":"13642",
+              "name":"UBND Phường Vị Xuyên",
+              "type":"Phường"
+           },
+           {
+              "level3_id":"13645",
+              "name":"UBND Phường Quang Trung",
+              "type":"Phường"
+           },
+           {
+              "level3_id":"13648",
+              "name":"UBND Phường Cửa Bắc",
+              "type":"Phường"
+           },
+           {
+              "level3_id":"13651",
+              "name":"UBND Phường Nguyễn Du",
+              "type":"Phường"
+           },
+           {
+              "level3_id":"13654",
+              "name":"UBND Phường Bà Triệu",
+              "type":"Phường"
+           },
+           {
+              "level3_id":"13657",
+              "name":"UBND Phường Trường Thi",
+              "type":"Phường"
+           },
+           {
+              "level3_id":"13660",
+              "name":"UBND Phường Phan Đình Phùng",
+              "type":"Phường"
+           },
+           {
+              "level3_id":"13663",
+              "name":"UBND Phường Ngô Quyền",
+              "type":"Phường"
+           },
+           {
+              "level3_id":"13666",
+              "name":"UBND Phường Trần Hưng Đạo",
+              "type":"Phường"
+           },
+           {
+              "level3_id":"13669",
+              "name":"UBND Phường Trần Đăng Ninh",
+              "type":"Phường"
+           },
+           {
+              "level3_id":"13672",
+              "name":"UBND Phường Năng Tĩnh",
+              "type":"Phường"
+           },
+           {
+              "level3_id":"13675",
+              "name":"UBND Phường Văn Miếu",
+              "type":"Phường"
+           },
+           {
+              "level3_id":"13678",
+              "name":"UBND Phường Trần Quang Khải",
+              "type":"Phường"
+           },
+           {
+              "level3_id":"13681",
+              "name":"UBND Phường Thống Nhất",
+              "type":"Phường"
+           },
+           {
+              "level3_id":"13684",
+              "name":"UBND Phường Lộc Hạ",
+              "type":"Phường"
+           },
+           {
+              "level3_id":"13687",
+              "name":"UBND Phường Lộc Vượng",
+              "type":"Phường"
+           },
+           {
+              "level3_id":"13690",
+              "name":"UBND Phường Cửa Nam",
+              "type":"Phường"
+           },
+           {
+              "level3_id":"13693",
+              "name":"UBND Phường Lộc Hòa",
+              "type":"Phường"
+           },
+           {
+              "level3_id":"13696",
+              "name":"UBND Xã Nam Phong",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13699",
+              "name":"UBND Phường Mỹ Xá",
+              "type":"Phường"
+           },
+           {
+              "level3_id":"13702",
+              "name":"UBND Xã Lộc An",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13705",
+              "name":"UBND Xã Nam Vân",
+              "type":"Xã"
+           }
+        ]
+     },
+     {
+        "level2_id":"358",
+        "name":"UBND Huyện Mỹ Lộc",
+        "type":"Huyện",
+        "children":[
+           {
+              "level3_id":"13708",
+              "name":"UBND Thị trấn Mỹ Lộc",
+              "type":"Thị trấn"
+           },
+           {
+              "level3_id":"13711",
+              "name":"UBND Xã Mỹ Hà",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13714",
+              "name":"UBND Xã Mỹ Tiến",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13717",
+              "name":"UBND Xã Mỹ Thắng",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13720",
+              "name":"UBND Xã Mỹ Trung",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13723",
+              "name":"UBND Xã Mỹ Tân",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13726",
+              "name":"UBND Xã Mỹ Phúc",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13729",
+              "name":"UBND Xã Mỹ Hưng",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13732",
+              "name":"UBND Xã Mỹ Thuận",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13735",
+              "name":"UBND Xã Mỹ Thịnh",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13738",
+              "name":"UBND Xã Mỹ Thành",
+              "type":"Xã"
+           }
+        ]
+     },
+     {
+        "level2_id":"359",
+        "name":"UBND Huyện Vụ Bản",
+        "type":"Huyện",
+        "children":[
+           {
+              "level3_id":"13741",
+              "name":"UBND Thị trấn Gôi",
+              "type":"Thị trấn"
+           },
+           {
+              "level3_id":"13744",
+              "name":"UBND Xã Minh Thuận",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13747",
+              "name":"UBND Xã Hiển Khánh",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13750",
+              "name":"UBND Xã Tân Khánh",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13753",
+              "name":"UBND Xã Hợp Hưng",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13756",
+              "name":"UBND Xã Đại An",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13759",
+              "name":"UBND Xã Tân Thành",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13762",
+              "name":"UBND Xã Cộng Hòa",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13765",
+              "name":"UBND Xã Trung Thành",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13768",
+              "name":"UBND Xã Quang Trung",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13771",
+              "name":"UBND Xã Minh Tân",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13774",
+              "name":"UBND Xã Liên Bảo",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13777",
+              "name":"UBND Xã Thành Lợi",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13780",
+              "name":"UBND Xã Kim Thái",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13783",
+              "name":"UBND Xã Liên Minh",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13786",
+              "name":"UBND Xã Đại Thắng",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13789",
+              "name":"UBND Xã Tam Thanh",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13792",
+              "name":"UBND Xã Vĩnh Hào",
+              "type":"Xã"
+           }
+        ]
+     },
+     {
+        "level2_id":"360",
+        "name":"UBND Huyện Ý Yên",
+        "type":"Huyện",
+        "children":[
+           {
+              "level3_id":"13795",
+              "name":"UBND Thị trấn Lâm",
+              "type":"Thị trấn"
+           },
+           {
+              "level3_id":"13798",
+              "name":"UBND Xã Yên Trung",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13801",
+              "name":"UBND Xã Yên Thành",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13804",
+              "name":"UBND Xã Yên Tân",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13807",
+              "name":"UBND Xã Yên Lợi",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13810",
+              "name":"UBND Xã Yên Thọ",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13813",
+              "name":"UBND Xã Yên Nghĩa",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13816",
+              "name":"UBND Xã Yên Minh",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13819",
+              "name":"UBND Xã Yên Phương",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13822",
+              "name":"UBND Xã Yên Chính",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13825",
+              "name":"UBND Xã Yên Bình",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13828",
+              "name":"UBND Xã Yên Phú",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13831",
+              "name":"UBND Xã Yên Mỹ",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13834",
+              "name":"UBND Xã Yên Dương",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13840",
+              "name":"UBND Xã Yên Hưng",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13843",
+              "name":"UBND Xã Yên Khánh",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13846",
+              "name":"UBND Xã Yên Phong",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13849",
+              "name":"UBND Xã Yên Ninh",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13852",
+              "name":"UBND Xã Yên Lương",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13855",
+              "name":"UBND Xã Yên Hồng",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13858",
+              "name":"UBND Xã Yên Quang",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13861",
+              "name":"UBND Xã Yên Tiến",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13864",
+              "name":"UBND Xã Yên Thắng",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13867",
+              "name":"UBND Xã Yên Phúc",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13870",
+              "name":"UBND Xã Yên Cường",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13873",
+              "name":"UBND Xã Yên Lộc",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13876",
+              "name":"UBND Xã Yên Bằng",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13879",
+              "name":"UBND Xã Yên Đồng",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13882",
+              "name":"UBND Xã Yên Khang",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13885",
+              "name":"UBND Xã Yên Nhân",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13888",
+              "name":"UBND Xã Yên Trị",
+              "type":"Xã"
+           }
+        ]
+     },
+     {
+        "level2_id":"361",
+        "name":"UBND Huyện Nghĩa Hưng",
+        "type":"Huyện",
+        "children":[
+           {
+              "level3_id":"13891",
+              "name":"UBND Thị trấn Liễu Đề",
+              "type":"Thị trấn"
+           },
+           {
+              "level3_id":"13894",
+              "name":"UBND Thị trấn Rạng Đông",
+              "type":"Thị trấn"
+           },
+           {
+              "level3_id":"13897",
+              "name":"UBND Xã Nghĩa Đồng",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13900",
+              "name":"UBND Xã Nghĩa Thịnh",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13903",
+              "name":"UBND Xã Nghĩa Minh",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13906",
+              "name":"UBND Xã Nghĩa Thái",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13909",
+              "name":"UBND Xã Hoàng Nam",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13912",
+              "name":"UBND Xã Nghĩa Châu",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13915",
+              "name":"UBND Xã Nghĩa Trung",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13918",
+              "name":"UBND Xã Nghĩa Sơn",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13921",
+              "name":"UBND Xã Nghĩa Lạc",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13924",
+              "name":"UBND Xã Nghĩa Hồng",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13927",
+              "name":"UBND Xã Nghĩa Phong",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13930",
+              "name":"UBND Xã Nghĩa Phú",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13933",
+              "name":"UBND Xã Nghĩa Bình",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13936",
+              "name":"UBND Thị trấn Quỹ Nhất",
+              "type":"Thị trấn"
+           },
+           {
+              "level3_id":"13939",
+              "name":"UBND Xã Nghĩa Tân",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13942",
+              "name":"UBND Xã Nghĩa Hùng",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13945",
+              "name":"UBND Xã Nghĩa Lâm",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13948",
+              "name":"UBND Xã Nghĩa Thành",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13951",
+              "name":"UBND Xã Phúc Thắng",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13954",
+              "name":"UBND Xã Nghĩa Lợi",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13957",
+              "name":"UBND Xã Nghĩa Hải",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13963",
+              "name":"UBND Xã Nam Điền",
+              "type":"Xã"
+           }
+        ]
+     },
+     {
+        "level2_id":"362",
+        "name":"UBND Huyện Nam Trực",
+        "type":"Huyện",
+        "children":[
+           {
+              "level3_id":"13966",
+              "name":"UBND Thị trấn Nam Giang",
+              "type":"Thị trấn"
+           },
+           {
+              "level3_id":"13969",
+              "name":"UBND Xã Nam Mỹ",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13972",
+              "name":"UBND Xã Điền Xá",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13975",
+              "name":"UBND Xã Nghĩa An",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13978",
+              "name":"UBND Xã Nam Thắng",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13981",
+              "name":"UBND Xã Nam Toàn",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13984",
+              "name":"UBND Xã Hồng Quang",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13987",
+              "name":"UBND Xã Tân Thịnh",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13990",
+              "name":"UBND Xã Nam Cường",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13993",
+              "name":"UBND Xã Nam Hồng",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13996",
+              "name":"UBND Xã Nam Hùng",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"13999",
+              "name":"UBND Xã Nam Hoa",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14002",
+              "name":"UBND Xã Nam Dương",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14005",
+              "name":"UBND Xã Nam Thanh",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14008",
+              "name":"UBND Xã Nam Lợi",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14011",
+              "name":"UBND Xã Bình Minh",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14014",
+              "name":"UBND Xã Đồng Sơn",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14017",
+              "name":"UBND Xã Nam Tiến",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14020",
+              "name":"UBND Xã Nam Hải",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14023",
+              "name":"UBND Xã Nam Thái",
+              "type":"Xã"
+           }
+        ]
+     },
+     {
+        "level2_id":"363",
+        "name":"UBND Huyện Trực Ninh",
+        "type":"Huyện",
+        "children":[
+           {
+              "level3_id":"14026",
+              "name":"UBND Thị trấn Cổ Lễ",
+              "type":"Thị trấn"
+           },
+           {
+              "level3_id":"14029",
+              "name":"UBND Xã Phương Định",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14032",
+              "name":"UBND Xã Trực Chính",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14035",
+              "name":"UBND Xã Trung Đông",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14038",
+              "name":"UBND Xã Liêm Hải",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14041",
+              "name":"UBND Xã Trực Tuấn",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14044",
+              "name":"UBND Xã Việt Hùng",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14047",
+              "name":"UBND Xã Trực Đạo",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14050",
+              "name":"UBND Xã Trực Hưng",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14053",
+              "name":"UBND Xã Trực Nội",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14056",
+              "name":"UBND Thị trấn Cát Thành",
+              "type":"Thị trấn"
+           },
+           {
+              "level3_id":"14059",
+              "name":"UBND Xã Trực Thanh",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14062",
+              "name":"UBND Xã Trực Khang",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14065",
+              "name":"UBND Xã Trực Thuận",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14068",
+              "name":"UBND Xã Trực Mỹ",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14071",
+              "name":"UBND Xã Trực Đại",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14074",
+              "name":"UBND Xã Trực Cường",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14077",
+              "name":"UBND Thị trấn Ninh Cường",
+              "type":"Thị trấn"
+           },
+           {
+              "level3_id":"14080",
+              "name":"UBND Xã Trực Thái",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14083",
+              "name":"UBND Xã Trực Hùng",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14086",
+              "name":"UBND Xã Trực Thắng",
+              "type":"Xã"
+           }
+        ]
+     },
+     {
+        "level2_id":"364",
+        "name":"UBND Huyện Xuân Trường",
+        "type":"Huyện",
+        "children":[
+           {
+              "level3_id":"14089",
+              "name":"UBND Thị trấn Xuân Trường",
+              "type":"Thị trấn"
+           },
+           {
+              "level3_id":"14092",
+              "name":"UBND Xã Xuân Châu",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14095",
+              "name":"UBND Xã Xuân Hồng",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14098",
+              "name":"UBND Xã Xuân Thành",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14101",
+              "name":"UBND Xã Xuân Thượng",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14104",
+              "name":"UBND Xã Xuân Phong",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14107",
+              "name":"UBND Xã Xuân Đài",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14110",
+              "name":"UBND Xã Xuân Tân",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14113",
+              "name":"UBND Xã Xuân Thủy",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14116",
+              "name":"UBND Xã Xuân Ngọc",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14119",
+              "name":"UBND Xã Xuân Bắc",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14122",
+              "name":"UBND Xã Xuân Phương",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14125",
+              "name":"UBND Xã Thọ Nghiệp",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14128",
+              "name":"UBND Xã Xuân Phú",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14131",
+              "name":"UBND Xã Xuân Trung",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14134",
+              "name":"UBND Xã Xuân Vinh",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14137",
+              "name":"UBND Xã Xuân Kiên",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14140",
+              "name":"UBND Xã Xuân Tiến",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14143",
+              "name":"UBND Xã Xuân Ninh",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14146",
+              "name":"UBND Xã Xuân Hòa",
+              "type":"Xã"
+           }
+        ]
+     },
+     {
+        "level2_id":"365",
+        "name":"UBND Huyện Giao Thủy",
+        "type":"Huyện",
+        "children":[
+           {
+              "level3_id":"14149",
+              "name":"UBND Thị trấn Ngô Đồng",
+              "type":"Thị trấn"
+           },
+           {
+              "level3_id":"14152",
+              "name":"UBND Thị trấn Quất Lâm",
+              "type":"Thị trấn"
+           },
+           {
+              "level3_id":"14155",
+              "name":"UBND Xã Giao Hương",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14158",
+              "name":"UBND Xã Hồng Thuận",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14161",
+              "name":"UBND Xã Giao Thiện",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14164",
+              "name":"UBND Xã Giao Thanh",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14167",
+              "name":"UBND Xã Hoành Sơn",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14170",
+              "name":"UBND Xã Bình Hòa",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14173",
+              "name":"UBND Xã Giao Tiến",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14176",
+              "name":"UBND Xã Giao Hà",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14179",
+              "name":"UBND Xã Giao Nhân",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14182",
+              "name":"UBND Xã Giao An",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14185",
+              "name":"UBND Xã Giao Lạc",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14188",
+              "name":"UBND Xã Giao Châu",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14191",
+              "name":"UBND Xã Giao Tân",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14194",
+              "name":"UBND Xã Giao Yến",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14197",
+              "name":"UBND Xã Giao Xuân",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14200",
+              "name":"UBND Xã Giao Thịnh",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14203",
+              "name":"UBND Xã Giao Hải",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14206",
+              "name":"UBND Xã Bạch Long",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14209",
+              "name":"UBND Xã Giao Long",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14212",
+              "name":"UBND Xã Giao Phong",
+              "type":"Xã"
+           }
+        ]
+     },
+     {
+        "level2_id":"366",
+        "name":"UBND Huyện Hải Hậu",
+        "type":"Huyện",
+        "children":[
+           {
+              "level3_id":"14215",
+              "name":"UBND Thị trấn Yên Định",
+              "type":"Thị trấn"
+           },
+           {
+              "level3_id":"14218",
+              "name":"UBND Thị trấn Cồn",
+              "type":"Thị trấn"
+           },
+           {
+              "level3_id":"14221",
+              "name":"UBND Thị trấn Thịnh Long",
+              "type":"Thị trấn"
+           },
+           {
+              "level3_id":"14224",
+              "name":"UBND Xã Hải Nam",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14227",
+              "name":"UBND Xã Hải Trung",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14230",
+              "name":"UBND Xã Hải Vân",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14233",
+              "name":"UBND Xã Hải Minh",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14236",
+              "name":"UBND Xã Hải Anh",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14239",
+              "name":"UBND Xã Hải Hưng",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14242",
+              "name":"UBND Xã Hải Bắc",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14245",
+              "name":"UBND Xã Hải Phúc",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14248",
+              "name":"UBND Xã Hải Thanh",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14251",
+              "name":"UBND Xã Hải Hà",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14254",
+              "name":"UBND Xã Hải Long",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14257",
+              "name":"UBND Xã Hải Phương",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14260",
+              "name":"UBND Xã Hải Đường",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14263",
+              "name":"UBND Xã Hải Lộc",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14266",
+              "name":"UBND Xã Hải Quang",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14269",
+              "name":"UBND Xã Hải Đông",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14272",
+              "name":"UBND Xã Hải Sơn",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14275",
+              "name":"UBND Xã Hải Tân",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14281",
+              "name":"UBND Xã Hải Phong",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14284",
+              "name":"UBND Xã Hải An",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14287",
+              "name":"UBND Xã Hải Tây",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14290",
+              "name":"UBND Xã Hải Lý",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14293",
+              "name":"UBND Xã Hải Phú",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14296",
+              "name":"UBND Xã Hải Giang",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14299",
+              "name":"UBND Xã Hải Cường",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14302",
+              "name":"UBND Xã Hải Ninh",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14305",
+              "name":"UBND Xã Hải Chính",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14308",
+              "name":"UBND Xã Hải Xuân",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14311",
+              "name":"UBND Xã Hải Châu",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14314",
+              "name":"UBND Xã Hải Triều",
+              "type":"Xã"
+           },
+           {
+              "level3_id":"14317",
+              "name":"UBND Xã Hải Hòa",
+              "type":"Xã"
+           }
+        ]
+     }
+  ]
+}]
