@@ -14,6 +14,7 @@ const TableList = (props) => {
     rowSelection,
     rowKey,
   } = props;
+  
   const [searchText, setSearchText] = useState('');
 
   const [current, setCurrent] = useState(1);
@@ -42,7 +43,7 @@ const TableList = (props) => {
       rowKey={rowKey || 'id'}
       bordered
       style={{backgroundColor: '#fff', width: '100%'}}
-      rowClassName={(record, index) => (index % 2 == 0 ? 'table-row-light' : 'table-row-dark')}
+      rowClassName={(record, index) => (index % 2 === 0 ? 'table-row-light' : 'table-row-dark')}
       loading={loading}
       size='small'
       ellipsis='enable'
