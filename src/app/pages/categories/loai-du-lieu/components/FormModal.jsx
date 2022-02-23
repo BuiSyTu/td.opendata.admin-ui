@@ -33,7 +33,7 @@ const ModalCategory = (props) => {
         setIsLoading(true);
         var res = await dataTypeApi.getById(modalId);
         if (res?.data) {
-          form.setFieldsValue(res?.data?.data);
+          form.setFieldsValue(res?.data);
         }
         setIsLoading(false);
       } catch (error) {
@@ -56,10 +56,7 @@ const ModalCategory = (props) => {
 
   const handleOk = async () => {
     try {
-      const values = await form.validateFields();
-      // if (fileList.length != 0) {
-      //   await postImage()
-      // }
+      await form.validateFields();
       const formData = form.getFieldsValue(true);
       typeModal === 'edit' ? putData(formData) : postData(formData);
     } catch (errorInfo) {

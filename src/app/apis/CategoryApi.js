@@ -2,12 +2,12 @@ import axios from 'axios';
 
 const ver = '1';
 
-const controllerName = 'datatypes';
+const controllerName = 'categories';
 
 const baseUrl = `https://192.168.2.169:5001/api/v${ver}/${controllerName}`;
 
 
-export class DataTypeApi {
+export class CategoryApi {
   async getAll() {
     try {
       const res = await axios({

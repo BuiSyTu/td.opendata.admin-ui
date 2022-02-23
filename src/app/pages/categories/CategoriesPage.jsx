@@ -1,6 +1,5 @@
-import React, {Suspense, lazy} from 'react';
+import {lazy} from 'react';
 import {Redirect, Route, Switch} from 'react-router-dom';
-import {PageLink, PageTitle} from '../../../_metronic/layout/core';
 const CategoriesPage = () => {
   const LinhVucPage = lazy(() => import('./linh-vuc/LinhVucPage'));
   const LoaiGiayToPage = lazy(() => import('./loai-giay-to/LoaiGiayToPage'));
@@ -10,8 +9,10 @@ const CategoriesPage = () => {
   const LoaiDiaDiemPage = lazy(() => import('./loai-dia-diem/LoaiDiaDiemPage'));
   const DiaDiemPage = lazy(() => import('./dia-diem/DiaDiemPage'));
   const GioiTinhPage = lazy(() => import('./gioi-tinh/GioiTinhPage'));
+  const LoaiDuLieuPage = lazy(() => import('./loai-du-lieu/LoaiDuLieuPage'))
   return (
     <Switch>
+      <Route path='/categories/data-type' component={LoaiDuLieuPage}></Route>
       <Route path='/categories/fields' component={LinhVucPage}></Route>
       <Route path='/categories/genders' component={GioiTinhPage}></Route>
       <Route path='/categories/identitytypes' component={LoaiGiayToPage}></Route>

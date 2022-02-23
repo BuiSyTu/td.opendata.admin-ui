@@ -109,7 +109,7 @@ const CustomPage = () => {
       try {
         setLoading(true);
         var res = await dataTypeApi.getAll();
-        setDataTable(res?.data?.data ?? []);
+        setDataTable(res?.data ?? []);
         setCount(res?.totalCount ?? 0);
         setLoading(false);
       } catch (error) {

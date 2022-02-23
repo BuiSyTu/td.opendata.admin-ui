@@ -1,26 +1,22 @@
 import React, {useEffect, useState} from 'react';
 import {
-  Row,
-  Col,
   Form,
   Button,
   Input,
   notification,
   Typography,
-  Select,
   Modal,
-  Checkbox,
-  Divider,
-  DatePicker,
   Spin,
-  Empty,
 } from 'antd';
-import {HOST_API, requestGET, requestPOST, requestPUT} from '../../../../utils/basicAPI';
+import {CategoryApi} from '../../../../apis/CategoryApi';
+
 const {TextArea} = Input;
 const {Text} = Typography;
+
+const categoryApi = new CategoryApi();
+
 const ModalCategory = (props) => {
-  const {modalVisible, setModalVisible, modalId, setModalId, typeModal, setTypeModal, setUpdate} =
-    props;
+  const {modalVisible, setModalVisible, modalId, setModalId, typeModal, setTypeModal, setUpdate} = props;
   const [form] = Form.useForm();
   const [disable, setDisable] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -33,7 +29,7 @@ const ModalCategory = (props) => {
     const fetchData = async () => {
       try {
         setIsLoading(true);
-        var res = await requestGET(`${HOST_API}/Category/${modalId}`);
+        var res = await categoryApi.getById(modalId);
         if (res?.data) {
           form.setFieldsValue(res?.data);
         }
@@ -42,8 +38,8 @@ const ModalCategory = (props) => {
         setIsLoading(false);
       }
     };
-    setDisable(typeModal == 'view' ? true : false);
-    if (modalId > 0) {
+    setDisable(typeModal === 'view' ? true : false);
+    if (modalId !== '') {
       fetchData();
     }
     return () => {};
@@ -56,9 +52,9 @@ const ModalCategory = (props) => {
   };
   const handleOk = async () => {
     try {
-      const values = await form.validateFields();
+      await form.validateFields();
       const formData = form.getFieldsValue(true);
-      typeModal == 'edit' ? putData(formData) : postData(formData);
+      typeModal === 'edit' ? putData(formData) : postData(formData);
     } catch (errorInfo) {
       console.log('Failed:', errorInfo);
     }
@@ -67,7 +63,7 @@ const ModalCategory = (props) => {
   const postData = async (data) => {
     try {
       setButtonLoading(true);
-      var res = await requestPOST(`${HOST_API}/Category`, data);
+      var res = await categoryApi.add(data);
       if (res) {
         notification.success({
           message: 'Thêm mới thành công!',
@@ -90,7 +86,7 @@ const ModalCategory = (props) => {
   const putData = async (data) => {
     try {
       setButtonLoading(true);
-      var res = await requestPUT(`${HOST_API}/Category/${modalId}`, data);
+      var res = await categoryApi.update(modalId, data);
       if (res) {
         notification.success({
           message: 'Cập nhập thành công!',
@@ -117,7 +113,7 @@ const ModalCategory = (props) => {
       onCancel={handleCancel}
       closeIcon={<i className='las la-times' style={{color: '#fff', fontSize: 20}}></i>}
       footer={[
-        typeModal == 'view' ? (
+        typeModal === 'view' ? (
           <></>
         ) : (
           <Button
@@ -157,7 +153,7 @@ const ModalCategory = (props) => {
         >
           <Text style={{color: '#757575', paddingLeft: 5}}>
             {' '}
-            {typeModal == 'view' ? 'Đóng' : 'Hủy'}
+            {typeModal === 'view' ? 'Đóng' : 'Hủy'}
           </Text>
         </Button>,
       ]}
