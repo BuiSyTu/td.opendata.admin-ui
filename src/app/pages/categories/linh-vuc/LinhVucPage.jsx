@@ -3,7 +3,7 @@ import {useState, useEffect} from 'react';
 import {PageTitle} from '../../../../_metronic/layout/core';
 import {Typography, Divider, Input, Popconfirm, notification} from 'antd';
 import TableList from '../../../components/TableList';
-import FormModal from './components/FormModal';
+import FormModal from '../hinh-thuc-cung-cap/components/FormModal';
 import {CategoryApi} from '../../../apis/CategoryApi';
 
 const {Text} = Typography;
