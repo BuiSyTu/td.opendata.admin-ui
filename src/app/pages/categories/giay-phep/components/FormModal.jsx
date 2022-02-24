@@ -1,26 +1,22 @@
-import React, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import {
-  Row,
-  Col,
   Form,
   Button,
   Input,
   notification,
   Typography,
-  Select,
   Modal,
-  Checkbox,
-  Divider,
-  DatePicker,
   Spin,
-  Empty,
 } from 'antd';
-import {HOST_API, requestGET, requestPOST, requestPUT} from '../../../../utils/basicAPI';
+import {LicenseApi} from '../../../../apis/LicenseApi';
+
 const {TextArea} = Input;
 const {Text} = Typography;
+
+const licenseApi = new LicenseApi();
+
 const ModalCategory = (props) => {
-  const {modalVisible, setModalVisible, modalId, setModalId, typeModal, setTypeModal, setUpdate} =
-    props;
+  const {modalVisible, setModalVisible, modalId, setModalId, typeModal, setTypeModal, setUpdate} = props;
   const [form] = Form.useForm();
   const [disable, setDisable] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -29,11 +25,12 @@ const ModalCategory = (props) => {
     labelCol: {span: 4},
     wrapperCol: {span: 20},
   };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         setIsLoading(true);
-        var res = await requestGET(`${HOST_API}/Gender/${modalId}`);
+        var res = await licenseApi.getById(modalId);
         if (res?.data) {
           form.setFieldsValue(res?.data);
         }
@@ -42,34 +39,35 @@ const ModalCategory = (props) => {
         setIsLoading(false);
       }
     };
-    setDisable(typeModal == 'view' ? true : false);
-    if (modalId > 0) {
+    setDisable(typeModal === 'view' ? true : false);
+    if (modalId !== '') {
       fetchData();
     }
     return () => {};
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [modalId]);
+
   const handleCancel = () => {
     form.resetFields();
     setTypeModal('');
     setModalId(0);
     setModalVisible(false);
   };
+
   const handleOk = async () => {
     try {
-      const values = await form.validateFields();
-      // if (fileList.length != 0) {
-      //   await postImage()
-      // }
+      await form.validateFields();
       const formData = form.getFieldsValue(true);
-      typeModal == 'edit' ? putData(formData) : postData(formData);
+      typeModal === 'edit' ? putData(formData) : postData(formData);
     } catch (errorInfo) {
       console.log('Failed:', errorInfo);
     }
   };
+
   const postData = async (data) => {
     try {
       setButtonLoading(true);
-      var res = await requestPOST(`${HOST_API}/Gender`, data);
+      var res = await licenseApi.add(data);
       if (res) {
         notification.success({
           message: 'Thêm mới thành công!',
@@ -88,10 +86,11 @@ const ModalCategory = (props) => {
     setUpdate(true);
     handleCancel();
   };
+
   const putData = async (data) => {
     try {
       setButtonLoading(true);
-      var res = await requestPUT(`${HOST_API}/Gender/${modalId}`, data);
+      var res = await licenseApi.update(modalId, data);
       if (res) {
         notification.success({
           message: 'Cập nhập thành công!',
@@ -110,16 +109,16 @@ const ModalCategory = (props) => {
     setUpdate(true);
     handleCancel();
   };
+  
   return (
     <Modal
       visible={modalVisible}
-      title={<Text style={{fontWeight: '500', color: '#fff'}}>Giới tính</Text>}
-      //width='60%'
+      title={<Text style={{fontWeight: '500', color: '#fff'}}>Lĩnh vực</Text>}
       onOk={handleOk}
       onCancel={handleCancel}
       closeIcon={<i className='las la-times' style={{color: '#fff', fontSize: 20}}></i>}
       footer={[
-        typeModal == 'view' ? (
+        typeModal === 'view' ? (
           <></>
         ) : (
           <Button
@@ -159,7 +158,7 @@ const ModalCategory = (props) => {
         >
           <Text style={{color: '#757575', paddingLeft: 5}}>
             {' '}
-            {typeModal == 'view' ? 'Đóng' : 'Hủy'}
+            {typeModal === 'view' ? 'Đóng' : 'Hủy'}
           </Text>
         </Button>,
       ]}
@@ -176,7 +175,12 @@ const ModalCategory = (props) => {
           <Form.Item
             label='Mã'
             name='code'
-            //rules={[{ required: true, message: 'Không được để trống!' }]}
+          >
+            <Input disabled={disable} style={{width: '100%', height: 32, borderRadius: 5}} />
+          </Form.Item>
+          <Form.Item
+            label='Icon'
+            name='icon'
           >
             <Input disabled={disable} style={{width: '100%', height: 32, borderRadius: 5}} />
           </Form.Item>

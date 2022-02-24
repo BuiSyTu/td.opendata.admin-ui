@@ -43,13 +43,16 @@ const ModalCategory = (props) => {
       fetchData();
     }
     return () => {};
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [modalId]);
+
   const handleCancel = () => {
     form.resetFields();
     setTypeModal('');
     setModalId(0);
     setModalVisible(false);
   };
+  
   const handleOk = async () => {
     try {
       await form.validateFields();

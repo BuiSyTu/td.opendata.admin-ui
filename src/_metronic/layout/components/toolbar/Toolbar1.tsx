@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import clsx from 'clsx';
-import React, {FC} from 'react';
-import {KTSVG} from '../../../helpers';
+import {FC} from 'react';
 import {useLayout} from '../../core';
 import {DefaultTitle} from '../header/page-title/DefaultTitle';
 

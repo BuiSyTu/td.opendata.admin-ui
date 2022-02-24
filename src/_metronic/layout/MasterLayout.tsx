@@ -13,7 +13,6 @@ import {
   ActivityDrawer,
   Main,
   InviteUsers,
-  UpgradePlan,
 } from '../partials'
 import {MenuComponent} from '../assets/ts/components'
 

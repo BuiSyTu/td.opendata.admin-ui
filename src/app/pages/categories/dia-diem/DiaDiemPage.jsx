@@ -1,9 +1,7 @@
-import React, {useState, useEffect} from 'react';
-import {Redirect, Route, Switch} from 'react-router-dom';
-import {shallowEqual, useSelector, connect, useDispatch, ConnectedProps} from 'react-redux';
+import {useState, useEffect} from 'react';
 
-import {PageLink, PageTitle} from '../../../../_metronic/layout/core';
-import {Row, Col, Typography, Divider, Input, Button, Popconfirm, notification, Icon} from 'antd';
+import {PageTitle} from '../../../../_metronic/layout/core';
+import {Row, Col, Typography, Divider, Input, Popconfirm, notification} from 'antd';
 import TableList from '../../../components/TableList';
 import FormModal from './components/FormModal';
 import {HOST_API, requestGET, requestDELETE} from '../../../utils/basicAPI';
@@ -21,14 +19,7 @@ const TypePaperPage = () => {
   const [offset, setOffset] = useState(0);
   const [modalId, setModalId] = useState(0);
   const [typeModal, setTypeModal] = useState('');
-  const chatBreadCrumbs = [
-    {
-      title: '',
-      path: '',
-      isSeparator: false,
-      isActive: false,
-    },
-  ];
+
   const columns = [
     {
       title: 'STT',
@@ -55,18 +46,6 @@ const TypePaperPage = () => {
       key: 'code',
       width: '35%',
     },
-    // {
-    //   title: 'Icon',
-    //   dataIndex: ' ',
-    //   key: '',
-    //   render: (text, record, index) => {
-    //     return (
-    //       <i className={`${record.placeTypeIcon}`} style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-    //       </i>
-    //     );
-    //   },
-    //   width: '5%',
-    // },
     {
       title: 'Thao tác',
       width: '15%',
@@ -74,7 +53,7 @@ const TypePaperPage = () => {
       key: '',
       render: (text, record) => (
         <div>
-          <a
+          <button
             className='btn btn-light-success m-btn m-btn--icon btn-sm m-btn--icon-only'
             data-toggle='m-tooltip'
             title='Xem'
@@ -83,8 +62,8 @@ const TypePaperPage = () => {
             }}
           >
             <i className='fas fa-edit' style={{marginLeft: -7}}></i>
-          </a>
-          <a
+          </button>
+          <button
             style={{marginLeft: 10}}
             className='btn btn-light-primary m-btn m-btn--icon btn-sm m-btn--icon-only'
             data-toggle='m-tooltip'
@@ -94,7 +73,7 @@ const TypePaperPage = () => {
             }}
           >
             <i className='la la-edit' style={{marginLeft: -7}}></i>
-          </a>
+          </button>
           <Popconfirm
             title='Xóa dữ liệu？'
             okText='Ok'
@@ -103,14 +82,14 @@ const TypePaperPage = () => {
               handleDelete(Number(record.id));
             }}
           >
-            <a
+            <button
               style={{marginLeft: 10}}
               className='btn btn-light-danger m-btn m-btn--icon btn-sm m-btn--icon-only'
               data-toggle='m-tooltip'
               title='Xóa'
             >
               <i className='fas fa-trash-alt' style={{marginLeft: -7}}></i>
-            </a>
+            </button>
           </Popconfirm>
         </div>
       ),
@@ -140,6 +119,7 @@ const TypePaperPage = () => {
       fetchData();
     }
     return () => {};
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [update]);
   const handleEdit = (id) => {
     setModalId(id);
@@ -183,14 +163,14 @@ const TypePaperPage = () => {
             />
           </Col>
           <Col span={12} style={{textAlign: 'right'}}>
-            <a
+            <button
               className=' btn btn-success btn-sm m-btn m-btn--icon'
               onClick={() => {
                 setModalVisible(true);
               }}
             >
               <i className='bi bi-plus-square'></i> Thêm
-            </a>
+            </button>
           </Col>
         </Row>
         <Divider style={{margin: '10px 0'}} />

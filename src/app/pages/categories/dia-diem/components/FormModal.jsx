@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import {
-  Row,
-  Col,
   Form,
   Button,
   Input,
@@ -9,11 +7,7 @@ import {
   Typography,
   Select,
   Modal,
-  Checkbox,
-  Divider,
-  DatePicker,
   Spin,
-  Empty,
 } from 'antd';
 import { HOST_API, requestGET, requestPOST, requestPUT } from '../../../../utils/basicAPI';
 const { TextArea } = Input;
@@ -27,10 +21,7 @@ const ModalCategory = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [buttonLoading, setButtonLoading] = useState(false);
   const [placeTypes, setPlaceTypes] = useState([]);
-  const layout = {
-    labelCol: { span: 4 },
-    wrapperCol: { span: 20 },
-  };
+
   useEffect(() => {
     const fetchData = async () => {
       const res = await requestGET(`${HOST_API}/PlaceType?pageNumber=1&pageSize=100&keySearch&orderBy`);
@@ -56,11 +47,12 @@ const ModalCategory = (props) => {
         setIsLoading(false);
       }
     };
-    setDisable(typeModal == 'view' ? true : false);
+    setDisable(typeModal === 'view' ? true : false);
     if (modalId > 0) {
       fetchData();
     }
     return () => { };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [modalId]);
   const handleCancel = () => {
     form.resetFields();
@@ -70,12 +62,10 @@ const ModalCategory = (props) => {
   };
   const handleOk = async () => {
     try {
-      const values = await form.validateFields();
-      // if (fileList.length != 0) {
-      //   await postImage()
-      // }
+      await form.validateFields();
+
       const formData = form.getFieldsValue(true);
-      typeModal == 'edit' ? putData(formData) : postData(formData);
+      typeModal === 'edit' ? putData(formData) : postData(formData);
     } catch (errorInfo) {
       console.log('Failed:', errorInfo);
     }
@@ -133,7 +123,7 @@ const ModalCategory = (props) => {
       onCancel={handleCancel}
       closeIcon={<i className='las la-times' style={{ color: '#fff', fontSize: 20 }}></i>}
       footer={[
-        typeModal == 'view' ? (
+        typeModal === 'view' ? (
           <></>
         ) : (
           <Button
@@ -173,7 +163,7 @@ const ModalCategory = (props) => {
         >
           <Text style={{ color: '#757575', paddingLeft: 5 }}>
             {' '}
-            {typeModal == 'view' ? 'Đóng' : 'Hủy'}
+            {typeModal === 'view' ? 'Đóng' : 'Hủy'}
           </Text>
         </Button>,
       ]}

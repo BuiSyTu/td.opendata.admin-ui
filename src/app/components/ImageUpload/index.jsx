@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import {useState} from 'react';
 import {Upload, Modal} from 'antd';
 import {getBase64} from '../../utils/basicAPI';
 

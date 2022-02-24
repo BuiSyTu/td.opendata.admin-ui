@@ -1,8 +1,6 @@
-import React, {useEffect, useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import {useEffect, useState} from 'react';
+import { useSelector} from 'react-redux';
 import {
-  Row,
-  Col,
   Form,
   Button,
   Input,
@@ -10,11 +8,8 @@ import {
   Typography,
   Select,
   Modal,
-  Checkbox,
-  Divider,
   DatePicker,
   Spin,
-  Empty,
 } from 'antd';
 import {
   HOST_API,
@@ -22,22 +17,20 @@ import {
   HOST_FILE,
   requestGET,
   requestPOST,
-  requestPUT,
 } from '../../../../utils/basicAPI';
 import ImageUpload from '../../../../components/ImageUpload';
 import {handleImage} from '../../../../utils/utils';
 import moment from 'moment';
 import 'moment/locale/vi';
 moment.locale('vi');
-const {TextArea} = Input;
 const {Text} = Typography;
 const {Option} = Select;
 const ModalCategory = (props) => {
   const {modalVisible, setModalVisible, modalId, setModalId, typeModal, setTypeModal, setUpdate} =
     props;
-  const dispatch = useDispatch();
   const accessToken = useSelector((state) => state.auth.accessToken);
   const [form] = Form.useForm();
+  // eslint-disable-next-line no-unused-vars
   const [disable, setDisable] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [buttonLoading, setButtonLoading] = useState(false);
@@ -54,9 +47,7 @@ const ModalCategory = (props) => {
   const [districtId, setDistrictId] = useState(null);
   const [image, setImage] = useState([]);
 
-  const [roles, setRoles] = useState([]);
-  const [userRoles, setUserRoles] = useState([]);
-  const [checkedRoles, setCheckedRoles] = React.useState([]);
+  // const [roles, setRoles] = useState([]);
 
   const layout = {
     labelCol: {xl: 8, xs: 24},
@@ -84,23 +75,25 @@ const ModalCategory = (props) => {
         setIsLoading(false);
       }
     };
-    setDisable(typeModal == 'view' ? true : false);
+    setDisable(typeModal === 'view' ? true : false);
     if (modalId > 0) {
       fetchData();
     }
     return () => {};
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [modalId]);
+
   useEffect(() => {
-    const fetchRoles = async () => {
-      const res = await requestGET(`${HOST_API}/Role?pageNumber=1&pageSize=100&keySearch&orderBy`);
-      if (res && res.data) {
-        let tmp = [];
-        res.data.forEach((i) => {
-          tmp.push({label: i.name, value: i.name});
-        });
-        setRoles(tmp);
-      }
-    };
+    // const fetchRoles = async () => {
+    //   const res = await requestGET(`${HOST_API}/Role?pageNumber=1&pageSize=100&keySearch&orderBy`);
+    //   if (res && res.data) {
+    //     let tmp = [];
+    //     res.data.forEach((i) => {
+    //       tmp.push({label: i.name, value: i.name});
+    //     });
+    //     setRoles(tmp);
+    //   }
+    // };
 
     const fetchDataIdentityType = async () => {
       const res = await requestGET(
@@ -187,7 +180,7 @@ const ModalCategory = (props) => {
   };
   const handleOk = async () => {
     try {
-      const values = await form.validateFields();
+      await form.validateFields();
       const formData = form.getFieldsValue(true);
       if (image?.length > 0) {
         if (modalId) {
@@ -196,7 +189,7 @@ const ModalCategory = (props) => {
           formData.avatarUrl = image[0]?.response?.data[0]?.url;
         }
       }
-      typeModal == 'edit' ? putData(formData) : postData(formData);
+      typeModal === 'edit' ? putData(formData) : postData(formData);
     } catch (errorInfo) {
       console.log('Failed:', errorInfo);
     }
@@ -261,7 +254,7 @@ const ModalCategory = (props) => {
       onCancel={handleCancel}
       closeIcon={<i className='las la-times' style={{color: '#fff', fontSize: 20}}></i>}
       footer={[
-        typeModal == 'view' ? (
+        typeModal === 'view' ? (
           <></>
         ) : (
           <Button
@@ -301,7 +294,7 @@ const ModalCategory = (props) => {
         >
           <Text style={{color: '#757575', paddingLeft: 5}}>
             {' '}
-            {typeModal == 'view' ? 'Đóng' : 'Hủy'}
+            {typeModal === 'view' ? 'Đóng' : 'Hủy'}
           </Text>
         </Button>,
       ]}

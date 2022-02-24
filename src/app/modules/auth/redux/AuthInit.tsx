@@ -15,8 +15,7 @@ const AuthInit: FC<PropsFromRedux> = (props) => {
   const [showSplashScreen, setShowSplashScreen] = useState(true);
   const accessToken = useSelector<RootState>(({auth}) => auth.accessToken, shallowEqual);
 
-  console.log('aaaa');
-  console.log(accessToken);
+  // console.log(accessToken);
 
   // We should request user by authToken before rendering the application
   useEffect(() => {

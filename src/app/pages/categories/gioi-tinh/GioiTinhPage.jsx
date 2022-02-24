@@ -1,9 +1,7 @@
-import React, {useState, useEffect} from 'react';
-import {Redirect, Route, Switch} from 'react-router-dom';
-import {shallowEqual, useSelector, connect, useDispatch, ConnectedProps} from 'react-redux';
+import {useState, useEffect} from 'react';
 
-import {PageLink, PageTitle} from '../../../../_metronic/layout/core';
-import {Row, Col, Typography, Divider, Input, Button, Popconfirm, notification} from 'antd';
+import {PageTitle} from '../../../../_metronic/layout/core';
+import {Typography, Divider, Input, Popconfirm, notification} from 'antd';
 import TableList from '../../../components/TableList';
 import FormModal from './components/FormModal';
 import {HOST_API, requestGET, requestDELETE} from '../../../utils/basicAPI';
@@ -21,14 +19,7 @@ const GioiTinhPage = () => {
   const [offset, setOffset] = useState(0);
   const [modalId, setModalId] = useState(0);
   const [typeModal, setTypeModal] = useState('');
-  const chatBreadCrumbs = [
-    {
-      title: '',
-      path: '',
-      isSeparator: false,
-      isActive: false,
-    },
-  ];
+
   const columns = [
     {
       title: 'STT',
@@ -64,7 +55,7 @@ const GioiTinhPage = () => {
       align: 'center',
       render: (text, record) => (
         <div>
-          <a
+          <button
             className='btn btn-light-success m-btn m-btn--icon btn-sm m-btn--icon-only'
             data-toggle='m-tooltip'
             title='Xem'
@@ -73,8 +64,8 @@ const GioiTinhPage = () => {
             }}
           >
             <i className='fas fa-edit' style={{marginLeft: -7}}></i>
-          </a>
-          <a
+          </button>
+          <button
             style={{marginLeft: 10}}
             className='btn btn-light-primary m-btn m-btn--icon btn-sm m-btn--icon-only'
             data-toggle='m-tooltip'
@@ -84,7 +75,7 @@ const GioiTinhPage = () => {
             }}
           >
             <i className='la la-edit' style={{marginLeft: -7}}></i>
-          </a>
+          </button>
           <Popconfirm
             title='Xóa dữ liệu？'
             okText='Ok'
@@ -93,14 +84,14 @@ const GioiTinhPage = () => {
               handleDelete(Number(record.id));
             }}
           >
-            <a
+            <button
               style={{marginLeft: 10}}
               className='btn btn-light-danger m-btn m-btn--icon btn-sm m-btn--icon-only'
               data-toggle='m-tooltip'
               title='Xóa'
             >
               <i className='fas fa-trash-alt' style={{marginLeft: -7}}></i>
-            </a>
+            </button>
           </Popconfirm>
         </div>
       ),
@@ -126,21 +117,26 @@ const GioiTinhPage = () => {
       fetchData();
     }
     return () => {};
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [update]);
+
   useEffect(() => {
     setUpdate(true);
     return () => {};
   }, [offset, size, inputValue]);
+
   const handleEdit = (id) => {
     setModalId(id);
     setTypeModal('edit');
     setModalVisible(true);
   };
+
   const handleView = (id) => {
     setModalId(id);
     setTypeModal('view');
     setModalVisible(true);
   };
+
   const handleDelete = async (id) => {
     var res = await requestDELETE(`${HOST_API}/Gender/${id}`);
     if (res) {
@@ -157,6 +153,7 @@ const GioiTinhPage = () => {
       });
     }
   };
+  
   return (
     <div>
       <PageTitle breadcrumbs={[]}>Danh mục giới tính</PageTitle>
@@ -172,14 +169,14 @@ const GioiTinhPage = () => {
             />
           </div>
           <div className='col-xl-4 d-flex justify-content-end'>
-            <a
+            <button
               className=' btn btn-success btn-sm m-btn m-btn--icon'
               onClick={() => {
                 setModalVisible(true);
               }}
             >
               <i className='bi bi-plus-square'></i> Thêm
-            </a>
+            </button>
           </div>
         </div>
         <Divider style={{margin: '10px 0'}} />

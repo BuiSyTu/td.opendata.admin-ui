@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from 'react';
-import {Table, Spin} from 'antd';
+import {useState} from 'react';
+import {Table} from 'antd';
 
 const TableList = (props) => {
   const {
@@ -14,15 +14,8 @@ const TableList = (props) => {
     rowSelection,
     rowKey,
   } = props;
-  
-  const [searchText, setSearchText] = useState('');
 
   const [current, setCurrent] = useState(1);
-
-  const handleReset = (clearFilters) => {
-    clearFilters();
-    setSearchText('');
-  };
 
   const handleTableChange = async (page, pageSize) => {
     setCurrent(page);

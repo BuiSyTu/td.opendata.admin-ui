@@ -45,6 +45,7 @@ const ModalCategory = (props) => {
       fetchData();
     }
     return () => {};
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [modalId]);
 
   const handleCancel = () => {

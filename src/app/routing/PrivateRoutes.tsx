@@ -12,9 +12,6 @@ export function PrivateRoutes() {
   const WidgetsPage = lazy(() => import('../modules/widgets/WidgetsPage'))
   const ChatPage = lazy(() => import('../modules/apps/chat/ChatPage'))
   const CategoriesPage = lazy(() => import('../pages/categories/CategoriesPage'))
-  const RecuimentPage = lazy(() => import('../pages/recruitments/RecuimentPage'))
-  const TrafficPage = lazy(() => import('../pages/traffics/TrafficPage'))
-  const SupplyDemandPage = lazy(() => import('../pages/supplydemand/SupplyDemandPage'))
 
   const AministrationPage = lazy(() => import('../pages/administration/AdministrationPage'))
   return (
@@ -22,9 +19,6 @@ export function PrivateRoutes() {
       <Switch>
         <Route path='/dashboard' component={DashboardWrapper} />
         <Route path='/categories' component={CategoriesPage} />
-        <Route path='/recruitments' component={RecuimentPage} />
-        <Route path='/traffics' component={TrafficPage} />
-        <Route path='/supplydemand' component={SupplyDemandPage} />
         <Route path='/builder' component={BuilderPageWrapper} />
         <Route path='/crafted/pages/profile' component={ProfilePage} />
         <Route path='/crafted/pages/wizards' component={WizardsPage} />

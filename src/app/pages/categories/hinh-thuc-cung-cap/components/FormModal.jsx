@@ -25,6 +25,7 @@ const ModalCategory = (props) => {
     labelCol: {span: 4},
     wrapperCol: {span: 20},
   };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -43,13 +44,16 @@ const ModalCategory = (props) => {
       fetchData();
     }
     return () => {};
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [modalId]);
+
   const handleCancel = () => {
     form.resetFields();
     setTypeModal('');
     setModalId(0);
     setModalVisible(false);
   };
+
   const handleOk = async () => {
     try {
       await form.validateFields();
@@ -105,6 +109,7 @@ const ModalCategory = (props) => {
     setUpdate(true);
     handleCancel();
   };
+  
   return (
     <Modal
       visible={modalVisible}
