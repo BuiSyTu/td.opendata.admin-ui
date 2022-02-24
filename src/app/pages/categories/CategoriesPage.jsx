@@ -8,6 +8,7 @@ const CategoriesPage = () => {
   const HinhThucCungCapPage = lazy(() => import('./hinh-thuc-cung-cap/HinhThucCungCapPage'));
   const TuKhoaPage = lazy(() => import('./tu-khoa/TuKhoaPage'));
   const GiayPhepPage = lazy(() => import('./giay-phep/GiayPhepPage'));
+  const ToChucPage = lazy(() => import('./to-chuc/ToChucPage'));
 
   return (
     <Switch>
@@ -16,7 +17,7 @@ const CategoriesPage = () => {
       <Route path='/categories/provider-type' component={HinhThucCungCapPage}></Route>
       <Route path='/categories/tag' component={TuKhoaPage}></Route>
       <Route path='/categories/license' component={GiayPhepPage}></Route>
-      <Route path='/categories/genders'></Route>
+      <Route path='/categories/organization' component={ToChucPage}></Route>
       <Redirect from='/categories' exact={true} to='/categories/fields' />
       <Redirect to='/categories/fields' />
     </Switch>

@@ -36,6 +36,7 @@ export function AsideMenuMain() {
             <AsideMenuItem to='/categories/provider-type' title='Hình thức cung cấp' hasBullet={true} />
             <AsideMenuItem to='/categories/tag' title='Từ khóa' hasBullet={true} />
             <AsideMenuItem to='/categories/license' title='Giấy phép' hasBullet={true} />
+            <AsideMenuItem to='/categories/organization' title='Tổ chức' hasBullet={true} />
           </AsideMenuItemWithSub>
         </div>
       ) : (
