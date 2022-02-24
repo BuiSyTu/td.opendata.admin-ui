@@ -140,7 +140,7 @@ const ModalCategory = (props) => {
           </Button>
         ),
         <Button
-          key='Cancle'
+          key='Cancel'
           type='primary'
           size='middle'
           style={{

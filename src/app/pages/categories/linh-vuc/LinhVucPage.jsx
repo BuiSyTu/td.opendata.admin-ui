@@ -126,7 +126,6 @@ const CategoryPage = () => {
   }, [offset, size, inputValue]);
 
   const handleEdit = (id) => {
-    console.log(id);
     setModalId(id);
     setTypeModal('edit');
     setModalVisible(true);
@@ -153,6 +152,7 @@ const CategoryPage = () => {
       });
     }
   };
+  
   return (
     <div>
       <PageTitle breadcrumbs={[]}>Từ khóa</PageTitle>

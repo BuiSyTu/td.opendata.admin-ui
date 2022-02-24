@@ -45,12 +45,6 @@ const CategoryPage = () => {
       width: '45%',
     },
     {
-      title: 'Mã',
-      dataIndex: 'code',
-      key: 'code',
-      width: '35%',
-    },
-    {
       title: 'Thao tác',
       width: '15%',
       dataIndex: '',
