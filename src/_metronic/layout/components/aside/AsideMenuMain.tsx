@@ -41,6 +41,7 @@ export function AsideMenuMain() {
           <AsideMenuItem to='/categories/data-type' title='Loại dữ liệu' hasBullet={true} />
           <AsideMenuItem to='/categories/fields' title='Lĩnh vực' hasBullet={true} />
           <AsideMenuItem to='/categories/provider-type' title='Hình thức cung cấp' hasBullet={true} />
+          <AsideMenuItem to='/categories/tag' title='Từ khóa' hasBullet={true} />
           <AsideMenuItem to='/categories/genders' title='Giới tính' hasBullet={true} />
           <AsideMenuItem to='/categories/identitytypes' title='Loại giấy tờ' hasBullet={true} />
           <AsideMenuItem to='/categories/maritalstatus' title='Tình trạng hôn nhân' hasBullet={true} />

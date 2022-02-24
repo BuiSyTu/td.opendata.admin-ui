@@ -4,12 +4,12 @@ import {PageTitle} from '../../../../_metronic/layout/core';
 import {Typography, Divider, Input, Popconfirm, notification} from 'antd';
 import TableList from '../../../components/TableList';
 import FormModal from '../hinh-thuc-cung-cap/components/FormModal';
-import {CategoryApi} from '../../../apis/CategoryApi';
+import {TagApi} from '../../../apis/TagApi';
 
 const {Text} = Typography;
 const {Search} = Input;
 
-const categoryApi = new CategoryApi();
+const tagApi = new TagApi();
 
 const CategoryPage = () => {
   const [loading, setLoading] = useState(false);
@@ -105,7 +105,7 @@ const CategoryPage = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        var res = await categoryApi.getAll();
+        var res = await tagApi.getAll();
         setDataTable(res?.data ?? []);
         setCount(res?.totalCount ?? 0);
         setLoading(false);
@@ -140,7 +140,7 @@ const CategoryPage = () => {
   };
 
   const handleDelete = async (id) => {
-    var res = await categoryApi.delete(id);
+    var res = await tagApi.delete(id);
     if (res) {
       notification.success({
         message: 'Xóa thành công!',
