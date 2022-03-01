@@ -16,31 +16,21 @@ import { RootState } from '../../setup'
 import { MasterInit } from '../../_metronic/layout/MasterInit'
 
 const Routes: FC = () => {
-  const isAuthorized = useSelector<RootState>(({ auth }) => auth.user, shallowEqual)
 
   return (
     <>
       <Switch>
-        {!isAuthorized ? (
-          <Route>
-            <AuthPage />
-          </Route>
-        ) : (
-          <Redirect from='/auth' to='/' />
-        )}
 
         <Route path='/error' component={ErrorsPage} />
         <Route path='/logout' component={Logout} />
 
-        {!isAuthorized ? (
-          <Redirect to='/auth/login' />
-        ) : (
-          <>
-            <MasterLayout>
-              <PrivateRoutes />
-            </MasterLayout>
-          </>
-        )}
+
+        <>
+          <MasterLayout>
+            <PrivateRoutes />
+          </MasterLayout>
+        </>
+
       </Switch>
       <MasterInit />
     </>

@@ -22,16 +22,16 @@ const HeaderUserMenu: FC = () => {
       <div className='menu-item px-3'>
         <div className='menu-content d-flex align-items-center px-3'>
           <div className='symbol symbol-50px me-5'>
-            <img alt='Logo' src={user.pic} />
+            <img alt='Logo' src={user?.pic??''} />
           </div>
 
           <div className='d-flex flex-column'>
             <div className='fw-bolder d-flex align-items-center fs-5'>
-              {user.fullName}
+              {user?.fullName ?? ''}
               <span className='badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2'>Pro</span>
             </div>
             <a href='#' className='fw-bold text-muted text-hover-primary fs-7'>
-              {user.email}
+              {user?.email ?? ''}
             </a>
           </div>
         </div>

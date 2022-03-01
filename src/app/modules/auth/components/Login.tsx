@@ -34,7 +34,8 @@ export function Login() {
       setLoading(true)
       login(values.email, values.password)
         .then((data) => {
-          let accessToken = data.data.data.token
+          console.log(data)
+          let accessToken = data.data
           setLoading(false)
           dispatch(auth.actions.login(accessToken))
         })

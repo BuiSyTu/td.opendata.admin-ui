@@ -12,7 +12,7 @@ export const REQUEST_PASSWORD_URL = `${API_URL}/identity/forgot-password`
 
 // Server should return AuthModel
 export function login(email: string, password: string) {
-  return axios.get(`${LOGIN_URL}?email=${email}&password=${password}`)
+  return sharepointApi.getUserTokenKey(email, password)
 }
 
 // Server should return AuthModel
