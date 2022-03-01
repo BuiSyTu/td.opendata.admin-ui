@@ -22,6 +22,8 @@ const CategoryPage = () => {
   const [offset, setOffset] = useState(0)
   const [modalId, setModalId] = useState('')
   const [typeModal, setTypeModal] = useState('')
+  const [disableDataTab, setDisableDataTab] = useState(true)
+  const [tabKey, setTabKey] = useState('information')
 
   const columns = [
     {
@@ -135,12 +137,14 @@ const CategoryPage = () => {
   const handleEdit = (id) => {
     setModalId(id)
     setTypeModal('edit')
+    setDisableDataTab(false)
     setModalVisible(true)
   }
 
   const handleView = (id) => {
     setModalId(id)
     setTypeModal('view')
+    setDisableDataTab(false)
     setModalVisible(true)
   }
 
@@ -198,6 +202,7 @@ const CategoryPage = () => {
         />
       </div>
       <FormModal
+        key={`${modalId}-${typeModal}`}
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}
         modalId={modalId}
@@ -205,6 +210,10 @@ const CategoryPage = () => {
         typeModal={typeModal}
         setTypeModal={setTypeModal}
         setUpdate={setUpdate}
+        disableDataTab={disableDataTab}
+        setDisableDataTab={setDisableDataTab}
+        tabKey={tabKey}
+        setTabKey={setTabKey}
       />
     </div>
   )

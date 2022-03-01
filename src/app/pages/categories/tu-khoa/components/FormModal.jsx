@@ -42,7 +42,7 @@ const ModalCategory = (props) => {
   const handleCancel = () => {
     form.resetFields()
     setTypeModal('')
-    setModalId(0)
+    setModalId('')
     setModalVisible(false)
   }
 

@@ -40,7 +40,7 @@ const providerTypeApi = new ProviderTypeApi()
 const dataTypeApi = new DataTypeApi()
 
 const ModalCategory = (props) => {
-  const { modalVisible, setModalVisible, modalId, setModalId, typeModal, setTypeModal, setUpdate } = props
+  const { modalVisible, setModalVisible, modalId, setModalId, typeModal, setTypeModal, setUpdate, disableDataTab, setDisableDataTab, tabKey, setTabKey } = props
   const [form] = Form.useForm()
   const [disable, setDisable] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
@@ -50,7 +50,6 @@ const ModalCategory = (props) => {
   const [providerTypes, setProviderTypes] = useState([])
   const [dataTypes, setDataTypes] = useState([])
   const [dataTypeCode, setDataTypeCode] = useState('webapi')
-  const [disableDataTab, setDisableDataTab] = useState(true)
   const [authorization, setAuthorization] = useState('NoAuth')
 
   const layout = {
@@ -141,7 +140,9 @@ const ModalCategory = (props) => {
   const handleCancel = () => {
     form.resetFields()
     setTypeModal('')
-    setModalId(0)
+    setDisableDataTab(true)
+    setTabKey('information')
+    setModalId('')
     setModalVisible(false)
   }
 
@@ -210,6 +211,10 @@ const ModalCategory = (props) => {
     setAuthorization(value)
   }
 
+  const handleTabClick = (key, event) => {
+    setTabKey(key)
+  }
+
   return (
     <Modal
       width={1200}
@@ -273,8 +278,11 @@ const ModalCategory = (props) => {
             authorization,
           }}
         >
-          <Tabs defaultActiveKey='1'>
-            <TabPane tab='Thông tin' key='1'>
+          <Tabs
+            activeKey={tabKey}
+            onTabClick={(key, event) => handleTabClick(key, event)}
+          >
+            <TabPane tab='Thông tin' key='information'>
               <Row>
                 <Col span={12}>
                   <Form.Item
@@ -390,7 +398,7 @@ const ModalCategory = (props) => {
               </Form.Item>
             </TabPane>
 
-            <TabPane tab='Dữ liệu' disabled={disableDataTab} key='2'>
+            <TabPane tab='Dữ liệu' disabled={disableDataTab} key='data'>
               {dataTypeCode === 'webapi'
                 ? (
                   <>
