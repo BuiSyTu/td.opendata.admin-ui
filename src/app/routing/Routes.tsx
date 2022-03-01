@@ -6,13 +6,13 @@
  */
 
 import { FC } from 'react'
-import { Redirect, Switch, Route } from 'react-router-dom'
-import { shallowEqual, useSelector } from 'react-redux'
+import { Switch, Route } from 'react-router-dom'
+// import { shallowEqual, useSelector } from 'react-redux'
 import { MasterLayout } from '../../_metronic/layout/MasterLayout'
 import { PrivateRoutes } from './PrivateRoutes'
-import { Logout, AuthPage } from '../modules/auth'
+import { Logout } from '../modules/auth'
 import { ErrorsPage } from '../modules/errors/ErrorsPage'
-import { RootState } from '../../setup'
+// import { RootState } from '../../setup'
 import { MasterInit } from '../../_metronic/layout/MasterInit'
 
 const Routes: FC = () => {

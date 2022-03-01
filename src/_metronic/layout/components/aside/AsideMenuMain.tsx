@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-no-target-blank */
-import { useSelector } from 'react-redux'
+// import { useSelector } from 'react-redux'
 
 import { useIntl } from 'react-intl'
 import { AsideMenuItemWithSub } from './AsideMenuItemWithSub'
@@ -7,7 +7,7 @@ import { AsideMenuItem } from './AsideMenuItem'
 
 export function AsideMenuMain() {
   const intl = useIntl()
-  const user: any = useSelector<any>((state) => state.auth.user)
+  // const user: any = useSelector<any>((state) => state.auth.user)
   // const userRoles = user?.roles ?? []
 
   // const CheckRole: any = (roles: Array<string>, role: Array<string>) => {
