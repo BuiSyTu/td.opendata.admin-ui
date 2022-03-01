@@ -1,8 +1,8 @@
-import axios from 'axios';
+import axios from 'axios'
 
-const ver = '1';
-const controllerName = 'organizations';
-const baseUrl = `https://192.168.2.169:5001/api/v${ver}/${controllerName}`;
+const ver = '1'
+const controllerName = 'organizations'
+const baseUrl = `https://192.168.2.169:5001/api/v${ver}/${controllerName}`
 
 export default class OrganizationApi {
   async getAll() {
@@ -11,12 +11,12 @@ export default class OrganizationApi {
         method: 'GET',
         url: baseUrl,
         timeout: 15000,
-      });
+      })
   
-      return res?.data;
+      return res?.data
     } catch (error) {
-      console.error(error);
-      return null;
+      console.error(error)
+      return null
     }
   }
 
@@ -30,12 +30,12 @@ export default class OrganizationApi {
         url: baseUrl,
         data,
         timeout: 15000,
-      });
+      })
 
-      return res?.data;
+      return res?.data
     } catch (error) {
-      console.error(error);
-      return null;
+      console.error(error)
+      return null
     }
   }
 
@@ -45,12 +45,12 @@ export default class OrganizationApi {
         method: 'GET',
         url: `${baseUrl}/${id}`,
         timeout: 15000,
-      });
+      })
 
-      return res?.data;
+      return res?.data
     } catch (error) {
-      console.error(error);
-      return null;
+      console.error(error)
+      return null
     }
   }
 
@@ -61,12 +61,12 @@ export default class OrganizationApi {
         url: `${baseUrl}/${id}`,
         data,
         timeout: 15000,
-      });
+      })
 
-      return res?.data;
+      return res?.data
     } catch (error) {
-      console.error(error);
-      return null;
+      console.error(error)
+      return null
     }
   }
 
@@ -76,12 +76,12 @@ export default class OrganizationApi {
         method: 'DELETE',
         url: `${baseUrl}/${id}`,
         timeout: 15000,
-      });
+      })
 
-      return res?.data;
+      return res?.data
     } catch (error) {
-      console.error(error);
-      return null;
+      console.error(error)
+      return null
     }
   }
 }

@@ -1,15 +1,15 @@
-import {lazy} from 'react';
-import {Redirect, Route, Switch} from 'react-router-dom';
+import { lazy } from 'react'
+import { Redirect, Route, Switch } from 'react-router-dom'
 
 
 const CategoriesPage = () => {
-  const LinhVucPage = lazy(() => import('./linh-vuc/LinhVucPage'));
-  const LoaiDuLieuPage = lazy(() => import('./loai-du-lieu/LoaiDuLieuPage'));
-  const HinhThucCungCapPage = lazy(() => import('./hinh-thuc-cung-cap/HinhThucCungCapPage'));
-  const TuKhoaPage = lazy(() => import('./tu-khoa/TuKhoaPage'));
-  const GiayPhepPage = lazy(() => import('./giay-phep/GiayPhepPage'));
-  const ToChucPage = lazy(() => import('./to-chuc/ToChucPage'));
-  const TapDuLieuPage = lazy(() => import('./tap-du-lieu/TapDuLieuPage'));
+  const LinhVucPage = lazy(() => import('./linh-vuc/LinhVucPage'))
+  const LoaiDuLieuPage = lazy(() => import('./loai-du-lieu/LoaiDuLieuPage'))
+  const HinhThucCungCapPage = lazy(() => import('./hinh-thuc-cung-cap/HinhThucCungCapPage'))
+  const TuKhoaPage = lazy(() => import('./tu-khoa/TuKhoaPage'))
+  const GiayPhepPage = lazy(() => import('./giay-phep/GiayPhepPage'))
+  const ToChucPage = lazy(() => import('./to-chuc/ToChucPage'))
+  const TapDuLieuPage = lazy(() => import('./tap-du-lieu/TapDuLieuPage'))
 
   return (
     <Switch>
@@ -23,7 +23,7 @@ const CategoriesPage = () => {
       <Redirect from='/categories' exact={true} to='/categories/fields' />
       <Redirect to='/categories/fields' />
     </Switch>
-  );
-};
+  )
+}
 
-export default CategoriesPage;
+export default CategoriesPage

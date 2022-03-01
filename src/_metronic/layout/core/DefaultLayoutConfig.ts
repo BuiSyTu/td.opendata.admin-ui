@@ -1,4 +1,4 @@
-import {ILayout} from './LayoutModels';
+import { ILayout } from './LayoutModels'
 
 export const DefaultLayoutConfig: ILayout = {
   main: {
@@ -84,4 +84,4 @@ export const DefaultLayoutConfig: ILayout = {
     responsiveBreakpoint: 'lg',
     responsiveTarget: '#kt_toolbar_container',
   },
-};
+}

@@ -1,21 +1,21 @@
-import {useState} from 'react';
-import {Upload, Modal} from 'antd';
-import {getBase64} from '../../utils/basicAPI';
+import {useState} from 'react'
+import {Upload, Modal} from 'antd'
+import {getBase64} from '../../utils/basicAPI'
 
 const ImageUpload = (props) => {
-  const {URL, fileList, onChange, headers, multiple, disabled} = props;
-  const [previewVisible, setPreviewVisible] = useState(false);
-  const [previewImage, setPreviewImage] = useState('');
+  const {URL, fileList, onChange, headers, multiple, disabled} = props
+  const [previewVisible, setPreviewVisible] = useState(false)
+  const [previewImage, setPreviewImage] = useState('')
 
   const handlePreview = async (file) => {
     if (!file.url && !file.preview) {
-      file.preview = await getBase64(file.originFileObj);
+      file.preview = await getBase64(file.originFileObj)
     }
-    setPreviewImage(file.url || file.preview);
-    setPreviewVisible(true);
-  };
+    setPreviewImage(file.url || file.preview)
+    setPreviewVisible(true)
+  }
 
-  const handleCancelImage = () => setPreviewVisible(false);
+  const handleCancelImage = () => setPreviewVisible(false)
 
   return (
     <>
@@ -41,7 +41,7 @@ const ImageUpload = (props) => {
         <img alt='example' style={{width: '100%'}} src={previewImage} />
       </Modal>
     </>
-  );
-};
+  )
+}
 
-export default ImageUpload;
+export default ImageUpload

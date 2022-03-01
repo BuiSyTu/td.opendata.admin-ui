@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, {FC, createContext, useContext, useEffect, useState} from 'react'
+import React, { FC, createContext, useContext, useEffect, useState } from 'react'
 
 export interface PageLink {
   title: string
@@ -18,12 +18,12 @@ export interface PageDataContextModel {
 }
 
 const PageDataContext = createContext<PageDataContextModel>({
-  setPageTitle: (_title: string) => {},
-  setPageBreadcrumbs: (_breadcrumbs: Array<PageLink>) => {},
-  setPageDescription: (_description: string) => {},
+  setPageTitle: (_title: string) => { },
+  setPageBreadcrumbs: (_breadcrumbs: Array<PageLink>) => { },
+  setPageDescription: (_description: string) => { },
 })
 
-const PageDataProvider: React.FC = ({children}) => {
+const PageDataProvider: React.FC = ({ children }) => {
   const [pageTitle, setPageTitle] = useState<string>('')
   const [pageDescription, setPageDescription] = useState<string>('')
   const [pageBreadcrumbs, setPageBreadcrumbs] = useState<Array<PageLink>>([])
@@ -47,8 +47,8 @@ type Props = {
   breadcrumbs?: Array<PageLink>
 }
 
-const PageTitle: FC<Props> = ({children, description, breadcrumbs}) => {
-  const {setPageTitle, setPageDescription, setPageBreadcrumbs} = usePageData()
+const PageTitle: FC<Props> = ({ children, description, breadcrumbs }) => {
+  const { setPageTitle, setPageDescription, setPageBreadcrumbs } = usePageData()
   useEffect(() => {
     if (children) {
       setPageTitle(children.toString())
@@ -79,8 +79,8 @@ const PageTitle: FC<Props> = ({children, description, breadcrumbs}) => {
   return <></>
 }
 
-const PageDescription: React.FC = ({children}) => {
-  const {setPageDescription} = usePageData()
+const PageDescription: React.FC = ({ children }) => {
+  const { setPageDescription } = usePageData()
   useEffect(() => {
     if (children) {
       setPageDescription(children.toString())
@@ -92,4 +92,4 @@ const PageDescription: React.FC = ({children}) => {
   return <></>
 }
 
-export {PageDescription, PageTitle, PageDataProvider, usePageData}
+export { PageDescription, PageTitle, PageDataProvider, usePageData }

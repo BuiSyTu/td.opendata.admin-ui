@@ -1,123 +1,114 @@
-import {useEffect, useState} from 'react';
-import {
-  Form,
-  Button,
-  Input,
-  notification,
-  Typography,
-  Modal,
-  Spin,
-} from 'antd';
-import OrganizationApi from '../../../../apis/OrganizationApi';
+import { useEffect, useState } from 'react'
+import { Form, Button, Input, notification, Typography, Modal, Spin } from 'antd'
+import OrganizationApi from '../../../../apis/OrganizationApi'
 
-const {TextArea} = Input;
-const {Text} = Typography;
-
-const organizationApi = new OrganizationApi();
+const { TextArea } = Input
+const { Text } = Typography
+const organizationApi = new OrganizationApi()
 
 const ModalCategory = (props) => {
-  const {modalVisible, setModalVisible, modalId, setModalId, typeModal, setTypeModal, setUpdate} = props;
-  const [form] = Form.useForm();
-  const [disable, setDisable] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [buttonLoading, setButtonLoading] = useState(false);
+  const { modalVisible, setModalVisible, modalId, setModalId, typeModal, setTypeModal, setUpdate } = props
+  const [form] = Form.useForm()
+  const [disable, setDisable] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+  const [buttonLoading, setButtonLoading] = useState(false)
 
   const layout = {
-    labelCol: {span: 4},
-    wrapperCol: {span: 20},
-  };
+    labelCol: { span: 4 },
+    wrapperCol: { span: 20 },
+  }
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        setIsLoading(true);
-        var res = await organizationApi.getById(modalId);
+        setIsLoading(true)
+        var res = await organizationApi.getById(modalId)
         if (res?.data) {
-          form.setFieldsValue(res?.data);
+          form.setFieldsValue(res?.data)
         }
-        setIsLoading(false);
+        setIsLoading(false)
       } catch (error) {
-        setIsLoading(false);
+        setIsLoading(false)
       }
-    };
-    setDisable(typeModal === 'view' ? true : false);
-    if (modalId !== '') {
-      fetchData();
     }
-    return () => {};
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [modalId]);
+    setDisable(typeModal === 'view' ? true : false)
+    if (modalId !== '') {
+      fetchData()
+    }
+    return () => { }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [modalId])
 
   const handleCancel = () => {
-    form.resetFields();
-    setTypeModal('');
-    setModalId('');
-    setModalVisible(false);
-  };
+    form.resetFields()
+    setTypeModal('')
+    setModalId('')
+    setModalVisible(false)
+  }
 
   const handleOk = async () => {
     try {
-      await form.validateFields();
-      const formData = form.getFieldsValue(true);
-      typeModal === 'edit' ? putData(formData) : postData(formData);
+      await form.validateFields()
+      const formData = form.getFieldsValue(true)
+      typeModal === 'edit' ? putData(formData) : postData(formData)
     } catch (errorInfo) {
-      console.log('Failed:', errorInfo);
+      console.log('Failed:', errorInfo)
     }
-  };
+  }
 
   const postData = async (data) => {
     try {
-      setButtonLoading(true);
-      var res = await organizationApi.add(data);
+      setButtonLoading(true)
+      var res = await organizationApi.add(data)
       if (res) {
         notification.success({
           message: 'Thêm mới thành công!',
           duration: 1,
-        });
+        })
       } else {
         notification.error({
           message: `Lỗi ${res}`,
           description: `${res}`,
-        });
+        })
       }
-      setButtonLoading(false);
+      setButtonLoading(false)
     } catch (error) {
-      setButtonLoading(false);
+      setButtonLoading(false)
     }
-    setUpdate(true);
-    handleCancel();
-  };
+    setUpdate(true)
+    handleCancel()
+  }
 
   const putData = async (data) => {
     try {
-      setButtonLoading(true);
-      var res = await organizationApi.update(modalId, data);
+      setButtonLoading(true)
+      var res = await organizationApi.update(modalId, data)
       if (res) {
         notification.success({
           message: 'Cập nhập thành công!',
           duration: 1,
-        });
+        })
       } else {
         notification.error({
           message: 'Thất bại!',
           description: 'Xảy ra lỗi trong quá trình thực hiện!',
-        });
+        })
       }
-      setButtonLoading(false);
+      setButtonLoading(false)
     } catch (error) {
-      setButtonLoading(false);
+      setButtonLoading(false)
     }
-    setUpdate(true);
-    handleCancel();
-  };
+    setUpdate(true)
+    handleCancel()
+  }
 
   return (
     <Modal
       visible={modalVisible}
-      title={<Text style={{fontWeight: '500', color: '#fff'}}>Danh mục lĩnh vực</Text>}
+      title={<Text style={{ fontWeight: '500', color: '#fff' }}>Danh mục lĩnh vực</Text>}
       onOk={handleOk}
       onCancel={handleCancel}
-      closeIcon={<i className='las la-times' style={{color: '#fff', fontSize: 20}}></i>}
+      closeIcon={<i className='las la-times' style={{ color: '#fff', fontSize: 20 }}></i>}
       footer={[
         typeModal === 'view' ? (
           <></>
@@ -133,13 +124,13 @@ const ModalCategory = (props) => {
               backgroundColor: '#34bfa3',
               borderColor: '#34bfa3',
             }}
-            icon={<i className='las la-save' style={{color: '#fff'}}></i>}
+            icon={<i className='las la-save' style={{ color: '#fff' }}></i>}
             onClick={() => {
-              handleOk();
+              handleOk()
             }}
             loading={buttonLoading}
           >
-            <Text style={{color: '#FFF', paddingLeft: 5}}> {'Lưu'}</Text>
+            <Text style={{ color: '#FFF', paddingLeft: 5 }}> {'Lưu'}</Text>
           </Button>
         ),
         <Button
@@ -152,12 +143,12 @@ const ModalCategory = (props) => {
             backgroundColor: '#FAFAFA',
             borderColor: '#BDBDBD',
           }}
-          icon={<i className='las la-times' style={{color: '#757575'}}></i>}
+          icon={<i className='las la-times' style={{ color: '#757575' }}></i>}
           onClick={() => {
-            handleCancel();
+            handleCancel()
           }}
         >
-          <Text style={{color: '#757575', paddingLeft: 5}}>
+          <Text style={{ color: '#757575', paddingLeft: 5 }}>
             {' '}
             {typeModal === 'view' ? 'Đóng' : 'Hủy'}
           </Text>
@@ -169,24 +160,24 @@ const ModalCategory = (props) => {
           <Form.Item
             label='Tên'
             name='name'
-            rules={[{required: true, message: 'Không được để trống!'}]}
+            rules={[{ required: true, message: 'Không được để trống!' }]}
           >
-            <Input disabled={disable} style={{width: '100%', height: 32, borderRadius: 5}} />
+            <Input disabled={disable} style={{ width: '100%', height: 32, borderRadius: 5 }} />
           </Form.Item>
           <Form.Item
             label='Mã'
             name='code'
             rules={[{ required: true, message: 'Không được để trống!' }]}
           >
-            <Input disabled={disable} style={{width: '100%', height: 32, borderRadius: 5}} />
+            <Input disabled={disable} style={{ width: '100%', height: 32, borderRadius: 5 }} />
           </Form.Item>
           <Form.Item label='Mô tả' name='Description'>
-            <TextArea disabled={disable} rows={3} style={{width: '100%', borderRadius: 5}} />
+            <TextArea disabled={disable} rows={3} style={{ width: '100%', borderRadius: 5 }} />
           </Form.Item>
         </Form>
       </Spin>
     </Modal>
-  );
-};
+  )
+}
 
-export default ModalCategory;
+export default ModalCategory

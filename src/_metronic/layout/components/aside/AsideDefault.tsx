@@ -1,15 +1,15 @@
 /* eslint-disable react/jsx-no-target-blank */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, {FC} from 'react';
-import {Link} from 'react-router-dom';
-import clsx from 'clsx';
-import {useLayout} from '../../core';
-import {KTSVG, toAbsoluteUrl} from '../../../helpers';
-import {AsideMenu} from './AsideMenu';
+import { FC } from 'react'
+import { Link } from 'react-router-dom'
+import clsx from 'clsx'
+import { useLayout } from '../../core'
+import { KTSVG, toAbsoluteUrl } from '../../../helpers'
+import { AsideMenu } from './AsideMenu'
 
 const AsideDefault: FC = () => {
-  const {config, classes} = useLayout();
-  const {aside} = config;
+  const { config, classes } = useLayout()
+  const { aside } = config
 
   return (
     <div
@@ -91,7 +91,7 @@ const AsideDefault: FC = () => {
       </div> */}
       {/* end::Footer */}
     </div>
-  );
-};
+  )
+}
 
-export {AsideDefault};
+export { AsideDefault }

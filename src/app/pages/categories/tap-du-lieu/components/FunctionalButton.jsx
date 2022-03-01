@@ -13,7 +13,7 @@ const FunctionalButton = (props) => {
       console.log('excel')
     }
 
-    switch(dataTypeCode) {
+    switch (dataTypeCode) {
       case 'webapi':
         handleWebApi();
         break;
@@ -34,7 +34,7 @@ const FunctionalButton = (props) => {
       console.log('excel')
     }
 
-    switch(dataTypeCode) {
+    switch (dataTypeCode) {
       case 'webapi':
         handleWebApi();
         break;
@@ -55,7 +55,7 @@ const FunctionalButton = (props) => {
       console.log('excel')
     }
 
-    switch(dataTypeCode) {
+    switch (dataTypeCode) {
       case 'webapi':
         handleWebApi();
         break;
@@ -67,7 +67,7 @@ const FunctionalButton = (props) => {
     }
   }
 
-  return(
+  return (
     <>
       <Button
         icon={<CodeSandboxOutlined />}

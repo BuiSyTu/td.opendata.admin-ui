@@ -1,12 +1,12 @@
-import React, {useEffect} from 'react'
-import {AsideDefault} from './components/aside/AsideDefault'
-import {Footer} from './components/Footer'
-import {HeaderWrapper} from './components/header/HeaderWrapper'
-import {Toolbar} from './components/toolbar/Toolbar'
-import {ScrollTop} from './components/ScrollTop'
-import {Content} from './components/Content'
-import {PageDataProvider} from './core'
-import {useLocation} from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { AsideDefault } from './components/aside/AsideDefault'
+import { Footer } from './components/Footer'
+import { HeaderWrapper } from './components/header/HeaderWrapper'
+import { Toolbar } from './components/toolbar/Toolbar'
+import { ScrollTop } from './components/ScrollTop'
+import { Content } from './components/Content'
+import { PageDataProvider } from './core'
+import { useLocation } from 'react-router-dom'
 import {
   DrawerMessenger,
   ExploreMain,
@@ -14,9 +14,9 @@ import {
   Main,
   InviteUsers,
 } from '../partials'
-import {MenuComponent} from '../assets/ts/components'
+import { MenuComponent } from '../assets/ts/components'
 
-const MasterLayout: React.FC = ({children}) => {
+const MasterLayout: React.FC = ({ children }) => {
   const location = useLocation()
   useEffect(() => {
     setTimeout(() => {
@@ -63,4 +63,4 @@ const MasterLayout: React.FC = ({children}) => {
   )
 }
 
-export {MasterLayout}
+export { MasterLayout }

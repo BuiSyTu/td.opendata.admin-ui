@@ -1,11 +1,11 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import clsx from 'clsx';
-import {FC} from 'react';
-import {useLayout} from '../../core';
-import {DefaultTitle} from '../header/page-title/DefaultTitle';
+import { FC } from 'react';
+import { useLayout } from '../../core';
+import { DefaultTitle } from '../header/page-title/DefaultTitle';
 
 const Toolbar1: FC = () => {
-  const {classes} = useLayout();
+  const { classes } = useLayout();
 
   return (
     <div className='toolbar' id='kt_toolbar'>
@@ -46,4 +46,4 @@ const Toolbar1: FC = () => {
   );
 };
 
-export {Toolbar1};
+export { Toolbar1 };

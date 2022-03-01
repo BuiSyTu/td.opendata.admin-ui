@@ -1,22 +1,22 @@
-import React, {useState, useEffect} from 'react';
-import {Modal, Upload} from 'antd';
-import {FaPlus} from 'react-icons/fa';
-import {getBase64} from '../../utils/basicAPI';
+import { useState } from 'react'
+import { Modal, Upload } from 'antd'
+import { FaPlus } from 'react-icons/fa'
+import { getBase64 } from '../../utils/basicAPI'
 
 const ImageUpload = (props) => {
-  const { URL, fileList, onChange, headers, multiple, disabled} = props;
-  const [previewVisible, setPreviewVisible] = useState(false);
-  const [previewImage, setPreviewImage] = useState('');
+  const { URL, fileList, onChange, headers, multiple, disabled } = props
+  const [previewVisible, setPreviewVisible] = useState(false)
+  const [previewImage, setPreviewImage] = useState('')
 
   const handlePreview = async (file) => {
     if (!file.url && !file.preview) {
-      file.preview = await getBase64(file.originFileObj);
+      file.preview = await getBase64(file.originFileObj)
     }
-    setPreviewImage(file.url || file.preview);
-    setPreviewVisible(true);
-  };
+    setPreviewImage(file.url || file.preview)
+    setPreviewVisible(true)
+  }
 
-  const handleCancelImage = () => setPreviewVisible(false);
+  const handleCancelImage = () => setPreviewVisible(false)
 
   return (
     <>
@@ -30,18 +30,18 @@ const ImageUpload = (props) => {
         onPreview={handlePreview}
         onChange={onChange}
         headers={headers}>
-        {(!!multiple || (fileList && fileList.length < 1))&&!disabled && (
+        {(!!multiple || (fileList && fileList.length < 1)) && !disabled && (
           <div>
             <FaPlus />
-            <div style={{marginTop: 8}}>Upload</div>
+            <div style={{ marginTop: 8 }}>Upload</div>
           </div>
         )}
       </Upload>
       <Modal visible={previewVisible} title={''} footer={null} onCancel={handleCancelImage}>
-        <img alt="example" style={{width: '100%'}} src={previewImage} />
+        <img alt="example" style={{ width: '100%' }} src={previewImage} />
       </Modal>
     </>
-  );
-};
+  )
+}
 
-export default ImageUpload;
+export default ImageUpload

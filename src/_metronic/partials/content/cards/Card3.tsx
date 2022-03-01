@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import {FC} from 'react'
-import {toAbsoluteUrl, KTSVG} from '../../../helpers'
+import { FC } from 'react'
+import { toAbsoluteUrl, KTSVG } from '../../../helpers'
 
 type Props = {
   color?: string
@@ -66,4 +66,4 @@ const Card3: FC<Props> = ({
   )
 }
 
-export {Card3}
+export { Card3 }

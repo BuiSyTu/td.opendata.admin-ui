@@ -33,7 +33,6 @@ const { Text } = Typography
 const { Option } = Select
 const { TabPane } = Tabs
 const { Dragger } = Upload
-
 const datasetApi = new DatasetApi()
 const categoryApi = new CategoryApi()
 const organizationApi = new OrganizationApi()
@@ -65,18 +64,18 @@ const ModalCategory = (props) => {
     action: 'https://192.168.2.169:5001/api/v1/attachmenthandles/excel',
     method: 'POST',
     onChange(info) {
-      const { status } = info.file;
+      const { status } = info.file
       if (status !== 'uploading') {
-        console.log(info.file, info.fileList);
+        console.log(info.file, info.fileList)
       }
       if (status === 'done') {
-        message.success(`${info.file.name} file uploaded successfully.`);
+        message.success(`${info.file.name} file uploaded successfully.`)
       } else if (status === 'error') {
-        message.error(`${info.file.name} file upload failed.`);
+        message.error(`${info.file.name} file upload failed.`)
       }
     },
     onDrop(e) {
-      console.log('Dropped files', e.dataTransfer.files);
+      console.log('Dropped files', e.dataTransfer.files)
     },
   }
 

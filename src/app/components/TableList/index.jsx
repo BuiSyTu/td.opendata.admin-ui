@@ -1,5 +1,5 @@
-import {useState} from 'react';
-import {Table} from 'antd';
+import {useState} from 'react'
+import {Table} from 'antd'
 
 const TableList = (props) => {
   const {
@@ -13,22 +13,22 @@ const TableList = (props) => {
     isPagination,
     rowSelection,
     rowKey,
-  } = props;
+  } = props
 
-  const [current, setCurrent] = useState(1);
+  const [current, setCurrent] = useState(1)
 
   const handleTableChange = async (page, pageSize) => {
-    setCurrent(page);
-    setOffset(page);
-  };
+    setCurrent(page)
+    setOffset(page)
+  }
 
   const handleSizeChange = async (current, size) => {
-    setSize(size);
-  };
+    setSize(size)
+  }
 
   const handleShowTotal = (total, range) => {
-    return `${range[0]}-${range[1]} của ${total} mục`;
-  };
+    return `${range[0]}-${range[1]} của ${total} mục`
+  }
 
   return (
     <Table
@@ -60,7 +60,7 @@ const TableList = (props) => {
       dataSource={dataTable}
       rowSelection={rowSelection}
     />
-  );
-};
+  )
+}
 
-export default TableList;
+export default TableList

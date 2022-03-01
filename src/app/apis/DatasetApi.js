@@ -1,25 +1,23 @@
-import axios from 'axios';
+import axios from 'axios'
 
-const ver = '1';
-
-const controllerName = 'datasets';
-
-const baseUrl = `https://192.168.2.169:5001/api/v${ver}/${controllerName}`;
+const ver = '1'
+const controllerName = 'datasets'
+const baseUrl = `https://192.168.2.169:5001/api/v${ver}/${controllerName}`
 
 
-export class DatasetApi {
+export default class DatasetApi {
   async getAll() {
     try {
       const res = await axios({
         method: 'GET',
         url: baseUrl,
         timeout: 15000,
-      });
+      })
   
-      return res?.data;
+      return res?.data
     } catch (error) {
-      console.error(error);
-      return null;
+      console.error(error)
+      return null
     }
   }
 
@@ -33,12 +31,12 @@ export class DatasetApi {
         url: baseUrl,
         data,
         timeout: 15000,
-      });
+      })
 
-      return res?.data;
+      return res?.data
     } catch (error) {
-      console.error(error);
-      return null;
+      console.error(error)
+      return null
     }
   }
 
@@ -48,12 +46,12 @@ export class DatasetApi {
         method: 'GET',
         url: `${baseUrl}/${id}`,
         timeout: 15000,
-      });
+      })
 
-      return res?.data;
+      return res?.data
     } catch (error) {
-      console.error(error);
-      return null;
+      console.error(error)
+      return null
     }
   }
 
@@ -64,12 +62,12 @@ export class DatasetApi {
         url: `${baseUrl}/${id}`,
         data,
         timeout: 15000,
-      });
+      })
 
-      return res?.data;
+      return res?.data
     } catch (error) {
-      console.error(error);
-      return null;
+      console.error(error)
+      return null
     }
   }
 
@@ -79,12 +77,12 @@ export class DatasetApi {
         method: 'DELETE',
         url: `${baseUrl}/${id}`,
         timeout: 15000,
-      });
+      })
 
-      return res?.data;
+      return res?.data
     } catch (error) {
-      console.error(error);
-      return null;
+      console.error(error)
+      return null
     }
   }
 }

@@ -1,27 +1,25 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react'
+import { PageTitle } from '../../../../_metronic/layout/core'
+import { Typography, Divider, Input, Popconfirm, notification } from 'antd'
+import TableList from '../../../components/TableList'
+import FormModal from './components/FormModal'
+import ProviderTypeApi from '../../../apis/ProviderTypeApi'
 
-import { PageTitle } from '../../../../_metronic/layout/core';
-import { Typography, Divider, Input, Popconfirm, notification } from 'antd';
-import TableList from '../../../components/TableList';
-import FormModal from './components/FormModal';
-import ProviderTypeApi from '../../../apis/ProviderTypeApi';
-
-const { Text } = Typography;
-const { Search } = Input;
-
-const providerTypeApi = new ProviderTypeApi();
+const { Text } = Typography
+const { Search } = Input
+const providerTypeApi = new ProviderTypeApi()
 
 const CategoryPage = () => {
-  const [loading, setLoading] = useState(false);
-  const [modalVisible, setModalVisible] = useState(false);
-  const [update, setUpdate] = useState(true);
-  const [inputValue, setInputValue] = useState('');
-  const [dataTable, setDataTable] = useState([]);
-  const [size, setSize] = useState(10);
-  const [count, setCount] = useState(0);
-  const [offset, setOffset] = useState(0);
-  const [modalId, setModalId] = useState('');
-  const [typeModal, setTypeModal] = useState('');
+  const [loading, setLoading] = useState(false)
+  const [modalVisible, setModalVisible] = useState(false)
+  const [update, setUpdate] = useState(true)
+  const [inputValue, setInputValue] = useState('')
+  const [dataTable, setDataTable] = useState([])
+  const [size, setSize] = useState(10)
+  const [count, setCount] = useState(0)
+  const [offset, setOffset] = useState(0)
+  const [modalId, setModalId] = useState('')
+  const [typeModal, setTypeModal] = useState('')
 
   const columns = [
     {
@@ -34,7 +32,7 @@ const CategoryPage = () => {
           <Text style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             {index + 1}
           </Text>
-        );
+        )
       },
       width: '5%',
     },
@@ -63,7 +61,7 @@ const CategoryPage = () => {
             data-toggle='m-tooltip'
             title='Xem'
             onClick={() => {
-              handleView(record.id);
+              handleView(record.id)
             }}
           >
             <i className='la la-file-text-o' style={{ marginLeft: -7 }}></i>
@@ -74,7 +72,7 @@ const CategoryPage = () => {
             data-toggle='m-tooltip'
             title='Sửa'
             onClick={() => {
-              handleEdit(record.id);
+              handleEdit(record.id)
             }}
           >
             <i className='la la-edit' style={{ marginLeft: -7 }}></i>
@@ -84,7 +82,7 @@ const CategoryPage = () => {
             okText='Ok'
             cancelText='Hủy'
             onConfirm={() => {
-              handleDelete(record.id);
+              handleDelete(record.id)
             }}
           >
             <button
@@ -99,61 +97,62 @@ const CategoryPage = () => {
         </div>
       ),
     },
-  ];
+  ]
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        setLoading(true);
-        var res = await providerTypeApi.getAll();
-        setDataTable(res?.data ?? []);
-        setCount(res?.totalCount ?? 0);
-        setLoading(false);
+        setLoading(true)
+        var res = await providerTypeApi.getAll()
+        setDataTable(res?.data ?? [])
+        setCount(res?.totalCount ?? 0)
+        setLoading(false)
       } catch (error) {
-        setLoading(false);
+        setLoading(false)
       }
-      setUpdate(false);
-    };
-    if (update) {
-      fetchData();
+      setUpdate(false)
     }
-    return () => { };
-  }, [update]);
+    if (update) {
+      fetchData()
+    }
+    return () => { }
+  }, [update])
 
   useEffect(() => {
-    setUpdate(true);
-    return () => { };
-  }, [offset, size, inputValue]);
+    setUpdate(true)
+    return () => { }
+  }, [offset, size, inputValue])
 
   const handleEdit = (id) => {
-    console.log(id);
-    setModalId(id);
-    setTypeModal('edit');
-    setModalVisible(true);
-  };
+    console.log(id)
+    setModalId(id)
+    setTypeModal('edit')
+    setModalVisible(true)
+  }
 
   const handleView = (id) => {
-    console.log(id);
-    setModalId(id);
-    setTypeModal('view');
-    setModalVisible(true);
-  };
+    console.log(id)
+    setModalId(id)
+    setTypeModal('view')
+    setModalVisible(true)
+  }
 
   const handleDelete = async (id) => {
-    var res = await providerTypeApi.delete(id);
+    var res = await providerTypeApi.delete(id)
     if (res) {
       notification.success({
         message: 'Xóa thành công!',
         duration: 1,
         placement: 'bottomRight',
-      });
+      })
     } else {
       notification.error({
         message: `Thất bại!`,
         description: 'Xóa không thành công.',
-      });
+      })
     }
-  };
+  }
+  
   return (
     <div>
       <PageTitle breadcrumbs={[]}>Danh mục hình thức cung cấp</PageTitle>
@@ -164,7 +163,7 @@ const CategoryPage = () => {
               style={{ width: '40%', height: 35, borderRadius: 10 }}
               placeholder='Tìm kiếm'
               onSearch={(e) => {
-                setInputValue(e);
+                setInputValue(e)
               }}
             />
           </div>
@@ -172,7 +171,7 @@ const CategoryPage = () => {
             <button
               className=' btn btn-success btn-sm m-btn m-btn--icon'
               onClick={() => {
-                setModalVisible(true);
+                setModalVisible(true)
               }}
             >
               <i className='bi bi-plus-square'></i> Thêm
@@ -201,7 +200,7 @@ const CategoryPage = () => {
         setUpdate={setUpdate}
       />
     </div>
-  );
-};
+  )
+}
 
-export default CategoryPage;
+export default CategoryPage

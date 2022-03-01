@@ -1,12 +1,12 @@
 import clsx from 'clsx'
-import React, {FC} from 'react'
-import {Link} from 'react-router-dom'
-import {useLayout} from '../../../core/LayoutProvider'
-import {usePageData} from '../../../core/PageData'
+import React, { FC } from 'react'
+import { Link } from 'react-router-dom'
+import { useLayout } from '../../../core/LayoutProvider'
+import { usePageData } from '../../../core/PageData'
 
 const DefaultTitle: FC = () => {
-  const {pageTitle, pageDescription, pageBreadcrumbs} = usePageData()
-  const {config, classes} = useLayout()
+  const { pageTitle, pageDescription, pageBreadcrumbs } = usePageData()
+  const { config, classes } = useLayout()
   return (
     <div
       id='kt_page_title'
@@ -63,4 +63,4 @@ const DefaultTitle: FC = () => {
   )
 }
 
-export {DefaultTitle}
+export { DefaultTitle }
