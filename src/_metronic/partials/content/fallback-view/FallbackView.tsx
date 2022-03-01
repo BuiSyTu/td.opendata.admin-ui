@@ -1,4 +1,4 @@
-import {toAbsoluteUrl} from '../../../helpers'
+import { toAbsoluteUrl } from '../../../helpers'
 
 export function FallbackView() {
   return (

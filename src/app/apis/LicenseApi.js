@@ -7,7 +7,7 @@ const controllerName = 'licenses';
 const baseUrl = `https://192.168.2.169:5001/api/v${ver}/${controllerName}`;
 
 
-export class LicenseApi {
+export default class LicenseApi {
   async getAll() {
     try {
       const res = await axios({

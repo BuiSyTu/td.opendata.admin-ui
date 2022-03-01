@@ -8,7 +8,7 @@ import {
   Modal,
   Spin,
 } from 'antd';
-import {DataTypeApi} from '../../../../apis/DataTypeApi';
+import DataTypeApi from '../../../../apis/DataTypeApi';
 
 const {TextArea} = Input;
 const {Text} = Typography;

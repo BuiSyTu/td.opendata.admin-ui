@@ -1,5 +1,5 @@
-import {useEffect, useState} from 'react';
-import { useSelector} from 'react-redux';
+import {useEffect, useState} from 'react'
+import { useSelector} from 'react-redux'
 import {
   Form,
   Button,
@@ -10,241 +10,247 @@ import {
   Modal,
   DatePicker,
   Spin,
-} from 'antd';
+} from 'antd'
 import {
   HOST_API,
   HOST_API_Image,
   HOST_FILE,
   requestGET,
   requestPOST,
-} from '../../../../utils/basicAPI';
-import ImageUpload from '../../../../components/ImageUpload';
-import {handleImage} from '../../../../utils/utils';
-import moment from 'moment';
-import 'moment/locale/vi';
-moment.locale('vi');
-const {Text} = Typography;
-const {Option} = Select;
+} from '../../../../utils/basicAPI'
+import ImageUpload from '../../../../components/ImageUpload'
+import {handleImage} from '../../../../utils/utils'
+import moment from 'moment'
+import 'moment/locale/vi'
+moment.locale('vi')
+const {Text} = Typography
+const {Option} = Select
 const ModalCategory = (props) => {
   const {modalVisible, setModalVisible, modalId, setModalId, typeModal, setTypeModal, setUpdate} =
-    props;
-  const accessToken = useSelector((state) => state.auth.accessToken);
-  const [form] = Form.useForm();
+    props
+  const accessToken = useSelector((state) => state.auth.accessToken)
+  const [form] = Form.useForm()
   // eslint-disable-next-line no-unused-vars
-  const [disable, setDisable] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [buttonLoading, setButtonLoading] = useState(false);
-  const [identityTypes, setIdentityTypes] = useState([]);
-  const [genders, setGenders] = useState([]);
-  const [maritalStatus, setMaritalStatus] = useState([]);
-  const [religions, setReligions] = useState([]);
+  const [disable, setDisable] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+  const [buttonLoading, setButtonLoading] = useState(false)
+  const [identityTypes, setIdentityTypes] = useState([])
+  const [genders, setGenders] = useState([])
+  const [maritalStatus, setMaritalStatus] = useState([])
+  const [religions, setReligions] = useState([])
 
-  const [provinces, setProvinces] = useState([]);
-  const [districts, setDistricts] = useState([]);
-  const [communes, setCommunes] = useState([]);
+  const [provinces, setProvinces] = useState([])
+  const [districts, setDistricts] = useState([])
+  const [communes, setCommunes] = useState([])
 
-  const [provinceId, setProvinceId] = useState(null);
-  const [districtId, setDistrictId] = useState(null);
-  const [image, setImage] = useState([]);
+  const [provinceId, setProvinceId] = useState(null)
+  const [districtId, setDistrictId] = useState(null)
+  const [image, setImage] = useState([])
 
-  // const [roles, setRoles] = useState([]);
+  // const [roles, setRoles] = useState([])
 
   const layout = {
     labelCol: {xl: 8, xs: 24},
     wrapperCol: {xl: 16, xs: 24},
-  };
+  }
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        setIsLoading(true);
-        var res = await requestGET(`${HOST_API}/User/${modalId}`);
+        setIsLoading(true)
+        var res = await requestGET(`${HOST_API}/User/${modalId}`)
         if (res?.data) {
-          var _data = res?.data;
-          _data.dateOfBirth = _data?.dateOfBirth ? moment(_data.dateOfBirth) : null;
+          var _data = res?.data
+          _data.dateOfBirth = _data?.dateOfBirth ? moment(_data.dateOfBirth) : null
           _data.identityDateOfIssue = _data?.identityDateOfIssue
             ? moment(_data.identityDateOfIssue)
-            : null;
+            : null
           if (_data?.avatarUrl) {
-            setImage(handleImage(_data?.avatarUrl ?? '', HOST_FILE));
+            setImage(handleImage(_data?.avatarUrl ?? '', HOST_FILE))
           }
 
-          form.setFieldsValue(_data);
+          form.setFieldsValue(_data)
         }
-        setIsLoading(false);
+        setIsLoading(false)
       } catch (error) {
-        setIsLoading(false);
+        setIsLoading(false)
       }
-    };
-    setDisable(typeModal === 'view' ? true : false);
-    if (modalId > 0) {
-      fetchData();
     }
-    return () => {};
+    setDisable(typeModal === 'view' ? true : false)
+    if (modalId > 0) {
+      fetchData()
+    }
+    return () => {}
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [modalId]);
+  }, [modalId])
 
   useEffect(() => {
     // const fetchRoles = async () => {
-    //   const res = await requestGET(`${HOST_API}/Role?pageNumber=1&pageSize=100&keySearch&orderBy`);
+    //   const res = await requestGET(`${HOST_API}/Role?pageNumber=1&pageSize=100&keySearch&orderBy`)
     //   if (res && res.data) {
-    //     let tmp = [];
+    //     let tmp = []
     //     res.data.forEach((i) => {
-    //       tmp.push({label: i.name, value: i.name});
-    //     });
-    //     setRoles(tmp);
+    //       tmp.push({label: i.name, value: i.name})
+    //     })
+    //     setRoles(tmp)
     //   }
-    // };
+    // }
 
     const fetchDataIdentityType = async () => {
       const res = await requestGET(
         `${HOST_API}/IdentityType?pageNumber=1&pageSize=100&keySearch&orderBy`
-      );
+      )
       if (res && res.data) {
-        setIdentityTypes(res.data);
+        setIdentityTypes(res.data)
       }
-    };
+    }
 
     const fetchDataGender = async () => {
       const res = await requestGET(
         `${HOST_API}/Gender?pageNumber=1&pageSize=100&keySearch&orderBy`
-      );
+      )
       if (res && res.data) {
-        setGenders(res.data);
+        setGenders(res.data)
       }
-    };
+    }
 
     const fetchReligion = async () => {
       const res = await requestGET(
         `${HOST_API}/Religion?pageNumber=1&pageSize=100&keySearch&orderBy`
-      );
+      )
       if (res && res.data) {
-        setReligions(res.data);
+        setReligions(res.data)
       }
-    };
+    }
 
     const fetchMaritalStatus = async () => {
       const res = await requestGET(
         `${HOST_API}/MaritalStatus?pageNumber=1&pageSize=100&keySearch&orderBy`
-      );
+      )
       if (res && res.data) {
-        setMaritalStatus(res.data);
+        setMaritalStatus(res.data)
       }
-    };
-    //fetchRoles();
-    fetchMaritalStatus();
-    fetchReligion();
-    fetchDataGender();
-    fetchDataIdentityType();
-    return () => {};
-  }, []);
+    }
+    //fetchRoles()
+    fetchMaritalStatus()
+    fetchReligion()
+    fetchDataGender()
+    fetchDataIdentityType()
+    return () => {}
+  }, [])
+
   useEffect(() => {
     const fetchData = async () => {
-      const res = await requestGET(`${HOST_API}/Area?level=1&pageNumber=0&pageSize=100`);
-      if (res && res.data) setProvinces(res.data);
-    };
-    fetchData();
-    return () => {};
-  }, []);
+      const res = await requestGET(`${HOST_API}/Area?level=1&pageNumber=0&pageSize=100`)
+      if (res && res.data) setProvinces(res.data)
+    }
+    fetchData()
+    return () => {}
+  }, [])
 
   useEffect(() => {
     if (provinceId) {
       const fetchData = async () => {
         const res = await requestGET(
           `${HOST_API}/Area?level=2&parentId=${provinceId}&pageNumber=0&pageSize=100`
-        );
-        if (res && res.data) setDistricts(res.data);
-      };
-      fetchData();
+        )
+        if (res && res.data) setDistricts(res.data)
+      }
+      fetchData()
     }
-    return () => {};
-  }, [provinceId]);
+    return () => {}
+  }, [provinceId])
 
   useEffect(() => {
     if (districtId) {
       const fetchData = async () => {
         const res = await requestGET(
           `${HOST_API}/Area?level=3&parentId=${districtId}&pageNumber=0&pageSize=100`
-        );
-        if (res && res.data) setCommunes(res.data);
-      };
-      fetchData();
+        )
+        if (res && res.data) setCommunes(res.data)
+      }
+      fetchData()
     }
-    return () => {};
-  }, [districtId]);
+    return () => {}
+  }, [districtId])
 
   const handleCancel = () => {
-    form.resetFields();
-    setTypeModal('');
-    setModalId(0);
-    setModalVisible(false);
-  };
+    form.resetFields()
+    setTypeModal('')
+    setModalId(0)
+    setModalVisible(false)
+  }
+
   const handleOk = async () => {
     try {
-      await form.validateFields();
-      const formData = form.getFieldsValue(true);
+      await form.validateFields()
+      const formData = form.getFieldsValue(true)
       if (image?.length > 0) {
         if (modalId) {
-          formData.avatarUrl = image[0].url;
+          formData.avatarUrl = image[0].url
         } else {
-          formData.avatarUrl = image[0]?.response?.data[0]?.url;
+          formData.avatarUrl = image[0]?.response?.data[0]?.url
         }
       }
-      typeModal === 'edit' ? putData(formData) : postData(formData);
+      typeModal === 'edit' ? putData(formData) : postData(formData)
     } catch (errorInfo) {
-      console.log('Failed:', errorInfo);
+      console.log('Failed:', errorInfo)
     }
-  };
+  }
+
   const postData = async (data) => {
     try {
-      setButtonLoading(true);
-      var res = await requestPOST(`${HOST_API}/User`, data);
+      setButtonLoading(true)
+      var res = await requestPOST(`${HOST_API}/User`, data)
       if (res) {
         notification.success({
           message: 'Thêm mới thành công!',
           duration: 1,
-        });
+        })
       } else {
         notification.error({
           message: `Lỗi ${res}`,
           description: `${res}`,
-        });
+        })
       }
-      setButtonLoading(false);
+      setButtonLoading(false)
     } catch (error) {
-      setButtonLoading(false);
+      setButtonLoading(false)
     }
-    setUpdate(true);
-    handleCancel();
-  };
+    setUpdate(true)
+    handleCancel()
+  }
+
   const putData = async (data) => {
     try {
-      setButtonLoading(true);
-      delete data?.commune;
-      delete data?.district;
-      delete data?.gender;
-      delete data?.identityType;
-      delete data?.maritalStatus;
-      delete data?.province;
-      delete data?.religion;
-      var res = await requestPOST(`${HOST_API}/User/${modalId}`, data);
+      setButtonLoading(true)
+      delete data?.commune
+      delete data?.district
+      delete data?.gender
+      delete data?.identityType
+      delete data?.maritalStatus
+      delete data?.province
+      delete data?.religion
+      var res = await requestPOST(`${HOST_API}/User/${modalId}`, data)
       if (res) {
         notification.success({
           message: 'Cập nhập thành công!',
           duration: 1,
-        });
+        })
       } else {
         notification.error({
           message: 'Thất bại!',
           description: 'Xảy ra lỗi trong quá trình thực hiện!',
-        });
+        })
       }
-      setButtonLoading(false);
+      setButtonLoading(false)
     } catch (error) {
-      setButtonLoading(false);
+      setButtonLoading(false)
     }
-    setUpdate(true);
-    handleCancel();
-  };
+    setUpdate(true)
+    handleCancel()
+  }
+  
   return (
     <Modal
       visible={modalVisible}
@@ -270,7 +276,7 @@ const ModalCategory = (props) => {
             }}
             icon={<i className='las la-save' style={{color: '#fff'}}></i>}
             onClick={() => {
-              handleOk();
+              handleOk()
             }}
             loading={buttonLoading}
           >
@@ -289,7 +295,7 @@ const ModalCategory = (props) => {
           }}
           icon={<i className='las la-times' style={{color: '#757575'}}></i>}
           onClick={() => {
-            handleCancel();
+            handleCancel()
           }}
         >
           <Text style={{color: '#757575', paddingLeft: 5}}>
@@ -387,7 +393,7 @@ const ModalCategory = (props) => {
                       <Option key={item.id} value={item.id}>
                         {item.name}
                       </Option>
-                    );
+                    )
                   })}
                 </Select>
               </Form.Item>
@@ -406,7 +412,7 @@ const ModalCategory = (props) => {
                       <Option key={item.id} value={item.id}>
                         {item.name}
                       </Option>
-                    );
+                    )
                   })}
                 </Select>
               </Form.Item>
@@ -425,7 +431,7 @@ const ModalCategory = (props) => {
                       <Option key={item.id} value={item.id}>
                         {item.name}
                       </Option>
-                    );
+                    )
                   })}
                 </Select>
               </Form.Item>
@@ -450,7 +456,7 @@ const ModalCategory = (props) => {
                       <Option key={item.id} value={item.id}>
                         {item.name}
                       </Option>
-                    );
+                    )
                   })}
                 </Select>
               </Form.Item>
@@ -487,7 +493,7 @@ const ModalCategory = (props) => {
                       <Option key={item.id} value={item.id}>
                         {item.nameWithType}
                       </Option>
-                    );
+                    )
                   })}
                 </Select>
               </Form.Item>
@@ -507,7 +513,7 @@ const ModalCategory = (props) => {
                       <Option key={item.id} value={item.id}>
                         {item.nameWithType}
                       </Option>
-                    );
+                    )
                   })}
                 </Select>
               </Form.Item>
@@ -526,7 +532,7 @@ const ModalCategory = (props) => {
                       <Option key={item.id} value={item.id}>
                         {item.nameWithType}
                       </Option>
-                    );
+                    )
                   })}
                 </Select>
               </Form.Item>
@@ -540,7 +546,7 @@ const ModalCategory = (props) => {
         </Form>
       </Spin>
     </Modal>
-  );
-};
+  )
+}
 
-export default ModalCategory;
+export default ModalCategory

@@ -31,6 +31,7 @@ export function AsideMenuMain() {
             fontIcon='bi-archive'
             icon='/media/icons/duotune/general/gen022.svg'
           >
+            <AsideMenuItem to='/categories/dataset' title='Tập dữ liệu' hasBullet={true} />
             <AsideMenuItem to='/categories/data-type' title='Loại dữ liệu' hasBullet={true} />
             <AsideMenuItem to='/categories/fields' title='Lĩnh vực' hasBullet={true} />
             <AsideMenuItem to='/categories/provider-type' title='Hình thức cung cấp' hasBullet={true} />

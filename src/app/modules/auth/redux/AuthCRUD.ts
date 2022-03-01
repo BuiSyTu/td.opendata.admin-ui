@@ -1,15 +1,18 @@
 import axios from 'axios'
 
+import SharepointApi from '../../../apis/SharepointApi'
+
 const API_URL = process.env.REACT_APP_API_URL || 'api'
+const sharepointApi = new SharepointApi()
 
 export const GET_USER_BY_ACCESSTOKEN_URL = `${API_URL}/identity/user-infor`
-export const LOGIN_URL = `${API_URL}/identity/token`
+export const LOGIN_URL = `${API_URL}/tokens`
 export const REGISTER_URL = `${API_URL}/identity/register`
 export const REQUEST_PASSWORD_URL = `${API_URL}/identity/forgot-password`
 
 // Server should return AuthModel
-export function login(userName: string, password: string) {
-  return axios.post(LOGIN_URL, {userName, password})
+export function login(email: string, password: string) {
+  return axios.get(`${LOGIN_URL}?email=${email}&password=${password}`)
 }
 
 // Server should return AuthModel

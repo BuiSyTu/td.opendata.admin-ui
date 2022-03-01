@@ -4,7 +4,7 @@ import {PageTitle} from '../../../../_metronic/layout/core';
 import {Typography, Divider, Input, Popconfirm, notification} from 'antd';
 import TableList from '../../../components/TableList';
 import FormModal from './components/FormModal';
-import {CategoryApi} from '../../../apis/CategoryApi';
+import CategoryApi from '../../../apis/CategoryApi';
 
 const {Text} = Typography;
 const {Search} = Input;
@@ -155,7 +155,7 @@ const CategoryPage = () => {
   
   return (
     <div>
-      <PageTitle breadcrumbs={[]}>Từ khóa</PageTitle>
+      <PageTitle breadcrumbs={[]}>Danh sách lĩnh vực</PageTitle>
       <div className='card mb-5 mb-xl-12 py-5'>
         <div className='d-flex row justify-content-between align-items-center px-5'>
           <div className='col-xl-8 d-flex align-items-center'>

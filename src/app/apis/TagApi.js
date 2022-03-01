@@ -7,7 +7,7 @@ const controllerName = 'tags';
 const baseUrl = `https://192.168.2.169:5001/api/v${ver}/${controllerName}`;
 
 
-export class TagApi {
+export default class TagApi {
   async getAll() {
     try {
       const res = await axios({

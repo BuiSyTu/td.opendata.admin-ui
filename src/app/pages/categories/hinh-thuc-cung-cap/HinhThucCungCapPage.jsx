@@ -1,13 +1,13 @@
-import {useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
 
-import {PageTitle} from '../../../../_metronic/layout/core';
-import {Typography, Divider, Input, Popconfirm, notification} from 'antd';
+import { PageTitle } from '../../../../_metronic/layout/core';
+import { Typography, Divider, Input, Popconfirm, notification } from 'antd';
 import TableList from '../../../components/TableList';
 import FormModal from './components/FormModal';
-import {ProviderTypeApi} from '../../../apis/ProviderTypeApi';
+import ProviderTypeApi from '../../../apis/ProviderTypeApi';
 
-const {Text} = Typography;
-const {Search} = Input;
+const { Text } = Typography;
+const { Search } = Input;
 
 const providerTypeApi = new ProviderTypeApi();
 
@@ -22,7 +22,7 @@ const CategoryPage = () => {
   const [offset, setOffset] = useState(0);
   const [modalId, setModalId] = useState('');
   const [typeModal, setTypeModal] = useState('');
-  
+
   const columns = [
     {
       title: 'STT',
@@ -31,7 +31,7 @@ const CategoryPage = () => {
       align: 'center',
       render: (text, record, index) => {
         return (
-          <Text style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+          <Text style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             {index + 1}
           </Text>
         );
@@ -66,10 +66,10 @@ const CategoryPage = () => {
               handleView(record.id);
             }}
           >
-            <i className='la la-file-text-o' style={{marginLeft: -7}}></i>
+            <i className='la la-file-text-o' style={{ marginLeft: -7 }}></i>
           </button>
           <button
-            style={{marginLeft: 10}}
+            style={{ marginLeft: 10 }}
             className='btn btn-light-primary m-btn m-btn--icon btn-sm m-btn--icon-only'
             data-toggle='m-tooltip'
             title='Sửa'
@@ -77,7 +77,7 @@ const CategoryPage = () => {
               handleEdit(record.id);
             }}
           >
-            <i className='la la-edit' style={{marginLeft: -7}}></i>
+            <i className='la la-edit' style={{ marginLeft: -7 }}></i>
           </button>
           <Popconfirm
             title='Xóa dữ liệu？'
@@ -88,12 +88,12 @@ const CategoryPage = () => {
             }}
           >
             <button
-              style={{marginLeft: 10}}
+              style={{ marginLeft: 10 }}
               className='btn btn-light-danger m-btn m-btn--icon btn-sm m-btn--icon-only'
               data-toggle='m-tooltip'
               title='Xóa'
             >
-              <i className='fas fa-trash-alt' style={{marginLeft: -7}}></i>
+              <i className='fas fa-trash-alt' style={{ marginLeft: -7 }}></i>
             </button>
           </Popconfirm>
         </div>
@@ -117,12 +117,12 @@ const CategoryPage = () => {
     if (update) {
       fetchData();
     }
-    return () => {};
+    return () => { };
   }, [update]);
 
   useEffect(() => {
     setUpdate(true);
-    return () => {};
+    return () => { };
   }, [offset, size, inputValue]);
 
   const handleEdit = (id) => {
@@ -161,7 +161,7 @@ const CategoryPage = () => {
         <div className='d-flex row justify-content-between align-items-center px-5'>
           <div className='col-xl-8 d-flex align-items-center'>
             <Search
-              style={{width: '40%', height: 35, borderRadius: 10}}
+              style={{ width: '40%', height: 35, borderRadius: 10 }}
               placeholder='Tìm kiếm'
               onSearch={(e) => {
                 setInputValue(e);
@@ -179,7 +179,7 @@ const CategoryPage = () => {
             </button>
           </div>
         </div>
-        <Divider style={{margin: '10px 0'}} />
+        <Divider style={{ margin: '10px 0' }} />
         <TableList
           dataTable={dataTable}
           columns={columns}

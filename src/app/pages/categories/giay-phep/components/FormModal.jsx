@@ -8,7 +8,7 @@ import {
   Modal,
   Spin,
 } from 'antd';
-import {LicenseApi} from '../../../../apis/LicenseApi';
+import LicenseApi from '../../../../apis/LicenseApi';
 
 const {TextArea} = Input;
 const {Text} = Typography;

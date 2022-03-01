@@ -1,13 +1,10 @@
 import axios from 'axios';
 
 const ver = '1';
-
 const controllerName = 'organizations';
-
 const baseUrl = `https://192.168.2.169:5001/api/v${ver}/${controllerName}`;
 
-
-export class OrganizationApi {
+export default class OrganizationApi {
   async getAll() {
     try {
       const res = await axios({

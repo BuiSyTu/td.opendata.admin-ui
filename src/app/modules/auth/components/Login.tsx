@@ -9,7 +9,7 @@ import * as auth from '../redux/AuthRedux'
 import {login} from '../redux/AuthCRUD'
 
 const loginSchema = Yup.object().shape({
-  userName: Yup.string()
+  email: Yup.string()
     .min(3, 'Minimum 3 symbols')
     .max(50, 'Maximum 50 symbols')
     .required('Email is required'),
@@ -20,8 +20,8 @@ const loginSchema = Yup.object().shape({
 })
 
 const initialValues = {
-  userName: 'admin',
-  password: 'Tandan@123',
+  email: 'demo1',
+  password: 'Demo123',
 }
 
 export function Login() {
@@ -32,7 +32,7 @@ export function Login() {
     validationSchema: loginSchema,
     onSubmit: (values, {setStatus, setSubmitting}) => {
       setLoading(true)
-      login(values.userName, values.password)
+      login(values.email, values.password)
         .then((data) => {
           let accessToken = data.data.data.token
           setLoading(false)
@@ -78,20 +78,20 @@ export function Login() {
         <label className='form-label fs-6 fw-bolder text-dark'>Tài khoản</label>
         <input
           placeholder='Tên đăng nhập'
-          {...formik.getFieldProps('userName')}
+          {...formik.getFieldProps('email')}
           className={clsx(
             'form-control form-control-lg form-control-solid',
-            {'is-invalid': formik.touched.userName && formik.errors.userName},
+            {'is-invalid': formik.touched.email && formik.errors.email},
             {
-              'is-valid': formik.touched.userName && !formik.errors.userName,
+              'is-valid': formik.touched.email && !formik.errors.email,
             }
           )}
-          name='userName'
+          name='email'
           autoComplete='off'
         />
-        {formik.touched.userName && formik.errors.userName && (
+        {formik.touched.email && formik.errors.email && (
           <div className='fv-plugins-message-container'>
-            <span role='alert'>{formik.errors.userName}</span>
+            <span role='alert'>{formik.errors.email}</span>
           </div>
         )}
       </div>

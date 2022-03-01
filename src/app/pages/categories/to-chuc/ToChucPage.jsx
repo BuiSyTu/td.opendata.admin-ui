@@ -4,7 +4,7 @@ import {PageTitle} from '../../../../_metronic/layout/core';
 import {Row, Col, Typography, Divider, Input, Popconfirm, notification} from 'antd';
 import TableList from '../../../components/TableList';
 import FormModal from './components/FormModal';
-import {OrganizationApi} from '../../../apis/OrganizationApi';
+import OrganizationApi from '../../../apis/OrganizationApi';
 
 const {Text} = Typography;
 const {Search} = Input;

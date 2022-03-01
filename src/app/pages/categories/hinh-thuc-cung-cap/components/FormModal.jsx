@@ -8,7 +8,7 @@ import {
   Modal,
   Spin,
 } from 'antd';
-import {ProviderTypeApi} from '../../../../apis/ProviderTypeApi';
+import ProviderTypeApi from '../../../../apis/ProviderTypeApi';
 
 const {TextArea} = Input;
 const {Text} = Typography;

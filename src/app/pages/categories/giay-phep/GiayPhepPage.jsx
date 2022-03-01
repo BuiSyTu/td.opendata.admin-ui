@@ -4,7 +4,7 @@ import {PageTitle} from '../../../../_metronic/layout/core';
 import {Typography, Divider, Input, Popconfirm, notification} from 'antd';
 import TableList from '../../../components/TableList';
 import FormModal from '../hinh-thuc-cung-cap/components/FormModal';
-import { LicenseApi } from '../../../apis/LicenseApi';
+import LicenseApi from '../../../apis/LicenseApi';
 
 const {Text} = Typography;
 const {Search} = Input;

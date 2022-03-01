@@ -1,27 +1,27 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react'
 
-import { PageTitle } from '../../../../_metronic/layout/core';
-import { Typography, Divider, Input, Popconfirm, notification } from 'antd';
-import TableList from '../../../components/TableList';
-import FormModal from '../hinh-thuc-cung-cap/components/FormModal';
-import { TagApi } from '../../../apis/TagApi';
+import { PageTitle } from '../../../../_metronic/layout/core'
+import { Typography, Divider, Input, Popconfirm, notification } from 'antd'
+import TableList from '../../../components/TableList'
+import FormModal from './components/FormModal'
+import DatasetApi from '../../../apis/DatasetApi'
 
-const { Text } = Typography;
-const { Search } = Input;
+const { Text } = Typography
+const { Search } = Input
 
-const tagApi = new TagApi();
+const datasetApi = new DatasetApi()
 
 const CategoryPage = () => {
-  const [loading, setLoading] = useState(false);
-  const [modalVisible, setModalVisible] = useState(false);
-  const [update, setUpdate] = useState(true);
-  const [inputValue, setInputValue] = useState('');
-  const [dataTable, setDataTable] = useState([]);
-  const [size, setSize] = useState(10);
-  const [count, setCount] = useState(0);
-  const [offset, setOffset] = useState(0);
-  const [modalId, setModalId] = useState('');
-  const [typeModal, setTypeModal] = useState('');
+  const [loading, setLoading] = useState(false)
+  const [modalVisible, setModalVisible] = useState(false)
+  const [update, setUpdate] = useState(true)
+  const [inputValue, setInputValue] = useState('')
+  const [dataTable, setDataTable] = useState([])
+  const [size, setSize] = useState(10)
+  const [count, setCount] = useState(0)
+  const [offset, setOffset] = useState(0)
+  const [modalId, setModalId] = useState('')
+  const [typeModal, setTypeModal] = useState('')
 
   const columns = [
     {
@@ -34,7 +34,7 @@ const CategoryPage = () => {
           <Text style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             {index + 1}
           </Text>
-        );
+        )
       },
       width: '5%',
     },
@@ -42,7 +42,19 @@ const CategoryPage = () => {
       title: 'Tên',
       dataIndex: 'name',
       key: 'name',
-      width: '45%',
+      width: '30%',
+    },
+    {
+      title: 'Mã',
+      dataIndex: 'code',
+      key: 'code',
+      width: '25%',
+    },
+    {
+      title: 'Tag',
+      dataIndex: 'tags',
+      key: 'tags',
+      width: '25%',
     },
     {
       title: 'Thao tác',
@@ -57,7 +69,7 @@ const CategoryPage = () => {
             data-toggle='m-tooltip'
             title='Xem'
             onClick={() => {
-              handleView(record.id);
+              handleView(record.id)
             }}
           >
             <i className='la la-file-text-o' style={{ marginLeft: -7 }}></i>
@@ -68,7 +80,7 @@ const CategoryPage = () => {
             data-toggle='m-tooltip'
             title='Sửa'
             onClick={() => {
-              handleEdit(record.id);
+              handleEdit(record.id)
             }}
           >
             <i className='la la-edit' style={{ marginLeft: -7 }}></i>
@@ -78,7 +90,7 @@ const CategoryPage = () => {
             okText='Ok'
             cancelText='Hủy'
             onConfirm={() => {
-              handleDelete(record.id);
+              handleDelete(record.id)
             }}
           >
             <button
@@ -93,65 +105,64 @@ const CategoryPage = () => {
         </div>
       ),
     },
-  ];
+  ]
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        setLoading(true);
-        var res = await tagApi.getAll();
-        setDataTable(res?.data ?? []);
-        setCount(res?.totalCount ?? 0);
-        setLoading(false);
+        setLoading(true)
+        var res = await datasetApi.getAll()
+        setDataTable(res?.data ?? [])
+        setCount(res?.totalCount ?? 0)
+        setLoading(false)
       } catch (error) {
-        setLoading(false);
+        setLoading(false)
       }
-      setUpdate(false);
-    };
-    if (update) {
-      fetchData();
+      setUpdate(false)
     }
-    return () => { };
-  }, [update]);
+
+    if (update) {
+      fetchData()
+    }
+    return () => { }
+  }, [update])
 
   useEffect(() => {
-    setUpdate(true);
-    return () => { };
-  }, [offset, size, inputValue]);
+    setUpdate(true)
+    return () => { }
+  }, [offset, size, inputValue])
 
   const handleEdit = (id) => {
-    console.log(id);
-    setModalId(id);
-    setTypeModal('edit');
-    setModalVisible(true);
-  };
+    setModalId(id)
+    setTypeModal('edit')
+    setModalVisible(true)
+  }
 
   const handleView = (id) => {
-    console.log(id);
-    setModalId(id);
-    setTypeModal('view');
-    setModalVisible(true);
-  };
+    setModalId(id)
+    setTypeModal('view')
+    setModalVisible(true)
+  }
 
   const handleDelete = async (id) => {
-    var res = await tagApi.delete(id);
+    var res = await datasetApi.delete(id)
     if (res) {
       notification.success({
         message: 'Xóa thành công!',
         duration: 1,
         placement: 'bottomRight',
-      });
+      })
     } else {
       notification.error({
         message: `Thất bại!`,
         description: 'Xóa không thành công.',
-      });
+      })
     }
-  };
-  
+  }
+
   return (
     <div>
-      <PageTitle breadcrumbs={[]}>Từ khóa</PageTitle>
+      <PageTitle breadcrumbs={[]}>Danh sách tập dữ liệu</PageTitle>
       <div className='card mb-5 mb-xl-12 py-5'>
         <div className='d-flex row justify-content-between align-items-center px-5'>
           <div className='col-xl-8 d-flex align-items-center'>
@@ -159,7 +170,7 @@ const CategoryPage = () => {
               style={{ width: '40%', height: 35, borderRadius: 10 }}
               placeholder='Tìm kiếm'
               onSearch={(e) => {
-                setInputValue(e);
+                setInputValue(e)
               }}
             />
           </div>
@@ -167,7 +178,7 @@ const CategoryPage = () => {
             <button
               className=' btn btn-success btn-sm m-btn m-btn--icon'
               onClick={() => {
-                setModalVisible(true);
+                setModalVisible(true)
               }}
             >
               <i className='bi bi-plus-square'></i> Thêm
@@ -196,7 +207,7 @@ const CategoryPage = () => {
         setUpdate={setUpdate}
       />
     </div>
-  );
-};
+  )
+}
 
-export default CategoryPage;
+export default CategoryPage

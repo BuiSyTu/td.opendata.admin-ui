@@ -9,9 +9,11 @@ const CategoriesPage = () => {
   const TuKhoaPage = lazy(() => import('./tu-khoa/TuKhoaPage'));
   const GiayPhepPage = lazy(() => import('./giay-phep/GiayPhepPage'));
   const ToChucPage = lazy(() => import('./to-chuc/ToChucPage'));
+  const TapDuLieuPage = lazy(() => import('./tap-du-lieu/TapDuLieuPage'));
 
   return (
     <Switch>
+      <Route path='/categories/dataset' component={TapDuLieuPage}></Route>
       <Route path='/categories/data-type' component={LoaiDuLieuPage}></Route>
       <Route path='/categories/fields' component={LinhVucPage}></Route>
       <Route path='/categories/provider-type' component={HinhThucCungCapPage}></Route>

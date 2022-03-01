@@ -7,7 +7,7 @@ const controllerName = 'datatypes';
 const baseUrl = `https://192.168.2.169:5001/api/v${ver}/${controllerName}`;
 
 
-export class DataTypeApi {
+export default class DataTypeApi {
   async getAll() {
     try {
       const res = await axios({
