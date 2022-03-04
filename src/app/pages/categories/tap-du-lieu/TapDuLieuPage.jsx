@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react'
+import { Divider, Input, Popconfirm, Typography, notification } from 'antd'
+import { useEffect, useState } from 'react'
 
-import { PageTitle } from '../../../../_metronic/layout/core'
-import { Typography, Divider, Input, Popconfirm, notification } from 'antd'
-import TableList from '../../../components/TableList'
-import FormModal from './components/FormModal'
 import DatasetApi from '../../../apis/DatasetApi'
+import FormModal from './components/FormModal'
+import { PageTitle } from '../../../../_metronic/layout/core'
+import TableList from '../../../components/TableList'
 
 const { Text } = Typography
 const { Search } = Input
@@ -22,7 +22,7 @@ const CategoryPage = () => {
   const [offset, setOffset] = useState(0)
   const [modalId, setModalId] = useState('')
   const [typeModal, setTypeModal] = useState('')
-  const [disableDataTab, setDisableDataTab] = useState(true)
+  const [disableDataTab, setDisableDataTab] = useState(false)
   const [tabKey, setTabKey] = useState('information')
 
   const columns = [

@@ -1,32 +1,31 @@
-import { useEffect, useState } from 'react'
 import {
-  Row,
-  Col,
-  Form,
-  Select,
   Button,
+  Col,
+  Divider,
+  Form,
   Input,
-  notification,
-  Typography,
   Modal,
+  Row,
+  Select,
+  Space,
   Spin,
+  Table,
   Tabs,
+  Typography,
   Upload,
   message,
-  Card,
-  Space,
-  Divider,
+  notification,
 } from 'antd'
 import { InboxOutlined, MinusCircleOutlined, PlusOutlined } from '@ant-design/icons'
+import { useEffect, useState } from 'react'
 
-import SelectMethodHttp from './SelectMethodHttp'
-import FunctionalButton from './FunctionalButton'
-
-import DatasetApi from '../../../../apis/DatasetApi'
 import CategoryApi from '../../../../apis/CategoryApi.js'
+import DataTypeApi from '../../../../apis/DataTypeApi'
+import DatasetApi from '../../../../apis/DatasetApi'
+import FunctionalButton from './FunctionalButton'
 import OrganizationApi from '../../../../apis/OrganizationApi'
 import ProviderTypeApi from '../../../../apis/ProviderTypeApi'
-import DataTypeApi from '../../../../apis/DataTypeApi'
+import { toObject } from '../../../../utils/common'
 
 const { TextArea } = Input
 const { Text } = Typography
@@ -45,12 +44,15 @@ const ModalCategory = (props) => {
   const [disable, setDisable] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [buttonLoading, setButtonLoading] = useState(false)
+
   const [categories, setCategories] = useState([])
   const [organizations, setOrganizations] = useState([])
   const [providerTypes, setProviderTypes] = useState([])
   const [dataTypes, setDataTypes] = useState([])
-  const [dataTypeCode, setDataTypeCode] = useState('webapi')
-  const [authorization, setAuthorization] = useState('NoAuth')
+  const [dataTypeCode, setDataTypeCode] = useState('excel')
+  const [dataPreview, setDataPreview] = useState([])
+  const [columnPreview, setColumnPreview] = useState([])
+  const [disableTablePreview, setDisableTablePreview] = useState(true)
 
   const layout = {
     labelCol: { span: 22 },
@@ -63,6 +65,8 @@ const ModalCategory = (props) => {
     action: 'https://192.168.2.169:5001/api/v1/attachmenthandles/excel',
     method: 'POST',
     onChange(info) {
+      console.log({info})
+
       const { status } = info.file
       if (status !== 'uploading') {
         console.log(info.file, info.fileList)
@@ -150,7 +154,22 @@ const ModalCategory = (props) => {
     try {
       await form.validateFields()
       const formData = form.getFieldsValue(true)
-      typeModal === 'edit' ? putData(formData) : postData(formData)
+
+      const headerObject = Array.isArray(formData.headers) ? toObject(formData.headers, 'key', 'value') : {}
+
+      const bodyData = {
+        ...formData,
+        datasetAPIConfig: {
+          method: formData?.method ?? '',
+          url: formData?.url ?? '',
+          headers: Object.keys(headerObject).length > 0 ? headerObject.toString() : '',
+          dataKey: formData?.dataKey ?? '',
+          tableName: formData?.tableName ?? '',
+          data: formData?.data ?? '',
+        }
+      }
+
+      typeModal === 'edit' ? putData(bodyData) : postData(bodyData)
     } catch (errorInfo) {
       console.log('Failed:', errorInfo)
     }
@@ -205,10 +224,6 @@ const ModalCategory = (props) => {
     }
     setUpdate(true)
     handleCancel()
-  }
-
-  const handleChangeAuthorization = (value, event) => {
-    setAuthorization(value)
   }
 
   const handleTabClick = (key, event) => {
@@ -275,7 +290,14 @@ const ModalCategory = (props) => {
           {...layout}
           form={form}
           initialValues={{
-            authorization,
+            url: 'https://api.hanhchinhcong.net/covidnew/QuocTichs',
+            method: 'GET',
+            headers: [
+              {key: 'Authorization', value: 'Bearer 3bcd9fb7-2e0e-3adb-8ba9-ecab0e37916f'}
+            ],
+            name: 'abc',
+            dataKey: 'data',
+            dataTypeId: '10090000-61d2-00d8-0224-08d9d1b30b4b',
           }}
         >
           <Tabs
@@ -393,7 +415,7 @@ const ModalCategory = (props) => {
                 </Col>
               </Row>
 
-              <Form.Item label='Mô tả' name='Description'>
+              <Form.Item label='Mô tả' name='description'>
                 <TextArea disabled={disable} rows={3} style={{ width: '100%', borderRadius: 5 }} />
               </Form.Item>
             </TabPane>
@@ -403,40 +425,33 @@ const ModalCategory = (props) => {
                 ? (
                   <>
                     <Row>
-                      <Col span={12}>
-                        <Form.Item label='Địa chỉ' name='address'>
-                          <Input addonBefore={<SelectMethodHttp />} placeholder='Enter request URL'></Input>
-                        </Form.Item>
-                      </Col>
-                      <Col span={12}>
-                        <Form.Item label='Authorization' name='authorization'>
-                          <Select
-                            // defaultValue={authorization}
-                            onChange={(value, event) => handleChangeAuthorization(value, event)}
-                          >
-                            <Option value='NoAuth'>NoAuth</Option>
-                            <Option value='BasicAuth'>BasicAuth</Option>
-                            <Option value='BearerToken'>BearerToken</Option>
+                      <Col span={3}>
+                        <Form.Item label='Phương thức' name='method'>
+                          {/* <SelectMethodHttp /> */}
+                          <Select placeholder='Http action'>
+                            <Option key='GET' value='GET'>Get</Option>
+                            <Option key='POST' value='POST'>Post</Option>
+                            <Option key='PUT' value='PUT'>Put</Option>
+                            <Option key='DELETE' value='DELETE'>Delete</Option>
+                            <Option key='HEAD' value='HEAD'>Head</Option>
+                            <Option key='PATCH' value='PATCH'>Patch</Option>
+                            <Option key='OPTIONS' value='OPTIONS'>Options</Option>
                           </Select>
                         </Form.Item>
-                        {
-                          authorization === 'NoAuth' ? <></>
-                            : authorization === 'BasicAuth' ? <Card>
-                              <Form.Item label='UserName'><Input /></Form.Item>
-                              <Form.Item label='Password'><Input /></Form.Item>
-                            </Card>
-                              : <Card>
-                                <Form.Item label='BearerToken'><Input /></Form.Item>
-                              </Card>
-                        }
 
+                        <Form.Item label='Data Key' name='dataKey'>
+                          <Input placeholder='Nhập data key' />
+                        </Form.Item>
                       </Col>
-                    </Row>
+                      <Col span={9}>
+                        <Form.Item label='Địa chỉ' name='url'>
+                          <Input
+                            placeholder='Enter request URL' />
+                        </Form.Item>
+                      </Col>
 
-                    <Divider />
-
-                    <Row>
                       <Col span={12}>
+                        <p className='mb-2'>Headers</p>
                         <Form.List name="headers">
                           {(fields, { add, remove }) => (
                             <>
@@ -466,36 +481,6 @@ const ModalCategory = (props) => {
                           )}
                         </Form.List>
                       </Col>
-                      <Col span={12}>
-                        <Form.List name="params">
-                          {(fields, { add, remove }) => (
-                            <>
-                              {fields.map(({ key, name, ...restField }) => (
-                                <Space key={key} style={{ display: 'flex', marginBottom: 8 }} align="baseline">
-                                  <Form.Item
-                                    {...restField}
-                                    name={[name, 'key']}
-                                  >
-                                    <Input placeholder="Key" />
-                                  </Form.Item>
-                                  <Form.Item
-                                    {...restField}
-                                    name={[name, 'value']}
-                                  >
-                                    <Input placeholder="Value" />
-                                  </Form.Item>
-                                  <MinusCircleOutlined onClick={() => remove(name)} />
-                                </Space>
-                              ))}
-                              <Form.Item>
-                                <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>
-                                  Thêm param
-                                </Button>
-                              </Form.Item>
-                            </>
-                          )}
-                        </Form.List>
-                      </Col>
                     </Row>
 
                     <Divider />
@@ -507,7 +492,6 @@ const ModalCategory = (props) => {
                         </Form.Item>
                       </Col>
                     </Row>
-                    <FunctionalButton dataTypeCode={dataTypeCode} />
                   </>
                 )
                 : (
@@ -520,10 +504,16 @@ const ModalCategory = (props) => {
                         <p className="ant-upload-text">Kéo hoặc thả file để tải lên</p>
                       </Dragger>
                     </Form.Item>
-                    <FunctionalButton dataTypeCode={dataTypeCode} />
                   </>
                 )
               }
+              <FunctionalButton
+                setDisableTablePreview={setDisableTablePreview}
+                setDataPreview={setDataPreview}
+                setColumnPreview={setColumnPreview}
+                dataTypeCode={dataTypeCode}
+                form={form} />
+              <Table className='mt-4' disable={disableTablePreview} dataSource={dataPreview} columns={columnPreview}></Table>
             </TabPane>
           </Tabs>
         </Form>

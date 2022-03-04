@@ -22,6 +22,8 @@ const CustomPage = () => {
   const [modalId, setModalId] = useState('')
   const [typeModal, setTypeModal] = useState('')
 
+  const dataTypeCannotBeDelete = ['webapi', 'excel']
+
   const columns = [
     {
       title: 'STT',
@@ -41,6 +43,16 @@ const CustomPage = () => {
       dataIndex: 'name',
       key: 'name',
       width: '40%',
+      render: (text, record, index) => {
+        console.log({text})
+        console.log({record})
+        console.log({index})
+        return (
+          <Text type={dataTypeCannotBeDelete.includes(record.code.toLowerCase()) ? 'success' : 'secondary'}>
+            {text}
+          </Text>
+        )
+      },
     },
     {
       title: 'Mã',
@@ -81,7 +93,7 @@ const CustomPage = () => {
             okText='Ok'
             cancelText='Hủy'
             onConfirm={() => {
-              handleDelete(record.id)
+              handleDelete(record)
             }}
           >
             <button
@@ -134,8 +146,17 @@ const CustomPage = () => {
     setModalVisible(true)
   }
 
-  const handleDelete = async (id) => {
-    var res = await dataTypeApi.delete(id)
+  const handleDelete = async (item) => {
+    if (dataTypeCannotBeDelete.includes(item.code.toLowerCase())) {
+      notification.error({
+        message: 'Không thể xóa phần tử hệ thống',
+        duration: 2,
+      })
+
+      return;
+    }
+
+    var res = await dataTypeApi.delete(item.Id)
     if (res) {
       notification.success({
         message: 'Xóa thành công!',
