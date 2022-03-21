@@ -1,25 +1,25 @@
-import { lazy } from 'react'
 import { Redirect, Route, Switch } from 'react-router-dom'
 
+import { lazy } from 'react'
 
 const CategoriesPage = () => {
-  const LinhVucPage = lazy(() => import('./linh-vuc/LinhVucPage'))
-  const LoaiDuLieuPage = lazy(() => import('./loai-du-lieu/LoaiDuLieuPage'))
-  const HinhThucCungCapPage = lazy(() => import('./hinh-thuc-cung-cap/HinhThucCungCapPage'))
-  const TuKhoaPage = lazy(() => import('./tu-khoa/TuKhoaPage'))
-  const GiayPhepPage = lazy(() => import('./giay-phep/GiayPhepPage'))
-  const ToChucPage = lazy(() => import('./to-chuc/ToChucPage'))
-  const TapDuLieuPage = lazy(() => import('./tap-du-lieu/TapDuLieuPage'))
+  const CategoryPage = lazy(() => import('./category/Page'))
+  const DataTypePage = lazy(() => import('./datatype/Page'))
+  const ProviderTypePage = lazy(() => import('./providerType/Page'))
+  const TagPage = lazy(() => import('./tag/Page'))
+  const LicensePage = lazy(() => import('./license/Page'))
+  const OrganizationPage = lazy(() => import('./organization/Page'))
+  const DatasetPage = lazy(() => import('./dataset/Page'))
 
   return (
     <Switch>
-      <Route path='/categories/dataset' component={TapDuLieuPage}></Route>
-      <Route path='/categories/data-type' component={LoaiDuLieuPage}></Route>
-      <Route path='/categories/fields' component={LinhVucPage}></Route>
-      <Route path='/categories/provider-type' component={HinhThucCungCapPage}></Route>
-      <Route path='/categories/tag' component={TuKhoaPage}></Route>
-      <Route path='/categories/license' component={GiayPhepPage}></Route>
-      <Route path='/categories/organization' component={ToChucPage}></Route>
+      <Route path='/categories/dataset' component={DatasetPage}></Route>
+      <Route path='/categories/data-type' component={DataTypePage}></Route>
+      <Route path='/categories/fields' component={CategoryPage}></Route>
+      <Route path='/categories/provider-type' component={ProviderTypePage}></Route>
+      <Route path='/categories/tag' component={TagPage}></Route>
+      <Route path='/categories/license' component={LicensePage}></Route>
+      <Route path='/categories/organization' component={OrganizationPage}></Route>
       <Redirect from='/categories' exact={true} to='/categories/fields' />
       <Redirect to='/categories/fields' />
     </Switch>
