@@ -1,27 +1,25 @@
-import { Divider, Input, Popconfirm, Tag, Typography, notification } from 'antd'
-import {danger, secondary, success} from '../../../constants/color'
+import { Divider, Input, Popconfirm, Typography, notification } from 'antd'
 import { useEffect, useState } from 'react'
 
 import FormModal from './components/FormModal'
 import { PageTitle } from '../../../../_metronic/layout/core'
 import TableList from '../../../components/TableList'
-import { datasetApi } from '../../../apis/dataset'
-import { handleModal } from '../../../../setup/redux/slices/dataset'
-import { useDispatch } from 'react-redux'
+import { providerTypeApi } from '../../../apis/providertype'
 
 const { Text } = Typography
 const { Search } = Input
 
 const CategoryPage = () => {
-  const dispatch = useDispatch()
-
   const [loading, setLoading] = useState(false)
+  const [modalVisible, setModalVisible] = useState(false)
   const [update, setUpdate] = useState(true)
   const [inputValue, setInputValue] = useState('')
   const [dataTable, setDataTable] = useState([])
   const [size, setSize] = useState(10)
   const [count, setCount] = useState(0)
   const [offset, setOffset] = useState(0)
+  const [modalId, setModalId] = useState('')
+  const [typeModal, setTypeModal] = useState('')
 
   const columns = [
     {
@@ -42,43 +40,13 @@ const CategoryPage = () => {
       title: 'Tên',
       dataIndex: 'name',
       key: 'name',
-      width: '30%',
+      width: '45%',
     },
     {
       title: 'Mã',
       dataIndex: 'code',
       key: 'code',
-      width: '25%',
-    },
-    {
-      title: 'Trạng thái dữ liệu',
-      dataIndex: 'state',
-      key: 'state',
-      width: '25%',
-      render: (text: any, record: any, index: any) => {
-        let color = secondary
-        let textDisplay = 'Không xác định'
-
-        switch (record?.state) {
-          case '0':
-            textDisplay = 'Chưa duyệt'
-            break;
-          case '1':
-            color = success
-            textDisplay = 'Đã duyệt'
-            break;
-          case '2':
-            color = danger
-            textDisplay = 'Bị từ chối'
-            break;
-          default:
-            break;
-        }
-
-        return (<Tag color={color}>
-          {textDisplay}
-        </Tag>);
-      },
+      width: '35%',
     },
     {
       title: 'Thao tác',
@@ -135,7 +103,7 @@ const CategoryPage = () => {
     const fetchData = async () => {
       try {
         setLoading(true)
-        var res = await datasetApi.getAll()
+        var res = await providerTypeApi.getAll()
         setDataTable(res?.data ?? [])
         setCount(res?.totalCount ?? 0)
         setLoading(false)
@@ -144,7 +112,6 @@ const CategoryPage = () => {
       }
       setUpdate(false)
     }
-
     if (update) {
       fetchData()
     }
@@ -157,31 +124,21 @@ const CategoryPage = () => {
   }, [offset, size, inputValue])
 
   const handleEdit = (id: string) => {
-    dispatch(handleModal({
-      modalId: id,
-      typeModal: 'edit',
-      disableDataTab: false,
-      modalVisible: true,
-    }))
+    console.log(id)
+    setModalId(id)
+    setTypeModal('edit')
+    setModalVisible(true)
   }
 
   const handleView = (id: string) => {
-    dispatch(handleModal({
-      modalId: id,
-      typeModal: 'view',
-      disableDataTab: false,
-      modalVisible: true,
-    }))
-  }
-
-  const handleAdd = () => {
-    dispatch(handleModal({
-      modalVisible: true,
-    }))
+    console.log(id)
+    setModalId(id)
+    setTypeModal('view')
+    setModalVisible(true)
   }
 
   const handleDelete = async (id: string) => {
-    var res = await datasetApi.delete(id)
+    var res = await providerTypeApi.delete(id)
     if (res) {
       notification.success({
         message: 'Xóa thành công!',
@@ -195,10 +152,10 @@ const CategoryPage = () => {
       })
     }
   }
-
+  
   return (
     <div>
-      <PageTitle breadcrumbs={[]}>Danh sách tập dữ liệu</PageTitle>
+      <PageTitle breadcrumbs={[]}>Danh mục hình thức cung cấp</PageTitle>
       <div className='card mb-5 mb-xl-12 py-5'>
         <div className='d-flex row justify-content-between align-items-center px-5'>
           <div className='col-xl-8 d-flex align-items-center'>
@@ -213,7 +170,9 @@ const CategoryPage = () => {
           <div className='col-xl-4 d-flex justify-content-end'>
             <button
               className=' btn btn-success btn-sm m-btn m-btn--icon'
-              onClick={() => handleAdd()}
+              onClick={() => {
+                setModalVisible(true)
+              }}
             >
               <i className='bi bi-plus-square'></i> Thêm
             </button>
@@ -232,6 +191,12 @@ const CategoryPage = () => {
         />
       </div>
       <FormModal
+        modalVisible={modalVisible}
+        setModalVisible={setModalVisible}
+        modalId={modalId}
+        setModalId={setModalId}
+        typeModal={typeModal}
+        setTypeModal={setTypeModal}
         setUpdate={setUpdate}
       />
     </div>

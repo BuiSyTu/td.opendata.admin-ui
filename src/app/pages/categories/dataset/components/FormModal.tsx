@@ -19,8 +19,8 @@ import {
   message,
   notification,
 } from 'antd'
-import { DatasetState, handleModal, setDataTypeCode, setDisableDataTab, setTabKey } from '../../../../../setup/redux/slices/dataset'
 import { InboxOutlined, MinusCircleOutlined, PlusOutlined } from '@ant-design/icons'
+import { handleModal, setDataTypeCode, setDisableDataTab, setTabKey } from '../../../../../setup/redux/slices/dataset'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 
@@ -32,12 +32,12 @@ import MetadataTable from './MetadataTable'
 import Organization from '../../../../models/Organization'
 import ProviderType from '../../../../models/ProviderType'
 import { RootState } from '../../../../../setup'
-import { categoryApi } from '../../../../apis/category.js'
+import { categoryApi } from '../../../../apis/category'
 import { dataTypeApi } from '../../../../apis/datatype'
 import { datasetApi } from '../../../../apis/dataset'
 import { organizationApi } from '../../../../apis/organization'
 import { providerTypeApi } from '../../../../apis/providertype'
-import { toObject } from '../../../../utils/common'
+import { toObject } from '../../../../../utils/common'
 
 const { TextArea } = Input
 const { Text } = Typography
@@ -45,7 +45,7 @@ const { Option } = Select
 const { TabPane } = Tabs
 const { Dragger } = Upload
 
-const ModalCategory = (props: any) => {
+function ModalCategory(props: any) {
   const dispatch = useDispatch()
   const tabKey = useSelector((state: RootState) => state.dataset.tabKey)
   const modalId = useSelector((state: RootState) => state.dataset.modalId)

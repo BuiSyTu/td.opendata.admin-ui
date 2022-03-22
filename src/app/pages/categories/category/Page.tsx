@@ -1,37 +1,35 @@
-import { Divider, Input, Popconfirm, Tag, Typography, notification } from 'antd'
-import {danger, secondary, success} from '../../../constants/color'
-import { useEffect, useState } from 'react'
+import {Divider, Input, Popconfirm, Typography, notification} from 'antd'
+import {useEffect, useState} from 'react'
 
 import FormModal from './components/FormModal'
-import { PageTitle } from '../../../../_metronic/layout/core'
+import {PageTitle} from '../../../../_metronic/layout/core'
 import TableList from '../../../components/TableList'
-import { datasetApi } from '../../../apis/dataset'
-import { handleModal } from '../../../../setup/redux/slices/dataset'
-import { useDispatch } from 'react-redux'
+import { categoryApi } from '../../../apis/category'
 
-const { Text } = Typography
-const { Search } = Input
+const {Text} = Typography
+const {Search} = Input
 
 const CategoryPage = () => {
-  const dispatch = useDispatch()
-
   const [loading, setLoading] = useState(false)
+  const [modalVisible, setModalVisible] = useState(false)
   const [update, setUpdate] = useState(true)
   const [inputValue, setInputValue] = useState('')
   const [dataTable, setDataTable] = useState([])
   const [size, setSize] = useState(10)
   const [count, setCount] = useState(0)
   const [offset, setOffset] = useState(0)
-
+  const [modalId, setModalId] = useState('')
+  const [typeModal, setTypeModal] = useState('')
+  
   const columns = [
     {
       title: 'STT',
       dataIndex: '',
       key: '',
       align: 'center',
-      render: (text: any, record: any, index: any) => {
+      render: (text: unknown, record: unknown, index: any) => {
         return (
-          <Text style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <Text style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
             {index + 1}
           </Text>
         )
@@ -42,43 +40,13 @@ const CategoryPage = () => {
       title: 'Tên',
       dataIndex: 'name',
       key: 'name',
-      width: '30%',
+      width: '45%',
     },
     {
       title: 'Mã',
       dataIndex: 'code',
       key: 'code',
-      width: '25%',
-    },
-    {
-      title: 'Trạng thái dữ liệu',
-      dataIndex: 'state',
-      key: 'state',
-      width: '25%',
-      render: (text: any, record: any, index: any) => {
-        let color = secondary
-        let textDisplay = 'Không xác định'
-
-        switch (record?.state) {
-          case '0':
-            textDisplay = 'Chưa duyệt'
-            break;
-          case '1':
-            color = success
-            textDisplay = 'Đã duyệt'
-            break;
-          case '2':
-            color = danger
-            textDisplay = 'Bị từ chối'
-            break;
-          default:
-            break;
-        }
-
-        return (<Tag color={color}>
-          {textDisplay}
-        </Tag>);
-      },
+      width: '35%',
     },
     {
       title: 'Thao tác',
@@ -96,10 +64,10 @@ const CategoryPage = () => {
               handleView(record.id)
             }}
           >
-            <i className='la la-file-text-o' style={{ marginLeft: -7 }}></i>
+            <i className='la la-file-text-o' style={{marginLeft: -7}}></i>
           </button>
           <button
-            style={{ marginLeft: 10 }}
+            style={{marginLeft: 10}}
             className='btn btn-light-primary m-btn m-btn--icon btn-sm m-btn--icon-only'
             data-toggle='m-tooltip'
             title='Sửa'
@@ -107,7 +75,7 @@ const CategoryPage = () => {
               handleEdit(record.id)
             }}
           >
-            <i className='la la-edit' style={{ marginLeft: -7 }}></i>
+            <i className='la la-edit' style={{marginLeft: -7}}></i>
           </button>
           <Popconfirm
             title='Xóa dữ liệu？'
@@ -118,12 +86,12 @@ const CategoryPage = () => {
             }}
           >
             <button
-              style={{ marginLeft: 10 }}
+              style={{marginLeft: 10}}
               className='btn btn-light-danger m-btn m-btn--icon btn-sm m-btn--icon-only'
               data-toggle='m-tooltip'
               title='Xóa'
             >
-              <i className='fas fa-trash-alt' style={{ marginLeft: -7 }}></i>
+              <i className='fas fa-trash-alt' style={{marginLeft: -7}}></i>
             </button>
           </Popconfirm>
         </div>
@@ -135,7 +103,7 @@ const CategoryPage = () => {
     const fetchData = async () => {
       try {
         setLoading(true)
-        var res = await datasetApi.getAll()
+        var res = await categoryApi.getAll()
         setDataTable(res?.data ?? [])
         setCount(res?.totalCount ?? 0)
         setLoading(false)
@@ -144,44 +112,31 @@ const CategoryPage = () => {
       }
       setUpdate(false)
     }
-
     if (update) {
       fetchData()
     }
-    return () => { }
+    return () => {}
   }, [update])
 
   useEffect(() => {
     setUpdate(true)
-    return () => { }
+    return () => {}
   }, [offset, size, inputValue])
 
   const handleEdit = (id: string) => {
-    dispatch(handleModal({
-      modalId: id,
-      typeModal: 'edit',
-      disableDataTab: false,
-      modalVisible: true,
-    }))
+    setModalId(id)
+    setTypeModal('edit')
+    setModalVisible(true)
   }
 
   const handleView = (id: string) => {
-    dispatch(handleModal({
-      modalId: id,
-      typeModal: 'view',
-      disableDataTab: false,
-      modalVisible: true,
-    }))
-  }
-
-  const handleAdd = () => {
-    dispatch(handleModal({
-      modalVisible: true,
-    }))
+    setModalId(id)
+    setTypeModal('view')
+    setModalVisible(true)
   }
 
   const handleDelete = async (id: string) => {
-    var res = await datasetApi.delete(id)
+    var res = await categoryApi.delete(id)
     if (res) {
       notification.success({
         message: 'Xóa thành công!',
@@ -195,15 +150,15 @@ const CategoryPage = () => {
       })
     }
   }
-
+  
   return (
     <div>
-      <PageTitle breadcrumbs={[]}>Danh sách tập dữ liệu</PageTitle>
+      <PageTitle breadcrumbs={[]}>Danh sách lĩnh vực</PageTitle>
       <div className='card mb-5 mb-xl-12 py-5'>
         <div className='d-flex row justify-content-between align-items-center px-5'>
           <div className='col-xl-8 d-flex align-items-center'>
             <Search
-              style={{ width: '40%', height: 35, borderRadius: 10 }}
+              style={{width: '40%', height: 35, borderRadius: 10}}
               placeholder='Tìm kiếm'
               onSearch={(e) => {
                 setInputValue(e)
@@ -213,13 +168,15 @@ const CategoryPage = () => {
           <div className='col-xl-4 d-flex justify-content-end'>
             <button
               className=' btn btn-success btn-sm m-btn m-btn--icon'
-              onClick={() => handleAdd()}
+              onClick={() => {
+                setModalVisible(true)
+              }}
             >
               <i className='bi bi-plus-square'></i> Thêm
             </button>
           </div>
         </div>
-        <Divider style={{ margin: '10px 0' }} />
+        <Divider style={{margin: '10px 0'}} />
         <TableList
           dataTable={dataTable}
           columns={columns}
@@ -232,6 +189,12 @@ const CategoryPage = () => {
         />
       </div>
       <FormModal
+        modalVisible={modalVisible}
+        setModalVisible={setModalVisible}
+        modalId={modalId}
+        setModalId={setModalId}
+        typeModal={typeModal}
+        setTypeModal={setTypeModal}
         setUpdate={setUpdate}
       />
     </div>

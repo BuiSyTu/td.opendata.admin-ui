@@ -4,18 +4,19 @@ import { setColumnMetata, setColumnPreview, setDataMetadata, setDataPreview, set
 import { useDispatch, useSelector } from 'react-redux'
 
 import ForwardApi from '../../../../apis/ForwardApi'
-import { toObject } from '../../../../utils/common'
+import { RootState } from '../../../../../setup'
+import { toObject } from '../../../../../utils/common'
 
 const forwardApi = new ForwardApi()
 
-const FunctionalButton = (props) => {
+const FunctionalButton = (props: any) => {
   const dispatch = useDispatch()
-  const dataTypeCode = useSelector(state => state.dataset.dataTypeCode)
+  const dataTypeCode = useSelector((state: RootState) => state.dataset.dataTypeCode)
 
   const { form, dataExcel } = props
 
   const handleClickPreview = () => {
-    const handlePreview = dataSource => {
+    const handlePreview = (dataSource: any) => {
       if (!Array.isArray(dataSource)) {
         notification.info({
           message: 'Dữ liệu không hợp lệ',
@@ -84,7 +85,7 @@ const FunctionalButton = (props) => {
   }
 
   const handleClickMetadata = () => {
-    const handleMetadata = (dataSource) => {
+    const handleMetadata = (dataSource: any) => {
       if (!Array.isArray(dataSource)) {
         notification.info({
           message: 'Dữ liệu không hợp lệ',
@@ -164,7 +165,6 @@ const FunctionalButton = (props) => {
       <Button
         icon={<DatabaseOutlined />}
         style={{
-          type: 'primary',
           background: '#ffb822',
           color: '#111111',
           minWidth: '130px',
@@ -178,7 +178,6 @@ const FunctionalButton = (props) => {
       <Button
         icon={<ClockCircleOutlined />}
         style={{
-          type: 'primary',
           background: '#34bfa3',
           color: '#ffffff',
           minWidth: '130px',

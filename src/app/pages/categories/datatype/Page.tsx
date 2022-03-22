@@ -1,34 +1,33 @@
-import { Divider, Input, Popconfirm, Tag, Typography, notification } from 'antd'
-import {danger, secondary, success} from '../../../constants/color'
+import { Col, Divider, Input, Popconfirm, Row, Typography, notification } from 'antd'
 import { useEffect, useState } from 'react'
 
 import FormModal from './components/FormModal'
 import { PageTitle } from '../../../../_metronic/layout/core'
 import TableList from '../../../components/TableList'
-import { datasetApi } from '../../../apis/dataset'
-import { handleModal } from '../../../../setup/redux/slices/dataset'
-import { useDispatch } from 'react-redux'
+import { dataTypeApi } from '../../../apis/datatype'
 
 const { Text } = Typography
 const { Search } = Input
 
-const CategoryPage = () => {
-  const dispatch = useDispatch()
-
+const CustomPage = () => {
   const [loading, setLoading] = useState(false)
+  const [modalVisible, setModalVisible] = useState(false)
   const [update, setUpdate] = useState(true)
   const [inputValue, setInputValue] = useState('')
   const [dataTable, setDataTable] = useState([])
   const [size, setSize] = useState(10)
   const [count, setCount] = useState(0)
   const [offset, setOffset] = useState(0)
+  const [modalId, setModalId] = useState('')
+  const [typeModal, setTypeModal] = useState('')
+
+  const dataTypeCannotBeDelete = ['webapi', 'excel']
 
   const columns = [
     {
       title: 'STT',
       dataIndex: '',
       key: '',
-      align: 'center',
       render: (text: any, record: any, index: any) => {
         return (
           <Text style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -42,50 +41,29 @@ const CategoryPage = () => {
       title: 'Tên',
       dataIndex: 'name',
       key: 'name',
-      width: '30%',
+      width: '40%',
+      render: (text: any, record: any, index: any) => {
+        console.log({text})
+        console.log({record})
+        console.log({index})
+        return (
+          <Text type={dataTypeCannotBeDelete.includes(record.code.toLowerCase()) ? 'success' : 'secondary'}>
+            {text}
+          </Text>
+        )
+      },
     },
     {
       title: 'Mã',
       dataIndex: 'code',
       key: 'code',
-      width: '25%',
-    },
-    {
-      title: 'Trạng thái dữ liệu',
-      dataIndex: 'state',
-      key: 'state',
-      width: '25%',
-      render: (text: any, record: any, index: any) => {
-        let color = secondary
-        let textDisplay = 'Không xác định'
-
-        switch (record?.state) {
-          case '0':
-            textDisplay = 'Chưa duyệt'
-            break;
-          case '1':
-            color = success
-            textDisplay = 'Đã duyệt'
-            break;
-          case '2':
-            color = danger
-            textDisplay = 'Bị từ chối'
-            break;
-          default:
-            break;
-        }
-
-        return (<Tag color={color}>
-          {textDisplay}
-        </Tag>);
-      },
+      width: '35%',
     },
     {
       title: 'Thao tác',
-      width: '15%',
+      width: '20%',
       dataIndex: '',
       key: '',
-      align: 'center',
       render: (text: any, record: any) => (
         <div>
           <button
@@ -114,7 +92,7 @@ const CategoryPage = () => {
             okText='Ok'
             cancelText='Hủy'
             onConfirm={() => {
-              handleDelete(record.id)
+              handleDelete(record)
             }}
           >
             <button
@@ -132,10 +110,15 @@ const CategoryPage = () => {
   ]
 
   useEffect(() => {
+    setUpdate(true)
+    return () => { }
+  }, [offset, size, inputValue])
+
+  useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true)
-        var res = await datasetApi.getAll()
+        var res = await dataTypeApi.getAll()
         setDataTable(res?.data ?? [])
         setCount(res?.totalCount ?? 0)
         setLoading(false)
@@ -144,50 +127,42 @@ const CategoryPage = () => {
       }
       setUpdate(false)
     }
-
     if (update) {
       fetchData()
     }
     return () => { }
   }, [update])
 
-  useEffect(() => {
-    setUpdate(true)
-    return () => { }
-  }, [offset, size, inputValue])
-
   const handleEdit = (id: string) => {
-    dispatch(handleModal({
-      modalId: id,
-      typeModal: 'edit',
-      disableDataTab: false,
-      modalVisible: true,
-    }))
+    setModalId(id)
+    setTypeModal('edit')
+    setModalVisible(true)
   }
 
   const handleView = (id: string) => {
-    dispatch(handleModal({
-      modalId: id,
-      typeModal: 'view',
-      disableDataTab: false,
-      modalVisible: true,
-    }))
+    setModalId(id)
+    setTypeModal('view')
+    setModalVisible(true)
   }
 
-  const handleAdd = () => {
-    dispatch(handleModal({
-      modalVisible: true,
-    }))
-  }
+  const handleDelete = async (item: any) => {
+    if (dataTypeCannotBeDelete.includes(item.code.toLowerCase())) {
+      notification.error({
+        message: 'Không thể xóa phần tử hệ thống',
+        duration: 2,
+      })
 
-  const handleDelete = async (id: string) => {
-    var res = await datasetApi.delete(id)
+      return;
+    }
+
+    var res = await dataTypeApi.delete(item.Id)
     if (res) {
       notification.success({
         message: 'Xóa thành công!',
         duration: 1,
         placement: 'bottomRight',
       })
+      setUpdate(true)
     } else {
       notification.error({
         message: `Thất bại!`,
@@ -198,10 +173,10 @@ const CategoryPage = () => {
 
   return (
     <div>
-      <PageTitle breadcrumbs={[]}>Danh sách tập dữ liệu</PageTitle>
+      <PageTitle breadcrumbs={[]}>Danh sách loại dữ liệu</PageTitle>
       <div className='card mb-5 mb-xl-12 py-5'>
-        <div className='d-flex row justify-content-between align-items-center px-5'>
-          <div className='col-xl-8 d-flex align-items-center'>
+        <Row justify='space-between' style={{ alignItems: 'center', padding: '5px 10px' }}>
+          <Col span={12} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
             <Search
               style={{ width: '40%', height: 35, borderRadius: 10 }}
               placeholder='Tìm kiếm'
@@ -209,33 +184,43 @@ const CategoryPage = () => {
                 setInputValue(e)
               }}
             />
-          </div>
-          <div className='col-xl-4 d-flex justify-content-end'>
+          </Col>
+          <Col span={12} style={{ textAlign: 'right' }}>
             <button
               className=' btn btn-success btn-sm m-btn m-btn--icon'
-              onClick={() => handleAdd()}
+              onClick={() => {
+                setModalVisible(true)
+              }}
             >
               <i className='bi bi-plus-square'></i> Thêm
             </button>
-          </div>
-        </div>
+          </Col>
+        </Row>
         <Divider style={{ margin: '10px 0' }} />
-        <TableList
-          dataTable={dataTable}
-          columns={columns}
-          isPagination={true}
-          size={size}
-          count={count}
-          setOffset={setOffset}
-          setSize={setSize}
-          loading={loading}
-        />
+        <Row>
+          <TableList
+            dataTable={dataTable}
+            columns={columns}
+            isPagination={true}
+            size={size}
+            count={count}
+            setOffset={setOffset}
+            setSize={setSize}
+            loading={loading}
+          />
+        </Row>
       </div>
       <FormModal
+        modalVisible={modalVisible}
+        setModalVisible={setModalVisible}
+        modalId={modalId}
+        setModalId={setModalId}
+        typeModal={typeModal}
+        setTypeModal={setTypeModal}
         setUpdate={setUpdate}
       />
     </div>
   )
 }
 
-export default CategoryPage
+export default CustomPage

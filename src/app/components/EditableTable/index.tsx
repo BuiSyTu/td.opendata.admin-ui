@@ -1,11 +1,5 @@
-import './MetadataTable.scss'
-
 import { Button, Form, FormInstance, Input, Table } from 'antd'
 import React, { useContext, useEffect, useRef, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-
-import { RootState } from '../../../../../setup'
-import { setDataMetadata } from '../../../../../setup/redux/slices/dataset'
 
 const EditableContext = React.createContext<FormInstance<any> | null>(null)
 
@@ -97,23 +91,22 @@ const EditableCell: React.FC<EditableCellProps> = ({
   return <td {...restProps}>{childNode}</td>
 }
 
-const MetadataTable = () => {
-  const dispatch = useDispatch()
-  const columnMetadata = useSelector((state: RootState) => state.dataset.columnMetadata)
-  const dataMetadata = useSelector((state: RootState) => state.dataset.dataMetadata)
-  const disableTableMetadata = useSelector((state: RootState) => state.dataset.disableTableMetadata)
+const EditableTable = (props: any) => {
+  const {columns, dataSrc, disabled } = props
+
+  const [dataSource, setDataSource] = useState(dataSrc)
 
   const handleAdd = (newData: any) => {
-    dispatch(setDataMetadata([...dataMetadata, newData]))
+    setDataSource([...dataSource, newData])
   }
 
   const handleSave = (row: any) => {
-    const newData = [...dataMetadata]
+    const newData = [...dataSource]
     const index = newData.findIndex((item) => row.key === item.key)
     const item = newData[index]
     newData.splice(index, 1, { ...item, ...row })
 
-    dispatch(setDataMetadata(newData))
+    setDataSource(newData)
   }
 
   const components = {
@@ -123,7 +116,7 @@ const MetadataTable = () => {
     },
   }
 
-  const columns = columnMetadata.map((col: any) => {
+  const _columns = columns.map((col: any) => {
     if (!col.editable) {
       return col
     }
@@ -141,7 +134,7 @@ const MetadataTable = () => {
   })
 
   return (
-    <div className={`mt-4 ${disableTableMetadata ? 'd-none' : 'd-block'}`}>
+    <div className={`mt-4 ${disabled ? 'd-none' : 'd-block'}`}>
       <Button
         onClick={handleAdd}
         type="primary"
@@ -155,11 +148,11 @@ const MetadataTable = () => {
         components={components}
         rowClassName={() => 'editable-row'}
         bordered
-        dataSource={dataMetadata}
-        columns={columns}
+        dataSource={dataSource}
+        columns={_columns}
       />
     </div>
   )
 }
 
-export default MetadataTable
+export default EditableTable
