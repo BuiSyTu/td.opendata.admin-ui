@@ -1,4 +1,4 @@
-import DataType from '../models/DataType'
+import { DataType } from '../models'
 import axios from 'axios'
 
 const ver = '1'

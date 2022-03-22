@@ -19,24 +19,17 @@ import {
   message,
   notification,
 } from 'antd'
+import { Category, DataType, Organization, ProviderType } from '../../../../models'
 import { InboxOutlined, MinusCircleOutlined, PlusOutlined } from '@ant-design/icons'
-import { handleModal, setDataTypeCode, setDisableDataTab, setTabKey } from '../../../../../setup/redux/slices/dataset'
+import { categoryApi, dataTypeApi, datasetApi, organizationApi, providerTypeApi } from '../../../../apis'
+import { handleModal, setDataTypeCode, setDisableDataTab, setDisableTableMetadata, setDisableTablePreview, setTabKey } from '../../../../../setup/redux/slices/dataset'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 
-import Category from '../../../../models/Category'
-import DataType from '../../../../models/DataType'
-import Dataset from '../../../../models/Dataset'
+import { Dataset } from '../../../../models'
 import FunctionalButton from './FunctionalButton'
 import MetadataTable from './MetadataTable'
-import Organization from '../../../../models/Organization'
-import ProviderType from '../../../../models/ProviderType'
 import { RootState } from '../../../../../setup'
-import { categoryApi } from '../../../../apis/category'
-import { dataTypeApi } from '../../../../apis/datatype'
-import { datasetApi } from '../../../../apis/dataset'
-import { organizationApi } from '../../../../apis/organization'
-import { providerTypeApi } from '../../../../apis/providertype'
 import { toObject } from '../../../../../utils/common'
 
 const { TextArea } = Input
@@ -204,6 +197,8 @@ function ModalCategory(props: any) {
   const handleChangeDataType = (value: string, event: any) => {
     dispatch(setDataTypeCode(event.code.toLowerCase()))
     dispatch(setDisableDataTab(false))
+    dispatch(setDisableTableMetadata(true))
+    dispatch(setDisableTablePreview(true))
   }
 
   const postData = async (data: Dataset) => {

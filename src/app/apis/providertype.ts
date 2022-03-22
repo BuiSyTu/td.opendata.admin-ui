@@ -1,4 +1,4 @@
-import ProviderType from '../models/ProviderType'
+import { ProviderType } from '../models'
 import axios from 'axios'
 
 const ver = '1'

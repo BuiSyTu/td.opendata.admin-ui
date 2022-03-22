@@ -1,4 +1,4 @@
-import Organization from '../models/Organization'
+import { Organization } from '../models'
 import axios from 'axios'
 
 const ver = '1'

@@ -1,4 +1,4 @@
-import Tag from '../models/Tag'
+import { Tag } from '../models'
 import axios from 'axios'
 
 const ver = '1'

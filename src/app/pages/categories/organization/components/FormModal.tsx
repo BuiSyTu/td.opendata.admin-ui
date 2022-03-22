@@ -1,8 +1,8 @@
 import { Button, Form, Input, Modal, Spin, Typography, notification } from 'antd'
 import { useEffect, useState } from 'react'
 
-import Organization from '../../../../models/Organization'
-import { organizationApi } from '../../../../apis/organization'
+import { Organization } from '../../../../models'
+import { organizationApi } from '../../../../apis'
 
 const { TextArea } = Input
 const { Text } = Typography

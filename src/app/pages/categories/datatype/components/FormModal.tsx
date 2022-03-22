@@ -1,8 +1,8 @@
 import { Button, Form, Input, Modal, Spin, Typography, notification } from 'antd'
 import { useEffect, useState } from 'react'
 
-import DataType from '../../../../models/DataType'
-import { dataTypeApi } from '../../../../apis/datatype'
+import { DataType } from '../../../../models'
+import { dataTypeApi } from '../../../../apis'
 
 const { TextArea } = Input
 const { Text } = Typography

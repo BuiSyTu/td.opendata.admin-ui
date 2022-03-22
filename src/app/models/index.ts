@@ -1,1 +1,7 @@
+export * from './Category'
 export * from './Dataset'
+export * from './DataType'
+export * from './License'
+export * from './Organization'
+export * from './ProviderType'
+export * from './Tag'

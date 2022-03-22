@@ -1,4 +1,4 @@
-export default interface License {
+export interface License {
   id: string,
   name: string,
   description: string,

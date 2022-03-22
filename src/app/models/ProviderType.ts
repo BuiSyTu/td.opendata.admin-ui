@@ -1,4 +1,4 @@
-export default interface ProviderType {
+export interface ProviderType {
   id: string,
   name: string,
   description: string,

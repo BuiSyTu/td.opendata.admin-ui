@@ -1,10 +1,10 @@
-import Category from './Category';
-import DataType from './DataType';
-import License from './License';
-import Organization from './Organization';
-import ProviderType from './ProviderType';
+import { Category } from './Category';
+import { DataType } from './DataType';
+import { License } from './License';
+import { Organization } from './Organization';
+import { ProviderType } from './ProviderType';
 
-export default interface Dataset {
+export interface Dataset {
   id: string,
   name: string,
   title: string,

@@ -1,4 +1,4 @@
-import Dataset from '../models/Dataset'
+import { Dataset } from '../models'
 import axios from 'axios'
 
 const ver = '1'

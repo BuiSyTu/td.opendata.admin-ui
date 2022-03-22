@@ -1,8 +1,8 @@
 import { Button, Form, Input, Modal, Spin, Typography, notification } from 'antd'
 import { useEffect, useState } from 'react'
 
-import Category from '../../../../models/Category'
-import { categoryApi } from '../../../../apis/category'
+import { Category } from '../../../../models'
+import { categoryApi } from '../../../../apis'
 
 const { TextArea } = Input
 const { Text } = Typography

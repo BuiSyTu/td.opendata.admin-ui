@@ -1,4 +1,4 @@
-export default interface Tag {
+export interface Tag {
   id: string,
   name: string,
   tenant: string,

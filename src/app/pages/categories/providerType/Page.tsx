@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import FormModal from './components/FormModal'
 import { PageTitle } from '../../../../_metronic/layout/core'
 import TableList from '../../../components/TableList'
-import { providerTypeApi } from '../../../apis/providertype'
+import { providerTypeApi } from '../../../apis'
 
 const { Text } = Typography
 const { Search } = Input

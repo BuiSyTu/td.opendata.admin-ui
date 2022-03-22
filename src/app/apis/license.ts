@@ -1,4 +1,4 @@
-import License from '../models/License'
+import { License } from '../models'
 import axios from 'axios'
 
 const ver = '1'
