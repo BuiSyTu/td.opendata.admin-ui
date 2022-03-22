@@ -74,10 +74,10 @@ const FunctionalButton = (props: any) => {
 
     switch (dataTypeCode) {
       case 'webapi':
-        handleWebApi();
+        handleWebApi()
         break;
       case 'excel':
-        handleExcel();
+        handleExcel()
         break;
       default:
         break;

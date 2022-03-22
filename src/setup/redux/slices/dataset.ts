@@ -13,8 +13,6 @@ export interface DatasetState {
   disableTableMetadata: boolean,
   dataMetadata: any[],
   columnMetadata: any[],
-  isLoadingMetadataTable: boolean,
-  isLoadingPreviewTable: boolean,
 } 
 
 const initalState: DatasetState = {
@@ -30,8 +28,6 @@ const initalState: DatasetState = {
   disableTableMetadata: true,
   dataMetadata: [],
   columnMetadata: [],
-  isLoadingMetadataTable: false,
-  isLoadingPreviewTable: false,
 }
 
 export const datasetSlice:Slice = createSlice({
@@ -76,12 +72,6 @@ export const datasetSlice:Slice = createSlice({
     setColumnMetata(state, action) {
       state.columnMetadata = action.payload ?? []
     },
-    setIsLoadingMetadataTable(state, action) {
-      state.isLoadingMetadataTable = action.payload ?? false
-    },
-    setIsLoadingPreviewTable(state, action) {
-      state.isLoadingPreviewTable = action.payload ?? false
-    }
   }
 })
 
@@ -97,6 +87,6 @@ export const {
   setDataPreview,
   setDisableTableMetadata,
   setColumnMetata,
-  setDataMetadata
+  setDataMetadata,
 } = actions
 export default reducer

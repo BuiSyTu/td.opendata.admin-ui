@@ -12,7 +12,7 @@ export function PrivateRoutes() {
   const AccountPage = lazy(() => import('../modules/accounts/AccountPage'))
   const WidgetsPage = lazy(() => import('../modules/widgets/WidgetsPage'))
   const ChatPage = lazy(() => import('../modules/apps/chat/ChatPage'))
-  const CategoriesPage = lazy(() => import('../pages/categories/CategoriesPage'))
+  const CategoriesPage = lazy(() => import('../pages/categories'))
 
   return (
     <Suspense fallback={<FallbackView />}>

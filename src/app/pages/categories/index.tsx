@@ -3,13 +3,13 @@ import { Redirect, Route, Switch } from 'react-router-dom'
 import { lazy } from 'react'
 
 const CategoriesPage = () => {
-  const CategoryPage = lazy(() => import('./category/Page'))
-  const DataTypePage = lazy(() => import('./datatype/Page'))
-  const ProviderTypePage = lazy(() => import('./providerType/Page'))
-  const TagPage = lazy(() => import('./tag/Page'))
-  const LicensePage = lazy(() => import('./license/Page'))
-  const OrganizationPage = lazy(() => import('./organization/Page'))
-  const DatasetPage = lazy(() => import('./dataset/Page'))
+  const CategoryPage = lazy(() => import('./category'))
+  const DataTypePage = lazy(() => import('./datatype'))
+  const ProviderTypePage = lazy(() => import('./providerType'))
+  const TagPage = lazy(() => import('./tag'))
+  const LicensePage = lazy(() => import('./license'))
+  const OrganizationPage = lazy(() => import('./organization'))
+  const DatasetPage = lazy(() => import('./dataset'))
 
   return (
     <Switch>

@@ -448,7 +448,6 @@ function ModalCategory(props: any) {
                     <Row>
                       <Col span={3}>
                         <Form.Item label='Phương thức' name='method'>
-                          {/* <SelectMethodHttp /> */}
                           <Select placeholder='Http action'>
                             <Option key='GET' value='GET'>Get</Option>
                             <Option key='POST' value='POST'>Post</Option>
@@ -537,7 +536,7 @@ function ModalCategory(props: any) {
                 className={`mt-4 ${disableTablePreview ? 'd-none' : 'd-block'}`}
                 dataSource={dataPreview}
                 columns={columnPreview} />
-            </TabPane>
+            </TabPane>  
           </Tabs>
         </Form>
       </Spin>
