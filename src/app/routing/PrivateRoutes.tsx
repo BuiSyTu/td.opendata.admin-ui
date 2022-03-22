@@ -1,7 +1,8 @@
-import { Suspense, lazy } from 'react'
 import { Redirect, Route, Switch } from 'react-router-dom'
-import { FallbackView } from '../../_metronic/partials'
+import { Suspense, lazy } from 'react'
+
 import { DashboardWrapper } from '../pages/dashboard/DashboardWrapper'
+import { FallbackView } from '../../_metronic/partials'
 import { MenuTestPage } from '../pages/MenuTestPage'
 
 export function PrivateRoutes() {
@@ -13,7 +14,6 @@ export function PrivateRoutes() {
   const ChatPage = lazy(() => import('../modules/apps/chat/ChatPage'))
   const CategoriesPage = lazy(() => import('../pages/categories/CategoriesPage'))
 
-  const AministrationPage = lazy(() => import('../pages/administration/AdministrationPage'))
   return (
     <Suspense fallback={<FallbackView />}>
       <Switch>
@@ -24,7 +24,6 @@ export function PrivateRoutes() {
         <Route path='/crafted/pages/wizards' component={WizardsPage} />
         <Route path='/crafted/widgets' component={WidgetsPage} />
         <Route path='/crafted/account' component={AccountPage} />
-        <Route path='/administration' component={AministrationPage} />
         <Route path='/apps/chat' component={ChatPage} />
         <Route path='/menu-test' component={MenuTestPage} />
         <Redirect from='/auth' to='/dashboard' />
