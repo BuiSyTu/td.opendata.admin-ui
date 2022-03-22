@@ -19,13 +19,19 @@ import {
   message,
   notification,
 } from 'antd'
+import { DatasetState, handleModal, setDataTypeCode, setDisableDataTab, setTabKey } from '../../../../../setup/redux/slices/dataset'
 import { InboxOutlined, MinusCircleOutlined, PlusOutlined } from '@ant-design/icons'
-import { handleModal, setDataTypeCode, setDisableDataTab, setTabKey } from '../Slice'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 
+import Category from '../../../../models/Category'
+import DataType from '../../../../models/DataType'
+import Dataset from '../../../../models/Dataset'
 import FunctionalButton from './FunctionalButton'
 import MetadataTable from './MetadataTable'
+import Organization from '../../../../models/Organization'
+import ProviderType from '../../../../models/ProviderType'
+import { RootState } from '../../../../../setup'
 import { categoryApi } from '../../../../apis/category.js'
 import { dataTypeApi } from '../../../../apis/datatype'
 import { datasetApi } from '../../../../apis/dataset'
@@ -39,17 +45,17 @@ const { Option } = Select
 const { TabPane } = Tabs
 const { Dragger } = Upload
 
-const ModalCategory = (props) => {
+const ModalCategory = (props: any) => {
   const dispatch = useDispatch()
-  const tabKey = useSelector(state => state.dataset.tabKey)
-  const modalId = useSelector(state => state.dataset.modalId)
-  const typeModal = useSelector(state => state.dataset.typeModal)
-  const modalVisible = useSelector(state => state.dataset.modalVisible)
-  const disableDataTab = useSelector(state => state.dataset.disableDataTab)
-  const dataTypeCode = useSelector(state => state.dataset.dataTypeCode)
-  const dataPreview = useSelector(state => state.dataset.dataPreview)
-  const columnPreview = useSelector(state => state.dataset.columnPreview)
-  const disableTablePreview = useSelector(state => state.dataset.disableTablePreview)
+  const tabKey = useSelector((state: RootState) => state.dataset.tabKey)
+  const modalId = useSelector((state: RootState) => state.dataset.modalId)
+  const typeModal = useSelector((state: RootState) => state.dataset.typeModal)
+  const modalVisible = useSelector((state: RootState) => state.dataset.modalVisible)
+  const disableDataTab = useSelector((state: RootState) => state.dataset.disableDataTab)
+  const dataTypeCode = useSelector((state: RootState) => state.dataset.dataTypeCode)
+  const dataPreview = useSelector((state: RootState) => state.dataset.dataPreview)
+  const columnPreview = useSelector((state: RootState) => state.dataset.columnPreview)
+  const disableTablePreview = useSelector((state: RootState) => state.dataset.disableTablePreview)
 
   const { setUpdate } = props
   const [form] = Form.useForm()
@@ -57,10 +63,10 @@ const ModalCategory = (props) => {
   const [isLoading, setIsLoading] = useState(false)
   const [buttonLoading, setButtonLoading] = useState(false)
 
-  const [categories, setCategories] = useState([])
-  const [organizations, setOrganizations] = useState([])
-  const [providerTypes, setProviderTypes] = useState([])
-  const [dataTypes, setDataTypes] = useState([])
+  const [categories, setCategories] = useState<Category[]>([])
+  const [organizations, setOrganizations] = useState<Organization[]>([])
+  const [providerTypes, setProviderTypes] = useState<ProviderType[]>([])
+  const [dataTypes, setDataTypes] = useState<DataType[]>([])
   const [dataExcel, setDataExcel] = useState([])
 
   const layout = {
@@ -72,18 +78,17 @@ const ModalCategory = (props) => {
     name: 'file',
     multiple: false,
     action: 'https://192.168.2.169:5001/api/v1/attachmenthandles/excel',
-    method: 'POST',
-    onChange(info) {
+    onChange(info: any) {
       const { status } = info.file
       if (status !== 'uploading') {
         let reader = new FileReader()
 
-        reader.onload = (e) => {
+        reader.onload = (e: any) => {
           const data = e.target.result
           const workbook = XLSX.read(data, {type: 'binary'})
 
           const firstSheetName = workbook.SheetNames[0]
-          var XL_row_object = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[firstSheetName])
+          var XL_row_object = XLSX.utils.sheet_to_json(workbook.Sheets[firstSheetName])
           var json_object = JSON.stringify(XL_row_object)
           setDataExcel(JSON.parse(json_object))
         }
@@ -96,7 +101,7 @@ const ModalCategory = (props) => {
         message.error(`${info.file.name} file upload failed.`)
       }
     },
-    onDrop(e) {
+    onDrop(e: any) {
       console.log('Dropped files', e.dataTransfer.files)
     },
   }
@@ -196,15 +201,14 @@ const ModalCategory = (props) => {
     }
   }
 
-  const handleChangeDataType = (value, event) => {
+  const handleChangeDataType = (value: string, event: any) => {
     dispatch(setDataTypeCode(event.code.toLowerCase()))
     dispatch(setDisableDataTab(false))
   }
 
-  const postData = async (data) => {
+  const postData = async (data: Dataset) => {
     try {
       setButtonLoading(true)
-      console.log(data)
       var res = await datasetApi.add(data)
       if (res) {
         notification.success({
@@ -225,7 +229,7 @@ const ModalCategory = (props) => {
     handleCancel()
   }
 
-  const putData = async (data) => {
+  const putData = async (data: Dataset) => {
     try {
       setButtonLoading(true)
       var res = await datasetApi.update(modalId, data)
@@ -248,7 +252,7 @@ const ModalCategory = (props) => {
     handleCancel()
   }
 
-  const handleTabClick = (key, event) => {
+  const handleTabClick = (key:string) => {
     dispatch(setTabKey(key))
   }
 
@@ -319,13 +323,12 @@ const ModalCategory = (props) => {
             ],
             name: 'abc',
             dataKey: 'data',
-            dataTypeId: '10090000-61d2-00d8-0224-08d9d1b30b4b',
             visibility: false,
           }}
         >
           <Tabs
             activeKey={tabKey}
-            onTabClick={(key, event) => handleTabClick(key, event)}
+            onTabClick={(key) => handleTabClick(key)}
           >
             <TabPane tab='Thông tin' key='information'>
               <Row>
@@ -374,13 +377,12 @@ const ModalCategory = (props) => {
                       showSearch
                       placeholder="Chọn lĩnh vực"
                     >
-                      {categories.map(category => {
-                        return (
+                      {categories.map(category =>  (
                           <Option key={category.id} value={category.id}>
                             {category.name}
                           </Option>
                         )
-                      })}
+                      )}
                     </Select>
                   </Form.Item>
                 </Col>
@@ -390,13 +392,12 @@ const ModalCategory = (props) => {
                       showSearch
                       placeholder="Chọn tổ chức"
                     >
-                      {organizations.map(organization => {
-                        return (
+                      {organizations.map(organization => (
                           <Option key={organization.id} value={organization.id}>
                             {organization.name}
                           </Option>
                         )
-                      })}
+                      )}
                     </Select>
                   </Form.Item>
                 </Col>
@@ -409,13 +410,12 @@ const ModalCategory = (props) => {
                       showSearch
                       placeholder="Chọn hình thức cung cấp"
                     >
-                      {providerTypes.map(providerType => {
-                        return (
+                      {providerTypes.map(providerType => (
                           <Option key={providerType.id} value={providerType.id}>
                             {providerType.name}
                           </Option>
                         )
-                      })}
+                      )}
                     </Select>
                   </Form.Item>
                 </Col>
@@ -426,13 +426,12 @@ const ModalCategory = (props) => {
                       placeholder="Chọn loại dữ liệu"
                       onChange={(value, event) => handleChangeDataType(value, event)}
                     >
-                      {dataTypes.map(dataType => {
-                        return (
+                      {dataTypes.map(dataType => (
                           <Option key={dataType.id} value={dataType.id} code={dataType.code}>
                             {dataType.name}
                           </Option>
                         )
-                      })}
+                      )}
                     </Select>
                   </Form.Item>
                 </Col>

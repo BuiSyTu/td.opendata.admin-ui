@@ -1,6 +1,6 @@
 import { Button, notification } from 'antd'
 import { ClockCircleOutlined, DatabaseOutlined } from '@ant-design/icons'
-import { setColumnMetata, setColumnPreview, setDataMetadata, setDataPreview, setDisableTableMetadata, setDisableTablePreview } from '../Slice'
+import { setColumnMetata, setColumnPreview, setDataMetadata, setDataPreview, setDisableTableMetadata, setDisableTablePreview } from '../../../../../setup/redux/slices/dataset'
 import { useDispatch, useSelector } from 'react-redux'
 
 import ForwardApi from '../../../../apis/ForwardApi'
@@ -109,20 +109,18 @@ const FunctionalButton = (props) => {
       const dataTemp = dataSource[0]
       const metadata = Object.keys(dataTemp).map(key => ({
         Data: key,
-        DataType: typeof dataTemp[key],
+        DataType: typeof dataTemp[key] === 'object' ? 'string' : typeof dataTemp[key],
         Title: key,
         Description: key,
-        IsDisplay: true,
       }))
       dispatch(setDataMetadata(metadata))
       console.log({metadata})
 
       const columnMetadata = [
         {key: 'Data', title: 'Data', dataIndex: 'Data'},
-        {key: 'DataType', title: 'DataType', dataIndex: 'DataType'},
-        {key: 'Title', title: 'Title', dataIndex: 'Title'},
-        {key: 'Description', title: 'Description', dataIndex: 'Description'},
-        {key: 'IsDisplay', title: 'IsDisplay', dataIndex: 'IsDisplay'},
+        {key: 'DataType', title: 'DataType', dataIndex: 'DataType', editable: true},
+        {key: 'Title', title: 'Title', dataIndex: 'Title', editable: true},
+        {key: 'Description', title: 'Description', dataIndex: 'Description', editable: true},
       ]
       dispatch(setColumnMetata(columnMetadata))
       console.log({columnMetadata})

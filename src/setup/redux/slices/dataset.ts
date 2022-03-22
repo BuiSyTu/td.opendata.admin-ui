@@ -1,6 +1,23 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { Slice, createSlice } from '@reduxjs/toolkit'
 
-const initalState = {
+export interface DatasetState {
+  tabKey: string,
+  modalId: string,
+  typeModal: string,
+  modalVisible: boolean,
+  disableDataTab: boolean,
+  dataTypeCode: string,
+  disableTablePreview: boolean,
+  dataPreview: any[],
+  columnPreview: any[],
+  disableTableMetadata: boolean,
+  dataMetadata: any[],
+  columnMetadata: any[],
+  isLoadingMetadataTable: boolean,
+  isLoadingPreviewTable: boolean,
+} 
+
+const initalState: DatasetState = {
   tabKey: 'information',
   modalId: '',
   typeModal: '',
@@ -13,9 +30,11 @@ const initalState = {
   disableTableMetadata: true,
   dataMetadata: [],
   columnMetadata: [],
+  isLoadingMetadataTable: false,
+  isLoadingPreviewTable: false,
 }
 
-export const datasetSlice = createSlice({
+export const datasetSlice:Slice = createSlice({
   name: 'dataset',
   initialState: initalState,
   reducers: {
@@ -56,6 +75,12 @@ export const datasetSlice = createSlice({
     },
     setColumnMetata(state, action) {
       state.columnMetadata = action.payload ?? []
+    },
+    setIsLoadingMetadataTable(state, action) {
+      state.isLoadingMetadataTable = action.payload ?? false
+    },
+    setIsLoadingPreviewTable(state, action) {
+      state.isLoadingPreviewTable = action.payload ?? false
     }
   }
 })

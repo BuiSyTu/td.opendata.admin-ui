@@ -6,7 +6,7 @@ import FormModal from './components/FormModal'
 import { PageTitle } from '../../../../_metronic/layout/core'
 import TableList from '../../../components/TableList'
 import { datasetApi } from '../../../apis/dataset'
-import { handleModal } from './Slice'
+import { handleModal } from '../../../../setup/redux/slices/dataset'
 import { useDispatch } from 'react-redux'
 
 const { Text } = Typography
