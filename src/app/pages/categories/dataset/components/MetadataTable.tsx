@@ -103,16 +103,21 @@ const MetadataTable = () => {
   const dataMetadata = useSelector((state: RootState) => state.dataset.dataMetadata)
   const disableTableMetadata = useSelector((state: RootState) => state.dataset.disableTableMetadata)
 
-  const handleAdd = (newData: any) => {
+  const handleAdd = () => {
+    const newData = {
+      Data: 'NewData',
+      DataType: 'string',
+      Title: 'NewData',
+      Description: 'NewData',
+    }
     dispatch(setDataMetadata([...dataMetadata, newData]))
   }
 
   const handleSave = (row: any) => {
     const newData = [...dataMetadata]
-    const index = newData.findIndex((item) => row.key === item.key)
+    const index = newData.findIndex((item) => row.Data === item.Data)
     const item = newData[index]
     newData.splice(index, 1, { ...item, ...row })
-
     dispatch(setDataMetadata(newData))
   }
 

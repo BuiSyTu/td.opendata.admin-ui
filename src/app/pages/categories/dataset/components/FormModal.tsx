@@ -19,10 +19,10 @@ import {
   message,
   notification,
 } from 'antd'
-import { Category, DataType, DatasetAPIConfig, DatasetFileConfig, Organization, ProviderType } from '../../../../models'
+import { Category, DataType, DatasetAPIConfig, DatasetFileConfig, License, Organization, ProviderType } from '../../../../models'
 import { InboxOutlined, MinusCircleOutlined, PlusOutlined } from '@ant-design/icons'
-import { categoryApi, dataTypeApi, datasetApi, organizationApi, providerTypeApi } from '../../../../apis'
-import { handleModal, setDataTypeCode, setDisableDataTab, setDisableTableMetadata, setDisableTablePreview, setTabKey } from '../../../../../setup/redux/slices/dataset'
+import { categoryApi, dataTypeApi, datasetApi, licenseApi, organizationApi, providerTypeApi } from '../../../../apis'
+import { handleModal, setColumnMetata, setDataMetadata, setDataTypeCode, setDisableDataTab, setDisableTableMetadata, setDisableTablePreview, setTabKey } from '../../../../../setup/redux/slices/dataset'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 
@@ -61,6 +61,7 @@ function ModalCategory(props: any) {
   const [organizations, setOrganizations] = useState<Organization[]>([])
   const [providerTypes, setProviderTypes] = useState<ProviderType[]>([])
   const [dataTypes, setDataTypes] = useState<DataType[]>([])
+  const [licenses, setLicenses] = useState<License[]>([])
   const [dataExcel, setDataExcel] = useState([])
 
   const layout = {
@@ -134,10 +135,18 @@ function ModalCategory(props: any) {
       }
     }
 
+    const fetchLicenses = async () => {
+      const res = await licenseApi.getAll()
+      if (res?.data) {
+        setLicenses(res?.data)
+      }
+    }
+
     fetchCategories()
     fetchOrganizations()
     fetchProviderTypes()
     fetchDataTypes()
+    fetchLicenses()
     return () => { }
   }, [])
 
@@ -148,6 +157,18 @@ function ModalCategory(props: any) {
         var res = await datasetApi.getById(modalId)
         if (res?.data) {
           form.setFieldsValue(res?.data)
+          
+          dispatch(setDataTypeCode(res?.data?.dataType?.code?.toLowerCase()))
+          dispatch(setDisableTableMetadata(false))
+          dispatch(setDataMetadata(JSON.parse(res?.data?.metadata)))
+
+          const columnMetadata = [
+            {key: 'Data', title: 'Data', dataIndex: 'Data'},
+            {key: 'DataType', title: 'DataType', dataIndex: 'DataType', editable: true},
+            {key: 'Title', title: 'Title', dataIndex: 'Title', editable: true},
+            {key: 'Description', title: 'Description', dataIndex: 'Description', editable: true},
+          ]
+          dispatch(setColumnMetata(columnMetadata))
         }
         setIsLoading(false)
       } catch (error) {
@@ -230,26 +251,26 @@ function ModalCategory(props: any) {
 
     console.log(data)
 
-    // try {
-    //   setButtonLoading(true)
-    //   var res = await datasetApi.add(data)
-    //   if (res) {
-    //     notification.success({
-    //       message: 'Thêm mới thành công!',
-    //       duration: 1,
-    //     })
-    //   } else {
-    //     notification.error({
-    //       message: `Lỗi ${res}`,
-    //       description: `${res}`,
-    //     })
-    //   }
-    //   setButtonLoading(false)
-    // } catch (error) {
-    //   setButtonLoading(false)
-    // }
-    // setUpdate(true)
-    // handleCancel()
+    try {
+      setButtonLoading(true)
+      var res = await datasetApi.add(data)
+      if (res) {
+        notification.success({
+          message: 'Thêm mới thành công!',
+          duration: 1,
+        })
+      } else {
+        notification.error({
+          message: `Lỗi ${res}`,
+          description: `${res}`,
+        })
+      }
+      setButtonLoading(false)
+    } catch (error) {
+      setButtonLoading(false)
+    }
+    setUpdate(true)
+    handleCancel()
   }
 
   const putData = async (data: Dataset) => {
@@ -443,7 +464,11 @@ function ModalCategory(props: any) {
                   </Form.Item>
                 </Col>
                 <Col span={12}>
-                  <Form.Item label='Loại dữ liệu' name='dataTypeId'>
+                  <Form.Item
+                    label='Loại dữ liệu'
+                    name='dataTypeId'
+                    rules={[{ required: true, message: 'Không được để trống!' }]}
+                  >
                     <Select
                       showSearch
                       placeholder="Chọn loại dữ liệu"
@@ -452,6 +477,24 @@ function ModalCategory(props: any) {
                       {dataTypes.map(dataType => (
                           <Option key={dataType.id} value={dataType.id} code={dataType.code}>
                             {dataType.name}
+                          </Option>
+                        )
+                      )}
+                    </Select>
+                  </Form.Item>
+                </Col>
+              </Row>
+
+              <Row>
+                <Col span={12}>
+                  <Form.Item label='Giấy phép' name='licenseId'>
+                    <Select
+                      showSearch
+                      placeholder="Chọn giấy phép"
+                    >
+                      {licenses.map(license => (
+                          <Option key={license.id} value={license.id}>
+                            {license.name}
                           </Option>
                         )
                       )}

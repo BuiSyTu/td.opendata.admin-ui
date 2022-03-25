@@ -12,6 +12,7 @@ const forwardApi = new ForwardApi()
 const FunctionalButton = (props: any) => {
   const dispatch = useDispatch()
   const dataTypeCode = useSelector((state: RootState) => state.dataset.dataTypeCode)
+  const dataMetadata = useSelector((state: RootState) => state.dataset.dataMetadata)
 
   const { form, dataExcel } = props
 
@@ -41,14 +42,24 @@ const FunctionalButton = (props: any) => {
       if (dataSource.length > 5) dataSource = dataSource.slice(0, 5)
       dispatch(setDataPreview(dataSource))
 
-      const dataTemp = dataSource[0]
-      const columns = Object.keys(dataTemp).map(key => ({
-        key,
-        title: key,
-        dataIndex: key,
-      }))
+      if (Array.isArray(dataMetadata) && dataMetadata.length > 0) {
+        const columns = dataMetadata.map((metadata: any) => ({
+          key: metadata.Data,
+          title: metadata.Title,
+          dataIndex: metadata.Data,
+        }))
 
-      dispatch(setColumnPreview(columns))
+        dispatch(setColumnPreview(columns))
+      } else {
+        const dataTemp = dataSource[0]
+        const columns = Object.keys(dataTemp).map(key => ({
+          key,
+          title: key,
+          dataIndex: key,
+        }))
+  
+        dispatch(setColumnPreview(columns))
+      }
     }
 
     const handleWebApi = async () => {
@@ -115,16 +126,14 @@ const FunctionalButton = (props: any) => {
         Description: key,
       }))
       dispatch(setDataMetadata(metadata))
-      console.log({metadata})
 
       const columnMetadata = [
-        {key: 'Data', title: 'Data', dataIndex: 'Data'},
+        {key: 'Data', title: 'Data', dataIndex: 'Data', editable: true},
         {key: 'DataType', title: 'DataType', dataIndex: 'DataType', editable: true},
         {key: 'Title', title: 'Title', dataIndex: 'Title', editable: true},
         {key: 'Description', title: 'Description', dataIndex: 'Description', editable: true},
       ]
       dispatch(setColumnMetata(columnMetadata))
-      console.log({columnMetadata})
     }
 
     const handleWebApi = async () => {
