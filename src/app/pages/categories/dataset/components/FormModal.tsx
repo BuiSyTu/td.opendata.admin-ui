@@ -19,7 +19,7 @@ import {
   message,
   notification,
 } from 'antd'
-import { Category, DataType, Organization, ProviderType } from '../../../../models'
+import { Category, DataType, DatasetAPIConfig, DatasetFileConfig, Organization, ProviderType } from '../../../../models'
 import { InboxOutlined, MinusCircleOutlined, PlusOutlined } from '@ant-design/icons'
 import { categoryApi, dataTypeApi, datasetApi, organizationApi, providerTypeApi } from '../../../../apis'
 import { handleModal, setDataTypeCode, setDisableDataTab, setDisableTableMetadata, setDisableTablePreview, setTabKey } from '../../../../../setup/redux/slices/dataset'
@@ -49,6 +49,7 @@ function ModalCategory(props: any) {
   const dataPreview = useSelector((state: RootState) => state.dataset.dataPreview)
   const columnPreview = useSelector((state: RootState) => state.dataset.columnPreview)
   const disableTablePreview = useSelector((state: RootState) => state.dataset.disableTablePreview)
+  const dataMetadata = useSelector((state: RootState) => state.dataset.dataMetadata)
 
   const { setUpdate } = props
   const [form] = Form.useForm()
@@ -73,6 +74,8 @@ function ModalCategory(props: any) {
     action: 'https://192.168.2.169:5001/api/v1/attachmenthandles/excel',
     onChange(info: any) {
       const { status } = info.file
+
+      // Xử lý preview và metadata ở chỗ này
       if (status !== 'uploading') {
         let reader = new FileReader()
 
@@ -88,7 +91,10 @@ function ModalCategory(props: any) {
 
         reader.readAsBinaryString(info.file.originFileObj)
       }
+
+      // Xử lý lưu file ở chỗ này
       if (status === 'done') {
+        console.log({ info })
         message.success(`${info.file.name} file uploaded successfully.`)
       } else if (status === 'error') {
         message.error(`${info.file.name} file upload failed.`)
@@ -176,16 +182,29 @@ function ModalCategory(props: any) {
 
       const headerObject = Array.isArray(formData.headers) ? toObject(formData.headers, 'key', 'value') : {}
 
+      const datasetFileConfig: DatasetFileConfig = {
+        fileType: '',
+        fileName: '',
+        fileData: '',
+        tableName: '',
+        tenant: '',
+        datasetId: ''
+      }
+
+      const datasetAPIConfig: DatasetAPIConfig = {
+        method: formData?.method ?? '',
+        url: formData?.url ?? '',
+        headers: Object.keys(headerObject).length > 0 ? headerObject.toString() : '',
+        dataKey: formData?.dataKey ?? '',
+        tableName: formData?.tableName ?? '',
+        data: formData?.data ?? ''
+      }
+
       const bodyData = {
         ...formData,
-        datasetAPIConfig: {
-          method: formData?.method ?? '',
-          url: formData?.url ?? '',
-          headers: Object.keys(headerObject).length > 0 ? headerObject.toString() : '',
-          dataKey: formData?.dataKey ?? '',
-          tableName: formData?.tableName ?? '',
-          data: formData?.data ?? '',
-        }
+        datasetAPIConfig,
+        datasetFileConfig,
+        metadata: dataMetadata.toString(),
       }
 
       typeModal === 'edit' ? putData(bodyData) : postData(bodyData)
@@ -202,26 +221,35 @@ function ModalCategory(props: any) {
   }
 
   const postData = async (data: Dataset) => {
-    try {
-      setButtonLoading(true)
-      var res = await datasetApi.add(data)
-      if (res) {
-        notification.success({
-          message: 'Thêm mới thành công!',
-          duration: 1,
-        })
-      } else {
-        notification.error({
-          message: `Lỗi ${res}`,
-          description: `${res}`,
-        })
-      }
-      setButtonLoading(false)
-    } catch (error) {
-      setButtonLoading(false)
+    if (!data.metadata) {
+      notification.error({
+        message: 'Bạn chưa tạo metadata',
+        description: 'Vui lòng thêm metadata trước khi thêm'
+      })
     }
-    setUpdate(true)
-    handleCancel()
+
+    console.log(data)
+
+    // try {
+    //   setButtonLoading(true)
+    //   var res = await datasetApi.add(data)
+    //   if (res) {
+    //     notification.success({
+    //       message: 'Thêm mới thành công!',
+    //       duration: 1,
+    //     })
+    //   } else {
+    //     notification.error({
+    //       message: `Lỗi ${res}`,
+    //       description: `${res}`,
+    //     })
+    //   }
+    //   setButtonLoading(false)
+    // } catch (error) {
+    //   setButtonLoading(false)
+    // }
+    // setUpdate(true)
+    // handleCancel()
   }
 
   const putData = async (data: Dataset) => {
