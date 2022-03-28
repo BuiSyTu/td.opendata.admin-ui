@@ -1,4 +1,5 @@
 import { Divider, Input, Popconfirm, Tag, Typography, notification } from 'antd'
+import { TypeModal, setDisableDataTab, setModalId, setModalVisible, setTypeModal } from '../../../../setup/redux/slices/dataset'
 import {danger, secondary, success} from '../../../constants/color'
 import { useEffect, useState } from 'react'
 
@@ -6,7 +7,6 @@ import FormModal from './components/FormModal'
 import { PageTitle } from '../../../../_metronic/layout/core'
 import TableList from '../../../components/TableList'
 import { datasetApi } from '../../../apis'
-import { handleModal } from '../../../../setup/redux/slices/dataset'
 import { useDispatch } from 'react-redux'
 
 const { Text } = Typography
@@ -42,19 +42,19 @@ const CategoryPage = () => {
       title: 'Tên',
       dataIndex: 'name',
       key: 'name',
-      width: '30%',
+      width: '25%',
     },
     {
       title: 'Mã',
       dataIndex: 'code',
       key: 'code',
-      width: '25%',
+      width: '20%',
     },
     {
       title: 'Trạng thái dữ liệu',
       dataIndex: 'state',
       key: 'state',
-      width: '25%',
+      width: '20%',
       render: (text: any, record: any, index: any) => {
         let color = secondary
         let textDisplay = 'Không xác định'
@@ -123,9 +123,35 @@ const CategoryPage = () => {
               data-toggle='m-tooltip'
               title='Xóa'
             >
-              <i className='fas fa-trash-alt' style={{ marginLeft: -7 }}></i>
+              <i className='la la-trash' style={{ marginLeft: -7 }}></i>
             </button>
           </Popconfirm>
+        </div>
+      ),
+    },
+    {
+      title: 'Xét duyệt',
+      width: '15%',
+      dataIndex: '',
+      key: '',
+      align: 'center',
+      render: (text: any, record: any) => (
+        <div>
+          <button
+            className='btn btn-light-success m-btn m-btn--icon btn-sm m-btn--icon-only'
+            data-toggle='m-tooltip'
+            title='Duyệt'
+          >
+            <i className='la la-check' style={{ marginLeft: -7 }}></i>
+          </button>
+          <button
+            style={{ marginLeft: 10 }}
+            className='btn btn-light-danger m-btn m-btn--icon btn-sm m-btn--icon-only'
+            data-toggle='m-tooltip'
+            title='Từ chối'
+          >
+            <i className='la la-times' style={{ marginLeft: -7 }}></i>
+          </button>
         </div>
       ),
     },
@@ -157,27 +183,22 @@ const CategoryPage = () => {
   }, [offset, size, inputValue])
 
   const handleEdit = (id: string) => {
-    dispatch(handleModal({
-      modalId: id,
-      typeModal: 'edit',
-      disableDataTab: false,
-      modalVisible: true,
-    }))
+    dispatch(setModalId(id))
+    dispatch(setTypeModal(TypeModal.edit))
+    dispatch(setDisableDataTab(false))
+    dispatch(setModalVisible(true))
   }
 
   const handleView = (id: string) => {
-    dispatch(handleModal({
-      modalId: id,
-      typeModal: 'view',
-      disableDataTab: false,
-      modalVisible: true,
-    }))
+    dispatch(setModalId(id))
+    dispatch(setTypeModal(TypeModal.view))
+    dispatch(setDisableDataTab(false))
+    dispatch(setModalVisible(true))
   }
 
   const handleAdd = () => {
-    dispatch(handleModal({
-      modalVisible: true,
-    }))
+    dispatch(setTypeModal(TypeModal.add))
+    dispatch(setModalVisible(true))
   }
 
   const handleDelete = async (id: string) => {
@@ -188,6 +209,8 @@ const CategoryPage = () => {
         duration: 1,
         placement: 'bottomRight',
       })
+
+      setUpdate(true)
     } else {
       notification.error({
         message: `Thất bại!`,

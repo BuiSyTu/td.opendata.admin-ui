@@ -1,27 +1,65 @@
 import { Slice, createSlice } from '@reduxjs/toolkit'
 
 export interface DatasetState {
-  tabKey: string,
+  tabKey: TabKey,
   modalId: string,
-  typeModal: string,
+  typeModal: TypeModal,
   modalVisible: boolean,
   disableDataTab: boolean,
-  dataTypeCode: string,
+  dataTypeCode: DataTypeCode,
   disableTablePreview: boolean,
   dataPreview: any[],
   columnPreview: any[],
   disableTableMetadata: boolean,
   dataMetadata: any[],
   columnMetadata: any[],
-} 
+}
+
+export enum TypeModal {
+  view = 'view',
+  edit = 'edit',
+  add = 'add',
+  none = '',
+}
+
+export enum TabKey {
+  information = 'information',
+  data = 'data',
+}
+
+export enum DataTypeCode {
+  excel = 'excel',
+  webapi = 'webapi',
+  none = '',
+}
+
+export enum State {
+  pending = 0,
+  approved = 1,
+  rejected = 2,
+}
+
+export class ColumnMetadata {
+  key: string
+  title: string
+  dataIndex: string
+  editable: boolean
+
+  constructor(key: string, title: string, dataIndex: string, editable: boolean) {
+    this.key = key
+    this.title = title
+    this.dataIndex = dataIndex
+    this.editable = editable
+  }
+}
 
 const initalState: DatasetState = {
-  tabKey: 'information',
+  tabKey: TabKey.information,
   modalId: '',
-  typeModal: '',
+  typeModal: TypeModal.none,
   modalVisible: false,
   disableDataTab: true,
-  dataTypeCode: '',
+  dataTypeCode: DataTypeCode.none,
   disableTablePreview: true,
   dataPreview: [],
   columnPreview: [],
@@ -35,7 +73,13 @@ export const datasetSlice:Slice = createSlice({
   initialState: initalState,
   reducers: {
     setTabKey(state, action) {
-      state.tabKey = action.payload ?? 'information'
+      state.tabKey = action.payload ?? TabKey.information
+    },
+    setModalId(state, action) {
+      state.modalId = action.payload ?? ''
+    },
+    setTypeModal(state, action) {
+      state.typeModal = action.payload ?? TypeModal.none
     },
     setModalVisible(state, action) {
       state.modalVisible = action.payload ?? false
@@ -44,15 +88,7 @@ export const datasetSlice:Slice = createSlice({
       state.disableDataTab = action.payload ?? true
     },
     setDataTypeCode(state, action) {
-      state.dataTypeCode = action.payload ?? ''
-    },
-    handleModal(state, action) {
-      const { modalId, typeModal, modalVisible, disableDataTab, tabKey } = action.payload
-      state.modalId = modalId ?? ''
-      state.typeModal = typeModal ?? ''
-      state.modalVisible = modalVisible ?? false
-      state.disableDataTab = disableDataTab ?? true
-      state.tabKey = tabKey ?? 'information'
+      state.dataTypeCode = action.payload ?? DataTypeCode.none
     },
     setDisableTablePreview(state, action) {
       state.disableTablePreview = action.payload ?? true
@@ -78,10 +114,11 @@ export const datasetSlice:Slice = createSlice({
 const { actions, reducer } = datasetSlice
 export const {
   setTabKey,
+  setModalId,
+  setTypeModal,
   setModalVisible,
   setDisableDataTab,
   setDataTypeCode,
-  handleModal,
   setDisableTablePreview,
   setColumnPreview,
   setDataPreview,

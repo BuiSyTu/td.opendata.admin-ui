@@ -20,9 +20,9 @@ import {
   notification,
 } from 'antd'
 import { Category, DataType, DatasetAPIConfig, DatasetFileConfig, License, Organization, ProviderType } from '../../../../models'
+import { DataTypeCode, TabKey, TypeModal, setColumnMetata, setColumnPreview, setDataMetadata, setDataPreview, setDataTypeCode, setDisableDataTab, setDisableTableMetadata, setDisableTablePreview, setModalId, setModalVisible, setTabKey, setTypeModal } from '../../../../../setup/redux/slices/dataset'
 import { InboxOutlined, MinusCircleOutlined, PlusOutlined } from '@ant-design/icons'
 import { categoryApi, dataTypeApi, datasetApi, licenseApi, organizationApi, providerTypeApi } from '../../../../apis'
-import { handleModal, setColumnMetata, setDataMetadata, setDataTypeCode, setDisableDataTab, setDisableTableMetadata, setDisableTablePreview, setTabKey } from '../../../../../setup/redux/slices/dataset'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 
@@ -159,16 +159,7 @@ function ModalCategory(props: any) {
           form.setFieldsValue(res?.data)
           
           dispatch(setDataTypeCode(res?.data?.dataType?.code?.toLowerCase()))
-          dispatch(setDisableTableMetadata(false))
           dispatch(setDataMetadata(JSON.parse(res?.data?.metadata)))
-
-          const columnMetadata = [
-            {key: 'Data', title: 'Data', dataIndex: 'Data'},
-            {key: 'DataType', title: 'DataType', dataIndex: 'DataType', editable: true},
-            {key: 'Title', title: 'Title', dataIndex: 'Title', editable: true},
-            {key: 'Description', title: 'Description', dataIndex: 'Description', editable: true},
-          ]
-          dispatch(setColumnMetata(columnMetadata))
         }
         setIsLoading(false)
       } catch (error) {
@@ -176,7 +167,7 @@ function ModalCategory(props: any) {
       }
     }
 
-    setDisable(typeModal === 'view' ? true : false)
+    setDisable(typeModal === TypeModal.view ? true : false)
 
     if (modalId !== '') {
       fetchData()
@@ -187,13 +178,17 @@ function ModalCategory(props: any) {
 
   const handleCancel = () => {
     form.resetFields()
-    dispatch(handleModal({
-      modalId: '',
-      typeModal: '',
-      modalVisible: false,
-      disableDataTab: true,
-      tabKey: 'information'
-    }))
+    dispatch(setModalId(''))
+    dispatch(setTypeModal(TypeModal.none))
+    dispatch(setModalVisible(false))
+    dispatch(setDisableDataTab(true))
+    dispatch(setTabKey(TabKey.information))
+    dispatch(setColumnMetata([]))
+    dispatch(setDataMetadata([]))
+    dispatch(setDisableTableMetadata(true))
+    dispatch(setColumnPreview([]))
+    dispatch(setDataPreview([]))
+    dispatch(setDisableTablePreview(true))
   }
 
   const handleOk = async () => {
@@ -225,10 +220,10 @@ function ModalCategory(props: any) {
         ...formData,
         datasetAPIConfig,
         datasetFileConfig,
-        metadata: dataMetadata.toString(),
+        metadata: JSON.stringify(dataMetadata),
       }
 
-      typeModal === 'edit' ? putData(bodyData) : postData(bodyData)
+      typeModal === TypeModal.edit ? putData(bodyData) : postData(bodyData)
     } catch (errorInfo) {
       console.log('Failed:', errorInfo)
     }
@@ -245,11 +240,11 @@ function ModalCategory(props: any) {
     if (!data.metadata) {
       notification.error({
         message: 'Bạn chưa tạo metadata',
-        description: 'Vui lòng thêm metadata trước khi thêm'
+        description: 'Vui lòng tạo metadata trước khi thêm'
       })
-    }
 
-    console.log(data)
+      return;
+    }
 
     try {
       setButtonLoading(true)
@@ -261,7 +256,7 @@ function ModalCategory(props: any) {
         })
       } else {
         notification.error({
-          message: `Lỗi ${res}`,
+          message: `Lỗi khi thêm`,
           description: `${res}`,
         })
       }
@@ -281,11 +276,6 @@ function ModalCategory(props: any) {
         notification.success({
           message: 'Cập nhập thành công!',
           duration: 1,
-        })
-      } else {
-        notification.error({
-          message: 'Thất bại!',
-          description: 'Xảy ra lỗi trong quá trình thực hiện!',
         })
       }
       setButtonLoading(false)
@@ -309,7 +299,7 @@ function ModalCategory(props: any) {
       onCancel={handleCancel}
       closeIcon={<i className='las la-times' style={{ color: '#fff', fontSize: 20 }}></i>}
       footer={[
-        typeModal === 'view' ? (
+        typeModal === TypeModal.view ? (
           <></>
         ) : (
           <Button
@@ -349,7 +339,7 @@ function ModalCategory(props: any) {
         >
           <Text style={{ color: '#757575', paddingLeft: 5 }}>
             {' '}
-            {typeModal === 'view' ? 'Đóng' : 'Hủy'}
+            {typeModal === TypeModal.view ? 'Đóng' : 'Hủy'}
           </Text>
         </Button>,
       ]}
@@ -513,7 +503,7 @@ function ModalCategory(props: any) {
             </TabPane>
 
             <TabPane tab='Dữ liệu' disabled={disableDataTab} key='data'>
-              {dataTypeCode === 'webapi'
+              {dataTypeCode === DataTypeCode.webapi
                 ? (
                   <>
                     <Row>

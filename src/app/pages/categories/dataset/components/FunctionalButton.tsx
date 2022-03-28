@@ -1,6 +1,6 @@
 import { Button, notification } from 'antd'
 import { ClockCircleOutlined, DatabaseOutlined } from '@ant-design/icons'
-import { setColumnMetata, setColumnPreview, setDataMetadata, setDataPreview, setDisableTableMetadata, setDisableTablePreview } from '../../../../../setup/redux/slices/dataset'
+import { ColumnMetadata, DataTypeCode, setColumnMetata, setColumnPreview, setDataMetadata, setDataPreview, setDisableTableMetadata, setDisableTablePreview } from '../../../../../setup/redux/slices/dataset'
 import { useDispatch, useSelector } from 'react-redux'
 
 import ForwardApi from '../../../../apis/ForwardApi'
@@ -84,10 +84,10 @@ const FunctionalButton = (props: any) => {
     }
 
     switch (dataTypeCode) {
-      case 'webapi':
+      case DataTypeCode.webapi:
         handleWebApi()
         break;
-      case 'excel':
+      case DataTypeCode.excel:
         handleExcel()
         break;
       default:
@@ -128,16 +128,32 @@ const FunctionalButton = (props: any) => {
       dispatch(setDataMetadata(metadata))
 
       const columnMetadata = [
-        {key: 'Data', title: 'Data', dataIndex: 'Data', editable: true},
-        {key: 'DataType', title: 'DataType', dataIndex: 'DataType', editable: true},
-        {key: 'Title', title: 'Title', dataIndex: 'Title', editable: true},
-        {key: 'Description', title: 'Description', dataIndex: 'Description', editable: true},
+        new ColumnMetadata('Data', 'Data', 'Data', true),
+        new ColumnMetadata('DataType', 'DataType', 'DataType', true),
+        new ColumnMetadata('Title', 'Title', 'Title', true),
+        new ColumnMetadata('Description', 'Description', 'Description', true),
       ]
       dispatch(setColumnMetata(columnMetadata))
     }
 
     const handleWebApi = async () => {
       const formData = form.getFieldsValue(true)
+
+      if (Array.isArray(dataMetadata) && dataMetadata.length > 0) {
+        dispatch(setDisableTablePreview(true))
+        dispatch(setDisableTableMetadata(false))
+        dispatch(setDataMetadata(dataMetadata))
+
+        const columnMetadata = [
+          new ColumnMetadata('Data', 'Data', 'Data', true),
+          new ColumnMetadata('DataType', 'DataType', 'DataType', true),
+          new ColumnMetadata('Title', 'Title', 'Title', true),
+          new ColumnMetadata('Description', 'Description', 'Description', true),
+        ]
+        dispatch(setColumnMetata(columnMetadata))
+        return;
+      }
+
       const { body, dataKey, headers, method, url } = formData
 
       const axiosOptions = {
@@ -154,14 +170,29 @@ const FunctionalButton = (props: any) => {
     }
 
     const handleExcel = () => {
+      if (Array.isArray(dataMetadata) && dataMetadata.length > 0) {
+        dispatch(setDisableTablePreview(true))
+        dispatch(setDisableTableMetadata(false))
+        dispatch(setDataMetadata(dataMetadata))
+
+        const columnMetadata = [
+          new ColumnMetadata('Data', 'Data', 'Data', true),
+          new ColumnMetadata('DataType', 'DataType', 'DataType', true),
+          new ColumnMetadata('Title', 'Title', 'Title', true),
+          new ColumnMetadata('Description', 'Description', 'Description', true),
+        ]
+        dispatch(setColumnMetata(columnMetadata))
+        return;
+      }
+
       handleMetadata(dataExcel)
     }
 
     switch (dataTypeCode) {
-      case 'webapi':
+      case DataTypeCode.webapi:
         handleWebApi();
         break;
-      case 'excel':
+      case DataTypeCode.excel:
         handleExcel();
         break;
       default:

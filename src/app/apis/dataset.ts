@@ -1,5 +1,6 @@
 import { Dataset } from '../models'
 import axios from 'axios'
+import { notification } from 'antd'
 
 const ver = '1'
 const controllerName = 'datasets'
@@ -65,8 +66,21 @@ const update = async (id: string, data: Dataset) => {
     })
 
     return res?.data
-  } catch (error) {
-    console.error(error)
+  } catch (error: any) {
+    const { status } = error.response
+
+    if (status === 406) {
+      notification.error({
+        message: 'Thất bại!',
+        description: 'Không có thông tin nào thay đổi',
+      })
+    } else {
+      notification.error({
+        message: 'Thất bại!',
+        description: 'Xảy ra lỗi trong quá trình thực hiện!',
+      })
+    }
+
     return null
   }
 }
