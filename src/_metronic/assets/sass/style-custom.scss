@@ -7,7 +7,7 @@ body {
 @include media-breakpoint-up(lg) {
   .header-fixed {
     .header {
-      // height: 50px;
+      height: 50px;
     }
     .tdheader {
       background-color: $color-blue !important;
@@ -145,18 +145,12 @@ body {
 }
 .ant-input{
     border: 1px solid rgba(0,0,0,0.3) !important;
-    // padding: 10px !important;
 }
-// .ant-input{
-//     border: 1px solid rgba(0,0,0,0.3) !important;
-// }
-
 .ant-select-selector {
   border: 1px solid rgba(0, 0, 0, 0.3) !important;
   border-radius: 5px !important;
   width: 100% !important;
 }
-
 .ant-form-item-label > label {
   font-weight: 500;
   color: #3f4047;
