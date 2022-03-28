@@ -101,7 +101,7 @@ const CustomPage = () => {
               data-toggle='m-tooltip'
               title='Xóa'
             >
-              <i className='fas fa-trash-alt' style={{ marginLeft: -7 }}></i>
+              <i className='la la-trash' style={{ marginLeft: -7 }}></i>
             </button>
           </Popconfirm>
         </div>
