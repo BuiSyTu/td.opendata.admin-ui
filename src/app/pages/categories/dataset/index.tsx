@@ -1,5 +1,5 @@
 import { Divider, Input, Popconfirm, Tag, Typography, notification } from 'antd'
-import { TypeModal, setDisableDataTab, setModalId, setModalVisible, setTypeModal } from '../../../../setup/redux/slices/dataset'
+import { State, TypeModal, setDisableDataTab, setModalId, setModalVisible, setTypeModal } from '../../../../setup/redux/slices/dataset'
 import {danger, secondary, success} from '../../../constants/color'
 import { useEffect, useState } from 'react'
 
@@ -60,14 +60,14 @@ const CategoryPage = () => {
         let textDisplay = 'Không xác định'
 
         switch (record?.state) {
-          case '0':
+          case State.pending:
             textDisplay = 'Chưa duyệt'
             break;
-          case '1':
+          case State.approved:
             color = success
             textDisplay = 'Đã duyệt'
             break;
-          case '2':
+          case State.rejected:
             color = danger
             textDisplay = 'Bị từ chối'
             break;
