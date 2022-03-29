@@ -96,7 +96,7 @@ const FunctionalButton = (props: any) => {
   }
 
   const handleClickMetadata = () => {
-    const handleMetadata = (dataSource: any) => {
+    const handleWithDataSource = (dataSource: any) => {
       if (!Array.isArray(dataSource)) {
         notification.info({
           message: 'Dữ liệu không hợp lệ',
@@ -136,21 +136,25 @@ const FunctionalButton = (props: any) => {
       dispatch(setColumnMetata(columnMetadata))
     }
 
+    const handleWithoutDataSource = () => {
+      dispatch(setDisableTablePreview(true))
+      dispatch(setDisableTableMetadata(false))
+      dispatch(setDataMetadata(dataMetadata))
+
+      const columnMetadata = [
+        new ColumnMetadata('Data', 'Data', 'Data', true),
+        new ColumnMetadata('DataType', 'DataType', 'DataType', true),
+        new ColumnMetadata('Title', 'Title', 'Title', true),
+        new ColumnMetadata('Description', 'Description', 'Description', true),
+      ]
+      dispatch(setColumnMetata(columnMetadata))
+    }
+
     const handleWebApi = async () => {
       const formData = form.getFieldsValue(true)
 
       if (Array.isArray(dataMetadata) && dataMetadata.length > 0) {
-        dispatch(setDisableTablePreview(true))
-        dispatch(setDisableTableMetadata(false))
-        dispatch(setDataMetadata(dataMetadata))
-
-        const columnMetadata = [
-          new ColumnMetadata('Data', 'Data', 'Data', true),
-          new ColumnMetadata('DataType', 'DataType', 'DataType', true),
-          new ColumnMetadata('Title', 'Title', 'Title', true),
-          new ColumnMetadata('Description', 'Description', 'Description', true),
-        ]
-        dispatch(setColumnMetata(columnMetadata))
+        handleWithoutDataSource()
         return;
       }
 
@@ -166,26 +170,16 @@ const FunctionalButton = (props: any) => {
       
       const res = await forwardApi.forward(axiosOptions);
       let dataSource = res[dataKey]
-      handleMetadata(dataSource)
+      handleWithDataSource(dataSource)
     }
 
     const handleExcel = () => {
       if (Array.isArray(dataMetadata) && dataMetadata.length > 0) {
-        dispatch(setDisableTablePreview(true))
-        dispatch(setDisableTableMetadata(false))
-        dispatch(setDataMetadata(dataMetadata))
-
-        const columnMetadata = [
-          new ColumnMetadata('Data', 'Data', 'Data', true),
-          new ColumnMetadata('DataType', 'DataType', 'DataType', true),
-          new ColumnMetadata('Title', 'Title', 'Title', true),
-          new ColumnMetadata('Description', 'Description', 'Description', true),
-        ]
-        dispatch(setColumnMetata(columnMetadata))
+        handleWithoutDataSource()
         return;
       }
 
-      handleMetadata(dataExcel)
+      handleWithDataSource(dataExcel)
     }
 
     switch (dataTypeCode) {
