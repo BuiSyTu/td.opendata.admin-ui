@@ -141,6 +141,9 @@ const CategoryPage = () => {
             className='btn btn-light-success m-btn m-btn--icon btn-sm m-btn--icon-only'
             data-toggle='m-tooltip'
             title='Duyệt'
+            onClick={() => {
+              handleApproved(record.id)
+            }}
           >
             <i className='la la-check' style={{ marginLeft: -7 }}></i>
           </button>
@@ -149,6 +152,9 @@ const CategoryPage = () => {
             className='btn btn-light-danger m-btn m-btn--icon btn-sm m-btn--icon-only'
             data-toggle='m-tooltip'
             title='Từ chối'
+            onClick={() => {
+              handleRejected(record.id)
+            }}
           >
             <i className='la la-times' style={{ marginLeft: -7 }}></i>
           </button>
@@ -215,6 +221,42 @@ const CategoryPage = () => {
       notification.error({
         message: `Thất bại!`,
         description: 'Xóa không thành công.',
+      })
+    }
+  }
+
+  const handleApproved = async (id: string) => {
+    var res = await datasetApi.approved(id)
+    if (res) {
+      notification.success({
+        message: 'Thành công!',
+        duration: 1,
+        placement: 'bottomRight',
+      })
+
+      setUpdate(true)
+    } else {
+      notification.error({
+        message: `Thất bại!`,
+        description: 'Không thành công.',
+      })
+    }
+  }
+
+  const handleRejected = async (id: string) => {
+    var res = await datasetApi.rejected(id)
+    if (res) {
+      notification.success({
+        message: 'Thành công!',
+        duration: 1,
+        placement: 'bottomRight',
+      })
+
+      setUpdate(true)
+    } else {
+      notification.error({
+        message: `Thất bại!`,
+        description: 'Không thành công.',
       })
     }
   }

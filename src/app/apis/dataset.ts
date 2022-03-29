@@ -100,10 +100,42 @@ const _delete = async(id: string) => {
   }
 }
 
+const approved = async(id: string) => {
+  try {
+    const res = await axios({
+      method: 'PATCH',
+      url: `${baseUrl}/approved/${id}`,
+      timeout: 15000,
+    })
+
+    return res?.data
+  } catch (error: any) {
+    console.error(error.response)
+    return null
+  }
+}
+
+const rejected = async(id: string) => {
+  try {
+    const res = await axios({
+      method: 'PATCH',
+      url: `${baseUrl}/rejected/${id}`,
+      timeout: 15000,
+    })
+
+    return res?.data
+  } catch (error: any) {
+    console.error(error.response)
+    return null
+  }
+}
+
 export const datasetApi = {
   getAll,
   add,
   getById,
   update,
   delete: _delete,
+  approved,
+  rejected,
 }
