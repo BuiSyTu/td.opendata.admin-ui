@@ -155,6 +155,21 @@ function ModalCategory(props: any) {
       try {
         setIsLoading(true)
         var res = await datasetApi.getById(modalId)
+
+        if (res?.data?.datasetAPIConfig) {
+          res.data = {
+            ...res.data,
+            ...res.data.datasetAPIConfig,
+          }
+
+          try {
+            const headersObj = JSON.parse(res.data.datasetAPIConfig?.headers)
+            res.data.headers = Object.keys(headersObj).map((key) => ({key: key, value: headersObj[key]}))
+          } catch(err) {
+            console.error(err)
+          }
+        }
+
         if (res?.data) {
           form.setFieldsValue(res?.data)
           
@@ -210,7 +225,7 @@ function ModalCategory(props: any) {
       const datasetAPIConfig: DatasetAPIConfig = {
         method: formData?.method ?? '',
         url: formData?.url ?? '',
-        headers: Object.keys(headerObject).length > 0 ? headerObject.toString() : '',
+        headers: Object.keys(headerObject).length > 0 ? JSON.stringify(headerObject) : '',
         dataKey: formData?.dataKey ?? '',
         tableName: formData?.tableName ?? '',
         data: formData?.data ?? ''
@@ -349,16 +364,6 @@ function ModalCategory(props: any) {
           layout='vertical'
           {...layout}
           form={form}
-          initialValues={{
-            url: 'https://api.hanhchinhcong.net/covidnew/QuocTichs',
-            method: 'GET',
-            headers: [
-              {key: 'Authorization', value: 'Bearer 3bcd9fb7-2e0e-3adb-8ba9-ecab0e37916f'}
-            ],
-            name: 'abc',
-            dataKey: 'data',
-            visibility: false,
-          }}
         >
           <Tabs
             activeKey={tabKey}
