@@ -70,7 +70,7 @@ const update = async (id: string, data: Dataset) => {
     const { status } = error.response
 
     if (status === 406) {
-      notification.error({
+      notification.warning({
         message: 'Thất bại!',
         description: 'Không có thông tin nào thay đổi',
       })
