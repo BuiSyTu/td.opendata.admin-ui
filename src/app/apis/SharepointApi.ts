@@ -16,8 +16,8 @@ export default class SharepointApi1 {
       })
   
       return res?.data
-    } catch (error) {
-      console.error(error)
+    } catch (error: any) {
+      console.error(error.response)
       return null
     }
   }

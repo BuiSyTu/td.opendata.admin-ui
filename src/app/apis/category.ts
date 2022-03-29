@@ -14,8 +14,8 @@ const getAll = async () => {
     })
 
     return res?.data
-  } catch (error) {
-    console.error(error)
+  } catch (error: any) {
+    console.error(error.response)
     return null
   }
 }
@@ -33,8 +33,8 @@ const add = async (data: Category) => {
     })
 
     return res?.data
-  } catch (error) {
-    console.error(error)
+  } catch (error: any) {
+    console.error(error.response)
     return null
   }
 }
@@ -48,8 +48,8 @@ const getById = async (id: string) => {
     })
 
     return res?.data
-  } catch (error) {
-    console.error(error)
+  } catch (error: any) {
+    console.error(error.response)
     return null
   }
 }
@@ -64,8 +64,8 @@ const update = async (id: string, data: Category) => {
     })
 
     return res?.data
-  } catch (error) {
-    console.error(error)
+  } catch (error: any) {
+    console.error(error.response)
     return null
   }
 }
@@ -79,8 +79,8 @@ const _delete = async(id: string) => {
     })
 
     return res?.data
-  } catch (error) {
-    console.error(error)
+  } catch (error: any) {
+    console.error(error.response)
     return null
   }
 }

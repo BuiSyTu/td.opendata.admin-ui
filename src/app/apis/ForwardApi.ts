@@ -18,8 +18,8 @@ export default class ForwardApi {
       })
 
       return res?.data
-    } catch (error) {
-      console.error(error)
+    } catch (error: any) {
+      console.error(error.response)
       return null
     }
   }
