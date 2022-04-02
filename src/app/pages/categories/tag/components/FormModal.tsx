@@ -1,8 +1,8 @@
 import { Button, Form, Input, Modal, Spin, Typography, notification } from 'antd'
 import { useEffect, useState } from 'react'
 
-import { Tag } from '../../../../models'
-import { tagApi } from '../../../../apis'
+import { Tag } from 'src/app/models'
+import { tagApi } from 'src/app/apis'
 
 const { TextArea } = Input
 const { Text } = Typography

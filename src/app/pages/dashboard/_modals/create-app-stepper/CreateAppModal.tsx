@@ -1,10 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, {useState, useRef} from 'react'
+
+import {ICreateAppData, defaultCreateAppData} from './IAppModels'
+import React, {useRef, useState} from 'react'
+
+import {KTSVG} from 'src/_metronic/helpers'
 import {Modal} from 'react-bootstrap-v5'
-import {StepperComponent} from '../../../../../_metronic/assets/ts/components'
-import {KTSVG} from '../../../../../_metronic/helpers'
-import {defaultCreateAppData, ICreateAppData} from './IAppModels'
+import {StepperComponent} from 'src/_metronic/assets/ts/components'
 
 type Props = {
   show: boolean

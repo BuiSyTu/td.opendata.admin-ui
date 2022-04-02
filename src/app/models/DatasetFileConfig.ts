@@ -1,8 +1,8 @@
 export interface DatasetFileConfig {
   fileType?: string,
   fileName?: string,
-  fileData?: string,
-  tableName?: string,
+  fileUrl?: string,
+  sheetName?: string,
   tenant?: string,
   datasetId?: string,
 }

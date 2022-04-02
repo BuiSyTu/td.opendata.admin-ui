@@ -1,8 +1,8 @@
 import { Button, Form, Input, Modal, Spin, Typography, notification } from 'antd'
 import { useEffect, useState } from 'react'
 
-import { ProviderType } from '../../../../models'
-import { providerTypeApi } from '../../../../apis'
+import { ProviderType } from 'src/app/models'
+import { providerTypeApi } from 'src/app/apis'
 
 const { TextArea } = Input
 const { Text } = Typography

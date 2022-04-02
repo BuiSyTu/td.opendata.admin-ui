@@ -4,7 +4,6 @@ export interface DatasetAPIConfig {
   headers?: string,
   data?: string,
   dataKey?: string,
-  tableName?: string,
   tenant?: string,
   datasetId?: string,
 }

@@ -2,9 +2,9 @@ import { Divider, Input, Popconfirm, Typography, notification } from 'antd'
 import { useEffect, useState } from 'react'
 
 import FormModal from './components/FormModal'
-import { PageTitle } from '../../../../_metronic/layout/core'
-import TableList from '../../../components/TableList'
-import { providerTypeApi } from '../../../apis'
+import { PageTitle } from 'src/_metronic/layout/core'
+import TableList from 'src/app/components/TableList'
+import { providerTypeApi } from 'src/app/apis'
 
 const { Text } = Typography
 const { Search } = Input

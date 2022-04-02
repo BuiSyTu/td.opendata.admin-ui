@@ -1,45 +1,30 @@
 import * as XLSX from 'xlsx'
 
-import {
-  Button,
-  Checkbox,
-  Col,
-  Divider,
-  Form,
-  Input,
-  Modal,
-  Row,
-  Select,
-  Space,
-  Spin,
-  Table,
-  Tabs,
-  Typography,
-  Upload,
-  message,
-  notification,
-} from 'antd'
-import { Category, DataType, DatasetAPIConfig, DatasetFileConfig, License, Organization, ProviderType } from '../../../../models'
-import { DataTypeCode, TabKey, TypeModal, setColumnMetata, setColumnPreview, setDataMetadata, setDataPreview, setDataTypeCode, setDisableDataTab, setDisableTableMetadata, setDisableTablePreview, setModalId, setModalVisible, setTabKey, setTypeModal } from '../../../../../setup/redux/slices/dataset'
-import { InboxOutlined, MinusCircleOutlined, PlusOutlined } from '@ant-design/icons'
-import { categoryApi, dataTypeApi, datasetApi, licenseApi, organizationApi, providerTypeApi } from '../../../../apis'
+import { Button, Checkbox, Col, Divider, Form, Input, Modal, Row, Select, Space, Spin, Table, Tabs, Typography, message, notification } from 'antd'
+import { Category, DataType, DatasetAPIConfig, DatasetFileConfig, License, Organization, ProviderType } from 'src/app/models'
+import { ColumnMetadata, DataTypeCode, TabKey, TypeModal, setColumnMetata, setColumnPreview, setDataMetadata, setDataPreview, setDataTypeCode, setDataUpload, setDisableDataTab, setDisableTableMetadata, setDisableTablePreview, setModalId, setModalVisible, setTabKey, setTypeModal } from 'src/setup/redux/slices/dataset'
+import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons'
+import { categoryApi, dataTypeApi, datasetApi, forwardApi, licenseApi, organizationApi, providerTypeApi } from 'src/app/apis'
+import { setFileName, setFileType, setFileUrl } from 'src/setup/redux/slices/datasetFileConfig'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 
-import { Dataset } from '../../../../models'
+import { Dataset } from 'src/app/models'
+import FooterModal from './FooterModal'
 import FunctionalButton from './FunctionalButton'
 import MetadataTable from './MetadataTable'
-import { RootState } from '../../../../../setup'
-import { toObject } from '../../../../../utils/common'
+import { RootState } from 'src/setup'
+import UploadDragger from './UploadDragger'
+import { toObject } from 'src/utils/common'
 
 const { TextArea } = Input
 const { Text } = Typography
 const { Option } = Select
 const { TabPane } = Tabs
-const { Dragger } = Upload
 
 function ModalCategory(props: any) {
   const dispatch = useDispatch()
+
   const tabKey = useSelector((state: RootState) => state.dataset.tabKey)
   const modalId = useSelector((state: RootState) => state.dataset.modalId)
   const typeModal = useSelector((state: RootState) => state.dataset.typeModal)
@@ -50,6 +35,11 @@ function ModalCategory(props: any) {
   const columnPreview = useSelector((state: RootState) => state.dataset.columnPreview)
   const disableTablePreview = useSelector((state: RootState) => state.dataset.disableTablePreview)
   const dataMetadata = useSelector((state: RootState) => state.dataset.dataMetadata)
+  const dataUpload = useSelector((state: RootState) => state.dataset.dataUpload) 
+
+  const fileName = useSelector((state: RootState) => state.datasetFileConfig.fileName)
+  const fileType = useSelector((state: RootState) => state.datasetFileConfig.fileType)
+  const fileUrl = useSelector((state: RootState) => state.datasetFileConfig.fileUrl)
 
   const { setUpdate } = props
   const [form] = Form.useForm()
@@ -62,48 +52,15 @@ function ModalCategory(props: any) {
   const [providerTypes, setProviderTypes] = useState<ProviderType[]>([])
   const [dataTypes, setDataTypes] = useState<DataType[]>([])
   const [licenses, setLicenses] = useState<License[]>([])
-  const [dataExcel, setDataExcel] = useState([])
+  const [fileList, setFileList] = useState<any[]>([])
+
+  const httpMethods = [
+    'GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'HEAD', 'OPTIONS'
+  ]
 
   const layout = {
     labelCol: { span: 22 },
     wrapperCol: { span: 22 },
-  }
-
-  const uploadProps = {
-    name: 'file',
-    multiple: false,
-    action: 'https://192.168.2.169:5001/api/v1/attachmenthandles/excel',
-    onChange(info: any) {
-      const { status } = info.file
-
-      // Xử lý preview và metadata ở chỗ này
-      if (status !== 'uploading') {
-        let reader = new FileReader()
-
-        reader.onload = (e: any) => {
-          const data = e.target.result
-          const workbook = XLSX.read(data, {type: 'binary'})
-
-          const firstSheetName = workbook.SheetNames[0]
-          var XL_row_object = XLSX.utils.sheet_to_json(workbook.Sheets[firstSheetName])
-          var json_object = JSON.stringify(XL_row_object)
-          setDataExcel(JSON.parse(json_object))
-        }
-
-        reader.readAsBinaryString(info.file.originFileObj)
-      }
-
-      // Xử lý lưu file ở chỗ này
-      if (status === 'done') {
-        console.log({ info })
-        message.success(`${info.file.name} file uploaded successfully.`)
-      } else if (status === 'error') {
-        message.error(`${info.file.name} file upload failed.`)
-      }
-    },
-    onDrop(e: any) {
-      console.log('Dropped files', e.dataTransfer.files)
-    },
   }
 
   useEffect(() => {
@@ -164,15 +121,22 @@ function ModalCategory(props: any) {
 
           try {
             const headersObj = JSON.parse(res.data.datasetAPIConfig?.headers)
-            res.data.headers = Object.keys(headersObj).map((key) => ({key: key, value: headersObj[key]}))
-          } catch(err) {
+            res.data.headers = Object.keys(headersObj).map((key) => ({ key: key, value: headersObj[key] }))
+          } catch (err) {
             console.error(err)
+          }
+        }
+
+        if (res?.data?.datasetFileConfig) {
+          res.data = {
+            ...res.data,
+            ...res.data.datasetFileConfig,
           }
         }
 
         if (res?.data) {
           form.setFieldsValue(res?.data)
-          
+
           dispatch(setDataTypeCode(res?.data?.dataType?.code?.toLowerCase()))
           dispatch(setDataMetadata(JSON.parse(res?.data?.metadata)))
         }
@@ -204,6 +168,7 @@ function ModalCategory(props: any) {
     dispatch(setColumnPreview([]))
     dispatch(setDataPreview([]))
     dispatch(setDisableTablePreview(true))
+    dispatch(setDataUpload([]))
   }
 
   const handleOk = async () => {
@@ -214,12 +179,10 @@ function ModalCategory(props: any) {
       const headerObject = Array.isArray(formData.headers) ? toObject(formData.headers, 'key', 'value') : {}
 
       const datasetFileConfig: DatasetFileConfig = {
-        fileType: '',
-        fileName: '',
-        fileData: '',
-        tableName: '',
-        tenant: '',
-        datasetId: ''
+        fileType,
+        fileName,
+        fileUrl,
+        sheetName: formData?.sheetName ?? '',
       }
 
       const datasetAPIConfig: DatasetAPIConfig = {
@@ -227,7 +190,6 @@ function ModalCategory(props: any) {
         url: formData?.url ?? '',
         headers: Object.keys(headerObject).length > 0 ? JSON.stringify(headerObject) : '',
         dataKey: formData?.dataKey ?? '',
-        tableName: formData?.tableName ?? '',
         data: formData?.data ?? ''
       }
 
@@ -252,6 +214,8 @@ function ModalCategory(props: any) {
   }
 
   const postData = async (data: Dataset) => {
+    console.log(data)
+
     if (!data.metadata) {
       notification.error({
         message: 'Bạn chưa tạo metadata',
@@ -301,8 +265,215 @@ function ModalCategory(props: any) {
     handleCancel()
   }
 
-  const handleTabClick = (key:string) => {
+  const handleTabClick = (key: string) => {
     dispatch(setTabKey(key))
+  }
+
+  const handleChangeDragger = (info: any) => {
+    const { status } = info.file
+
+    // Xử lý preview và metadata ở chỗ này
+    if (status === 'uploading') {
+      let reader = new FileReader()
+
+      reader.onload = (e: any) => {
+        const data = e.target.result
+        const workbook = XLSX.read(data, { type: 'binary' })
+
+        const firstSheetName = workbook.SheetNames[0]
+        var XL_row_object = XLSX.utils.sheet_to_json(workbook.Sheets[firstSheetName])
+        var json_object = JSON.stringify(XL_row_object)
+        dispatch(setDataUpload(JSON.parse(json_object)))
+      }
+
+      reader.readAsBinaryString(info.file.originFileObj)
+    }
+
+    // Xử lý lưu file ở chỗ này
+    if (status === 'done') {
+      const { response } = info.file
+      const { name, type, url } = response.data[0]
+
+      dispatch(setFileName(name))
+      dispatch(setFileType(type))
+      dispatch(setFileUrl(url))
+
+      message.success(`${info.file.name} file uploaded successfully.`)
+    } else if (status === 'error') {
+      message.error(`${info.file.name} file upload failed.`)
+    }
+  }
+
+  const handleClickPreview = () => {
+    const handlePreview = (dataSource: any) => {
+      if (!Array.isArray(dataSource)) {
+        notification.info({
+          message: 'Dữ liệu không hợp lệ',
+          duration: 1,
+        })
+
+        return;
+      }
+
+      if (dataSource.length === 0) {
+        notification.info({
+          message: 'Chưa có dữ liệu',
+          duration: 1,
+        })
+
+        return;
+      }
+
+      dispatch(setDisableTablePreview(false))
+      dispatch(setDisableTableMetadata(true))
+
+      if (dataSource.length > 5) dataSource = dataSource.slice(0, 5)
+      dispatch(setDataPreview(dataSource))
+
+      if (Array.isArray(dataMetadata) && dataMetadata.length > 0) {
+        const columns = dataMetadata.map((metadata: any) => ({
+          key: metadata.Data,
+          title: metadata.Title,
+          dataIndex: metadata.Data,
+        }))
+
+        dispatch(setColumnPreview(columns))
+      } else {
+        const dataTemp = dataSource[0]
+        const columns = Object.keys(dataTemp).map(key => ({
+          key,
+          title: key,
+          dataIndex: key,
+        }))
+  
+        dispatch(setColumnPreview(columns))
+      }
+    }
+
+    const handleWebApi = async () => {
+      const formData = form.getFieldsValue(true)
+      const { body, dataKey, headers, method, url } = formData
+
+      const axiosOptions = {
+        method,
+        url,
+        timeout: 15000,
+        headers: JSON.stringify(Array.isArray(headers) ? toObject(headers, 'key', 'value') : {}),
+        data: JSON.stringify(body),
+      }
+      
+      const res = await forwardApi.forward(axiosOptions);
+      let dataSource = res[dataKey]
+      handlePreview(dataSource)
+    }
+
+    const handleExcel = () => {
+      handlePreview(dataUpload)
+    }
+
+    switch (dataTypeCode) {
+      case DataTypeCode.webapi:
+        handleWebApi()
+        break;
+      case DataTypeCode.excel:
+        handleExcel()
+        break;
+      default:
+        break;
+    }
+  }
+
+  const handleClickMetadata = () => {
+    const columnMetadata = [
+      new ColumnMetadata('Data', 'Data', 'Data', true),
+      new ColumnMetadata('DataType', 'DataType', 'DataType', true),
+      new ColumnMetadata('Title', 'Title', 'Title', true),
+      new ColumnMetadata('Description', 'Description', 'Description', true),
+    ]
+
+    const handleWithDataSource = (dataSource: any) => {
+      if (!Array.isArray(dataSource)) {
+        notification.info({
+          message: 'Dữ liệu không hợp lệ',
+          duration: 1,
+        })
+
+        return;
+      }
+
+      if (dataSource.length === 0) {
+        notification.info({
+          message: 'Chưa có dữ liệu',
+          duration: 1,
+        })
+
+        return;
+      }
+
+      dispatch(setDisableTablePreview(true))
+      dispatch(setDisableTableMetadata(false))
+
+      const dataTemp = dataSource[0]
+      const metadata = Object.keys(dataTemp).map(key => ({
+        Data: key,
+        DataType: typeof dataTemp[key] === 'object' ? 'string' : typeof dataTemp[key],
+        Title: key,
+        Description: key,
+      }))
+      dispatch(setDataMetadata(metadata))
+      dispatch(setColumnMetata(columnMetadata))
+    }
+
+    const handleWithoutDataSource = () => {
+      dispatch(setDisableTablePreview(true))
+      dispatch(setDisableTableMetadata(false))
+      dispatch(setDataMetadata(dataMetadata))
+
+      dispatch(setColumnMetata(columnMetadata))
+    }
+
+    const handleWebApi = async () => {
+      const formData = form.getFieldsValue(true)
+
+      if (Array.isArray(dataMetadata) && dataMetadata.length > 0) {
+        handleWithoutDataSource()
+        return;
+      }
+
+      const { body, dataKey, headers, method, url } = formData
+
+      const axiosOptions = {
+        method,
+        url,
+        timeout: 15000,
+        headers: JSON.stringify(Array.isArray(headers) ? toObject(headers, 'key', 'value') : {}),
+        data: JSON.stringify(body),
+      }
+
+      const res = await forwardApi.forward(axiosOptions);
+      let dataSource = res[dataKey]
+      handleWithDataSource(dataSource)
+    }
+
+    const handleExcel = () => {
+      if (Array.isArray(dataMetadata) && dataMetadata.length > 0) {
+        handleWithoutDataSource()
+        return;
+      }
+
+      handleWithDataSource(dataUpload)
+    }
+
+    switch (dataTypeCode) {
+      case DataTypeCode.webapi:
+        handleWebApi();
+        break;
+      case DataTypeCode.excel:
+        handleExcel();
+        break;
+      default:
+        break;
+    }
   }
 
   return (
@@ -313,51 +484,12 @@ function ModalCategory(props: any) {
       onOk={handleOk}
       onCancel={handleCancel}
       closeIcon={<i className='las la-times' style={{ color: '#fff', fontSize: 20 }}></i>}
-      footer={[
-        typeModal === TypeModal.view ? (
-          <></>
-        ) : (
-          <Button
-            key='Ok'
-            type='primary'
-            htmlType='submit'
-            size='middle'
-            style={{
-              borderRadius: 5,
-              padding: '5px 12px',
-              backgroundColor: '#34bfa3',
-              borderColor: '#34bfa3',
-            }}
-            icon={<i className='las la-save' style={{ color: '#fff' }}></i>}
-            onClick={() => {
-              handleOk()
-            }}
-            loading={buttonLoading}
-          >
-            <Text style={{ color: '#FFF', paddingLeft: 5 }}> {'Lưu'}</Text>
-          </Button>
-        ),
-        <Button
-          key='Cancel'
-          type='primary'
-          size='middle'
-          style={{
-            borderRadius: 5,
-            padding: '5px 12px',
-            backgroundColor: '#FAFAFA',
-            borderColor: '#BDBDBD',
-          }}
-          icon={<i className='las la-times' style={{ color: '#757575' }}></i>}
-          onClick={() => {
-            handleCancel()
-          }}
-        >
-          <Text style={{ color: '#757575', paddingLeft: 5 }}>
-            {' '}
-            {typeModal === TypeModal.view ? 'Đóng' : 'Hủy'}
-          </Text>
-        </Button>,
-      ]}
+      footer={<FooterModal
+        typeModal={typeModal}
+        hanleOk={handleOk}
+        handleCancel={handleCancel}
+        buttonLoading={buttonLoading}
+      />}
     >
       <Spin spinning={isLoading}>
         <Form
@@ -381,10 +513,7 @@ function ModalCategory(props: any) {
                   </Form.Item>
                 </Col>
                 <Col span={12}>
-                  <Form.Item
-                    label='Mã'
-                    name='code'
-                  >
+                  <Form.Item label='Mã' name='code'>
                     <Input disabled={disable} style={{ width: '100%', height: 32, borderRadius: 5 }} />
                   </Form.Item>
                 </Col>
@@ -392,18 +521,12 @@ function ModalCategory(props: any) {
 
               <Row>
                 <Col span={12}>
-                  <Form.Item
-                    label='Tiêu hiển thị'
-                    name='title'
-                  >
+                  <Form.Item label='Tiêu hiển thị' name='title'>
                     <Input disabled={disable} style={{ width: '100%', height: 32, borderRadius: 5 }} />
                   </Form.Item>
                 </Col>
                 <Col span={12}>
-                  <Form.Item
-                    label='Tag'
-                    name='tags'
-                  >
+                  <Form.Item label='Tag' name='tags'>
                     <Input disabled={disable} style={{ width: '100%', height: 32, borderRadius: 5 }} />
                   </Form.Item>
                 </Col>
@@ -412,11 +535,8 @@ function ModalCategory(props: any) {
               <Row>
                 <Col span={12}>
                   <Form.Item label='Lĩnh vực' name='categoryId'>
-                    <Select
-                      showSearch
-                      placeholder="Chọn lĩnh vực"
-                    >
-                      {categories.map(category =>  (
+                    <Select showSearch placeholder='Chọn lĩnh vực'>
+                      {categories.map(category => (
                           <Option key={category.id} value={category.id}>
                             {category.name}
                           </Option>
@@ -427,10 +547,7 @@ function ModalCategory(props: any) {
                 </Col>
                 <Col span={12}>
                   <Form.Item label='Tổ chức' name='organizationId'>
-                    <Select
-                      showSearch
-                      placeholder="Chọn tổ chức"
-                    >
+                    <Select showSearch placeholder='Chọn tổ chức'>
                       {organizations.map(organization => (
                           <Option key={organization.id} value={organization.id}>
                             {organization.name}
@@ -445,10 +562,7 @@ function ModalCategory(props: any) {
               <Row>
                 <Col span={12}>
                   <Form.Item label='Hình thức cung cấp' name='providerTypeId'>
-                    <Select
-                      showSearch
-                      placeholder="Chọn hình thức cung cấp"
-                    >
+                    <Select showSearch placeholder='Chọn hình thức cung cấp'>
                       {providerTypes.map(providerType => (
                           <Option key={providerType.id} value={providerType.id}>
                             {providerType.name}
@@ -464,9 +578,7 @@ function ModalCategory(props: any) {
                     name='dataTypeId'
                     rules={[{ required: true, message: 'Không được để trống!' }]}
                   >
-                    <Select
-                      showSearch
-                      placeholder="Chọn loại dữ liệu"
+                    <Select showSearch placeholder='Chọn loại dữ liệu'
                       onChange={(value, event) => handleChangeDataType(value, event)}
                     >
                       {dataTypes.map(dataType => (
@@ -483,10 +595,7 @@ function ModalCategory(props: any) {
               <Row>
                 <Col span={12}>
                   <Form.Item label='Giấy phép' name='licenseId'>
-                    <Select
-                      showSearch
-                      placeholder="Chọn giấy phép"
-                    >
+                    <Select showSearch placeholder='Chọn giấy phép'>
                       {licenses.map(license => (
                           <Option key={license.id} value={license.id}>
                             {license.name}
@@ -515,13 +624,12 @@ function ModalCategory(props: any) {
                       <Col span={3}>
                         <Form.Item label='Phương thức' name='method'>
                           <Select placeholder='Http action'>
-                            <Option key='GET' value='GET'>Get</Option>
-                            <Option key='POST' value='POST'>Post</Option>
-                            <Option key='PUT' value='PUT'>Put</Option>
-                            <Option key='DELETE' value='DELETE'>Delete</Option>
-                            <Option key='HEAD' value='HEAD'>Head</Option>
-                            <Option key='PATCH' value='PATCH'>Patch</Option>
-                            <Option key='OPTIONS' value='OPTIONS'>Options</Option>
+                            {httpMethods.map(httpMethod => (
+                                <Option key={httpMethod} value={httpMethod}>
+                                  {httpMethod}
+                                </Option>
+                              ) 
+                            )}
                           </Select>
                         </Form.Item>
 
@@ -538,28 +646,28 @@ function ModalCategory(props: any) {
 
                       <Col span={12}>
                         <p className='mb-2'>Headers</p>
-                        <Form.List name="headers">
+                        <Form.List name='headers'>
                           {(fields, { add, remove }) => (
                             <>
                               {fields.map(({ key, name, ...restField }) => (
-                                <Space key={key} style={{ display: 'flex', marginBottom: 8 }} align="baseline">
+                                <Space key={key} style={{ display: 'flex', marginBottom: 8 }} align='baseline'>
                                   <Form.Item
                                     {...restField}
                                     name={[name, 'key']}
                                   >
-                                    <Input placeholder="Key" />
+                                    <Input placeholder='Key' />
                                   </Form.Item>
                                   <Form.Item
                                     {...restField}
                                     name={[name, 'value']}
                                   >
-                                    <Input placeholder="Value" />
+                                    <Input placeholder='Value' />
                                   </Form.Item>
                                   <MinusCircleOutlined onClick={() => remove(name)} />
                                 </Space>
                               ))}
                               <Form.Item>
-                                <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>
+                                <Button type='dashed' onClick={() => add()} block icon={<PlusOutlined />}>
                                   Thêm header
                                 </Button>
                               </Form.Item>
@@ -582,27 +690,30 @@ function ModalCategory(props: any) {
                 )
                 : (
                   <>
-                    <Form.Item label='File đính kèm' name='file'>
-                      <Dragger {...uploadProps}>
-                        <p className="ant-upload-drag-icon">
-                          <InboxOutlined />
-                        </p>
-                        <p className="ant-upload-text">Kéo hoặc thả file để tải lên</p>
-                      </Dragger>
-                    </Form.Item>
+                    <Form.Item label='File đính kèm' name='fileUrl'>
+                      <UploadDragger
+                        onChange={handleChangeDragger}
+                        fileList={fileList}  
+                      />
+                    </Form.Item>  
+
+                    <Col span={9}>
+                      <Form.Item label='Tên sheet / data key' name='sheetName'>
+                        <Input
+                          placeholder='Điền tên sheet / data key' />
+                      </Form.Item>
+                    </Col>
                   </>
                 )
               }
-              <FunctionalButton
-                dataExcel={dataExcel}
-                form={form} />
+              <FunctionalButton handleClickPreview={handleClickPreview} handleClickMetadata={handleClickMetadata} />
 
               <MetadataTable />
               <Table
                 className={`mt-4 ${disableTablePreview ? 'd-none' : 'd-block'}`}
                 dataSource={dataPreview}
                 columns={columnPreview} />
-            </TabPane>  
+            </TabPane>
           </Tabs>
         </Form>
       </Spin>

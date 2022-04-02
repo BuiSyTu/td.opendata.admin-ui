@@ -1,19 +1,21 @@
 import { Divider, Input, Popconfirm, Tag, Typography, notification } from 'antd'
-import { State, TypeModal, setDisableDataTab, setModalId, setModalVisible, setTypeModal } from '../../../../setup/redux/slices/dataset'
-import {danger, secondary, success} from '../../../constants/color'
+import { State, TypeModal, setDisableDataTab, setModalId, setModalVisible, setTypeModal } from 'src/setup/redux/slices/dataset'
+import {danger, secondary, success} from 'src/app/constants/color'
+import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 
 import FormModal from './components/FormModal'
-import { PageTitle } from '../../../../_metronic/layout/core'
-import TableList from '../../../components/TableList'
-import { datasetApi } from '../../../apis'
-import { useDispatch } from 'react-redux'
+import { PageTitle } from 'src/_metronic/layout/core'
+import { RootState } from 'src/setup'
+import TableList from 'src/app/components/TableList'
+import { datasetApi } from 'src/app/apis'
 
 const { Text } = Typography
 const { Search } = Input
 
 const CategoryPage = () => {
   const dispatch = useDispatch()
+  const modalVisible = useSelector((state: RootState) => state.dataset.modalVisible)
 
   const [loading, setLoading] = useState(false)
   const [update, setUpdate] = useState(true)
@@ -296,9 +298,7 @@ const CategoryPage = () => {
           loading={loading}
         />
       </div>
-      <FormModal
-        setUpdate={setUpdate}
-      />
+      { modalVisible ? ( <FormModal setUpdate={setUpdate} /> ) : <></> }
     </div>
   )
 }

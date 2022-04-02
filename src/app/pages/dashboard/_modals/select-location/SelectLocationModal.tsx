@@ -1,6 +1,7 @@
-import React, {Dispatch, SetStateAction, useState, useEffect} from 'react'
+import React, {Dispatch, SetStateAction, useEffect, useState} from 'react'
+
+import {KTSVG} from 'src/_metronic/helpers'
 import {Modal} from 'react-bootstrap-v5'
-import {KTSVG} from '../../../../../_metronic/helpers'
 
 type Props = {
   data: {location: string; setLocation: Dispatch<SetStateAction<string>>}

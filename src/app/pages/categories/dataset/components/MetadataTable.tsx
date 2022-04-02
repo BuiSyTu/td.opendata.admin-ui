@@ -4,8 +4,8 @@ import { Button, Form, FormInstance, Input, Table } from 'antd'
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { RootState } from '../../../../../setup'
-import { setDataMetadata } from '../../../../../setup/redux/slices/dataset'
+import { RootState } from 'src/setup'
+import { setDataMetadata } from 'src/setup/redux/slices/dataset'
 
 const EditableContext = React.createContext<FormInstance<any> | null>(null)
 

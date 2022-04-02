@@ -13,6 +13,7 @@ export interface DatasetState {
   disableTableMetadata: boolean,
   dataMetadata: any[],
   columnMetadata: any[],
+  dataUpload: any[],
 }
 
 export enum TypeModal {
@@ -66,6 +67,7 @@ const initalState: DatasetState = {
   disableTableMetadata: true,
   dataMetadata: [],
   columnMetadata: [],
+  dataUpload: [],
 }
 
 export const datasetSlice:Slice = createSlice({
@@ -108,6 +110,9 @@ export const datasetSlice:Slice = createSlice({
     setColumnMetata(state, action) {
       state.columnMetadata = action.payload ?? []
     },
+    setDataUpload(state, action) {
+      state.dataUpload = action.payload ?? []
+    }
   }
 })
 
@@ -125,5 +130,6 @@ export const {
   setDisableTableMetadata,
   setColumnMetata,
   setDataMetadata,
+  setDataUpload,
 } = actions
 export default reducer

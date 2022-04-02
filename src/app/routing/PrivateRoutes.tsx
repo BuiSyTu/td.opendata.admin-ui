@@ -1,9 +1,9 @@
 import { Redirect, Route, Switch } from 'react-router-dom'
 import { Suspense, lazy } from 'react'
 
-import { DashboardWrapper } from '../pages/dashboard/DashboardWrapper'
-import { FallbackView } from '../../_metronic/partials'
-import { MenuTestPage } from '../pages/MenuTestPage'
+import { DashboardWrapper } from 'src/app/pages/dashboard/DashboardWrapper'
+import { FallbackView } from 'src/_metronic/partials'
+import { MenuTestPage } from 'src/app/pages/MenuTestPage'
 
 export function PrivateRoutes() {
   const BuilderPageWrapper = lazy(() => import('../pages/layout-builder/BuilderPageWrapper'))

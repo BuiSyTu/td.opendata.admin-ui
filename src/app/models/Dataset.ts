@@ -29,4 +29,5 @@ export interface Dataset {
   authorEmail?: string,
   maintainer?: string,
   maintainerEmail?: string,
+  tableName?: string,
 }

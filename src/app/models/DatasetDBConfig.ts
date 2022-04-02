@@ -3,7 +3,6 @@ export interface DatasetDBConfig {
   connectionString?: string,
   databaseName?: string,
   dataTable?: string,
-  tableName?: string,
   tenant?: string,
   datasetId?: string,
 }
