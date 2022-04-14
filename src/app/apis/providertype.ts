@@ -1,9 +1,9 @@
 import { ProviderType } from '../models'
 import axios from 'axios'
 
-const ver = '1'
 const controllerName = 'providertypes'
-const baseUrl = `https://192.168.2.169:5001/api/v${ver}/${controllerName}`
+const baseUrl = `${process.env.REACT_APP_API_URL}/${controllerName}`
+const authorization = `Bearer ${process.env.REACT_APP_BEAR_TOKEN}`
 
 
 const getAll = async () => {
@@ -11,6 +11,9 @@ const getAll = async () => {
     const res = await axios({
       method: 'GET',
       url: baseUrl,
+      headers: {
+        'Authorization': authorization,
+      },
       timeout: 15000,
     })
 
@@ -26,6 +29,7 @@ const add = async (data: ProviderType) => {
     const res = await axios({
       method: 'POST',
       headers: {
+        'Authorization': authorization,
         'Content-Type': 'application/json',
       },
       url: baseUrl,
@@ -45,6 +49,9 @@ const getById = async (id: string) => {
     const res = await axios({
       method: 'GET',
       url: `${baseUrl}/${id}`,
+      headers: {
+        'Authorization': authorization,
+      },
       timeout: 15000,
     })
 
@@ -60,6 +67,9 @@ const update = async (id: string, data: ProviderType) => {
     const res = await axios({
       method: 'PUT',
       url: `${baseUrl}/${id}`,
+      headers: {
+        'Authorization': authorization,
+      },
       data,
       timeout: 15000,
     })
@@ -76,6 +86,9 @@ const _delete = async(id: string) => {
     const res = await axios({
       method: 'DELETE',
       url: `${baseUrl}/${id}`,
+      headers: {
+        'Authorization': authorization,
+      },
       timeout: 15000,
     })
 

@@ -1,8 +1,7 @@
 import axios from 'axios'
 
-const ver = '1'
 const controllerName = 'forward'
-const baseUrl = `https://192.168.2.169:5001/api/v${ver}/${controllerName}`
+const baseUrl = `${process.env.REACT_APP_API_URL}/${controllerName}`
 
 const forward = async(axiosConfig: any) => {
   try {

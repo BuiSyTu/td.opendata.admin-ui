@@ -1,9 +1,9 @@
 import { Category } from '../models'
 import axios from 'axios'
 
-const ver = '1'
 const controllerName = 'categories'
-const baseUrl = `https://192.168.2.169:5001/api/v${ver}/${controllerName}`
+const baseUrl = `${process.env.REACT_APP_API_URL}/${controllerName}`
+const authorization = `Bearer ${process.env.REACT_APP_BEAR_TOKEN}`
 
 const getAll = async () => {
   try {
@@ -11,6 +11,9 @@ const getAll = async () => {
       method: 'GET',
       url: baseUrl,
       timeout: 15000,
+      headers: {
+        'Authorization': authorization,
+      }
     })
 
     return res?.data
@@ -25,6 +28,7 @@ const add = async (data: Category) => {
     const res = await axios({
       method: 'POST',
       headers: {
+        'Authorization': authorization,
         'Content-Type': 'application/json',
       },
       url: baseUrl,
@@ -44,6 +48,9 @@ const getById = async (id: string) => {
     const res = await axios({
       method: 'GET',
       url: `${baseUrl}/${id}`,
+      headers: {
+        'Authorization': authorization,
+      },
       timeout: 15000,
     })
 
@@ -59,6 +66,9 @@ const update = async (id: string, data: Category) => {
     const res = await axios({
       method: 'PUT',
       url: `${baseUrl}/${id}`,
+      headers: {
+        'Authorization': authorization,
+      },
       data,
       timeout: 15000,
     })
@@ -75,6 +85,9 @@ const _delete = async(id: string) => {
     const res = await axios({
       method: 'DELETE',
       url: `${baseUrl}/${id}`,
+      headers: {
+        'Authorization': authorization,
+      },
       timeout: 15000,
     })
 

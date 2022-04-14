@@ -101,7 +101,6 @@ const MetadataTable = () => {
   const dispatch = useDispatch()
   const columnMetadata = useSelector((state: RootState) => state.dataset.columnMetadata)
   const dataMetadata = useSelector((state: RootState) => state.dataset.dataMetadata)
-  const disableTableMetadata = useSelector((state: RootState) => state.dataset.disableTableMetadata)
 
   const handleAdd = () => {
     const newData = {
@@ -146,7 +145,7 @@ const MetadataTable = () => {
   })
 
   return (
-    <div className={`mt-4 ${disableTableMetadata ? 'd-none' : 'd-block'}`}>
+    <div>
       <Button
         onClick={handleAdd}
         type="primary"

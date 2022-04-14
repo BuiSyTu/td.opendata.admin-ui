@@ -1,8 +1,4 @@
-import { Category } from './Category';
-import { DataType } from './DataType';
-import { License } from './License';
-import { Organization } from './Organization';
-import { ProviderType } from './ProviderType';
+import { Category, DataType, DatasetAPIConfig, DatasetDBConfig, DatasetFileConfig, License, Organization, ProviderType } from 'src/app/models';
 
 export interface Dataset {
   id: string,
@@ -11,7 +7,8 @@ export interface Dataset {
   description?: string,
   code?: string,
   tags?: string,
-  state?: number,
+  approveState?: number,
+  isSynced?: boolean,
   visibility?: boolean,
   licenseId?: string,
   license?: License,
@@ -30,4 +27,7 @@ export interface Dataset {
   maintainer?: string,
   maintainerEmail?: string,
   tableName?: string,
+  datasetAPIConfig?: DatasetAPIConfig
+  datasetFileConfig?: DatasetFileConfig,
+  datasetDBConfig?: DatasetDBConfig
 }

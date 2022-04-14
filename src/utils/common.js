@@ -11,3 +11,13 @@ export const getBase64 = (fileBlob) => {
     reader.onerror = (error) => reject(error);
   });
 };
+
+export const isDevelopmentMode = !process.env.NODE_ENV || process.env.NODE_ENV === 'development'
+
+export const openJsonInNewTab = (json) => {
+  var myjson = JSON.stringify(json, null, 2);
+  var x = window.open();
+  x?.document.open();
+  x?.document.write('<html><body><pre>' + myjson + '</pre></body></html>');
+  x?.document.close();
+}

@@ -2,7 +2,7 @@ import * as XLSX from 'xlsx'
 
 import { Button, Checkbox, Col, Divider, Form, Input, Modal, Row, Select, Space, Spin, Table, Tabs, Typography, message, notification } from 'antd'
 import { Category, DataType, DatasetAPIConfig, DatasetFileConfig, License, Organization, ProviderType } from 'src/app/models'
-import { ColumnMetadata, DataTypeCode, TabKey, TypeModal, setColumnMetata, setColumnPreview, setDataMetadata, setDataPreview, setDataTypeCode, setDataUpload, setDisableDataTab, setDisableTableMetadata, setDisableTablePreview, setModalId, setModalVisible, setTabKey, setTypeModal } from 'src/setup/redux/slices/dataset'
+import { ColumnMetadata, DataTypeCode, TabKey, TypeModal, setColumnMetata, setColumnPreview, setDataMetadata, setDataPreview, setDataTypeCode, setDataUpload, setDisableDataTab, setTabKey } from 'src/setup/redux/slices/dataset'
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons'
 import { categoryApi, dataTypeApi, datasetApi, forwardApi, licenseApi, organizationApi, providerTypeApi } from 'src/app/apis'
 import { setFileName, setFileType, setFileUrl } from 'src/setup/redux/slices/datasetFileConfig'
@@ -10,12 +10,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 
 import { Dataset } from 'src/app/models'
-import FooterModal from './FooterModal'
 import FunctionalButton from './FunctionalButton'
 import MetadataTable from './MetadataTable'
 import { RootState } from 'src/setup'
 import UploadDragger from './UploadDragger'
 import { toObject } from 'src/utils/common'
+import { v4 as uuidv4 } from 'uuid'
 
 const { TextArea } = Input
 const { Text } = Typography
@@ -26,22 +26,18 @@ function ModalCategory(props: any) {
   const dispatch = useDispatch()
 
   const tabKey = useSelector((state: RootState) => state.dataset.tabKey)
-  const modalId = useSelector((state: RootState) => state.dataset.modalId)
-  const typeModal = useSelector((state: RootState) => state.dataset.typeModal)
-  const modalVisible = useSelector((state: RootState) => state.dataset.modalVisible)
   const disableDataTab = useSelector((state: RootState) => state.dataset.disableDataTab)
   const dataTypeCode = useSelector((state: RootState) => state.dataset.dataTypeCode)
   const dataPreview = useSelector((state: RootState) => state.dataset.dataPreview)
   const columnPreview = useSelector((state: RootState) => state.dataset.columnPreview)
-  const disableTablePreview = useSelector((state: RootState) => state.dataset.disableTablePreview)
   const dataMetadata = useSelector((state: RootState) => state.dataset.dataMetadata)
-  const dataUpload = useSelector((state: RootState) => state.dataset.dataUpload) 
+  const dataUpload = useSelector((state: RootState) => state.dataset.dataUpload)
 
   const fileName = useSelector((state: RootState) => state.datasetFileConfig.fileName)
   const fileType = useSelector((state: RootState) => state.datasetFileConfig.fileType)
   const fileUrl = useSelector((state: RootState) => state.datasetFileConfig.fileUrl)
 
-  const { setUpdate } = props
+  const { setUpdate, modalVisible, setModalVisible, modalId, setModalId, typeModal, setTypeModal } = props
   const [form] = Form.useForm()
   const [disable, setDisable] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
@@ -53,6 +49,8 @@ function ModalCategory(props: any) {
   const [dataTypes, setDataTypes] = useState<DataType[]>([])
   const [licenses, setLicenses] = useState<License[]>([])
   const [fileList, setFileList] = useState<any[]>([])
+  const [disableTablePreview, setDisableTablePreview] = useState<boolean>(true)
+  const [disableTableMetadata, setDisableTableMetadata] = useState<boolean>(true)
 
   const httpMethods = [
     'GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'HEAD', 'OPTIONS'
@@ -132,6 +130,12 @@ function ModalCategory(props: any) {
             ...res.data,
             ...res.data.datasetFileConfig,
           }
+
+          setFileList([{
+            url: `${process.env.REACT_APP_API_URL}/${res.data.datasetFileConfig.fileUrl}`,
+            name: res.data.datasetFileConfig.fileName,
+            uid: uuidv4()
+          }])
         }
 
         if (res?.data) {
@@ -157,17 +161,19 @@ function ModalCategory(props: any) {
 
   const handleCancel = () => {
     form.resetFields()
-    dispatch(setModalId(''))
-    dispatch(setTypeModal(TypeModal.none))
-    dispatch(setModalVisible(false))
+
+    setDisableTablePreview(true)
+    setDisableTableMetadata(true)
+    setModalVisible(false)
+    setModalId('')
+    setTypeModal(TypeModal.none)
+
     dispatch(setDisableDataTab(true))
     dispatch(setTabKey(TabKey.information))
     dispatch(setColumnMetata([]))
     dispatch(setDataMetadata([]))
-    dispatch(setDisableTableMetadata(true))
     dispatch(setColumnPreview([]))
     dispatch(setDataPreview([]))
-    dispatch(setDisableTablePreview(true))
     dispatch(setDataUpload([]))
   }
 
@@ -200,6 +206,8 @@ function ModalCategory(props: any) {
         metadata: JSON.stringify(dataMetadata),
       }
 
+      console.log(bodyData)
+
       typeModal === TypeModal.edit ? putData(bodyData) : postData(bodyData)
     } catch (errorInfo) {
       console.log('Failed:', errorInfo)
@@ -207,15 +215,14 @@ function ModalCategory(props: any) {
   }
 
   const handleChangeDataType = (value: string, event: any) => {
+    setDisableTablePreview(true)
+    setDisableTableMetadata(true)
+
     dispatch(setDataTypeCode(event.code.toLowerCase()))
     dispatch(setDisableDataTab(false))
-    dispatch(setDisableTableMetadata(true))
-    dispatch(setDisableTablePreview(true))
   }
 
   const postData = async (data: Dataset) => {
-    console.log(data)
-
     if (!data.metadata) {
       notification.error({
         message: 'Bạn chưa tạo metadata',
@@ -270,38 +277,34 @@ function ModalCategory(props: any) {
   }
 
   const handleChangeDragger = (info: any) => {
-    const { status } = info.file
+    setFileList(info.fileList)
+    const { response } = info.file
 
-    // Xử lý preview và metadata ở chỗ này
-    if (status === 'uploading') {
-      let reader = new FileReader()
+    // Check xem upload đã xong hay chưa
+    if (!response) return;
 
-      reader.onload = (e: any) => {
-        const data = e.target.result
-        const workbook = XLSX.read(data, { type: 'binary' })
+    const { name, type, url } = response.data[0]
 
-        const firstSheetName = workbook.SheetNames[0]
-        var XL_row_object = XLSX.utils.sheet_to_json(workbook.Sheets[firstSheetName])
-        var json_object = JSON.stringify(XL_row_object)
-        dispatch(setDataUpload(JSON.parse(json_object)))
-      }
+    dispatch(setFileName(name))
+    dispatch(setFileType(type))
+    dispatch(setFileUrl(url))
 
-      reader.readAsBinaryString(info.file.originFileObj)
+
+    let reader = new FileReader()
+
+    reader.onload = (e: any) => {
+      const data = e.target.result
+      const workbook = XLSX.read(data, { type: 'binary' })
+
+      const firstSheetName = workbook.SheetNames[0]
+      var XL_row_object = XLSX.utils.sheet_to_json(workbook.Sheets[firstSheetName])
+      var json_object = JSON.stringify(XL_row_object)
+      dispatch(setDataUpload(JSON.parse(json_object)))
     }
 
-    // Xử lý lưu file ở chỗ này
-    if (status === 'done') {
-      const { response } = info.file
-      const { name, type, url } = response.data[0]
+    reader.readAsBinaryString(info.file.originFileObj)
 
-      dispatch(setFileName(name))
-      dispatch(setFileType(type))
-      dispatch(setFileUrl(url))
-
-      message.success(`${info.file.name} file uploaded successfully.`)
-    } else if (status === 'error') {
-      message.error(`${info.file.name} file upload failed.`)
-    }
+    message.success(`${info.file.name} file uploaded successfully.`)
   }
 
   const handleClickPreview = () => {
@@ -324,8 +327,8 @@ function ModalCategory(props: any) {
         return;
       }
 
-      dispatch(setDisableTablePreview(false))
-      dispatch(setDisableTableMetadata(true))
+      setDisableTablePreview(false)
+      setDisableTableMetadata(true)
 
       if (dataSource.length > 5) dataSource = dataSource.slice(0, 5)
       dispatch(setDataPreview(dataSource))
@@ -345,7 +348,7 @@ function ModalCategory(props: any) {
           title: key,
           dataIndex: key,
         }))
-  
+
         dispatch(setColumnPreview(columns))
       }
     }
@@ -361,9 +364,9 @@ function ModalCategory(props: any) {
         headers: JSON.stringify(Array.isArray(headers) ? toObject(headers, 'key', 'value') : {}),
         data: JSON.stringify(body),
       }
-      
+
       const res = await forwardApi.forward(axiosOptions);
-      let dataSource = res[dataKey]
+      const dataSource = res[dataKey]
       handlePreview(dataSource)
     }
 
@@ -410,8 +413,8 @@ function ModalCategory(props: any) {
         return;
       }
 
-      dispatch(setDisableTablePreview(true))
-      dispatch(setDisableTableMetadata(false))
+      setDisableTablePreview(true)
+      setDisableTableMetadata(false)
 
       const dataTemp = dataSource[0]
       const metadata = Object.keys(dataTemp).map(key => ({
@@ -425,10 +428,10 @@ function ModalCategory(props: any) {
     }
 
     const handleWithoutDataSource = () => {
-      dispatch(setDisableTablePreview(true))
-      dispatch(setDisableTableMetadata(false))
-      dispatch(setDataMetadata(dataMetadata))
+      setDisableTablePreview(true)
+      setDisableTableMetadata(false)
 
+      dispatch(setDataMetadata(dataMetadata))
       dispatch(setColumnMetata(columnMetadata))
     }
 
@@ -484,12 +487,51 @@ function ModalCategory(props: any) {
       onOk={handleOk}
       onCancel={handleCancel}
       closeIcon={<i className='las la-times' style={{ color: '#fff', fontSize: 20 }}></i>}
-      footer={<FooterModal
-        typeModal={typeModal}
-        hanleOk={handleOk}
-        handleCancel={handleCancel}
-        buttonLoading={buttonLoading}
-      />}
+      footer={[
+        typeModal === 'view' ? (
+          <></>
+        ) : (
+          <Button
+            key='Ok'
+            type='primary'
+            htmlType='submit'
+            size='middle'
+            style={{
+              borderRadius: 5,
+              padding: '5px 12px',
+              backgroundColor: '#34bfa3',
+              borderColor: '#34bfa3',
+            }}
+            icon={<i className='las la-save' style={{ color: '#fff' }}></i>}
+            onClick={() => {
+              handleOk()
+            }}
+            loading={buttonLoading}
+          >
+            <Text style={{ color: '#FFF', paddingLeft: 5 }}> {'Lưu'}</Text>
+          </Button>
+        ),
+        <Button
+          key='Cancel'
+          type='primary'
+          size='middle'
+          style={{
+            borderRadius: 5,
+            padding: '5px 12px',
+            backgroundColor: '#FAFAFA',
+            borderColor: '#BDBDBD',
+          }}
+          icon={<i className='las la-times' style={{ color: '#757575' }}></i>}
+          onClick={() => {
+            handleCancel()
+          }}
+        >
+          <Text style={{ color: '#757575', paddingLeft: 5 }}>
+            {' '}
+            {typeModal === 'view' ? 'Đóng' : 'Hủy'}
+          </Text>
+        </Button>,
+      ]}
     >
       <Spin spinning={isLoading}>
         <Form
@@ -537,10 +579,10 @@ function ModalCategory(props: any) {
                   <Form.Item label='Lĩnh vực' name='categoryId'>
                     <Select showSearch placeholder='Chọn lĩnh vực'>
                       {categories.map(category => (
-                          <Option key={category.id} value={category.id}>
-                            {category.name}
-                          </Option>
-                        )
+                        <Option key={category.id} value={category.id}>
+                          {category.name}
+                        </Option>
+                      )
                       )}
                     </Select>
                   </Form.Item>
@@ -549,10 +591,10 @@ function ModalCategory(props: any) {
                   <Form.Item label='Tổ chức' name='organizationId'>
                     <Select showSearch placeholder='Chọn tổ chức'>
                       {organizations.map(organization => (
-                          <Option key={organization.id} value={organization.id}>
-                            {organization.name}
-                          </Option>
-                        )
+                        <Option key={organization.id} value={organization.id}>
+                          {organization.name}
+                        </Option>
+                      )
                       )}
                     </Select>
                   </Form.Item>
@@ -564,10 +606,10 @@ function ModalCategory(props: any) {
                   <Form.Item label='Hình thức cung cấp' name='providerTypeId'>
                     <Select showSearch placeholder='Chọn hình thức cung cấp'>
                       {providerTypes.map(providerType => (
-                          <Option key={providerType.id} value={providerType.id}>
-                            {providerType.name}
-                          </Option>
-                        )
+                        <Option key={providerType.id} value={providerType.id}>
+                          {providerType.name}
+                        </Option>
+                      )
                       )}
                     </Select>
                   </Form.Item>
@@ -582,10 +624,10 @@ function ModalCategory(props: any) {
                       onChange={(value, event) => handleChangeDataType(value, event)}
                     >
                       {dataTypes.map(dataType => (
-                          <Option key={dataType.id} value={dataType.id} code={dataType.code}>
-                            {dataType.name}
-                          </Option>
-                        )
+                        <Option key={dataType.id} value={dataType.id} code={dataType.code}>
+                          {dataType.name}
+                        </Option>
+                      )
                       )}
                     </Select>
                   </Form.Item>
@@ -597,10 +639,10 @@ function ModalCategory(props: any) {
                   <Form.Item label='Giấy phép' name='licenseId'>
                     <Select showSearch placeholder='Chọn giấy phép'>
                       {licenses.map(license => (
-                          <Option key={license.id} value={license.id}>
-                            {license.name}
-                          </Option>
-                        )
+                        <Option key={license.id} value={license.id}>
+                          {license.name}
+                        </Option>
+                      )
                       )}
                     </Select>
                   </Form.Item>
@@ -625,10 +667,10 @@ function ModalCategory(props: any) {
                         <Form.Item label='Phương thức' name='method'>
                           <Select placeholder='Http action'>
                             {httpMethods.map(httpMethod => (
-                                <Option key={httpMethod} value={httpMethod}>
-                                  {httpMethod}
-                                </Option>
-                              ) 
+                              <Option key={httpMethod} value={httpMethod}>
+                                {httpMethod}
+                              </Option>
+                            )
                             )}
                           </Select>
                         </Form.Item>
@@ -693,9 +735,9 @@ function ModalCategory(props: any) {
                     <Form.Item label='File đính kèm' name='fileUrl'>
                       <UploadDragger
                         onChange={handleChangeDragger}
-                        fileList={fileList}  
+                        fileList={fileList}
                       />
-                    </Form.Item>  
+                    </Form.Item>
 
                     <Col span={9}>
                       <Form.Item label='Tên sheet / data key' name='sheetName'>
@@ -708,11 +750,10 @@ function ModalCategory(props: any) {
               }
               <FunctionalButton handleClickPreview={handleClickPreview} handleClickMetadata={handleClickMetadata} />
 
-              <MetadataTable />
-              <Table
-                className={`mt-4 ${disableTablePreview ? 'd-none' : 'd-block'}`}
+              {!disableTableMetadata && <MetadataTable />}
+              {!disableTablePreview && <Table
                 dataSource={dataPreview}
-                columns={columnPreview} />
+                columns={columnPreview} />}
             </TabPane>
           </Tabs>
         </Form>

@@ -7,10 +7,8 @@ export interface DatasetState {
   modalVisible: boolean,
   disableDataTab: boolean,
   dataTypeCode: DataTypeCode,
-  disableTablePreview: boolean,
   dataPreview: any[],
   columnPreview: any[],
-  disableTableMetadata: boolean,
   dataMetadata: any[],
   columnMetadata: any[],
   dataUpload: any[],
@@ -61,10 +59,8 @@ const initalState: DatasetState = {
   modalVisible: false,
   disableDataTab: true,
   dataTypeCode: DataTypeCode.none,
-  disableTablePreview: true,
   dataPreview: [],
   columnPreview: [],
-  disableTableMetadata: true,
   dataMetadata: [],
   columnMetadata: [],
   dataUpload: [],
@@ -92,17 +88,11 @@ export const datasetSlice:Slice = createSlice({
     setDataTypeCode(state, action) {
       state.dataTypeCode = action.payload ?? DataTypeCode.none
     },
-    setDisableTablePreview(state, action) {
-      state.disableTablePreview = action.payload ?? true
-    },
     setDataPreview(state, action) {
       state.dataPreview = action.payload ?? []
     },
     setColumnPreview(state, action) {
       state.columnPreview = action.payload ?? []
-    },
-    setDisableTableMetadata(state, action) {
-      state.disableTableMetadata = action.payload ?? true
     },
     setDataMetadata(state, action) {
       state.dataMetadata = action.payload ?? []
@@ -124,10 +114,8 @@ export const {
   setModalVisible,
   setDisableDataTab,
   setDataTypeCode,
-  setDisableTablePreview,
   setColumnPreview,
   setDataPreview,
-  setDisableTableMetadata,
   setColumnMetata,
   setDataMetadata,
   setDataUpload,

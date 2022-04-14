@@ -1,8 +1,5 @@
-import { Modal, Upload } from 'antd'
-
 import { InboxOutlined } from '@ant-design/icons'
-import { getBase64 } from 'src/utils/common'
-import { useState } from 'react'
+import { Upload } from 'antd'
 
 const { Dragger } = Upload
 
@@ -20,6 +17,7 @@ const UploadDragger = (props: any) => {
     <>
       <Dragger
         name='files'
+        maxCount={1}
         multiple={false}
         action='https://192.168.2.169:5001/api/v1/attachments'
         onChange={onChange}

@@ -1,20 +1,35 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-// Redux
-// https://github.com/rt2zz/redux-persist
-import {PersistGate} from 'redux-persist/integration/react'
-import {Provider} from 'react-redux'
-import * as _redux from './setup'
-import store, {persistor} from './setup/redux/Store'
-// Axios
-import axios from 'axios'
-
 import 'antd/dist/antd.css'
 import 'react-toastify/dist/ReactToastify.css'
+import './_metronic/assets/sass/style.scss'
+import './_metronic/assets/sass/style.react.scss'
 
-// Apps
+import * as _redux from './setup'
+
+import store, {persistor} from './setup/redux/Store'
+
 import {App} from './app/App'
 import {MetronicI18nProvider} from './_metronic/i18n/Metronici18n'
+import {PersistGate} from 'redux-persist/integration/react'
+import {Provider} from 'react-redux'
+import React from 'react'
+import ReactDOM from 'react-dom'
+import axios from 'axios'
+
+// Redux
+// https://github.com/rt2zz/redux-persist
+
+
+
+
+// Axios
+
+
+
+
+
+// Apps
+
+
 /**
  * TIP: Replace this style import with dark styles to enable dark mode
  *
@@ -24,8 +39,8 @@ import {MetronicI18nProvider} from './_metronic/i18n/Metronici18n'
  *
  * import './_metronic/assets/css/style.rtl.css'
  **/
-import './_metronic/assets/sass/style.scss'
-import './_metronic/assets/sass/style.react.scss'
+
+
 /**
  * Base URL of the website.
  *

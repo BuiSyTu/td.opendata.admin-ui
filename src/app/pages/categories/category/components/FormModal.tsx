@@ -23,10 +23,12 @@ const ModalCategory = (props: CategoryProps) => {
   const [disable, setDisable] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [buttonLoading, setButtonLoading] = useState(false)
+
   const layout = {
     labelCol: { span: 4 },
     wrapperCol: { span: 20 },
   }
+  
   useEffect(() => {
     const fetchData = async () => {
       try {

@@ -2,16 +2,19 @@ import { Dataset } from '../models'
 import axios from 'axios'
 import { notification } from 'antd'
 
-const ver = '1'
 const controllerName = 'datasets'
-const baseUrl = `https://192.168.2.169:5001/api/v${ver}/${controllerName}`
+const baseUrl = `${process.env.REACT_APP_API_URL}/${controllerName}`
+const authorization = `Bearer ${process.env.REACT_APP_BEAR_TOKEN}`
 
 
 const getAll = async () => {
-  try {
+  try {    
     const res = await axios({
       method: 'GET',
       url: baseUrl,
+      headers: {
+        'Authorization': authorization,
+      },
       timeout: 15000,
     })
 
@@ -27,6 +30,7 @@ const add = async (data: Dataset) => {
     const res = await axios({
       method: 'POST',
       headers: {
+        'Authorization': authorization,
         'Content-Type': 'application/json',
       },
       url: baseUrl,
@@ -46,6 +50,27 @@ const getById = async (id: string) => {
     const res = await axios({
       method: 'GET',
       url: `${baseUrl}/${id}`,
+      headers: {
+        'Authorization': authorization,
+      },
+      timeout: 15000,
+    })
+
+    return res?.data
+  } catch (error: any) {
+    console.error(error.response)
+    return null
+  }
+}
+
+const getData = async (id: string) => {
+  try {
+    const res = await axios({
+      method: 'GET',
+      url: `${baseUrl}/${id}/data`,
+      headers: {
+        'Authorization': authorization,
+      },
       timeout: 15000,
     })
 
@@ -61,6 +86,9 @@ const update = async (id: string, data: Dataset) => {
     const res = await axios({
       method: 'PUT',
       url: `${baseUrl}/${id}`,
+      headers: {
+        'Authorization': authorization,
+      },
       data,
       timeout: 15000,
     })
@@ -130,6 +158,21 @@ const rejected = async(id: string) => {
   }
 }
 
+const syncData = async(id: string) => {
+  try {
+    const res = await axios({
+      method: 'PATCH',
+      url: `${baseUrl}/syncdata/${id}`,
+      timeout: 15000,
+    })
+
+    return res?.data
+  } catch (error: any) {
+    console.error(error.response)
+    return null
+  }
+}
+
 export const datasetApi = {
   getAll,
   add,
@@ -138,4 +181,6 @@ export const datasetApi = {
   delete: _delete,
   approved,
   rejected,
+  syncData,
+  getData,
 }
