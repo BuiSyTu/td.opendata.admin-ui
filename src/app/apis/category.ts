@@ -1,4 +1,4 @@
-import { Category } from '../models'
+import { Category } from 'src/app/models'
 import axios from 'axios'
 
 const controllerName = 'categories'
@@ -63,6 +63,7 @@ const getById = async (id: string) => {
 
 const update = async (id: string, data: Category) => {
   try {
+    debugger
     const res = await axios({
       method: 'PUT',
       url: `${baseUrl}/${id}`,

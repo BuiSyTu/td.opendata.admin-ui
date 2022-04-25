@@ -1,4 +1,4 @@
-import { ProviderType } from '../models'
+import { ProviderType } from 'src/app/models'
 import axios from 'axios'
 
 const controllerName = 'providertypes'

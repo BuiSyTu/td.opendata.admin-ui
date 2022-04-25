@@ -1,4 +1,4 @@
-import { Organization } from '../models'
+import { Organization } from 'src/app/models'
 import axios from 'axios'
 
 const controllerName = 'organizations'

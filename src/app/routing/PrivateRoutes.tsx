@@ -6,25 +6,17 @@ import { FallbackView } from 'src/_metronic/partials'
 import { MenuTestPage } from 'src/app/pages/MenuTestPage'
 
 export function PrivateRoutes() {
-  const BuilderPageWrapper = lazy(() => import('../pages/layout-builder/BuilderPageWrapper'))
-  const ProfilePage = lazy(() => import('../modules/profile/ProfilePage'))
-  const WizardsPage = lazy(() => import('../modules/wizards/WizardsPage'))
-  const AccountPage = lazy(() => import('../modules/accounts/AccountPage'))
-  const WidgetsPage = lazy(() => import('../modules/widgets/WidgetsPage'))
-  const ChatPage = lazy(() => import('../modules/apps/chat/ChatPage'))
-  const CategoriesPage = lazy(() => import('../pages/categories'))
+  const DatasetPage = lazy(() => import('../pages/dataset'))
+  const DataCategoriesPage = lazy(() => import('../pages/data-categories'))
+  const AdministrativeCategoriesPage = lazy(() => import('../pages/administrative-categories'))
 
   return (
     <Suspense fallback={<FallbackView />}>
       <Switch>
         <Route path='/dashboard' component={DashboardWrapper} />
-        <Route path='/categories' component={CategoriesPage} />
-        <Route path='/builder' component={BuilderPageWrapper} />
-        <Route path='/crafted/pages/profile' component={ProfilePage} />
-        <Route path='/crafted/pages/wizards' component={WizardsPage} />
-        <Route path='/crafted/widgets' component={WidgetsPage} />
-        <Route path='/crafted/account' component={AccountPage} />
-        <Route path='/apps/chat' component={ChatPage} />
+        <Route path='/dataset' component={DatasetPage} />
+        <Route path='/data-categories' component={DataCategoriesPage} />
+        <Route path='/administrative-categories' component={AdministrativeCategoriesPage} />
         <Route path='/menu-test' component={MenuTestPage} />
         <Redirect from='/default.aspx' to='/dashboard' />
         <Redirect from='/auth' to='/dashboard' />

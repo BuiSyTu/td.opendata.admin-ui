@@ -1,4 +1,4 @@
-import { License } from '../models'
+import { License } from 'src/app/models'
 import axios from 'axios'
 
 const controllerName = 'licenses'

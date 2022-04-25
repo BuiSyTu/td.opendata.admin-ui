@@ -1,9 +1,9 @@
+import {put, takeLatest} from 'redux-saga/effects';
+
 import {Action} from '@reduxjs/toolkit';
+import {UserModel} from '../models/UserModel';
 import {persistReducer} from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import {put, takeLatest} from 'redux-saga/effects';
-import {UserModel} from '../models/UserModel';
-import {getUserByToken} from './AuthCRUD';
 
 export interface ActionWithPayload<T> extends Action {
   payload?: T;
@@ -89,8 +89,8 @@ export function* saga() {
     yield put(actions.requestUser());
   });
 
-  yield takeLatest(actionTypes.UserRequested, function* userRequested() {
-    const {data: user} = yield getUserByToken();
-    yield put(actions.fulfillUser(user?.data ?? null));
-  });
+  // yield takeLatest(actionTypes.UserRequested, function* userRequested() {
+  //   const {data: user} = yield getUserByToken();
+  //   yield put(actions.fulfillUser(user?.data ?? null));
+  // });
 }

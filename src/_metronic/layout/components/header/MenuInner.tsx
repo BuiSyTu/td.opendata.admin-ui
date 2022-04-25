@@ -1,6 +1,5 @@
-import { MenuItem } from './MenuItem'
 import { MenuInnerWithSub } from './MenuInnerWithSub'
-import { MegaMenu } from './MegaMenu'
+import { MenuItem } from './MenuItem'
 import { useIntl } from 'react-intl'
 
 export function MenuInner() {
@@ -8,120 +7,108 @@ export function MenuInner() {
   return (
     <>
       <MenuItem title={intl.formatMessage({ id: 'MENU.DASHBOARD' })} to='/dashboard' />
-      <MenuItem title='Layout Builder' to='/builder' />
       <MenuInnerWithSub
-        title='Crafted'
-        to='/crafted'
+        title='Tập dữ liệu'
+        to='/dataset'
         menuPlacement='bottom-start'
         menuTrigger='click'
       >
-        {/* PAGES */}
         <MenuInnerWithSub
-          title='Pages'
-          to='/crafted/pages'
-          fontIcon='bi-archive'
+          title='Web api'
+          to='/dataset/webapi'
+          hasBullet={true}
           hasArrow={true}
           menuPlacement='right-start'
           menuTrigger={`{default:'click', lg: 'hover'}`}
         >
-          <MenuInnerWithSub
-            title='Profile'
-            to='/crafted/pages/profile'
-            hasArrow={true}
-            hasBullet={true}
-            menuPlacement='right-start'
-            menuTrigger={`{default:'click', lg: 'hover'}`}
-          >
-            <MenuItem to='/crafted/pages/profile/overview' title='Overview' hasBullet={true} />
-            <MenuItem to='/crafted/pages/profile/projects' title='Projects' hasBullet={true} />
-            <MenuItem to='/crafted/pages/profile/campaigns' title='Campaigns' hasBullet={true} />
-            <MenuItem to='/crafted/pages/profile/documents' title='Documents' hasBullet={true} />
-            <MenuItem
-              to='/crafted/pages/profile/connections'
-              title='Connections'
-              hasBullet={true}
-            />
-          </MenuInnerWithSub>
-          <MenuInnerWithSub
-            title='Wizards'
-            to='/crafted/pages/wizards'
-            hasArrow={true}
-            hasBullet={true}
-            menuPlacement='right-start'
-            menuTrigger={`{default:'click', lg: 'hover'}`}
-          >
-            <MenuItem to='/crafted/pages/wizards/horizontal' title='Horizontal' hasBullet={true} />
-            <MenuItem to='/crafted/pages/wizards/vertical' title='Vertical' hasBullet={true} />
-          </MenuInnerWithSub>
+          <MenuItem to='/dataset/webapi/list' title='Danh sách' hasBullet={true} />
+          <MenuItem to='/dataset/webapi/config' title='Cấu hình' hasBullet={true} />
+          <MenuItem to='/dataset/webapi/sync-history' title='Lịch sử đồng bộ' hasBullet={true} />
+          <MenuItem to='/dataset/webapi/statistic' title='Thống kê' hasBullet={true} />
+        </MenuInnerWithSub>
+        <MenuInnerWithSub
+          title='File'
+          to='/dataset/excel'
+          hasBullet={true}
+          hasArrow={true}
+          menuPlacement='right-start'
+          menuTrigger={`{default:'click', lg: 'hover'}`}
+        >
+          <MenuItem to='/dataset/excel/list' title='Danh sách' hasBullet={true} />
+          <MenuItem to='/dataset/excel/config' title='Cấu hình' hasBullet={true} />
+          <MenuItem to='/dataset/excel/sync-history' title='Lịch sử đồng bộ' hasBullet={true} />
+          <MenuItem to='/dataset/excel/statistic' title='Thống kê' hasBullet={true} />
+        </MenuInnerWithSub>
+        <MenuInnerWithSub
+          title='Database'
+          to='/dataset/database'
+          hasBullet={true}
+          hasArrow={true}
+          menuPlacement='right-start'
+          menuTrigger={`{default:'click', lg: 'hover'}`}
+        >
+          <MenuItem to='/dataset/database/list' title='Danh sách' hasBullet={true} />
+          <MenuItem to='/dataset/database/config' title='Cấu hình' hasBullet={true} />
+          <MenuItem to='/dataset/database/sync-history' title='Lịch sử đồng bộ' hasBullet={true} />
+          <MenuItem to='/dataset/database/statistic' title='Thống kê' hasBullet={true} />
         </MenuInnerWithSub>
 
-        {/* ACCOUNT */}
         <MenuInnerWithSub
-          title='Accounts'
-          to='/crafted/accounts'
-          fontIcon='bi-person'
+          title='Dữ liệu thu thập'
+          to='/dataset/collect'
+          hasBullet={true}
           hasArrow={true}
           menuPlacement='right-start'
           menuTrigger={`{default:'click', lg: 'hover'}`}
         >
-          <MenuItem to='/crafted/account/overview' title='Overview' hasBullet={true} />
-          <MenuItem to='/crafted/account/settings' title='Settings' hasBullet={true} />
+          <MenuItem to='/dataset/collect/list' title='Danh sách' hasBullet={true} />
+          <MenuItem to='/dataset/collect/config' title='Theo lĩnh vực' hasBullet={true} />
+          <MenuItem to='/dataset/collect/syc-history' title='Theo trạng thái' hasBullet={true} />
+          <MenuItem to='/dataset/collect/statistic' title='Theo đơn vị cung cấp' hasBullet={true} />
+          <MenuItem to='/dataset/collect/statistic' title='Theo loại hình thu thập' hasBullet={true} />
         </MenuInnerWithSub>
 
-        {/* ERRORS */}
         <MenuInnerWithSub
-          title='Errors'
-          to='/error'
-          fontIcon='bi-sticky'
+          title='Duyệt dữ liệu'
+          to='/dataset/approve'
+          hasBullet={true}
           hasArrow={true}
           menuPlacement='right-start'
           menuTrigger={`{default:'click', lg: 'hover'}`}
         >
-          <MenuItem to='/error/404' title='Error 404' hasBullet={true} />
-          <MenuItem to='/error/500' title='Error 500' hasBullet={true} />
-        </MenuInnerWithSub>
-
-        {/* Widgets */}
-        <MenuInnerWithSub
-          title='Widgets'
-          to='/crafted/widgets'
-          fontIcon='bi-layers'
-          hasArrow={true}
-          menuPlacement='right-start'
-          menuTrigger={`{default:'click', lg: 'hover'}`}
-        >
-          <MenuItem to='/crafted/widgets/lists' title='Lists' hasBullet={true} />
-          <MenuItem to='/crafted/widgets/statistics' title='Statistics' hasBullet={true} />
-          <MenuItem to='/crafted/widgets/charts' title='Charts' hasBullet={true} />
-          <MenuItem to='/crafted/widgets/mixed' title='Mixed' hasBullet={true} />
-          <MenuItem to='/crafted/widgets/tables' title='Tables' hasBullet={true} />
-          <MenuItem to='/crafted/widgets/feeds' title='Feeds' hasBullet={true} />
-        </MenuInnerWithSub>
-      </MenuInnerWithSub>
-
-      <MenuInnerWithSub title='Apps' to='/apps' menuPlacement='bottom-start' menuTrigger='click'>
-        {/* PAGES */}
-        <MenuInnerWithSub
-          title='Chat'
-          to='/apps/chat'
-          icon='/media/icons/duotune/communication/com012.svg'
-          hasArrow={true}
-          menuPlacement='right-start'
-          menuTrigger={`{default:'click', lg: 'hover'}`}
-        >
-          <MenuItem to='/apps/chat/private-chat' title='Private Chat' hasBullet={true} />
-          <MenuItem to='/apps/chat/group-chat' title='Group Chart' hasBullet={true} />
-          <MenuItem to='/apps/chat/drawer-chat' title='Drawer Chart' hasBullet={true} />
+          <MenuItem to='/dataset/approve/list' title='Đang chờ' hasBullet={true} />
+          <MenuItem to='/dataset/approve/config' title='Không duyệt' hasBullet={true} />
+          <MenuItem to='/dataset/approve/syc-history' title='Đã duyệt' hasBullet={true} />
+          <MenuItem to='/dataset/approve/statistic' title='Thống kê theo lĩnh vực' hasBullet={true} />
+          <MenuItem to='/dataset/approve/statistic' title='Thống kê theo đơn vị cung cấp' hasBullet={true} />
+          <MenuItem to='/dataset/approve/statistic' title='Thống kê theo loại hình thu thập' hasBullet={true} />
+          <MenuItem to='/dataset/approve/statistic' title='Thống kê duyệt dữ liệu' hasBullet={true} />
         </MenuInnerWithSub>
       </MenuInnerWithSub>
       <MenuInnerWithSub
-        isMega={true}
-        title='Mega menu'
-        to='/mega-menu'
+        title='Danh mục dữ liệu'
+        to='/data-categories'
         menuPlacement='bottom-start'
         menuTrigger='click'
       >
-        <MegaMenu />
+        <MenuItem to='/data-categories/dataset' title='Tập dữ liệu' hasBullet={true} />
+        <MenuItem to='/data-categories/data-type' title='Loại dữ liệu' hasBullet={true} />
+        <MenuItem to='/data-categories/fields' title='Lĩnh vực' hasBullet={true} />
+        <MenuItem to='/data-categories/provider-type' title='Hình thức cung cấp' hasBullet={true} />
+        <MenuItem to='/data-categories/keyword' title='Từ khóa' hasBullet={true} />
+        <MenuItem to='/data-categories/license' title='Giấy phép' hasBullet={true} />
+        <MenuItem to='/data-categories/organization' title='Tổ chức' hasBullet={true} />
+      </MenuInnerWithSub>
+
+      <MenuInnerWithSub
+        title='Danh mục thủ tục hành chính'
+        to='/administrative-categories'
+        menuPlacement='bottom-start'
+        menuTrigger='click'
+      >
+        <MenuItem to='/administrative-categories/document-type' title='Loại giấy tờ' hasBullet={true} />
+        <MenuItem to='/administrative-categories/mining-source' title='Nguồn khai thác' hasBullet={true} />
+        <MenuItem to='/administrative-categories/data-source' title='Nguồn dữ liệu' hasBullet={true} />
       </MenuInnerWithSub>
     </>
   )

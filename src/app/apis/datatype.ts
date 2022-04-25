@@ -1,4 +1,4 @@
-import { DataType } from '../models'
+import { DataType } from 'src/app/models'
 import axios from 'axios'
 
 const controllerName = 'datatypes'
