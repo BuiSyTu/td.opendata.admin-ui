@@ -1,7 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
+
+import {ChatInner, Dropdown1} from 'src/_metronic/partials'
+import {KTSVG, toAbsoluteUrl} from 'src/_metronic/helpers'
 import React, {FC} from 'react'
-import {KTSVG, toAbsoluteUrl} from '../../../../../_metronic/helpers'
-import {Dropdown1, ChatInner} from '../../../../../_metronic/partials'
 
 const Private: FC = () => {
   return (

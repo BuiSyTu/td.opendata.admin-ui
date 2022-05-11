@@ -21,3 +21,18 @@ export const openJsonInNewTab = (json) => {
   x?.document.write('<html><body><pre>' + myjson + '</pre></body></html>');
   x?.document.close();
 }
+
+export const toQueryString = (obj, prefix) => {
+  var str = [],
+  p;
+  for (p in obj) {
+    if (obj.hasOwnProperty(p)) {
+      var k = prefix ? prefix + "[" + p + "]" : p,
+        v = obj[p];
+      str.push((v !== null && typeof v === "object") ?
+      toQueryString(v, k) :
+        encodeURIComponent(k) + "=" + encodeURIComponent(v));
+    }
+  }
+  return str.join("&");
+}

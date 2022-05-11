@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-const baseUrl = `https://api.hanhchinhcong.net/opendatanew_sp`
-const bearerToken = 'Bearer 1a2d5c3d-8e81-332a-85ee-fb0966045122'
+const baseUrl = process.env.REACT_APP_API_URL
+const authorization = `Bearer ${process.env.REACT_APP_BEAR_TOKEN}`
 
 const getUserTokenKey = async(user: string, pass: string) => {
   try {
@@ -10,7 +10,7 @@ const getUserTokenKey = async(user: string, pass: string) => {
       url: `${baseUrl}/usertokenkey?user=${user}&pass=${pass}`,
       timeout: 15000,
       headers: {
-        Authorization: bearerToken,
+        Authorization: authorization,
       },
     })
 
@@ -28,7 +28,7 @@ const getUserInfo = async(token: string) => {
       url: `${baseUrl}/userinfo`,
       timeout: 15000,
       headers: {
-        Authorization: bearerToken,
+        Authorization: authorization,
         userTokenKey: token,
       },
     })

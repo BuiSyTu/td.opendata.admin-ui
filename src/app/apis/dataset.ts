@@ -1,19 +1,24 @@
-import { Dataset } from 'src/app/models'
+import { Dataset, DatasetListFilter } from 'src/app/models'
+
 import axios from 'axios'
+import { getCookie } from 'src/utils/cookies'
 import { notification } from 'antd'
+import { toQueryString } from 'src/utils/common'
 
 const controllerName = 'datasets'
 const baseUrl = `${process.env.REACT_APP_API_URL}/${controllerName}`
 const authorization = `Bearer ${process.env.REACT_APP_BEAR_TOKEN}`
 
 
-const getAll = async () => {
+const getAll = async (listFilter?: DatasetListFilter) => {
   try {    
+    const params = toQueryString(listFilter)
     const res = await axios({
       method: 'GET',
-      url: baseUrl,
+      url: `${baseUrl}?${params}`,
       headers: {
         'Authorization': authorization,
+        'TDAuthorization': getCookie('token'),
       },
       timeout: 15000,
     })
@@ -32,6 +37,7 @@ const add = async (data: Dataset) => {
       headers: {
         'Authorization': authorization,
         'Content-Type': 'application/json',
+        'TDAuthorization': getCookie('token'),
       },
       url: baseUrl,
       data,
@@ -52,6 +58,7 @@ const getById = async (id: string) => {
       url: `${baseUrl}/${id}`,
       headers: {
         'Authorization': authorization,
+        'TDAuthorization': getCookie('token'),
       },
       timeout: 15000,
     })
@@ -70,6 +77,7 @@ const getData = async (id: string) => {
       url: `${baseUrl}/${id}/data`,
       headers: {
         'Authorization': authorization,
+        'TDAuthorization': getCookie('token'),
       },
       timeout: 15000,
     })
@@ -88,6 +96,7 @@ const update = async (id: string, data: Dataset) => {
       url: `${baseUrl}/${id}`,
       headers: {
         'Authorization': authorization,
+        'TDAuthorization': getCookie('token'),
       },
       data,
       timeout: 15000,
@@ -118,6 +127,10 @@ const _delete = async(id: string) => {
     const res = await axios({
       method: 'DELETE',
       url: `${baseUrl}/${id}`,
+      headers: {
+        'Authorization': authorization,
+        'TDAuthorization': getCookie('token'),
+      },
       timeout: 15000,
     })
 
@@ -133,6 +146,10 @@ const approved = async(id: string) => {
     const res = await axios({
       method: 'PATCH',
       url: `${baseUrl}/approved/${id}`,
+      headers: {
+        'Authorization': authorization,
+        'TDAuthorization': getCookie('token'),
+      },
       timeout: 15000,
     })
 
@@ -148,6 +165,10 @@ const rejected = async(id: string) => {
     const res = await axios({
       method: 'PATCH',
       url: `${baseUrl}/rejected/${id}`,
+      headers: {
+        'Authorization': authorization,
+        'TDAuthorization': getCookie('token'),
+      },
       timeout: 15000,
     })
 
@@ -163,6 +184,10 @@ const syncData = async(id: string) => {
     const res = await axios({
       method: 'PATCH',
       url: `${baseUrl}/syncdata/${id}`,
+      headers: {
+        'Authorization': authorization,
+        'TDAuthorization': getCookie('token'),
+      },
       timeout: 15000,
     })
 

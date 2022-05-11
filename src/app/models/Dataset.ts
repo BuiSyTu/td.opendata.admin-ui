@@ -31,3 +31,19 @@ export interface Dataset {
   datasetFileConfig?: DatasetFileConfig,
   datasetDBConfig?: DatasetDBConfig
 }
+
+export interface DatasetListFilter {
+  licenseId?: string,
+  organizationId?: string,
+  dataTypeId?: string,
+  categoryId?: string,
+  providerTypeId?: string,
+  approveState?: ApproveState,
+  visibility?: boolean,
+}
+
+export enum ApproveState {
+  PENDING = 0,
+  APPROVED = 1,
+  REJECTED = 2,
+}

@@ -1,5 +1,6 @@
 import { Category } from 'src/app/models'
 import axios from 'axios'
+import { getCookie } from 'src/utils/cookies';
 
 const controllerName = 'categories'
 const baseUrl = `${process.env.REACT_APP_API_URL}/${controllerName}`
@@ -13,6 +14,7 @@ const getAll = async () => {
       timeout: 15000,
       headers: {
         'Authorization': authorization,
+        'TDAuthorization': getCookie('token'),
       }
     })
 
@@ -30,6 +32,7 @@ const add = async (data: Category) => {
       headers: {
         'Authorization': authorization,
         'Content-Type': 'application/json',
+        'TDAuthorization': getCookie('token'),
       },
       url: baseUrl,
       data,
@@ -50,6 +53,7 @@ const getById = async (id: string) => {
       url: `${baseUrl}/${id}`,
       headers: {
         'Authorization': authorization,
+        'TDAuthorization': getCookie('token'),
       },
       timeout: 15000,
     })
@@ -69,6 +73,7 @@ const update = async (id: string, data: Category) => {
       url: `${baseUrl}/${id}`,
       headers: {
         'Authorization': authorization,
+        'TDAuthorization': getCookie('token'),
       },
       data,
       timeout: 15000,
@@ -88,6 +93,7 @@ const _delete = async(id: string) => {
       url: `${baseUrl}/${id}`,
       headers: {
         'Authorization': authorization,
+        'TDAuthorization': getCookie('token'),
       },
       timeout: 15000,
     })

@@ -1,9 +1,11 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from 'react'
+
 import {Redirect, Route, Switch, useHistory} from 'react-router-dom'
-import {Error500} from './components/Error500'
+
 import {Error404} from './components/Error404'
-import {toAbsoluteUrl} from '../../../_metronic/helpers'
+import {Error500} from './components/Error500'
+import React from 'react'
+import {toAbsoluteUrl} from 'src/_metronic/helpers'
 
 const ErrorsPage: React.FC = () => {
   const history = useHistory()
@@ -45,14 +47,14 @@ const ErrorsPage: React.FC = () => {
           </div>
           <div
             className='
-          d-flex
-          flex-row-auto
-          bgi-no-repeat
-          bgi-position-x-center
-          bgi-size-contain
-          bgi-position-y-bottom
-          min-h-100px min-h-lg-350px
-        '
+              d-flex
+              flex-row-auto
+              bgi-no-repeat
+              bgi-position-x-center
+              bgi-size-contain
+              bgi-position-y-bottom
+              min-h-100px min-h-lg-350px
+            '
             style={{
               backgroundImage: `url('${toAbsoluteUrl('/media/illustrations/sketchy-1/17.png')}')`,
             }}

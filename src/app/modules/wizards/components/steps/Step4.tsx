@@ -1,6 +1,6 @@
+import {ErrorMessage, Field} from 'formik'
+import {KTSVG, toAbsoluteUrl} from 'src/_metronic/helpers'
 import React, {FC} from 'react'
-import {KTSVG, toAbsoluteUrl} from '../../../../../_metronic/helpers'
-import {Field, ErrorMessage} from 'formik'
 
 const Step4: FC = () => {
   return (

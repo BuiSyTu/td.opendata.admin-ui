@@ -4,7 +4,7 @@ import React, {useEffect} from 'react'
 import {Redirect, Route, Switch} from 'react-router-dom'
 
 import {Login} from './components/Login'
-import {toAbsoluteUrl} from '../../../_metronic/helpers'
+import {toAbsoluteUrl} from 'src/_metronic/helpers'
 
 export function AuthPage() {
   useEffect(() => {

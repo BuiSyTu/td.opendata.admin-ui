@@ -1,11 +1,11 @@
-import React, {FC} from 'react'
 import {
   FeedsWidget2,
   FeedsWidget3,
   FeedsWidget4,
   FeedsWidget5,
   FeedsWidget6,
-} from '../../../../_metronic/partials/widgets'
+} from 'src/_metronic/partials/widgets'
+import React, {FC} from 'react'
 
 const Feeds: FC = () => {
   return (

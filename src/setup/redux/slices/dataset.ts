@@ -70,37 +70,37 @@ export const datasetSlice:Slice = createSlice({
   name: 'dataset',
   initialState: initalState,
   reducers: {
-    setTabKey(state, action) {
+    setTabKey(state: any, action: any) {
       state.tabKey = action.payload ?? TabKey.information
     },
-    setModalId(state, action) {
+    setModalId(state: any, action: any) {
       state.modalId = action.payload ?? ''
     },
-    setTypeModal(state, action) {
+    setTypeModal(state: any, action: any) {
       state.typeModal = action.payload ?? TypeModal.none
     },
-    setModalVisible(state, action) {
+    setModalVisible(state: any, action: any) {
       state.modalVisible = action.payload ?? false
     },
-    setDisableDataTab(state, action) {
+    setDisableDataTab(state: any, action: any) {
       state.disableDataTab = action.payload ?? true
     },
-    setDataTypeCode(state, action) {
+    setDataTypeCode(state: any, action: any) {
       state.dataTypeCode = action.payload ?? DataTypeCode.none
     },
-    setDataPreview(state, action) {
+    setDataPreview(state: any, action: any) {
       state.dataPreview = action.payload ?? []
     },
-    setColumnPreview(state, action) {
+    setColumnPreview(state: any, action: any) {
       state.columnPreview = action.payload ?? []
     },
-    setDataMetadata(state, action) {
+    setDataMetadata(state: any, action: any) {
       state.dataMetadata = action.payload ?? []
     },
-    setColumnMetata(state, action) {
+    setColumnMetata(state: any, action: any) {
       state.columnMetadata = action.payload ?? []
     },
-    setDataUpload(state, action) {
+    setDataUpload(state: any, action: any) {
       state.dataUpload = action.payload ?? []
     }
   }

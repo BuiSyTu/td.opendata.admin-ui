@@ -1,4 +1,3 @@
-import React, {FC} from 'react'
 import {
   ListsWidget1,
   ListsWidget2,
@@ -8,7 +7,8 @@ import {
   ListsWidget6,
   ListsWidget7,
   ListsWidget8,
-} from '../../../../_metronic/partials/widgets'
+} from 'src/_metronic/partials/widgets'
+import React, {FC} from 'react'
 
 const Lists: FC = () => {
   return (

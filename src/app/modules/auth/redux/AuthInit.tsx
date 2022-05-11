@@ -5,9 +5,9 @@ import * as auth from './AuthRedux';
 
 import {ConnectedProps, connect, shallowEqual, useDispatch, useSelector} from 'react-redux';
 import {FC, useEffect, useRef, useState} from 'react';
+import { getCookie, setCookie } from 'src/utils/cookies';
 
 import {RootState} from '../../../../setup';
-import { getCookie } from 'src/utils/cookies';
 
 const mapState = (state: RootState) => ({auth: state.auth});
 const connector = connect(mapState, auth.actions);
@@ -19,7 +19,9 @@ const AuthInit: FC<PropsFromRedux> = (props) => {
 
   if (!token) {
     token =
-      'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTA1NDA5NDUsImV4cCI6MTc0NTIzNTM0NSwidXNlciI6ImRlbW8xIiwic3ViIjoiZGVtbzEiLCJyb2xlcyI6W10sInBlcm1pc3Npb25zIjpbIkRhdGFIVC5UaHVUaGFwIiwiRGF0YUhULkR1eWV0IiwiRGF0YURWLlRodVRoYXAiXSwidXNlclBvc2l0aW9uQ29kZSI6IjgzNmY4MmFkLWMyM2UtNGE0YS05MTVjLWVkOTZjNjAwYWM5MiIsInVzZXJPZmZpY2UiOiIxOyNmNjY0NGVjMC1iZDQ3LTQzMTItOTUxNS1jODIwMzZhZWRlY2EiLCJhcmVhQ29kZSI6bnVsbH0.ry-zXbeR1yGVb4UepwhCOIwK39M9bHg6taMcwU_oGuU"';
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJhOTIzNzJiNi0wODQyLTQzZWItYmM3ZS0zZjhiMmRlOGI1MjciLCJzdWIiOiJyb290LmFkbWluIiwiZW1haWwiOiJhZG1pbkByb290LmNvbSIsImlwQWRkcmVzcyI6IjE5Mi4xNjguMi4xNjkiLCJ0ZW5hbnQiOiJyb290IiwiaXNzIjoidm5kIiwiYXVkIjoidm5kIiwicm9sZXMiOiJBZG1pbiIsImV4cCI6MTY1MTM4ODQ0Nn0.oWue4Oa9j7x-kfW7rKDDc4h4I56wajfmC0GaFABQ2UU';
+
+    setCookie('token', token, '/')
   }
 
   if (!token) {

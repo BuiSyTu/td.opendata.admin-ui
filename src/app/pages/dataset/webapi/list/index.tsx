@@ -1,35 +1,41 @@
-import {Divider, Input, Popconfirm, Typography, notification} from 'antd'
-import {useEffect, useState} from 'react'
+import { Divider, Input, Popconfirm, Tag, Typography, notification } from 'antd'
+import { State, TypeModal, setDisableDataTab } from 'src/setup/redux/slices/dataset'
+import {danger, secondary, success} from 'src/app/constants/color'
+import { useEffect, useState } from 'react'
 
-import FormModal from './components/FormModal'
-import {PageTitle} from 'src/_metronic/layout/core'
+import FormModal from 'src/app/pages/dataset/components/FormModal'
+import { PageTitle } from 'src/_metronic/layout/core'
 import TableList from 'src/app/components/TableList'
-import { categoryApi } from 'src/app/apis/category'
+import { datasetApi } from 'src/app/apis'
+import { openJsonInNewTab } from 'src/utils/common'
+import { useDispatch } from 'react-redux'
 
-const {Text} = Typography
-const {Search} = Input
+const { Text } = Typography
+const { Search } = Input
 
-const CategoryPage = () => {
-  const [loading, setLoading] = useState(false)
+const ListPage = () => {
+  const dispatch = useDispatch()
+  
   const [modalVisible, setModalVisible] = useState(false)
+  const [modalId, setModalId] = useState('')
+  const [typeModal, setTypeModal] = useState<TypeModal>(TypeModal.none)
+  const [loading, setLoading] = useState(false)
   const [update, setUpdate] = useState(true)
   const [inputValue, setInputValue] = useState('')
   const [dataTable, setDataTable] = useState([])
   const [size, setSize] = useState(10)
   const [count, setCount] = useState(0)
   const [offset, setOffset] = useState(0)
-  const [modalId, setModalId] = useState('')
-  const [typeModal, setTypeModal] = useState('')
-  
+
   const columns = [
     {
       title: 'STT',
       dataIndex: '',
       key: '',
       align: 'center',
-      render: (text: unknown, record: unknown, index: any) => {
+      render: (text: any, record: any, index: any) => {
         return (
-          <Text style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+          <Text style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             {index + 1}
           </Text>
         )
@@ -40,13 +46,67 @@ const CategoryPage = () => {
       title: 'Tên',
       dataIndex: 'name',
       key: 'name',
-      width: '45%',
+      width: '20%',
     },
     {
       title: 'Mã',
       dataIndex: 'code',
       key: 'code',
-      width: '35%',
+      width: '10%',
+    },
+    {
+      title: 'Trạng thái dữ liệu',
+      dataIndex: 'state',
+      key: 'state',
+      width: '20%',
+      render: (text: any, record: any, index: any) => {
+        const getApproveState = () => {
+          let color = secondary
+          let textDisplay = 'Không xác định'
+  
+          switch (record?.approveState) {
+            case State.pending:
+              textDisplay = 'Chưa duyệt'
+              break;
+            case State.approved:
+              color = success
+              textDisplay = 'Đã duyệt'
+              break;
+            case State.rejected:
+              color = danger
+              textDisplay = 'Bị từ chối'
+              break;
+            default:
+              break;
+          }
+
+          return {
+            color,
+            textDisplay
+          }
+        }
+
+        const getIsSynced = () => {
+          return {
+            color: record?.isSynced ? success : secondary,
+            textDisplay: record?.isSynced ? 'Đã đồng bộ' : 'Đang đồng bộ',
+          }
+        }
+
+        const { color: colorApproveState, textDisplay: textApproveState } = getApproveState()
+        const { color: colorSynced, textDisplay: textSynced } = getIsSynced()
+
+        return (
+          <>
+            <Tag color={colorApproveState}>
+              {textApproveState}
+            </Tag>
+            <Tag color={colorSynced}>
+              {textSynced}
+            </Tag>
+          </>
+        );
+      },
     },
     {
       title: 'Thao tác',
@@ -64,10 +124,10 @@ const CategoryPage = () => {
               handleView(record.id)
             }}
           >
-            <i className='la la-file-text-o' style={{marginLeft: -7}}></i>
+            <i className='la la-file-text-o' style={{ marginLeft: -7 }}></i>
           </button>
           <button
-            style={{marginLeft: 10}}
+            style={{ marginLeft: 10 }}
             className='btn btn-light-primary m-btn m-btn--icon btn-sm m-btn--icon-only'
             data-toggle='m-tooltip'
             title='Sửa'
@@ -75,7 +135,7 @@ const CategoryPage = () => {
               handleEdit(record.id)
             }}
           >
-            <i className='la la-edit' style={{marginLeft: -7}}></i>
+            <i className='la la-edit' style={{ marginLeft: -7 }}></i>
           </button>
           <Popconfirm
             title='Xóa dữ liệu？'
@@ -86,14 +146,78 @@ const CategoryPage = () => {
             }}
           >
             <button
-              style={{marginLeft: 10}}
+              style={{ marginLeft: 10 }}
               className='btn btn-light-danger m-btn m-btn--icon btn-sm m-btn--icon-only'
               data-toggle='m-tooltip'
               title='Xóa'
             >
-              <i className='la la-trash' style={{marginLeft: -7}}></i>
+              <i className='la la-trash' style={{ marginLeft: -7 }}></i>
             </button>
           </Popconfirm>
+        </div>
+      ),
+    },
+    {
+      title: 'Dữ liệu',
+      width: '15%',
+      dataIndex: '',
+      key: '',
+      align: 'center',
+      render: (text: any, record: any) => (
+        <div>
+          <button
+            className='btn btn-light-primary m-btn m-btn--icon btn-sm m-btn--icon-only'
+            data-toggle='m-tooltip'
+            title='Đồng bộ lại'
+            onClick={() => {
+              handleSyncData(record.id)
+            }}
+          >
+            <i className='la la-sync' style={{ marginLeft: -7 }}></i>
+          </button>
+          <button
+            style={{ marginLeft: 10 }}
+            className='btn btn-light-success m-btn m-btn--icon btn-sm m-btn--icon-only'
+            data-toggle='m-tooltip'
+            title='Xem dữ liệu mẫu'
+            onClick={() => {
+              handleGetData(record.id)
+            }}
+          >
+            <i className='la la-eye' style={{ marginLeft: -7 }}></i>
+          </button>
+        </div>
+      ),
+    },
+    {
+      title: 'Xét duyệt',
+      width: '15%',
+      dataIndex: '',
+      key: '',
+      align: 'center',
+      render: (text: any, record: any) => (
+        <div>
+          <button
+            className='btn btn-light-success m-btn m-btn--icon btn-sm m-btn--icon-only'
+            data-toggle='m-tooltip'
+            title='Duyệt'
+            onClick={() => {
+              handleApproved(record.id)
+            }}
+          >
+            <i className='la la-check' style={{ marginLeft: -7 }}></i>
+          </button>
+          <button
+            style={{ marginLeft: 10 }}
+            className='btn btn-light-danger m-btn m-btn--icon btn-sm m-btn--icon-only'
+            data-toggle='m-tooltip'
+            title='Từ chối'
+            onClick={() => {
+              handleRejected(record.id)
+            }}
+          >
+            <i className='la la-times' style={{ marginLeft: -7 }}></i>
+          </button>
         </div>
       ),
     },
@@ -103,7 +227,7 @@ const CategoryPage = () => {
     const fetchData = async () => {
       try {
         setLoading(true)
-        var res = await categoryApi.getAll()
+        var res = await datasetApi.getAll()
         setDataTable(res?.data ?? [])
         setCount(res?.totalCount ?? 0)
         setLoading(false)
@@ -112,37 +236,49 @@ const CategoryPage = () => {
       }
       setUpdate(false)
     }
+
     if (update) {
       fetchData()
     }
-    return () => {}
+    return () => { }
   }, [update])
 
   useEffect(() => {
     setUpdate(true)
-    return () => {}
+    return () => { }
   }, [offset, size, inputValue])
 
   const handleEdit = (id: string) => {
-    setModalId(id)
-    setTypeModal('edit')
     setModalVisible(true)
+    setModalId(id)
+    setTypeModal(TypeModal.edit)
+
+    dispatch(setDisableDataTab(false))
   }
 
   const handleView = (id: string) => {
-    setModalId(id)
-    setTypeModal('view')
     setModalVisible(true)
+    setModalId(id)
+    setTypeModal(TypeModal.view)
+    
+    dispatch(setDisableDataTab(false))
+  }
+
+  const handleAdd = () => {
+    setModalVisible(true)
+    setTypeModal(TypeModal.add)
   }
 
   const handleDelete = async (id: string) => {
-    var res = await categoryApi.delete(id)
+    var res = await datasetApi.delete(id)
     if (res) {
       notification.success({
         message: 'Xóa thành công!',
         duration: 1,
         placement: 'bottomRight',
       })
+
+      setUpdate(true)
     } else {
       notification.error({
         message: `Thất bại!`,
@@ -150,15 +286,87 @@ const CategoryPage = () => {
       })
     }
   }
-  
+
+  const handleApproved = async (id: string) => {
+    var res = await datasetApi.approved(id)
+    if (res) {
+      notification.success({
+        message: 'Thành công!',
+        duration: 1,
+        placement: 'bottomRight',
+      })
+
+      setUpdate(true)
+    } else {
+      notification.error({
+        message: `Thất bại!`,
+        description: 'Không thành công.',
+      })
+    }
+  }
+
+  const handleRejected = async (id: string) => {
+    var res = await datasetApi.rejected(id)
+    if (res) {
+      notification.success({
+        message: 'Thành công!',
+        duration: 1,
+        placement: 'bottomRight',
+      })
+
+      setUpdate(true)
+    } else {
+      notification.error({
+        message: 'Thất bại!',
+        description: 'Không thành công.',
+      })
+    }
+  }
+
+  const handleSyncData = async (id: string) => {
+    notification.warning({
+      message: 'Đang đồng bộ!',
+      duration: 2,
+      placement: 'bottomRight',
+    });
+
+    var res = await datasetApi.syncData(id)
+    if (res) {
+      notification.success({
+        message: 'Thành công!',
+        duration: 1,
+        placement: 'bottomRight',
+      })
+
+      setUpdate(true)
+    } else {
+      notification.error({
+        message: `Thất bại!`,
+        description: 'Không thành công.',
+      })
+    }
+  }
+
+  const handleGetData = async (id: string) => {
+    var res = await datasetApi.getData(id)
+    if (res) {
+      openJsonInNewTab(res)
+    } else {
+      notification.error({
+        message: `Thất bại!`,
+        description: 'Không thành công.',
+      })
+    }
+  }
+
   return (
     <div>
-      <PageTitle breadcrumbs={[]}>Danh sách lĩnh vực</PageTitle>
+      <PageTitle breadcrumbs={[]}>Danh sách tập dữ liệu</PageTitle>
       <div className='card mb-5 mb-xl-12 py-5'>
         <div className='d-flex row justify-content-between align-items-center px-5'>
           <div className='col-xl-8 d-flex align-items-center'>
             <Search
-              style={{width: '40%', height: 35, borderRadius: 10}}
+              style={{ width: '40%', height: 35, borderRadius: 10 }}
               placeholder='Tìm kiếm'
               onSearch={(e) => {
                 setInputValue(e)
@@ -168,15 +376,13 @@ const CategoryPage = () => {
           <div className='col-xl-4 d-flex justify-content-end'>
             <button
               className=' btn btn-success btn-sm m-btn m-btn--icon'
-              onClick={() => {
-                setModalVisible(true)
-              }}
+              onClick={() => handleAdd()}
             >
               <i className='bi bi-plus-square'></i> Thêm
             </button>
           </div>
         </div>
-        <Divider style={{margin: '10px 0'}} />
+        <Divider style={{ margin: '10px 0' }} />
         <TableList
           dataTable={dataTable}
           columns={columns}
@@ -201,4 +407,4 @@ const CategoryPage = () => {
   )
 }
 
-export default CategoryPage
+export default ListPage

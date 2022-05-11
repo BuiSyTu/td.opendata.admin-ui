@@ -24,27 +24,26 @@ export const globalSlice = createSlice({
       state = initialState;
     },
     setAccessToken: (state, action) => {
-      const payload = action.payload;
-      state.accessToken = payload;
+      state.accessToken = action.payload;
     },
     setDataUser: (state, action) => {
-      const payload = action.payload?.Info ?? [];
+      const dataInfo = action.payload?.Info ?? [];
       const dataRole = action.payload?.Role ?? [];
 
       state.actionsLoading = false;
       state.error = null;
-      state.dataUser = payload;
+      state.dataUser = dataInfo;
       state.dataRole = dataRole;
 
       try {
-        state.user = payload[0];
+        state.user = dataInfo[0];
 
         var arrDonVi = [];
 
-        state.currentDonViDashboard = payload[0].UserOffice;
-        arrDonVi.push(payload[0].UserOffice);
+        state.currentDonViDashboard = dataInfo[0].UserOffice;
+        arrDonVi.push(dataInfo[0].UserOffice);
 
-        let DonViTheoDoi_str = payload[0]?.DonViTheoDoi ?? '[]';
+        let DonViTheoDoi_str = dataInfo[0]?.DonViTheoDoi ?? '[]';
 
         try {
           let donvitheodoi = JSON.parse(DonViTheoDoi_str);
@@ -54,7 +53,7 @@ export const globalSlice = createSlice({
         arrDonVi = _.uniq(arrDonVi, 'GroupCode');
 
         var arrDoiTuongDanhGia = [];
-        let TenNhomDoiTuongDanhGia_str = payload[0]?.TenNhomDoiTuongDanhGia ?? '[]';
+        let TenNhomDoiTuongDanhGia_str = dataInfo[0]?.TenNhomDoiTuongDanhGia ?? '[]';
 
         try {
           let donvitheodoi = JSON.parse(TenNhomDoiTuongDanhGia_str);
@@ -63,7 +62,7 @@ export const globalSlice = createSlice({
 
         state.listDoiTuongDanhGia = arrDoiTuongDanhGia;
         state.listDonViTheoDoi = arrDonVi;
-        state.listDonViDashboard = [payload[0].UserOffice];
+        state.listDonViDashboard = [dataInfo[0].UserOffice];
       } catch (error) {
         state.currentChucVu = null;
       }

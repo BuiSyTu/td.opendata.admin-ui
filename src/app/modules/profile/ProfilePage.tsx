@@ -1,12 +1,13 @@
-import React from 'react'
+import {PageLink, PageTitle} from 'src/_metronic/layout/core'
 import {Redirect, Route, Switch} from 'react-router-dom'
-import {PageLink, PageTitle} from '../../../_metronic/layout/core'
-import {Overview} from './components/Overview'
-import {Projects} from './components/Projects'
+
 import {Campaigns} from './components/Campaigns'
-import {Documents} from './components/Documents'
 import {Connections} from './components/Connections'
+import {Documents} from './components/Documents'
+import {Overview} from './components/Overview'
 import {ProfileHeader} from './ProfileHeader'
+import {Projects} from './components/Projects'
+import React from 'react'
 
 const profileBreadCrumbs: Array<PageLink> = [
   {

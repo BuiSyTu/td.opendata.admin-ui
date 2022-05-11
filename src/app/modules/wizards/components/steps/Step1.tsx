@@ -1,7 +1,9 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
+
+import {ErrorMessage, Field} from 'formik'
 import React, {FC} from 'react'
-import {KTSVG} from '../../../../../_metronic/helpers'
-import {Field, ErrorMessage} from 'formik'
+
+import {KTSVG} from 'src/_metronic/helpers'
 
 const Step1: FC = () => {
   return (

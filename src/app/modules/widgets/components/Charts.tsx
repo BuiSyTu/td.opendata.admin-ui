@@ -1,4 +1,3 @@
-import React, {FC} from 'react'
 import {
   ChartsWidget1,
   ChartsWidget2,
@@ -8,7 +7,8 @@ import {
   ChartsWidget6,
   ChartsWidget7,
   ChartsWidget8,
-} from '../../../../_metronic/partials/widgets'
+} from 'src/_metronic/partials/widgets'
+import React, {FC} from 'react'
 
 const Charts: FC = () => {
   return (

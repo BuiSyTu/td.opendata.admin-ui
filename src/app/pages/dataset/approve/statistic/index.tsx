@@ -1,5 +1,5 @@
 import { Divider, Input, Tag, Typography } from 'antd'
-import { danger, secondary, success } from 'src/app/constants/color'
+import {danger, secondary, success} from 'src/app/constants/color'
 import { useEffect, useState } from 'react'
 
 import { ApproveState } from 'src/app/models'
@@ -11,8 +11,7 @@ import { datasetApi } from 'src/app/apis'
 const { Text } = Typography
 const { Search } = Input
 
-
-const StatisticByCategoryPage = () => {
+const StatisticPage = () => {
   const [loading, setLoading] = useState(false)
   const [update, setUpdate] = useState(true)
   const [inputValue, setInputValue] = useState('')
@@ -57,7 +56,7 @@ const StatisticByCategoryPage = () => {
         const getApproveState = () => {
           let color = secondary
           let textDisplay = 'Không xác định'
-
+  
           switch (record?.approveState) {
             case State.pending:
               textDisplay = 'Chưa duyệt'
@@ -137,14 +136,6 @@ const StatisticByCategoryPage = () => {
       <div className='card mb-5 mb-xl-12 py-5'>
         <div className='d-flex row justify-content-between align-items-center px-5'>
           <div className='col-xl-8 d-flex align-items-center'>
-            <button type="button" data-code="all" className="category-filter btn btn-secondary me-2 cursor-pointer active">Tất cả</button>
-            <button type="button" data-code="giao-duc" className="category-filter btn btn-secondary me-2 cursor-pointer">Giáo dục</button>
-            <button type="button" data-code="y-te" className="category-filter btn btn-secondary me-2 cursor-pointer">Y tế</button>
-            <button type="button" data-code="linh-vuc-khac-1" className="category-filter btn btn-secondary me-2 cursor-pointer">Lĩnh vực khác 1</button>
-            <button type="button" data-code="linh-vuc-khac-2" className="category-filter btn btn-secondary me-2 cursor-pointer">Lĩnh vực khác 2</button>
-          </div>
-          <Divider style={{ margin: '10px 0' }} />
-          <div className='col-xl-8 d-flex align-items-center'>
             <Search
               style={{ width: '40%', height: 35, borderRadius: 10 }}
               placeholder='Tìm kiếm'
@@ -170,4 +161,4 @@ const StatisticByCategoryPage = () => {
   )
 }
 
-export default StatisticByCategoryPage
+export default StatisticPage

@@ -1,13 +1,14 @@
+import {Form, Formik, FormikValues} from 'formik'
+import {ICreateAccount, createAccountSchemas, inits} from './CreateAccountWizardHelper'
 import React, {FC, useEffect, useRef, useState} from 'react'
-import {KTSVG} from '../../../../_metronic/helpers'
+
+import {KTSVG} from 'src/_metronic/helpers'
 import {Step1} from './steps/Step1'
 import {Step2} from './steps/Step2'
 import {Step3} from './steps/Step3'
 import {Step4} from './steps/Step4'
 import {Step5} from './steps/Step5'
-import {StepperComponent} from '../../../../_metronic/assets/ts/components'
-import {Formik, Form, FormikValues} from 'formik'
-import {ICreateAccount, createAccountSchemas, inits} from './CreateAccountWizardHelper'
+import {StepperComponent} from 'src/_metronic/assets/ts/components'
 
 const Vertical: FC = () => {
   const stepperRef = useRef<HTMLDivElement | null>(null)

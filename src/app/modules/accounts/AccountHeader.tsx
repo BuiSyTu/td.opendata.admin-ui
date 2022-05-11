@@ -1,8 +1,10 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from 'react'
-import {KTSVG, toAbsoluteUrl} from '../../../_metronic/helpers'
+
+import {KTSVG, toAbsoluteUrl} from 'src/_metronic/helpers'
+
+import {Dropdown1} from 'src/_metronic/partials'
 import {Link} from 'react-router-dom'
-import {Dropdown1} from '../../../_metronic/partials'
+import React from 'react'
 import {useLocation} from 'react-router'
 
 const AccountHeader: React.FC = () => {

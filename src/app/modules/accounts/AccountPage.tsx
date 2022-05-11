@@ -1,9 +1,10 @@
-import React from 'react'
+import {PageLink, PageTitle} from 'src/_metronic/layout/core'
 import {Redirect, Route, Switch} from 'react-router-dom'
-import {PageLink, PageTitle} from '../../../_metronic/layout/core'
-import {Overview} from './components/Overview'
-import {Settings} from './components/settings/Settings'
+
 import {AccountHeader} from './AccountHeader'
+import {Overview} from './components/Overview'
+import React from 'react'
+import {Settings} from './components/settings/Settings'
 
 const accountBreadCrumbs: Array<PageLink> = [
   {

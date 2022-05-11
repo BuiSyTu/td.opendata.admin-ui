@@ -80,12 +80,12 @@ export function AsideMenuMain() {
           fontIcon='bi-archive'
           hasBullet={true}
         >
-          <AsideMenuItem to='/dataset/approve/list' title='Đang chờ' hasBullet={true} />
-          <AsideMenuItem to='/dataset/approve/config' title='Không duyệt' hasBullet={true} />
-          <AsideMenuItem to='/dataset/approve/sync-history' title='Đã duyệt' hasBullet={true} />
-          <AsideMenuItem to='/dataset/approve/statistic' title='Thống kê theo lĩnh vực' hasBullet={true} />
-          <AsideMenuItem to='/dataset/approve/statistic' title='Thống kê theo đơn vị cung cấp' hasBullet={true} />
-          <AsideMenuItem to='/dataset/approve/statistic' title='Thống kê theo loại hình thu thập' hasBullet={true} />
+          <AsideMenuItem to='/dataset/approve/pending' title='Đang chờ' hasBullet={true} />
+          <AsideMenuItem to='/dataset/approve/rejected' title='Không duyệt' hasBullet={true} />
+          <AsideMenuItem to='/dataset/approve/approved' title='Đã duyệt' hasBullet={true} />
+          <AsideMenuItem to='/dataset/approve/statistic-by-category' title='Thống kê theo lĩnh vực' hasBullet={true} />
+          <AsideMenuItem to='/dataset/approve/statistic-by-organization' title='Thống kê theo đơn vị cung cấp' hasBullet={true} />
+          <AsideMenuItem to='/dataset/approve/statistic-by-provider-type' title='Thống kê theo loại hình thu thập' hasBullet={true} />
           <AsideMenuItem to='/dataset/approve/statistic' title='Thống kê tổng hợp duyệt dữ liệu' hasBullet={true} />
         </AsideMenuItemWithSub>
       </AsideMenuItemWithSub>
