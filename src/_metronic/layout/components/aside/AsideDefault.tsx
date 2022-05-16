@@ -1,11 +1,13 @@
 /* eslint-disable react/jsx-no-target-blank */
 /* eslint-disable jsx-a11y/anchor-is-valid */
+
+import { KTSVG, toAbsoluteUrl } from 'src/_metronic/helpers'
+
+import { AsideMenu } from './AsideMenu'
 import { FC } from 'react'
 import { Link } from 'react-router-dom'
 import clsx from 'clsx'
-import { useLayout } from '../../core'
-import { KTSVG, toAbsoluteUrl } from '../../../helpers'
-import { AsideMenu } from './AsideMenu'
+import { useLayout } from 'src/_metronic/layout/core'
 
 const AsideDefault: FC = () => {
   const { config, classes } = useLayout()

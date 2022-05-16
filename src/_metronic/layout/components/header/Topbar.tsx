@@ -1,8 +1,9 @@
-import clsx from 'clsx'
+import { HeaderNotificationsMenu, HeaderUserMenu, QuickLinks, Search } from 'src/_metronic/partials'
+import { KTSVG, toAbsoluteUrl } from 'src/_metronic/helpers'
 import React, { FC } from 'react'
-import { KTSVG, toAbsoluteUrl } from '../../../helpers'
-import { HeaderNotificationsMenu, HeaderUserMenu, QuickLinks, Search } from '../../../partials'
-import { useLayout } from '../../core'
+
+import clsx from 'clsx'
+import { useLayout } from 'src/_metronic/layout/core'
 
 const toolbarButtonMarginClass = 'ms-1 ms-lg-3',
   toolbarButtonHeightClass = 'w-30px h-30px w-md-40px h-md-40px',

@@ -3,8 +3,6 @@ import 'react-toastify/dist/ReactToastify.css'
 import './_metronic/assets/sass/style.scss'
 import './_metronic/assets/sass/style.react.scss'
 
-import * as _redux from './setup'
-
 import store, {persistor} from './setup/redux/Store'
 
 import {App} from './app/App'
@@ -13,7 +11,6 @@ import {PersistGate} from 'redux-persist/integration/react'
 import {Provider} from 'react-redux'
 import React from 'react'
 import ReactDOM from 'react-dom'
-import axios from 'axios'
 
 // Redux
 // https://github.com/rt2zz/redux-persist
@@ -60,7 +57,6 @@ const {PUBLIC_URL} = process.env
  *
  * @see https://github.com/axios/axios#interceptors
  */
-_redux.setupAxios(axios, store)
 
 ReactDOM.render(
   <MetronicI18nProvider>

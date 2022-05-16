@@ -1,11 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import clsx from 'clsx'
-import { Link } from 'react-router-dom'
+
 import { KTSVG, toAbsoluteUrl } from '../../../helpers'
-import { useLayout } from '../../core'
-import { Header } from './Header'
+
 import { DefaultTitle } from './page-title/DefaultTitle'
+import { Header } from './Header'
+import { Link } from 'react-router-dom'
 import { Topbar } from './Topbar'
+import clsx from 'clsx'
+import { useLayout } from 'src/_metronic/layout/core'
 
 export function HeaderWrapper() {
   const { config, classes, attributes } = useLayout()

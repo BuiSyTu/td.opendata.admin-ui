@@ -17,13 +17,13 @@ export const datasetFileConfigSlice:Slice = createSlice({
   name: 'datasetFileConfig',
   initialState: initalState,
   reducers: {
-    setFileType(state, action) {
+    setFileType(state: any, action: any) {
       state.fileType = action.payload ?? ''
     },
-    setFileName(state, action) {
+    setFileName(state: any, action: any) {
       state.fileName = action.payload ?? ''
     },
-    setFileUrl(state, action) {
+    setFileUrl(state: any, action: any) {
       state.fileUrl = action.payload ?? ''
     },
   }

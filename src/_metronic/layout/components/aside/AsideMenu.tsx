@@ -1,8 +1,9 @@
-import React, {useRef, useEffect} from 'react'
-import {useLocation} from 'react-router'
-import clsx from 'clsx'
+import {DrawerComponent, ScrollComponent, ToggleComponent} from 'src/_metronic/assets/ts/components'
+import React, {useEffect, useRef} from 'react'
+
 import {AsideMenuMain} from './AsideMenuMain'
-import {DrawerComponent, ScrollComponent, ToggleComponent} from '../../../assets/ts/components'
+import clsx from 'clsx'
+import {useLocation} from 'react-router'
 
 type Props = {
   asideMenuCSSClasses: string[]

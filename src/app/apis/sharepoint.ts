@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const baseUrl = process.env.REACT_APP_API_URL
+const baseUrl = process.env.REACT_APP_API_SP_URL
 const authorization = `Bearer ${process.env.REACT_APP_BEAR_TOKEN}`
 
 const getUserTokenKey = async(user: string, pass: string) => {

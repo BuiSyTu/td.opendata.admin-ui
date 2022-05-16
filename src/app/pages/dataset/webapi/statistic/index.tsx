@@ -1,5 +1,5 @@
 const StatisticPage = () => {
-  return <></>
+  return <>StatisticPage</>
 }
 
 export default StatisticPage

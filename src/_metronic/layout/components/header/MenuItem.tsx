@@ -1,8 +1,9 @@
-import React from 'react'
+import { KTSVG, checkIsActive } from 'src/_metronic/helpers'
+
 import { Link } from 'react-router-dom'
-import { useLocation } from 'react-router'
+import React from 'react'
 import clsx from 'clsx'
-import { checkIsActive, KTSVG } from '../../../helpers'
+import { useLocation } from 'react-router'
 
 type Props = {
   to: string
