@@ -1,7 +1,7 @@
 import { KTSVG, checkIsActive } from 'src/_metronic/helpers'
 import React, { useEffect, useRef } from 'react'
 
-import clsx from 'clsx'
+import classnames from 'classnames'
 import { useLocation } from 'react-router'
 
 type Props = {
@@ -41,7 +41,7 @@ const MenuInnerWithSub: React.FC<Props> = ({
   return (
     <div ref={menuItemRef} className='menu-item menu-lg-down-accordion me-lg-1'>
       <span
-        className={clsx('menu-link py-3', {
+        className={classnames('menu-link py-3', {
           active: checkIsActive(pathname, to),
         })}
       >
@@ -59,7 +59,7 @@ const MenuInnerWithSub: React.FC<Props> = ({
 
         {fontIcon && (
           <span className='menu-icon'>
-            <i className={clsx('bi fs-3', fontIcon)}></i>
+            <i className={classnames('bi fs-3', fontIcon)}></i>
           </span>
         )}
 
@@ -68,7 +68,7 @@ const MenuInnerWithSub: React.FC<Props> = ({
         {hasArrow && <span className='menu-arrow'></span>}
       </span>
       <div
-        className={clsx(
+        className={classnames(
           'menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown',
           isMega ? 'w-100 w-lg-600px p-5 p-lg-5' : 'menu-rounded-0 py-lg-4 w-lg-225px'
         )}

@@ -6,7 +6,7 @@ import { KTSVG, toAbsoluteUrl } from 'src/_metronic/helpers'
 import { AsideMenu } from './AsideMenu'
 import { FC } from 'react'
 import { Link } from 'react-router-dom'
-import clsx from 'clsx'
+import classnames from 'classnames'
 import { useLayout } from 'src/_metronic/layout/core'
 
 const AsideDefault: FC = () => {
@@ -16,7 +16,7 @@ const AsideDefault: FC = () => {
   return (
     <div
       id='kt_aside'
-      className={clsx('aside', classes.aside.join(' '))}
+      className={classnames('aside', classes.aside.join(' '))}
       data-kt-drawer='true'
       data-kt-drawer-name='aside'
       data-kt-drawer-activate='{default: true, lg: false}'

@@ -20,7 +20,8 @@
       right: 0;
       left: 0;
       z-index: get($header-config, fixed, z-index);
-      background-color: get($header-config, fixed, bg-color);
+      // background-color: get($header-config, fixed, bg-color);
+      background-image: url('/assets/header.jpg');
       height: get($header-config, fixed, height, desktop);
       padding: 0;
       box-shadow: get($header-config, fixed, box-shadow);

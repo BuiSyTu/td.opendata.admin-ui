@@ -1,9 +1,11 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, {useEffect, useRef} from 'react'
-import {KTSVG} from '../../../helpers'
+
 import ApexCharts, {ApexOptions} from 'apexcharts'
+import React, {useEffect, useRef} from 'react'
 import {getCSS, getCSSVariableValue} from '../../../assets/ts/_utils'
-import clsx from 'clsx'
+
+import {KTSVG} from '../../../helpers'
+import classnames from 'classnames'
 
 type Props = {
   className: string
@@ -46,7 +48,7 @@ const StatisticsWidget4: React.FC<Props> = ({className, svgIcon, color, change, 
       {/* begin::Body */}
       <div className='card-body p-0'>
         <div className='d-flex flex-stack card-p flex-grow-1'>
-          <span className={clsx('symbol symbol-50px', `symbol-light-${color}`, 'me-2')}>
+          <span className={classnames('symbol symbol-50px', `symbol-light-${color}`, 'me-2')}>
             <span className='symbol-label'>
               <KTSVG path={svgIcon} className={`svg-icon-2x svg-icon-${color}`} />
             </span>

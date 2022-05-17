@@ -1,8 +1,10 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import clsx from 'clsx'
-import React from 'react'
+
 import {KTSVG, toAbsoluteUrl} from '../../../helpers'
+
 import {Dropdown1} from '../../content/dropdown/Dropdown1'
+import React from 'react'
+import classnames from 'classnames'
 
 type Props = {
   className: string
@@ -24,7 +26,7 @@ const MixedWidget4: React.FC<Props> = ({className, color, image, title, date, pr
           <div className='d-flex align-items-center'>
             {/* begin:Image */}
             <div className='symbol symbol-60px me-5'>
-              <span className={clsx(`symbol-label`, `bg-${color}-light`)}>
+              <span className={classnames(`symbol-label`, `bg-${color}-light`)}>
                 <img src={toAbsoluteUrl(image)} className='h-50 align-self-center' alt='' />
               </span>
             </div>

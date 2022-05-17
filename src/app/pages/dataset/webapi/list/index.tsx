@@ -227,7 +227,7 @@ const ListPage = () => {
     const fetchData = async () => {
       try {
         setLoading(true)
-        var res = await datasetApi.getAll()
+        var res = await datasetApi.getAll({ dataTypeCode: 'webapi' })
         setDataTable(res?.data ?? [])
         setCount(res?.totalCount ?? 0)
         setLoading(false)

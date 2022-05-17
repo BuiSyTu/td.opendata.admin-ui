@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import clsx from 'clsx'
+
 import React from 'react'
+import classnames from 'classnames'
 
 type Props = {
   className: string
@@ -24,7 +25,7 @@ const EngageWidget2: React.FC<Props> = ({
               Nike Sneakers
             </a>
           </h3>
-          <div className={clsx('fs-3', `text-${color}`)}>Get Amazing Nike Sneakers</div>
+          <div className={classnames('fs-3', `text-${color}`)}>Get Amazing Nike Sneakers</div>
         </div>
         {imagePath && (
           <div

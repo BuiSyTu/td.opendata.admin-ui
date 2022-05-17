@@ -1,12 +1,15 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, {useState} from 'react'
-import {useDispatch} from 'react-redux'
+
 import * as Yup from 'yup'
-import clsx from 'clsx'
-import {Link} from 'react-router-dom'
-import {useFormik} from 'formik'
 import * as auth from '../redux/AuthRedux'
+
+import React, {useState} from 'react'
+
+import {Link} from 'react-router-dom'
+import classnames from 'classnames'
 import {login} from '../redux/AuthCRUD'
+import {useDispatch} from 'react-redux'
+import {useFormik} from 'formik'
 
 const loginSchema = Yup.object().shape({
   email: Yup.string()
@@ -80,7 +83,7 @@ export function Login() {
         <input
           placeholder='Tên đăng nhập'
           {...formik.getFieldProps('email')}
-          className={clsx(
+          className={classnames(
             'form-control form-control-lg form-control-solid',
             {'is-invalid': formik.touched.email && formik.errors.email},
             {
@@ -120,7 +123,7 @@ export function Login() {
           type='password'
           autoComplete='off'
           {...formik.getFieldProps('password')}
-          className={clsx(
+          className={classnames(
             'form-control form-control-lg form-control-solid',
             {
               'is-invalid': formik.touched.password && formik.errors.password,

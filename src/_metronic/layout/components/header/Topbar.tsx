@@ -2,7 +2,7 @@ import { HeaderNotificationsMenu, HeaderUserMenu, QuickLinks, Search } from 'src
 import { KTSVG, toAbsoluteUrl } from 'src/_metronic/helpers'
 import React, { FC } from 'react'
 
-import clsx from 'clsx'
+import classnames from 'classnames'
 import { useLayout } from 'src/_metronic/layout/core'
 
 const toolbarButtonMarginClass = 'ms-1 ms-lg-3',
@@ -16,14 +16,14 @@ const Topbar: FC = () => {
   return (
     <div className='d-flex align-items-stretch flex-shrink-0'>
       {/* Search */}
-      <div className={clsx('d-flex align-items-stretch', toolbarButtonMarginClass)}>
+      <div className={classnames('d-flex align-items-stretch', toolbarButtonMarginClass)}>
         <Search />
       </div>
       {/* Activities */}
-      <div className={clsx('d-flex align-items-center', toolbarButtonMarginClass)}>
+      <div className={classnames('d-flex align-items-center', toolbarButtonMarginClass)}>
         {/* begin::Drawer toggle */}
         <div
-          className={clsx('btn btn-icon btn-active-light-primary', toolbarButtonHeightClass)}
+          className={classnames('btn btn-icon btn-active-light-primary', toolbarButtonHeightClass)}
           id='kt_activities_toggle'
         >
           <KTSVG
@@ -34,10 +34,10 @@ const Topbar: FC = () => {
         {/* end::Drawer toggle */}
       </div>
       {/* Quick links */}
-      <div className={clsx('d-flex align-items-center', toolbarButtonMarginClass)}>
+      <div className={classnames('d-flex align-items-center', toolbarButtonMarginClass)}>
         {/* begin::Menu wrapper */}
         <div
-          className={clsx('btn btn-icon btn-active-light-primary', toolbarButtonHeightClass)}
+          className={classnames('btn btn-icon btn-active-light-primary', toolbarButtonHeightClass)}
           data-kt-menu-trigger='click'
           data-kt-menu-attach='parent'
           data-kt-menu-placement='bottom-end'
@@ -53,10 +53,10 @@ const Topbar: FC = () => {
       </div>
 
       {/* CHAT */}
-      <div className={clsx('d-flex align-items-center', toolbarButtonMarginClass)}>
+      <div className={classnames('d-flex align-items-center', toolbarButtonMarginClass)}>
         {/* begin::Menu wrapper */}
         <div
-          className={clsx(
+          className={classnames(
             'btn btn-icon btn-active-light-primary position-relative',
             toolbarButtonHeightClass
           )}
@@ -73,10 +73,10 @@ const Topbar: FC = () => {
       </div>
 
       {/* NOTIFICATIONS */}
-      <div className={clsx('d-flex align-items-center', toolbarButtonMarginClass)}>
+      <div className={classnames('d-flex align-items-center', toolbarButtonMarginClass)}>
         {/* begin::Menu- wrapper */}
         <div
-          className={clsx(
+          className={classnames(
             'btn btn-icon btn-active-light-primary position-relative',
             toolbarButtonHeightClass
           )}
@@ -96,12 +96,12 @@ const Topbar: FC = () => {
 
       {/* begin::User */}
       <div
-        className={clsx('d-flex align-items-center', toolbarButtonMarginClass)}
+        className={classnames('d-flex align-items-center', toolbarButtonMarginClass)}
         id='kt_header_user_menu_toggle'
       >
         {/* begin::Toggle */}
         <div
-          className={clsx('cursor-pointer symbol', toolbarUserAvatarHeightClass)}
+          className={classnames('cursor-pointer symbol', toolbarUserAvatarHeightClass)}
           data-kt-menu-trigger='click'
           data-kt-menu-attach='parent'
           data-kt-menu-placement='bottom-end'

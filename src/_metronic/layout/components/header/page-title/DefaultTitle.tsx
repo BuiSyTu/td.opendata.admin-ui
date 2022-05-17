@@ -1,6 +1,7 @@
-import clsx from 'clsx'
 import React, { FC } from 'react'
+
 import { Link } from 'react-router-dom'
+import classnames from 'classnames'
 import { useLayout } from '../../../core/LayoutProvider'
 import { usePageData } from '../../../core/PageData'
 
@@ -13,7 +14,7 @@ const DefaultTitle: FC = () => {
       data-kt-swapper='true'
       data-kt-swapper-mode='prepend'
       data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}"
-      className={clsx('page-title d-flex', classes.pageTitle.join(' '))}
+      className={classnames('page-title d-flex', classes.pageTitle.join(' '))}
     >
       {/* begin::Title */}
       {pageTitle && (
@@ -40,7 +41,7 @@ const DefaultTitle: FC = () => {
             <ul className='breadcrumb breadcrumb-separatorless fw-bold fs-7 my-1'>
               {Array.from(pageBreadcrumbs).map((item, index) => (
                 <li
-                  className={clsx('breadcrumb-item', {
+                  className={classnames('breadcrumb-item', {
                     'text-dark': !item.isSeparator && item.isActive,
                     'text-muted': !item.isSeparator && !item.isActive,
                   })}

@@ -1,8 +1,10 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import clsx from 'clsx'
+
+import {KTSVG, defaultAlerts, defaultLogs, toAbsoluteUrl} from '../../../helpers'
+
 import {FC} from 'react'
 import {Link} from 'react-router-dom'
-import {KTSVG, toAbsoluteUrl, defaultAlerts, defaultLogs} from '../../../helpers'
+import classnames from 'classnames'
 
 const HeaderNotificationsMenu: FC = () => (
   <div
@@ -57,7 +59,7 @@ const HeaderNotificationsMenu: FC = () => (
             <div key={`alert${index}`} className='d-flex flex-stack py-4'>
               <div className='d-flex align-items-center'>
                 <div className='symbol symbol-35px me-4'>
-                  <span className={clsx('symbol-label', `bg-light-${alert.state}`)}>
+                  <span className={classnames('symbol-label', `bg-light-${alert.state}`)}>
                     {' '}
                     <KTSVG
                       path={`/media/${alert.icon}`}
@@ -125,7 +127,7 @@ const HeaderNotificationsMenu: FC = () => (
           {defaultLogs.map((log, index) => (
             <div key={`log${index}`} className='d-flex flex-stack py-4'>
               <div className='d-flex align-items-center me-2'>
-                <span className={clsx('w-70px badge', `badge-light-${log.state}`, 'me-4')}>
+                <span className={classnames('w-70px badge', `badge-light-${log.state}`, 'me-4')}>
                   {log.code}
                 </span>
 

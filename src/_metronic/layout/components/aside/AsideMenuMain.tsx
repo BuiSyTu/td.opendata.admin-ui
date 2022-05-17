@@ -69,9 +69,11 @@ export function AsideMenuMain() {
           <AsideMenuItem to='/dataset/collect/list' title='Danh sách' hasBullet={true} />
           <AsideMenuItem to='/dataset/collect/config' title='Theo lĩnh vực' hasBullet={true} />
           <AsideMenuItem to='/dataset/collect/sync-history' title='Theo hình thức thu thập' hasBullet={true} />
-          <AsideMenuItem to='/dataset/collect/statistic' title='Theo trạng thái' hasBullet={true} />
-          <AsideMenuItem to='/dataset/collect/statistic' title='Theo đơn vị cung cấp' hasBullet={true} />
-          <AsideMenuItem to='/dataset/collect/statistic' title='Theo loại hình thu thập' hasBullet={true} />
+          <AsideMenuItem to='/dataset/collect/statistic-by-category' title='Theo thể loại' hasBullet={true} />
+          <AsideMenuItem to='/dataset/collect/statistic-by-status' title='Theo trạng thái' hasBullet={true} />
+          <AsideMenuItem to='/dataset/collect/statistic-by-organization' title='Theo đơn vị cung cấp' hasBullet={true} />
+          <AsideMenuItem to='/dataset/collect/statistic-by-data-type' title='Theo loại hình thu thập' hasBullet={true} />
+          <AsideMenuItem to='/dataset/collect/statistic-by-provider-type' title='Theo hình thức cung cấp' hasBullet={true} />
         </AsideMenuItemWithSub>
 
         <AsideMenuItemWithSub

@@ -40,6 +40,7 @@ export interface DatasetListFilter {
   providerTypeId?: string,
   approveState?: ApproveState,
   visibility?: boolean,
+  dataTypeCode?: string,
 }
 
 export enum ApproveState {

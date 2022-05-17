@@ -1,10 +1,12 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, {useEffect, useRef} from 'react'
+
 import ApexCharts, {ApexOptions} from 'apexcharts'
-import {KTSVG} from '../../../helpers'
-import {getCSSVariableValue} from '../../../assets/ts/_utils'
+import React, {useEffect, useRef} from 'react'
+
 import {Dropdown1} from '../../content/dropdown/Dropdown1'
-import clsx from 'clsx'
+import {KTSVG} from '../../../helpers'
+import classnames from 'classnames'
+import {getCSSVariableValue} from '../../../assets/ts/_utils'
 
 type Props = {
   className: string
@@ -43,7 +45,7 @@ const MixedWidget3: React.FC<Props> = ({className, chartColor, chartHeight}) => 
           {/* begin::Menu  */}
           <button
             type='button'
-            className={clsx(
+            className={classnames(
               'btn btn-sm btn-icon btn-color-white btn-active-white',
               `btn-active-color-${chartColor}`,
               'border-0 me-n3'

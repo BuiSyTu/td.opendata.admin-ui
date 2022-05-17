@@ -1,8 +1,9 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import clsx from 'clsx';
-import { FC } from 'react';
-import { useLayout } from '../../core';
+
 import { DefaultTitle } from '../header/page-title/DefaultTitle';
+import { FC } from 'react';
+import classnames from 'classnames';
+import { useLayout } from '../../core';
 
 const Toolbar1: FC = () => {
   const { classes } = useLayout();
@@ -11,7 +12,7 @@ const Toolbar1: FC = () => {
     <div className='toolbar' id='kt_toolbar'>
       <div
         id='kt_toolbar_container'
-        className={clsx(classes.toolbarContainer.join(' '), 'd-flex flex-stack')}
+        className={classnames(classes.toolbarContainer.join(' '), 'd-flex flex-stack')}
       >
         <DefaultTitle />
 

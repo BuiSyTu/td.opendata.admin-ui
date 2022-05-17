@@ -1,14 +1,16 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
+
 import { FC, useState } from 'react'
-import clsx from 'clsx'
 import {
-  toAbsoluteUrl,
-  defaultMessages,
-  defaultUserInfos,
   MessageModel,
   UserInfoModel,
+  defaultMessages,
+  defaultUserInfos,
   messageFromClient,
+  toAbsoluteUrl,
 } from '../../helpers'
+
+import classnames from 'classnames'
 
 type Props = {
   isDrawer?: boolean
@@ -54,7 +56,7 @@ const ChatInner: FC<Props> = ({ isDrawer = false }) => {
       id={isDrawer ? 'kt_drawer_chat_messenger_body' : 'kt_chat_messenger_body'}
     >
       <div
-        className={clsx('scroll-y me-n5 pe-5', { 'h-300px h-lg-auto': !isDrawer })}
+        className={classnames('scroll-y me-n5 pe-5', { 'h-300px h-lg-auto': !isDrawer })}
         data-kt-element='messages'
         data-kt-scroll='true'
         data-kt-scroll-activate='{default: false, lg: true}'
@@ -83,11 +85,11 @@ const ChatInner: FC<Props> = ({ isDrawer = false }) => {
           return (
             <div
               key={`message${index}`}
-              className={clsx('d-flex', contentClass, 'mb-10', { 'd-none': message.template })}
+              className={classnames('d-flex', contentClass, 'mb-10', { 'd-none': message.template })}
               {...templateAttr}
             >
               <div
-                className={clsx(
+                className={classnames(
                   'd-flex flex-column align-items',
                   `align-items-${message.type === 'in' ? 'start' : 'end'}`
                 )}
@@ -127,7 +129,7 @@ const ChatInner: FC<Props> = ({ isDrawer = false }) => {
                 </div>
 
                 <div
-                  className={clsx(
+                  className={classnames(
                     'p-5 rounded',
                     `bg-light-${state}`,
                     'text-dark fw-bold mw-lg-400px',

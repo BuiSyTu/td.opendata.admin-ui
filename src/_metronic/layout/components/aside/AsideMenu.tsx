@@ -2,7 +2,7 @@ import {DrawerComponent, ScrollComponent, ToggleComponent} from 'src/_metronic/a
 import React, {useEffect, useRef} from 'react'
 
 import {AsideMenuMain} from './AsideMenuMain'
-import clsx from 'clsx'
+import classnames from 'classnames'
 import {useLocation} from 'react-router'
 
 type Props = {
@@ -40,7 +40,7 @@ const AsideMenu: React.FC<Props> = ({asideMenuCSSClasses}) => {
       <div
         id='#kt_aside_menu'
         data-kt-menu='true'
-        className={clsx(
+        className={classnames(
           'menu menu-column menu-title-gray-800 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500',
           asideMenuCSSClasses.join(' ')
         )}

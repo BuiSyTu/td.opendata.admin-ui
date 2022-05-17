@@ -41,7 +41,8 @@
 
     // Logo
     .aside-logo {
-      background-color: get($aside-config, logo-bg-color);
+      // background-color: get($aside-config, logo-bg-color);
+      background-image: url('/assets/header.jpg')
     }
 
     // Aside toggle

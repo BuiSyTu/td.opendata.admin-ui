@@ -137,7 +137,7 @@ const StatisticByCategoryPage = () => {
       <div className='card mb-5 mb-xl-12 py-5'>
         <div className='d-flex row justify-content-between align-items-center px-5'>
           <div className='col-xl-8 d-flex align-items-center'>
-            <button type="button" data-code="all" className="category-filter btn btn-secondary me-2 cursor-pointer active">Tất cả</button>
+            <button type="button" data-code="all" className="category-filter btn btn-secondary me-2 cursor-pointer">Tất cả</button>
             <button type="button" data-code="giao-duc" className="category-filter btn btn-secondary me-2 cursor-pointer">Giáo dục</button>
             <button type="button" data-code="y-te" className="category-filter btn btn-secondary me-2 cursor-pointer">Y tế</button>
             <button type="button" data-code="linh-vuc-khac-1" className="category-filter btn btn-secondary me-2 cursor-pointer">Lĩnh vực khác 1</button>

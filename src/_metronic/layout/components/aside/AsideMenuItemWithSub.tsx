@@ -1,7 +1,7 @@
 import { KTSVG, checkIsActive } from 'src/_metronic/helpers'
 
 import React from 'react'
-import clsx from 'clsx'
+import classnames from 'classnames'
 import { useLayout } from 'src/_metronic/layout/core'
 import { useLocation } from 'react-router'
 
@@ -28,7 +28,7 @@ const AsideMenuItemWithSub: React.FC<Props> = ({
 
   return (
     <div
-      className={clsx('menu-item', { 'here show': isActive }, 'menu-accordion')}
+      className={classnames('menu-item', { 'here show': isActive }, 'menu-accordion')}
       data-kt-menu-trigger='click'
     >
       <span className='menu-link'>
@@ -42,11 +42,11 @@ const AsideMenuItemWithSub: React.FC<Props> = ({
             <KTSVG path={icon} className='svg-icon-2' />
           </span>
         )}
-        {fontIcon && aside.menuIcon === 'font' && <i className={clsx('bi fs-3', fontIcon)}></i>}
+        {fontIcon && aside.menuIcon === 'font' && <i className={classnames('bi fs-3', fontIcon)}></i>}
         <span className='menu-title'>{title}</span>
         <span className='menu-arrow'></span>
       </span>
-      <div className={clsx('menu-sub menu-sub-accordion', { 'menu-active-bg': isActive })}>
+      <div className={classnames('menu-sub menu-sub-accordion', { 'menu-active-bg': isActive })}>
         {children}
       </div>
     </div>

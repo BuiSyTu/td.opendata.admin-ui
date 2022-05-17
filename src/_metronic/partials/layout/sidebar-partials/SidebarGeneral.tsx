@@ -1,10 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import clsx from 'clsx'
-import React, {useState, useEffect} from 'react'
+
+import {KTSVG, toAbsoluteUrl} from '../../../helpers'
+import React, {useEffect, useState} from 'react'
+
 import ApexCharts from 'apexcharts'
-import {toAbsoluteUrl, KTSVG} from '../../../helpers'
 import {Dropdown1} from '../../content/dropdown/Dropdown1'
+import classnames from 'classnames'
 
 const chartsData: Array<{
   tabId: number
@@ -198,7 +200,7 @@ export function SidebarGeneral() {
               setTab(0)
               activateChart(0)
             }}
-            className={clsx('nav-link', {active: activeTab === 0})}
+            className={classnames('nav-link', {active: activeTab === 0})}
             id='kt_sidebar_tab_1'
           >
             <img
@@ -220,7 +222,7 @@ export function SidebarGeneral() {
               setTab(1)
               activateChart(1)
             }}
-            className={clsx('nav-link', {active: activeTab === 1})}
+            className={classnames('nav-link', {active: activeTab === 1})}
             id='kt_sidebar_tab_2'
           >
             <img
@@ -242,7 +244,7 @@ export function SidebarGeneral() {
               setTab(2)
               activateChart(2)
             }}
-            className={clsx('nav-link', {active: activeTab === 2})}
+            className={classnames('nav-link', {active: activeTab === 2})}
             id='kt_sidebar_tab_3'
           >
             <img
@@ -264,7 +266,7 @@ export function SidebarGeneral() {
               setTab(3)
               activateChart(3)
             }}
-            className={clsx('nav-link', {active: activeTab === 3})}
+            className={classnames('nav-link', {active: activeTab === 3})}
             id='kt_sidebar_tab_4'
           >
             <img
@@ -286,7 +288,7 @@ export function SidebarGeneral() {
               setTab(4)
               activateChart(4)
             }}
-            className={clsx('nav-link', {active: activeTab === 4})}
+            className={classnames('nav-link', {active: activeTab === 4})}
             id='kt_sidebar_tab_5'
           >
             <img
@@ -317,7 +319,7 @@ export function SidebarGeneral() {
         >
           <div className='tab-content'>
             <div
-              className={clsx('tab-pane', {active: activeTab === 0})}
+              className={classnames('tab-pane', {active: activeTab === 0})}
               id='kt_sidebar_tab_pane_1'
               role='tabpanel'
             >
@@ -516,7 +518,7 @@ export function SidebarGeneral() {
             </div>
 
             <div
-              className={clsx('tab-pane', {active: activeTab === 1})}
+              className={classnames('tab-pane', {active: activeTab === 1})}
               id='kt_sidebar_tab_pane_2'
               role='tabpanel'
             >
@@ -715,7 +717,7 @@ export function SidebarGeneral() {
             </div>
 
             <div
-              className={clsx('tab-pane', {active: activeTab === 2})}
+              className={classnames('tab-pane', {active: activeTab === 2})}
               id='kt_sidebar_tab_pane_3'
               role='tabpanel'
             >
@@ -914,7 +916,7 @@ export function SidebarGeneral() {
             </div>
 
             <div
-              className={clsx('tab-pane', {active: activeTab === 3})}
+              className={classnames('tab-pane', {active: activeTab === 3})}
               id='kt_sidebar_tab_pane_4'
               role='tabpanel'
             >
@@ -1113,7 +1115,7 @@ export function SidebarGeneral() {
             </div>
 
             <div
-              className={clsx('tab-pane', {active: activeTab === 4})}
+              className={classnames('tab-pane', {active: activeTab === 4})}
               id='kt_sidebar_tab_pane_5'
               role='tabpanel'
             >

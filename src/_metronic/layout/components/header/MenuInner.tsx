@@ -79,9 +79,9 @@ export function MenuInner() {
           <MenuItem to='/dataset/approve/list' title='Đang chờ' hasBullet={true} />
           <MenuItem to='/dataset/approve/config' title='Không duyệt' hasBullet={true} />
           <MenuItem to='/dataset/approve/syc-history' title='Đã duyệt' hasBullet={true} />
-          <MenuItem to='/dataset/approve/statistic' title='Thống kê theo lĩnh vực' hasBullet={true} />
-          <MenuItem to='/dataset/approve/statistic' title='Thống kê theo đơn vị cung cấp' hasBullet={true} />
-          <MenuItem to='/dataset/approve/statistic' title='Thống kê theo loại hình thu thập' hasBullet={true} />
+          <MenuItem to='/dataset/approve/statistic-by-category' title='Thống kê theo lĩnh vực' hasBullet={true} />
+          <MenuItem to='/dataset/approve/statistic-by-organization' title='Thống kê theo đơn vị cung cấp' hasBullet={true} />
+          <MenuItem to='/dataset/approve/statistic-by-provider-type' title='Thống kê theo loại hình thu thập' hasBullet={true} />
           <MenuItem to='/dataset/approve/statistic' title='Thống kê duyệt dữ liệu' hasBullet={true} />
         </MenuInnerWithSub>
       </MenuInnerWithSub>

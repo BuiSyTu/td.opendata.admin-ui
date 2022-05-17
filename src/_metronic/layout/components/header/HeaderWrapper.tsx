@@ -6,7 +6,7 @@ import { DefaultTitle } from './page-title/DefaultTitle'
 import { Header } from './Header'
 import { Link } from 'react-router-dom'
 import { Topbar } from './Topbar'
-import clsx from 'clsx'
+import classnames from 'classnames'
 import { useLayout } from 'src/_metronic/layout/core'
 
 export function HeaderWrapper() {
@@ -16,11 +16,11 @@ export function HeaderWrapper() {
   return (
     <div
       id='kt_header'
-      className={clsx('tdheader', 'header', classes.header.join(' '), 'align-items-stretch')}
+      className={classnames('tdheader', 'header', classes.header.join(' '), 'align-items-stretch')}
       {...attributes.headerMenu}
     >
       <div
-        className={clsx(
+        className={classnames(
           classes.headerContainer.join(' '),
           'd-flex align-items-stretch justify-content-between'
         )}
