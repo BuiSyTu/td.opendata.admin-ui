@@ -1,7 +1,8 @@
 import * as XLSX from 'xlsx'
 
-import { Button, Checkbox, Col, Divider, Form, Input, Modal, Row, Select, Space, Spin, Table, Tabs, Typography, message, notification } from 'antd'
+import { Button, Checkbox, Col, Divider, Form, Input, Modal, Row, Select, Space, Spin, Table, Tabs, Typography, Upload, message, notification } from 'antd'
 import { Category, DataType, DatasetAPIConfig, DatasetFileConfig, License, Organization, ProviderType } from 'src/app/models'
+import { ClockCircleOutlined, DatabaseOutlined, InboxOutlined } from '@ant-design/icons'
 import { ColumnMetadata, DataTypeCode, TabKey, TypeModal, setColumnMetata, setColumnPreview, setDataMetadata, setDataPreview, setDataTypeCode, setDataUpload, setDisableDataTab, setTabKey } from 'src/setup/redux/slices/dataset'
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons'
 import { categoryApi, dataTypeApi, datasetApi, forwardApi, licenseApi, organizationApi, providerTypeApi } from 'src/app/apis'
@@ -10,10 +11,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 
 import { Dataset } from 'src/app/models'
-import FunctionalButton from './FunctionalButton'
-import MetadataTable from './MetadataTable'
+import MetadataTable from '../MetadataTable'
 import { RootState } from 'src/setup'
-import UploadDragger from './UploadDragger'
 import { toObject } from 'src/utils/common'
 import { v4 as uuidv4 } from 'uuid'
 
@@ -21,8 +20,27 @@ const { TextArea } = Input
 const { Text } = Typography
 const { Option } = Select
 const { TabPane } = Tabs
+const { Dragger } = Upload
 
-function ModalCategory(props: any) {
+type Props = {
+  setUpdate: any,
+  modalVisible: any,
+  setModalVisible: any,
+  modalId: any,
+  setModalId: any,
+  typeModal: any,
+  setTypeModal: any,
+}
+
+const ModalCategory: React.FC<Props> = ({
+  setUpdate,
+  modalVisible,
+  setModalVisible,
+  modalId,
+  setModalId,
+  typeModal,
+  setTypeModal
+}) => {
   const dispatch = useDispatch()
 
   const tabKey = useSelector((state: RootState) => state.dataset.tabKey)
@@ -37,7 +55,6 @@ function ModalCategory(props: any) {
   const fileType = useSelector((state: RootState) => state.datasetFileConfig.fileType)
   const fileUrl = useSelector((state: RootState) => state.datasetFileConfig.fileUrl)
 
-  const { setUpdate, modalVisible, setModalVisible, modalId, setModalId, typeModal, setTypeModal } = props
   const [form] = Form.useForm()
   const [disable, setDisable] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
@@ -486,6 +503,60 @@ function ModalCategory(props: any) {
     }
   }
 
+  const handleDrop = (e: any) => console.log('Dropped files', e.dataTransfer.files)
+
+  const handlePreview = async (file: any) => {
+    if (file.url) {
+      window.open(file.url, '_blank')
+    }
+  }
+
+  const footer = [
+    typeModal === 'view' ? (
+      <></>
+    ) : (
+      <Button
+        key='Ok'
+        type='primary'
+        htmlType='submit'
+        size='middle'
+        style={{
+          borderRadius: 5,
+          padding: '5px 12px',
+          backgroundColor: '#34bfa3',
+          borderColor: '#34bfa3',
+        }}
+        icon={<i className='las la-save' style={{ color: '#fff' }}></i>}
+        onClick={() => {
+          handleOk()
+        }}
+        loading={buttonLoading}
+      >
+        <Text style={{ color: '#FFF', paddingLeft: 5 }}> {'Lưu'}</Text>
+      </Button>
+    ),
+    <Button
+      key='Cancel'
+      type='primary'
+      size='middle'
+      style={{
+        borderRadius: 5,
+        padding: '5px 12px',
+        backgroundColor: '#FAFAFA',
+        borderColor: '#BDBDBD',
+      }}
+      icon={<i className='las la-times' style={{ color: '#757575' }}></i>}
+      onClick={() => {
+        handleCancel()
+      }}
+    >
+      <Text style={{ color: '#757575', paddingLeft: 5 }}>
+        {' '}
+        {typeModal === 'view' ? 'Đóng' : 'Hủy'}
+      </Text>
+    </Button>,
+  ]
+
   return (
     <Modal
       width={1200}
@@ -494,51 +565,7 @@ function ModalCategory(props: any) {
       onOk={handleOk}
       onCancel={handleCancel}
       closeIcon={<i className='las la-times' style={{ color: '#fff', fontSize: 20 }}></i>}
-      footer={[
-        typeModal === 'view' ? (
-          <></>
-        ) : (
-          <Button
-            key='Ok'
-            type='primary'
-            htmlType='submit'
-            size='middle'
-            style={{
-              borderRadius: 5,
-              padding: '5px 12px',
-              backgroundColor: '#34bfa3',
-              borderColor: '#34bfa3',
-            }}
-            icon={<i className='las la-save' style={{ color: '#fff' }}></i>}
-            onClick={() => {
-              handleOk()
-            }}
-            loading={buttonLoading}
-          >
-            <Text style={{ color: '#FFF', paddingLeft: 5 }}> {'Lưu'}</Text>
-          </Button>
-        ),
-        <Button
-          key='Cancel'
-          type='primary'
-          size='middle'
-          style={{
-            borderRadius: 5,
-            padding: '5px 12px',
-            backgroundColor: '#FAFAFA',
-            borderColor: '#BDBDBD',
-          }}
-          icon={<i className='las la-times' style={{ color: '#757575' }}></i>}
-          onClick={() => {
-            handleCancel()
-          }}
-        >
-          <Text style={{ color: '#757575', paddingLeft: 5 }}>
-            {' '}
-            {typeModal === 'view' ? 'Đóng' : 'Hủy'}
-          </Text>
-        </Button>,
-      ]}
+      footer={footer}
     >
       <Spin spinning={isLoading}>
         <Form
@@ -740,10 +767,21 @@ function ModalCategory(props: any) {
                 : (
                   <>
                     <Form.Item label='File đính kèm' name='fileUrl'>
-                      <UploadDragger
+                      <Dragger
+                        name='files'
+                        maxCount={1}
+                        multiple={false}
+                        action='https://192.168.2.169:5001/api/v1/attachments'
                         onChange={handleChangeDragger}
+                        onDrop={handleDrop}
+                        onPreview={handlePreview}
                         fileList={fileList}
-                      />
+                      >
+                        <p className="ant-upload-drag-icon">
+                          <InboxOutlined />
+                        </p>
+                        <p className="ant-upload-text">Kéo hoặc thả file để tải lên</p>
+                      </Dragger>
                     </Form.Item>
 
                     <Col span={9}>
@@ -755,7 +793,33 @@ function ModalCategory(props: any) {
                   </>
                 )
               }
-              <FunctionalButton handleClickPreview={handleClickPreview} handleClickMetadata={handleClickMetadata} />
+              <>
+                <Button
+                  icon={<DatabaseOutlined />}
+                  style={{
+                    background: '#ffb822',
+                    color: '#111111',
+                    minWidth: '130px',
+                    borderRadius: 5,
+                    marginRight: '5px',
+                  }}
+                  onClick={handleClickPreview}
+                >
+                  Xem trước
+                </Button>
+                <Button
+                  icon={<ClockCircleOutlined />}
+                  style={{
+                    background: '#34bfa3',
+                    color: '#ffffff',
+                    minWidth: '130px',
+                    borderRadius: 5,
+                  }}
+                  onClick={handleClickMetadata}
+                >
+                  Xem metadata
+                </Button>
+              </>
 
               {!disableTableMetadata && <MetadataTable />}
               {!disableTablePreview && <Table

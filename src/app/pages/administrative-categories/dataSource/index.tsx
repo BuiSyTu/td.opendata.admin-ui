@@ -137,6 +137,7 @@ const DataSourcePage = () => {
         duration: 1,
         placement: 'bottomRight',
       })
+      setUpdate(true)
     } else {
       notification.error({
         message: `Thất bại!`,

@@ -146,7 +146,9 @@ const CustomPage = () => {
   }
 
   const handleDelete = async (item: any) => {
-    if (dataTypeCannotBeDelete.includes(item.code.toLowerCase())) {
+    console.log({item})
+
+    if (dataTypeCannotBeDelete.includes(item?.code?.toLowerCase())) {
       notification.error({
         message: 'Không thể xóa phần tử hệ thống',
         duration: 2,
@@ -155,7 +157,7 @@ const CustomPage = () => {
       return;
     }
 
-    var res = await dataTypeApi.delete(item.Id)
+    var res = await dataTypeApi.delete(item.id)
     if (res) {
       notification.success({
         message: 'Xóa thành công!',

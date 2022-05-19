@@ -124,14 +124,12 @@ const CategoryPage = () => {
   }, [offset, size, inputValue])
 
   const handleEdit = (id: string) => {
-    console.log(id)
     setModalId(id)
     setTypeModal('edit')
     setModalVisible(true)
   }
 
   const handleView = (id: string) => {
-    console.log(id)
     setModalId(id)
     setTypeModal('view')
     setModalVisible(true)

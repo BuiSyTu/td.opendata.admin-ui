@@ -1,20 +1,32 @@
 import {Table} from 'antd'
 import {useState} from 'react'
 
-const TableList = (props: any) => {
-  const {
-    loading,
-    dataTable,
-    count,
-    size,
-    columns,
-    setOffset,
-    setSize,
-    isPagination,
-    rowSelection,
-    rowKey,
-  } = props
+interface Props {
+  loading?: any,
+  dataTable?: any,
+  count?: any,
+  size?: any,
+  columns?: any,
+  setOffset?: any,
+  setSize?: any,
+  isPagination?: any,
+  rowSelection?: any,
+  rowKey?: any,
+}
 
+const TableList: React.FC<Props> = ({
+  loading,
+  dataTable,
+  count,
+  size,
+  columns,
+  setOffset,
+  setSize,
+  isPagination,
+  rowSelection,
+  rowKey,
+  ...props
+}) => {
   const [current, setCurrent] = useState(1)
 
   const handleTableChange = async (page: number, pageSize: number) => {
@@ -39,7 +51,6 @@ const TableList = (props: any) => {
       rowClassName={(record, index) => (index % 2 === 0 ? 'table-row-light' : 'table-row-dark')}
       loading={loading}
       size='small'
-      ellipsis='enable'
       pagination={
         isPagination
           ? {

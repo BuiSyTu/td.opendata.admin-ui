@@ -1,11 +1,11 @@
-import { Button, Form, Input, Modal, Spin, Typography, notification } from 'antd'
+import { Form, Input, notification } from 'antd'
 import { useEffect, useState } from 'react'
 
+import CRUDModal from 'src/app/components/CRUDModal'
 import { ProviderType } from 'src/app/models'
 import { providerTypeApi } from 'src/app/apis'
 
 const { TextArea } = Input
-const { Text } = Typography
 
 const ModalCategory = (props: any) => {
   const { modalVisible, setModalVisible, modalId, setModalId, typeModal, setTypeModal, setUpdate } = props
@@ -103,85 +103,40 @@ const ModalCategory = (props: any) => {
   }
 
   return (
-    <Modal
-      visible={modalVisible}
-      title={<Text style={{ fontWeight: '500', color: '#fff' }}>Lĩnh vực</Text>}
-      onOk={handleOk}
-      onCancel={handleCancel}
-      closeIcon={<i className='las la-times' style={{ color: '#fff', fontSize: 20 }}></i>}
-      footer={[
-        typeModal === 'view' ? (
-          <></>
-        ) : (
-          <Button
-            key='Ok'
-            type='primary'
-            htmlType='submit'
-            size='middle'
-            style={{
-              borderRadius: 5,
-              padding: '5px 12px',
-              backgroundColor: '#34bfa3',
-              borderColor: '#34bfa3',
-            }}
-            icon={<i className='las la-save' style={{ color: '#fff' }}></i>}
-            onClick={() => {
-              handleOk()
-            }}
-            loading={buttonLoading}
-          >
-            <Text style={{ color: '#FFF', paddingLeft: 5 }}> {'Lưu'}</Text>
-          </Button>
-        ),
-        <Button
-          key='Cancle'
-          type='primary'
-          size='middle'
-          style={{
-            borderRadius: 5,
-            padding: '5px 12px',
-            backgroundColor: '#FAFAFA',
-            borderColor: '#BDBDBD',
-          }}
-          icon={<i className='las la-times' style={{ color: '#757575' }}></i>}
-          onClick={() => {
-            handleCancel()
-          }}
-        >
-          <Text style={{ color: '#757575', paddingLeft: 5 }}>
-            {' '}
-            {typeModal === 'view' ? 'Đóng' : 'Hủy'}
-          </Text>
-        </Button>,
-      ]}
+    <CRUDModal
+      modalVisible={modalVisible}
+      buttonLoading={buttonLoading}
+      handleOk={handleOk}
+      handleCancel={handleCancel}
+      isLoading={isLoading}
+      title='Hình thức cung cấp'
+      typeModal={typeModal}
     >
-      <Spin spinning={isLoading}>
-        <Form {...layout} form={form}>
-          <Form.Item
-            label='Tên'
-            name='name'
-            rules={[{ required: true, message: 'Không được để trống!' }]}
-          >
-            <Input disabled={disable} style={{ width: '100%', height: 32, borderRadius: 5 }} />
-          </Form.Item>
-          <Form.Item
-            label='Mã'
-            name='code'
-          >
-            <Input disabled={disable} style={{ width: '100%', height: 32, borderRadius: 5 }} />
-          </Form.Item>
-          <Form.Item
-            label='Icon'
-            name='icon'
-          >
-            <Input disabled={disable} style={{ width: '100%', height: 32, borderRadius: 5 }} />
-          </Form.Item>
-          <Form.Item label='Mô tả' name='description'>
-            <TextArea disabled={disable} rows={3} style={{ width: '100%', borderRadius: 5 }} />
-          </Form.Item>
-        </Form>
-      </Spin>
-    </Modal>
+      <Form {...layout} form={form}>
+        <Form.Item
+          label='Tên'
+          name='name'
+          rules={[{ required: true, message: 'Không được để trống!' }]}
+        >
+          <Input disabled={disable} style={{ width: '100%', height: 32, borderRadius: 5 }} />
+        </Form.Item>
+        <Form.Item
+          label='Mã'
+          name='code'
+        >
+          <Input disabled={disable} style={{ width: '100%', height: 32, borderRadius: 5 }} />
+        </Form.Item>
+        <Form.Item
+          label='Icon'
+          name='icon'
+        >
+          <Input disabled={disable} style={{ width: '100%', height: 32, borderRadius: 5 }} />
+        </Form.Item>
+        <Form.Item label='Mô tả' name='description'>
+          <TextArea disabled={disable} rows={3} style={{ width: '100%', borderRadius: 5 }} />
+        </Form.Item>
+      </Form>
+    </CRUDModal>
   )
 }
 

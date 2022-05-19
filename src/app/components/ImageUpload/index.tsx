@@ -2,15 +2,27 @@ import {Modal, Upload} from 'antd'
 
 import {useState} from 'react'
 
-const ImageUpload = (props: any) => {
-  const {URL, fileList, onChange, headers, multiple, disabled} = props
+type Props = {
+  URL?: any,
+  fileList?: any,
+  onChange?: any,
+  headers?: any,
+  multiple?: any,
+  disabled?: any,
+}
+
+const ImageUpload: React.FC<Props> = ({
+  URL,
+  fileList,
+  onChange,
+  headers,
+  multiple,
+  disabled
+}) => {
   const [previewVisible, setPreviewVisible] = useState(false)
   const [previewImage, setPreviewImage] = useState('')
 
   const handlePreview = async (file: any) => {
-    // if (!file.url && !file.preview) {
-    //   file.preview = await getBase64(file.originFileObj)
-    // }
     setPreviewImage(file.url || file.preview)
     setPreviewVisible(true)
   }
