@@ -19,7 +19,10 @@ const UploadDragger = (props: any) => {
         name='files'
         maxCount={1}
         multiple={false}
-        action='https://192.168.2.169:5001/api/v1/attachments'
+        action={`${process.env.REACT_APP_FILE_URL}/api/v1/attachments`}
+        headers={{
+          TDAuthorization: process.env?.REACT_APP_DEFAULT_TDAUTHORIZATION ?? '',
+        }}
         onChange={onChange}
         onDrop={handleDrop}
         onPreview={handlePreview}

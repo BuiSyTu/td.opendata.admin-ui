@@ -1,3 +1,5 @@
+import PaginationFilter from './PaginationFilter';
+
 export interface DataType {
   id: string,
   name?: string,
@@ -5,4 +7,8 @@ export interface DataType {
   code?: string,
   isActive?: string,
   ternant?: string,
+}
+
+export interface DataTypeListFilter extends PaginationFilter {
+  
 }

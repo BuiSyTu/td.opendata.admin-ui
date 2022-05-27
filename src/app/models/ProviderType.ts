@@ -1,3 +1,5 @@
+import PaginationFilter from './PaginationFilter';
+
 export interface ProviderType {
   id: string,
   name?: string,
@@ -5,4 +7,8 @@ export interface ProviderType {
   code?: string,
   isActive?: string,
   ternant?: string,
+}
+
+export interface ProviderTypeListFilter extends PaginationFilter {
+  
 }

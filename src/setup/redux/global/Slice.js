@@ -1,10 +1,11 @@
-import {createSlice} from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   accessToken: '',
   accessTokenOld: '',
   refreshToken: '',
   userInfo: null,
+  firstAccess: true,
 };
 
 export const globalSlice = createSlice({
@@ -20,5 +21,17 @@ export const globalSlice = createSlice({
     setUserInfo: (state, action) => {
       state.userInfo = action.payload;
     },
+    setFirstAccess: (state, action) => {
+      state.firstAccess = action.payload;
+    }
   },
 });
+
+const { actions, reducer } = globalSlice
+export const {
+  logOut,
+  setAccessToken,
+  setUserInfo,
+  setFirstAccess,
+} = actions
+export default reducer

@@ -1,3 +1,5 @@
+import PaginationFilter from './PaginationFilter';
+
 export interface Category {
   id: string,
   name?: string,
@@ -8,4 +10,9 @@ export interface Category {
   icon?: string,
   order?: number,
   parentId?: string,
+  imageUrlResponse?: any,
+}
+
+export interface CategoryListFilter extends PaginationFilter {
+  
 }

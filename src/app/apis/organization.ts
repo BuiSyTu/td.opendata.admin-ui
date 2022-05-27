@@ -1,16 +1,19 @@
-import { Organization } from 'src/app/models'
+import { Organization, OrganizationListFilter } from 'src/app/models'
+
 import axios from 'axios'
 import { getCookie } from 'src/utils/cookies'
+import { toQueryString } from 'src/utils/common'
 
 const controllerName = 'organizations'
 const baseUrl = `${process.env.REACT_APP_API_URL}/${controllerName}`
 const authorization = `Bearer ${process.env.REACT_APP_BEAR_TOKEN}`
 
-const getAll = async () => {
-  try {
+const getAll = async (listFilter?: OrganizationListFilter) => {
+  try {    
+    const params = toQueryString(listFilter)
     const res = await axios({
       method: 'GET',
-      url: baseUrl,
+      url: `${baseUrl}?${params}`,
       headers: {
         'Authorization': authorization,
         'TDAuthorization': getCookie('token'),

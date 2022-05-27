@@ -1,12 +1,20 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import { PageTitle } from 'src/_metronic/layout/core'
 import Widget1 from './components/Widget1'
 import { useIntl } from 'react-intl'
+import { useDispatch } from 'react-redux'
+import { setFirstAccess } from 'src/setup/redux/global/Slice'
 
 const DashboardPage: FC = () => {
+  const dispatch = useDispatch();
   const intl = useIntl();
+
+  useEffect(() => {
+    dispatch(setFirstAccess(false))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <>

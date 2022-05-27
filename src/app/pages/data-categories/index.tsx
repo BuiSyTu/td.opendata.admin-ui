@@ -20,8 +20,8 @@ const DataCategoriesPage = () => {
       <Route path='/data-categories/tag' component={TagPage}></Route>
       <Route path='/data-categories/license' component={LicensePage}></Route>
       <Route path='/data-categories/organization' component={OrganizationPage}></Route>
-      <Redirect from='/data-categories' exact={true} to='/data-categories/fields' />
-      <Redirect to='/data-categories/fields' />
+      <Redirect exact from='/data-categories' to='/data-categories/fields' />
+      <Redirect to='/default.aspx' />
     </Switch>
   )
 }

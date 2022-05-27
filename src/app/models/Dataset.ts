@@ -1,5 +1,7 @@
 import { Category, DataType, DatasetAPIConfig, DatasetDBConfig, DatasetFileConfig, License, Organization, ProviderType } from 'src/app/models';
 
+import PaginationFilter from './PaginationFilter';
+
 export interface Dataset {
   id: string,
   name?: string,
@@ -32,7 +34,7 @@ export interface Dataset {
   datasetDBConfig?: DatasetDBConfig
 }
 
-export interface DatasetListFilter {
+export interface DatasetListFilter extends PaginationFilter {
   licenseId?: string,
   organizationId?: string,
   dataTypeId?: string,

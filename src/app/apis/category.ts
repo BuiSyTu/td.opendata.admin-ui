@@ -1,21 +1,24 @@
-import { Category } from 'src/app/models'
+import { Category, CategoryListFilter } from 'src/app/models'
+
 import axios from 'axios'
 import { getCookie } from 'src/utils/cookies';
+import { toQueryString } from 'src/utils/common';
 
 const controllerName = 'categories'
 const baseUrl = `${process.env.REACT_APP_API_URL}/${controllerName}`
 const authorization = `Bearer ${process.env.REACT_APP_BEAR_TOKEN}`
 
-const getAll = async () => {
-  try {
+const getAll = async (listFilter?: CategoryListFilter) => {
+  try {    
+    const params = toQueryString(listFilter)
     const res = await axios({
       method: 'GET',
-      url: baseUrl,
-      timeout: 15000,
+      url: `${baseUrl}?${params}`,
       headers: {
         'Authorization': authorization,
         'TDAuthorization': getCookie('token'),
-      }
+      },
+      timeout: 15000,
     })
 
     return res?.data
@@ -67,7 +70,6 @@ const getById = async (id: string) => {
 
 const update = async (id: string, data: Category) => {
   try {
-    debugger
     const res = await axios({
       method: 'PUT',
       url: `${baseUrl}/${id}`,

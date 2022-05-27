@@ -1,3 +1,5 @@
+import PaginationFilter from './PaginationFilter';
+
 export interface Organization {
   id: string,
   name?: string,
@@ -5,4 +7,8 @@ export interface Organization {
   code?: string,
   isActive?: string,
   ternant?: string,
+}
+
+export interface OrganizationListFilter extends PaginationFilter {
+  
 }

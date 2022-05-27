@@ -1,3 +1,5 @@
+import PaginationFilter from './PaginationFilter';
+
 export interface License {
   id: string,
   name?: string,
@@ -5,4 +7,8 @@ export interface License {
   code?: string,
   isActive?: string,
   ternant?: string,
+}
+
+export interface LicenseListFilter extends PaginationFilter {
+  
 }

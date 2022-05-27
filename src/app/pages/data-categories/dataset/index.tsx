@@ -46,7 +46,7 @@ const DatasetPage = () => {
       title: 'Tên',
       dataIndex: 'name',
       key: 'name',
-      width: '20%',
+      width: '15%',
     },
     {
       title: 'Mã',
@@ -58,7 +58,7 @@ const DatasetPage = () => {
       title: 'Trạng thái dữ liệu',
       dataIndex: 'state',
       key: 'state',
-      width: '20%',
+      width: '15%',
       render: (text: any, record: any, index: any) => {
         const getApproveState = () => {
           let color = secondary
@@ -221,13 +221,20 @@ const DatasetPage = () => {
         </div>
       ),
     },
+    {
+      title: 'Lượt xem',
+      dataIndex: 'view',
+      key: 'view',
+      align: 'center',
+      width: '10%',
+    },
   ]
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true)
-        var res = await datasetApi.getAll()
+        var res = await datasetApi.getAll({orderBy: ['view']})
         setDataTable(res?.data ?? [])
         setCount(res?.totalCount ?? 0)
         setLoading(false)
