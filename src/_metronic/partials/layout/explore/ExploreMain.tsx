@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import {Demos} from './Demos';
-import {KTSVG} from '../../../helpers';
+import { Demos } from './Demos';
+import { KTSVG } from '../../../helpers';
 
 export function ExploreMain() {
   return (
@@ -25,7 +25,7 @@ export function ExploreMain() {
           {/* begin::Header */}
           <div className='card-header' id='kt_explore_header'>
             <h5 className='card-title fw-bold text-gray-600'>
-              Explore {process.env.REACT_APP_THEME_NAME}
+              Explore Metronic
             </h5>
 
             <div className='card-toolbar'>
@@ -53,7 +53,7 @@ export function ExploreMain() {
             >
               <div className='mb-7'>
                 <div className='d-flex flex-stack'>
-                  <h3 className='mb-0'>{process.env.REACT_APP_THEME_NAME} Licenses</h3>
+                  <h3 className='mb-0'>Metronic Licenses</h3>
 
                   <a href='https://themeforest.net/licenses/standard' className='fw-bold'>
                     License FAQs
@@ -134,7 +134,7 @@ export function ExploreMain() {
                 </div>
               </div>
 
-              <a href={process.env.REACT_APP_PURCHASE_URL} className='btn btn-primary mb-15 w-100'>
+              <a href={'https://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469'} className='btn btn-primary mb-15 w-100'>
                 Buy Now
               </a>
               <Demos />
