@@ -1,6 +1,6 @@
 import { Divider, Input, Popconfirm, Tag, Typography, notification } from 'antd'
 import { State, TypeModal, setDisableDataTab } from 'src/setup/redux/slices/dataset'
-import {danger, secondary, success} from 'src/app/constants/color'
+import { danger, secondary, success } from 'src/app/constants/color'
 import { useEffect, useState } from 'react'
 
 import FormModal from './components/FormModal'
@@ -15,7 +15,7 @@ const { Search } = Input
 
 const DatasetPage = () => {
   const dispatch = useDispatch()
-  
+
   const [modalVisible, setModalVisible] = useState(false)
   const [modalId, setModalId] = useState('')
   const [typeModal, setTypeModal] = useState<TypeModal>(TypeModal.none)
@@ -58,12 +58,12 @@ const DatasetPage = () => {
       title: 'Trạng thái dữ liệu',
       dataIndex: 'state',
       key: 'state',
-      width: '15%',
+      width: '20%',
       render: (text: any, record: any, index: any) => {
         const getApproveState = () => {
           let color = secondary
           let textDisplay = 'Không xác định'
-  
+
           switch (record?.approveState) {
             case State.pending:
               textDisplay = 'Chưa duyệt'
@@ -159,7 +159,7 @@ const DatasetPage = () => {
     },
     {
       title: 'Dữ liệu',
-      width: '15%',
+      width: '10%',
       dataIndex: '',
       key: '',
       align: 'center',
@@ -191,7 +191,7 @@ const DatasetPage = () => {
     },
     {
       title: 'Xét duyệt',
-      width: '15%',
+      width: '10%',
       dataIndex: '',
       key: '',
       align: 'center',
@@ -222,7 +222,7 @@ const DatasetPage = () => {
       ),
     },
     {
-      title: 'Lượt xem',
+      title: 'View',
       dataIndex: 'view',
       key: 'view',
       align: 'center',
@@ -234,7 +234,7 @@ const DatasetPage = () => {
     const fetchData = async () => {
       try {
         setLoading(true)
-        var res = await datasetApi.getAll({orderBy: ['view']})
+        var res = await datasetApi.getAll({ orderBy: ['view'] })
         setDataTable(res?.data ?? [])
         setCount(res?.totalCount ?? 0)
         setLoading(false)
@@ -267,7 +267,7 @@ const DatasetPage = () => {
     setModalVisible(true)
     setModalId(id)
     setTypeModal(TypeModal.view)
-    
+
     dispatch(setDisableDataTab(false))
   }
 
@@ -369,7 +369,7 @@ const DatasetPage = () => {
   return (
     <div>
       <PageTitle breadcrumbs={[]}>Danh sách tập dữ liệu</PageTitle>
-      <div className='card mb-5 mb-xl-12 py-5'>
+      <div className='card mb-5 mb-xl-12 p-10'>
         <div className='d-flex row justify-content-between align-items-center px-5'>
           <div className='col-xl-8 d-flex align-items-center'>
             <Search

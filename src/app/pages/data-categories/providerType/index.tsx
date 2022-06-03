@@ -150,11 +150,11 @@ const CategoryPage = () => {
       })
     }
   }
-  
+
   return (
     <div>
       <PageTitle breadcrumbs={[]}>Danh mục hình thức cung cấp</PageTitle>
-      <div className='card mb-5 mb-xl-12 py-5'>
+      <div className='card mb-5 mb-xl-12 p-10'>
         <div className='d-flex row justify-content-between align-items-center px-5'>
           <div className='col-xl-8 d-flex align-items-center'>
             <Search

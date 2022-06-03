@@ -134,7 +134,7 @@ const StatisticByCategoryPage = () => {
   return (
     <div>
       <PageTitle breadcrumbs={[]}>Danh sách tập dữ liệu</PageTitle>
-      <div className='card mb-5 mb-xl-12 py-5'>
+      <div className='card mb-5 mb-xl-12 p-10'>
         <div className='d-flex row justify-content-between align-items-center px-5'>
           <div className='col-xl-8 d-flex align-items-center'>
             <button type="button" data-code="all" className="category-filter btn btn-secondary me-2 cursor-pointer">Tất cả</button>

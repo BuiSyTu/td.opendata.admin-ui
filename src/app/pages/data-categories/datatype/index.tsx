@@ -43,9 +43,9 @@ const CustomPage = () => {
       key: 'name',
       width: '40%',
       render: (text: any, record: any, index: any) => {
-        console.log({text})
-        console.log({record})
-        console.log({index})
+        console.log({ text })
+        console.log({ record })
+        console.log({ index })
         return (
           <Text type={dataTypeCannotBeDelete.includes(record.code.toLowerCase()) ? 'success' : 'secondary'}>
             {text}
@@ -146,7 +146,7 @@ const CustomPage = () => {
   }
 
   const handleDelete = async (item: any) => {
-    console.log({item})
+    console.log({ item })
 
     if (dataTypeCannotBeDelete.includes(item?.code?.toLowerCase())) {
       notification.error({
@@ -176,7 +176,7 @@ const CustomPage = () => {
   return (
     <div>
       <PageTitle breadcrumbs={[]}>Danh sách loại dữ liệu</PageTitle>
-      <div className='card mb-5 mb-xl-12 py-5'>
+      <div className='card mb-5 mb-xl-12 p-10'>
         <Row justify='space-between' style={{ alignItems: 'center', padding: '5px 10px' }}>
           <Col span={12} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
             <Search

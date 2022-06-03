@@ -153,7 +153,7 @@ const CustomPage = () => {
   return (
     <div>
       <PageTitle breadcrumbs={[]}>Danh sách tổ chức</PageTitle>
-      <div className='card mb-5 mb-xl-12 py-5'>
+      <div className='card mb-5 mb-xl-12 p-10'>
         <Row justify='space-between' style={{ alignItems: 'center', padding: '5px 10px' }}>
           <Col span={12} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
             <Search

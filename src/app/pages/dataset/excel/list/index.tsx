@@ -1,6 +1,6 @@
 import { Divider, Input, Popconfirm, Tag, Typography, notification } from 'antd'
 import { State, TypeModal, setDisableDataTab } from 'src/setup/redux/slices/dataset'
-import {danger, secondary, success} from 'src/app/constants/color'
+import { danger, secondary, success } from 'src/app/constants/color'
 import { useEffect, useState } from 'react'
 
 import FormModal from 'src/app/pages/dataset/components/FormModal'
@@ -15,7 +15,7 @@ const { Search } = Input
 
 const CategoryPage = () => {
   const dispatch = useDispatch()
-  
+
   const [modalVisible, setModalVisible] = useState(false)
   const [modalId, setModalId] = useState('')
   const [typeModal, setTypeModal] = useState<TypeModal>(TypeModal.none)
@@ -63,7 +63,7 @@ const CategoryPage = () => {
         const getApproveState = () => {
           let color = secondary
           let textDisplay = 'Không xác định'
-  
+
           switch (record?.approveState) {
             case State.pending:
               textDisplay = 'Chưa duyệt'
@@ -260,7 +260,7 @@ const CategoryPage = () => {
     setModalVisible(true)
     setModalId(id)
     setTypeModal(TypeModal.view)
-    
+
     dispatch(setDisableDataTab(false))
   }
 
@@ -362,7 +362,7 @@ const CategoryPage = () => {
   return (
     <div>
       <PageTitle breadcrumbs={[]}>Danh sách tập dữ liệu</PageTitle>
-      <div className='card mb-5 mb-xl-12 py-5'>
+      <div className='card mb-5 mb-xl-12 p-10'>
         <div className='d-flex row justify-content-between align-items-center px-5'>
           <div className='col-xl-8 d-flex align-items-center'>
             <Search

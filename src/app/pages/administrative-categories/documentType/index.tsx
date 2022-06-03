@@ -1,13 +1,13 @@
-import {Divider, Input, Popconfirm, Typography, notification} from 'antd'
-import {useEffect, useState} from 'react'
+import { Divider, Input, Popconfirm, Typography, notification } from 'antd'
+import { useEffect, useState } from 'react'
 
 import FormModal from './components/FormModal'
-import {PageTitle} from 'src/_metronic/layout/core'
+import { PageTitle } from 'src/_metronic/layout/core'
 import TableList from 'src/app/components/TableList'
 import { documentTypeApi } from 'src/app/apis'
 
-const {Text} = Typography
-const {Search} = Input
+const { Text } = Typography
+const { Search } = Input
 
 const DocumentTypePage = () => {
   const [loading, setLoading] = useState(false)
@@ -20,7 +20,7 @@ const DocumentTypePage = () => {
   const [offset, setOffset] = useState(0)
   const [modalId, setModalId] = useState('')
   const [typeModal, setTypeModal] = useState('')
-  
+
   const columns = [
     {
       title: 'STT',
@@ -29,7 +29,7 @@ const DocumentTypePage = () => {
       align: 'center',
       render: (text: unknown, record: unknown, index: any) => {
         return (
-          <Text style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+          <Text style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             {index + 1}
           </Text>
         )
@@ -58,10 +58,10 @@ const DocumentTypePage = () => {
               handleView(record.id)
             }}
           >
-            <i className='la la-file-text-o' style={{marginLeft: -7}}></i>
+            <i className='la la-file-text-o' style={{ marginLeft: -7 }}></i>
           </button>
           <button
-            style={{marginLeft: 10}}
+            style={{ marginLeft: 10 }}
             className='btn btn-light-primary m-btn m-btn--icon btn-sm m-btn--icon-only'
             data-toggle='m-tooltip'
             title='Sửa'
@@ -69,7 +69,7 @@ const DocumentTypePage = () => {
               handleEdit(record.id)
             }}
           >
-            <i className='la la-edit' style={{marginLeft: -7}}></i>
+            <i className='la la-edit' style={{ marginLeft: -7 }}></i>
           </button>
           <Popconfirm
             title='Xóa dữ liệu？'
@@ -80,12 +80,12 @@ const DocumentTypePage = () => {
             }}
           >
             <button
-              style={{marginLeft: 10}}
+              style={{ marginLeft: 10 }}
               className='btn btn-light-danger m-btn m-btn--icon btn-sm m-btn--icon-only'
               data-toggle='m-tooltip'
               title='Xóa'
             >
-              <i className='la la-trash' style={{marginLeft: -7}}></i>
+              <i className='la la-trash' style={{ marginLeft: -7 }}></i>
             </button>
           </Popconfirm>
         </div>
@@ -109,12 +109,12 @@ const DocumentTypePage = () => {
     if (update) {
       fetchData()
     }
-    return () => {}
+    return () => { }
   }, [update])
 
   useEffect(() => {
     setUpdate(true)
-    return () => {}
+    return () => { }
   }, [offset, size, inputValue])
 
   const handleEdit = (id: string) => {
@@ -145,15 +145,15 @@ const DocumentTypePage = () => {
       })
     }
   }
-  
+
   return (
     <div>
       <PageTitle breadcrumbs={[]}>Danh sách loại giấy tờ</PageTitle>
-      <div className='card mb-5 mb-xl-12 py-5'>
+      <div className='card mb-5 mb-xl-12 p-10'>
         <div className='d-flex row justify-content-between align-items-center px-5'>
           <div className='col-xl-8 d-flex align-items-center'>
             <Search
-              style={{width: '40%', height: 35, borderRadius: 10}}
+              style={{ width: '40%', height: 35, borderRadius: 10 }}
               placeholder='Tìm kiếm'
               onSearch={(e) => {
                 setInputValue(e)
@@ -171,7 +171,7 @@ const DocumentTypePage = () => {
             </button>
           </div>
         </div>
-        <Divider style={{margin: '10px 0'}} />
+        <Divider style={{ margin: '10px 0' }} />
         <TableList
           dataTable={dataTable}
           columns={columns}

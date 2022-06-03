@@ -1,5 +1,5 @@
 import { Divider, Input, Tag, Typography } from 'antd'
-import {danger, secondary, success} from 'src/app/constants/color'
+import { danger, secondary, success } from 'src/app/constants/color'
 import { useEffect, useState } from 'react'
 
 import { ApproveState } from 'src/app/models'
@@ -56,7 +56,7 @@ const StatisticByDataTypePage = () => {
         const getApproveState = () => {
           let color = secondary
           let textDisplay = 'Không xác định'
-  
+
           switch (record?.approveState) {
             case State.pending:
               textDisplay = 'Chưa duyệt'
@@ -133,7 +133,7 @@ const StatisticByDataTypePage = () => {
   return (
     <div>
       <PageTitle breadcrumbs={[]}>Danh sách tập dữ liệu</PageTitle>
-      <div className='card mb-5 mb-xl-12 py-5'>
+      <div className='card mb-5 mb-xl-12 p-10'>
         <div className='d-flex row justify-content-between align-items-center px-5'>
           <div className='col-xl-8 d-flex align-items-center'>
             <Search
