@@ -202,14 +202,17 @@ const FormModal: React.FC<Props> = ({
       const headerObject = Array.isArray(formData.headers) ? toObject(formData.headers, 'key', 'value') : {}
 
       if (dataTypeCode === DataTypeCode.excel) {
-        const datasetFileConfig: DatasetFileConfig = {
-          fileType,
-          fileName,
-          fileUrl,
-          sheetName: formData?.sheetName ?? '',
-        }
+        // Khi file thay đổi, 3 thuộc tính này mới hết empty
+        if (fileType && fileName && fileUrl) {
+          const datasetFileConfig: DatasetFileConfig = {
+            fileType,
+            fileName,
+            fileUrl,
+            sheetName: formData?.sheetName ?? '',
+          }
 
-        formData.datasetFileConfig = datasetFileConfig
+          formData.datasetFileConfig = datasetFileConfig
+        }
       }
 
       if (dataTypeCode === DataTypeCode.webapi) {
@@ -519,12 +522,10 @@ const FormModal: React.FC<Props> = ({
           borderColor: '#34bfa3',
         }}
         icon={<i className='las la-save' style={{ color: '#fff' }}></i>}
-        onClick={() => {
-          handleOk()
-        }}
+        onClick={handleOk}
         loading={buttonLoading}
       >
-        <Text style={{ color: '#FFF', paddingLeft: 5 }}> {'Lưu'}</Text>
+        <Text style={{ color: '#FFF', paddingLeft: 5 }}> Lưu</Text>
       </Button>
     ),
     <Button
