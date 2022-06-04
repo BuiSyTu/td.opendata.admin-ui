@@ -1,16 +1,16 @@
 import * as XLSX from 'xlsx'
 
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect, useState } from 'react'
 import { Button, Checkbox, Col, Divider, Form, Input, Modal, Row, Select, Space, Spin, Table, Tabs, Typography, message, notification } from 'antd'
 import { Category, DataType, DatasetAPIConfig, DatasetFileConfig, License, Organization, ProviderType } from 'src/app/models'
 import { ColumnMetadata, DataTypeCode, TabKey, TypeModal, setColumnMetata, setColumnPreview, setDataMetadata, setDataPreview, setDataTypeCode, setDataUpload, setDisableDataTab, setTabKey } from 'src/setup/redux/slices/dataset'
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons'
 import { categoryApi, dataTypeApi, datasetApi, forwardApi, licenseApi, organizationApi, providerTypeApi } from 'src/app/apis'
 import { setFileName, setFileType, setFileUrl } from 'src/setup/redux/slices/datasetFileConfig'
-import { useDispatch, useSelector } from 'react-redux'
-import { useEffect, useState } from 'react'
+import { ClockCircleOutlined, DatabaseOutlined } from '@ant-design/icons'
 
 import { Dataset } from 'src/app/models'
-import FunctionalButton from '../FunctionalButton'
 import MetadataTable from '../MetadataTable'
 import { RootState } from 'src/setup'
 import UploadDragger from '../UploadDragger'
@@ -775,7 +775,33 @@ const FormModal: React.FC<Props> = ({
                   </>
                 )
               }
-              <FunctionalButton handleClickPreview={handleClickPreview} handleClickMetadata={handleClickMetadata} />
+              <div className='mb-5'>
+                <Button
+                  icon={<DatabaseOutlined />}
+                  style={{
+                    background: '#ffb822',
+                    color: '#111111',
+                    minWidth: '130px',
+                    borderRadius: 5,
+                    marginRight: '5px',
+                  }}
+                  onClick={handleClickPreview}
+                >
+                  Xem trước
+                </Button>
+                <Button
+                  icon={<ClockCircleOutlined />}
+                  style={{
+                    background: '#34bfa3',
+                    color: '#ffffff',
+                    minWidth: '130px',
+                    borderRadius: 5,
+                  }}
+                  onClick={handleClickMetadata}
+                >
+                  Xem metadata
+                </Button>
+              </div>
 
               {!disableTableMetadata && <MetadataTable />}
               {!disableTablePreview && <Table

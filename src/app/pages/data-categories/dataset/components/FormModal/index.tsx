@@ -796,7 +796,7 @@ const ModalCategory: React.FC<Props> = ({
                   </>
                 )
               }
-              <>
+              <div className='mb-5'>
                 <Button
                   icon={<DatabaseOutlined />}
                   style={{
@@ -822,7 +822,7 @@ const ModalCategory: React.FC<Props> = ({
                 >
                   Xem metadata
                 </Button>
-              </>
+              </div>
 
               {!disableTableMetadata && <MetadataTable />}
               {!disableTablePreview && <Table
