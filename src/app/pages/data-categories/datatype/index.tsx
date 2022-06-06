@@ -42,16 +42,6 @@ const CustomPage = () => {
       dataIndex: 'name',
       key: 'name',
       width: '40%',
-      render: (text: any, record: any, index: any) => {
-        console.log({ text })
-        console.log({ record })
-        console.log({ index })
-        return (
-          <Text type={dataTypeCannotBeDelete.includes(record.code.toLowerCase()) ? 'success' : 'secondary'}>
-            {text}
-          </Text>
-        )
-      },
     },
     {
       title: 'Mã',

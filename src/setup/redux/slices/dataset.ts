@@ -27,7 +27,7 @@ export enum TabKey {
 }
 
 export enum DataTypeCode {
-  excel = 'excel',
+  file = 'file',
   webapi = 'webapi',
   none = '',
 }
@@ -66,7 +66,7 @@ const initalState: DatasetState = {
   dataUpload: [],
 }
 
-export const datasetSlice:Slice = createSlice({
+export const datasetSlice: Slice = createSlice({
   name: 'dataset',
   initialState: initalState,
   reducers: {

@@ -1,20 +1,18 @@
 import * as XLSX from 'xlsx'
 
-import { Button, Checkbox, Col, Divider, Form, Input, Modal, Row, Select, Space, Spin, Table, Tabs, Typography, Upload, message, notification } from 'antd'
-import { Category, DataType, DatasetAPIConfig, DatasetFileConfig, License, Organization, ProviderType } from 'src/app/models'
-import { ClockCircleOutlined, DatabaseOutlined, InboxOutlined } from '@ant-design/icons'
-import { ColumnMetadata, DataTypeCode, TabKey, TypeModal, setColumnMetata, setColumnPreview, setDataMetadata, setDataPreview, setDataTypeCode, setDataUpload, setDisableDataTab, setTabKey } from 'src/setup/redux/slices/dataset'
-import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons'
-import { categoryApi, dataTypeApi, datasetApi, forwardApi, licenseApi, organizationApi, providerTypeApi } from 'src/app/apis'
-import { setFileName, setFileType, setFileUrl } from 'src/setup/redux/slices/datasetFileConfig'
-import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Button, Checkbox, Col, Divider, Form, Input, Modal, Row, Select, Space, Spin, Table, Tabs, Typography, Upload, message, notification } from 'antd'
+import { ClockCircleOutlined, DatabaseOutlined, InboxOutlined, MinusCircleOutlined, PlusOutlined } from '@ant-design/icons'
+import { v4 as uuidv4 } from 'uuid'
 
-import { Dataset } from 'src/app/models'
-import MetadataTable from '../MetadataTable'
 import { RootState } from 'src/setup'
 import { toObject } from 'src/utils/common'
-import { v4 as uuidv4 } from 'uuid'
+import { Category, Dataset, DataType, DatasetAPIConfig, DatasetFileConfig, License, Organization, ProviderType } from 'src/app/models'
+import { categoryApi, dataTypeApi, datasetApi, forwardApi, licenseApi, organizationApi, providerTypeApi } from 'src/app/apis'
+import { ColumnMetadata, DataTypeCode, TabKey, TypeModal, setColumnMetata, setColumnPreview, setDataMetadata, setDataPreview, setDataTypeCode, setDataUpload, setDisableDataTab, setTabKey } from 'src/setup/redux/slices/dataset'
+import { setFileName, setFileType, setFileUrl } from 'src/setup/redux/slices/datasetFileConfig'
+import MetadataTable from '../MetadataTable'
 
 const { TextArea } = Input
 const { Text } = Typography
@@ -201,7 +199,7 @@ const ModalCategory: React.FC<Props> = ({
 
       const headerObject = Array.isArray(formData.headers) ? toObject(formData.headers, 'key', 'value') : {}
 
-      if (dataTypeCode === DataTypeCode.excel) {
+      if (dataTypeCode === DataTypeCode.file) {
         const datasetFileConfig: DatasetFileConfig = {
           fileType,
           fileName,
@@ -399,7 +397,7 @@ const ModalCategory: React.FC<Props> = ({
       case DataTypeCode.webapi:
         handleWebApi()
         break;
-      case DataTypeCode.excel:
+      case DataTypeCode.file:
         handleExcel()
         break;
       default:
@@ -495,7 +493,7 @@ const ModalCategory: React.FC<Props> = ({
       case DataTypeCode.webapi:
         handleWebApi();
         break;
-      case DataTypeCode.excel:
+      case DataTypeCode.file:
         handleExcel();
         break;
       default:

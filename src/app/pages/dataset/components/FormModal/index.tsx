@@ -1,21 +1,20 @@
 import * as XLSX from 'xlsx'
 
-import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Button, Checkbox, Col, Divider, Form, Input, Modal, Row, Select, Space, Spin, Table, Tabs, Typography, message, notification } from 'antd'
-import { Category, DataType, DatasetAPIConfig, DatasetFileConfig, License, Organization, ProviderType } from 'src/app/models'
-import { ColumnMetadata, DataTypeCode, TabKey, TypeModal, setColumnMetata, setColumnPreview, setDataMetadata, setDataPreview, setDataTypeCode, setDataUpload, setDisableDataTab, setTabKey } from 'src/setup/redux/slices/dataset'
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons'
-import { categoryApi, dataTypeApi, datasetApi, forwardApi, licenseApi, organizationApi, providerTypeApi } from 'src/app/apis'
-import { setFileName, setFileType, setFileUrl } from 'src/setup/redux/slices/datasetFileConfig'
 import { ClockCircleOutlined, DatabaseOutlined } from '@ant-design/icons'
-
-import { Dataset } from 'src/app/models'
-import MetadataTable from '../MetadataTable'
-import { RootState } from 'src/setup'
-import UploadDragger from '../UploadDragger'
-import { toObject } from 'src/utils/common'
 import { v4 as uuidv4 } from 'uuid'
+
+import { RootState } from 'src/setup'
+import { toObject } from 'src/utils/common'
+import { Category, DataType, DatasetAPIConfig, DatasetFileConfig, License, Organization, ProviderType, Dataset } from 'src/app/models'
+import { categoryApi, dataTypeApi, datasetApi, forwardApi, licenseApi, organizationApi, providerTypeApi } from 'src/app/apis'
+import { ColumnMetadata, DataTypeCode, TabKey, TypeModal, setColumnMetata, setColumnPreview, setDataMetadata, setDataPreview, setDataTypeCode, setDataUpload, setDisableDataTab, setTabKey } from 'src/setup/redux/slices/dataset'
+import { setFileName, setFileType, setFileUrl } from 'src/setup/redux/slices/datasetFileConfig'
+import MetadataTable from '../MetadataTable'
+import UploadDragger from '../UploadDragger'
 
 const { TextArea } = Input
 const { Text } = Typography
@@ -201,7 +200,7 @@ const FormModal: React.FC<Props> = ({
 
       const headerObject = Array.isArray(formData.headers) ? toObject(formData.headers, 'key', 'value') : {}
 
-      if (dataTypeCode === DataTypeCode.excel) {
+      if (dataTypeCode === DataTypeCode.file) {
         // Khi file thay đổi, 3 thuộc tính này mới hết empty
         if (fileType && fileName && fileUrl) {
           const datasetFileConfig: DatasetFileConfig = {
@@ -409,7 +408,7 @@ const FormModal: React.FC<Props> = ({
       case DataTypeCode.webapi:
         handleWebApi()
         break;
-      case DataTypeCode.excel:
+      case DataTypeCode.file:
         handleExcel()
         break;
       default:
@@ -505,7 +504,7 @@ const FormModal: React.FC<Props> = ({
       case DataTypeCode.webapi:
         handleWebApi();
         break;
-      case DataTypeCode.excel:
+      case DataTypeCode.file:
         handleExcel();
         break;
       default:
