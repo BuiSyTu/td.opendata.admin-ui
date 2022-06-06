@@ -649,6 +649,21 @@ const ModalCategory: React.FC<Props> = ({
                   </Form.Item>
                 </Col>
                 <Col span={12}>
+                  <Form.Item label='Giấy phép' name='licenseId'>
+                    <Select showSearch placeholder='Chọn giấy phép'>
+                      {licenses.map(license => (
+                        <Option key={license.id} value={license.id}>
+                          {license.name}
+                        </Option>
+                      )
+                      )}
+                    </Select>
+                  </Form.Item>
+                </Col>
+              </Row>
+
+              <Row>
+                <Col span={12}>
                   <Form.Item
                     label='Loại dữ liệu'
                     name='dataTypeId'
@@ -660,21 +675,6 @@ const ModalCategory: React.FC<Props> = ({
                       {dataTypes.map(dataType => (
                         <Option key={dataType.id} value={dataType.id} code={dataType.code}>
                           {dataType.name}
-                        </Option>
-                      )
-                      )}
-                    </Select>
-                  </Form.Item>
-                </Col>
-              </Row>
-
-              <Row>
-                <Col span={12}>
-                  <Form.Item label='Giấy phép' name='licenseId'>
-                    <Select showSearch placeholder='Chọn giấy phép'>
-                      {licenses.map(license => (
-                        <Option key={license.id} value={license.id}>
-                          {license.name}
                         </Option>
                       )
                       )}
