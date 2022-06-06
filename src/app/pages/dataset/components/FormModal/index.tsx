@@ -229,6 +229,13 @@ const FormModal: React.FC<Props> = ({
 
       formData.metadata = JSON.stringify(dataMetadata)
 
+      const tmpDataType = dataTypes.filter(dataType => dataType.code?.toLowerCase() === dataTypeCode)
+      if (tmpDataType && Array.isArray(tmpDataType) && tmpDataType.length > 0) {
+        formData.dataTypeId = tmpDataType[0].id
+      }
+
+      console.log(formData)
+
       typeModal === TypeModal.edit ? putData(formData) : postData(formData)
     } catch (errorInfo) {
       console.log('Failed:', errorInfo)
@@ -655,7 +662,7 @@ const FormModal: React.FC<Props> = ({
                 </Col>
               </Row>
 
-              <Row>
+              {/* <Row>
                 <Col span={12}>
                   <Form.Item
                     label='Loại dữ liệu'
@@ -674,7 +681,7 @@ const FormModal: React.FC<Props> = ({
                     </Select>
                   </Form.Item>
                 </Col>
-              </Row>
+              </Row> */}
 
               <Form.Item name='visibility' valuePropName='checked'>
                 <Checkbox>Xuất bản lên cổng</Checkbox>

@@ -1,5 +1,5 @@
 import { Divider, Input, Popconfirm, Tag, Typography, notification } from 'antd'
-import { State, TypeModal, setDisableDataTab } from 'src/setup/redux/slices/dataset'
+import { State, TypeModal, setDisableDataTab, setDataTypeCode } from 'src/setup/redux/slices/dataset'
 import { danger, secondary, success } from 'src/app/constants/color'
 import { useEffect, useState } from 'react'
 
@@ -254,6 +254,7 @@ const ListPage = () => {
     setTypeModal(TypeModal.edit)
 
     dispatch(setDisableDataTab(false))
+    dispatch(setDataTypeCode('webapi'))
   }
 
   const handleView = (id: string) => {
@@ -262,11 +263,15 @@ const ListPage = () => {
     setTypeModal(TypeModal.view)
 
     dispatch(setDisableDataTab(false))
+    dispatch(setDataTypeCode('webapi'))
   }
 
   const handleAdd = () => {
     setModalVisible(true)
     setTypeModal(TypeModal.add)
+
+    dispatch(setDisableDataTab(false))
+    dispatch(setDataTypeCode('webapi'))
   }
 
   const handleDelete = async (id: string) => {
