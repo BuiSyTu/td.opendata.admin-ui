@@ -1,3 +1,5 @@
+import styles from './FormModal.module.scss'
+
 import * as XLSX from 'xlsx'
 
 import { useEffect, useState } from 'react'
@@ -6,6 +8,7 @@ import { Button, Checkbox, Col, Divider, Form, Input, Modal, Row, Select, Space,
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons'
 import { ClockCircleOutlined, DatabaseOutlined } from '@ant-design/icons'
 import { v4 as uuidv4 } from 'uuid'
+import classNames from 'classnames/bind'
 
 import { RootState } from 'src/setup'
 import { toObject } from 'src/utils/common'
@@ -20,6 +23,8 @@ const { TextArea } = Input
 const { Text } = Typography
 const { Option } = Select
 const { TabPane } = Tabs
+
+const cx = classNames.bind(styles)
 
 type Props = {
   setUpdate: any,
@@ -513,29 +518,19 @@ const FormModal: React.FC<Props> = ({
         type='primary'
         htmlType='submit'
         size='middle'
-        style={{
-          borderRadius: 5,
-          padding: '5px 12px',
-          backgroundColor: '#34bfa3',
-          borderColor: '#34bfa3',
-        }}
+        className={cx('ok-btn')}
         icon={<i className='las la-save' style={{ color: '#fff' }}></i>}
         onClick={handleOk}
         loading={buttonLoading}
       >
-        <Text style={{ color: '#FFF', paddingLeft: 5 }}> Lưu</Text>
+        <Text style={{ color: '#fff', paddingLeft: 5 }}> Lưu</Text>
       </Button>
     ),
     <Button
       key='Cancel'
       type='primary'
       size='middle'
-      style={{
-        borderRadius: 5,
-        padding: '5px 12px',
-        backgroundColor: '#FAFAFA',
-        borderColor: '#BDBDBD',
-      }}
+      className={cx('cancel-btn')}
       icon={<i className='las la-times' style={{ color: '#757575' }}></i>}
       onClick={() => {
         handleCancel()
@@ -552,7 +547,7 @@ const FormModal: React.FC<Props> = ({
     <Modal
       width={1200}
       visible={modalVisible}
-      title={<Text style={{ fontWeight: '500', color: '#fff' }}>Tập dữ liệu</Text>}
+      title={<Text className={cx('text-modal')}>Tập dữ liệu</Text>}
       onOk={handleOk}
       onCancel={handleCancel}
       closeIcon={<i className='las la-times' style={{ color: '#fff', fontSize: 20 }}></i>}
@@ -576,12 +571,12 @@ const FormModal: React.FC<Props> = ({
                     name='name'
                     rules={[{ required: true, message: 'Không được để trống!' }]}
                   >
-                    <Input disabled={disable} style={{ width: '100%', height: 32, borderRadius: 5 }} />
+                    <Input disabled={disable} className={cx('input')} />
                   </Form.Item>
                 </Col>
                 <Col span={12}>
                   <Form.Item label='Mã' name='code'>
-                    <Input disabled={disable} style={{ width: '100%', height: 32, borderRadius: 5 }} />
+                    <Input disabled={disable} className={cx('input')} />
                   </Form.Item>
                 </Col>
               </Row>
@@ -589,12 +584,12 @@ const FormModal: React.FC<Props> = ({
               <Row>
                 <Col span={12}>
                   <Form.Item label='Tiêu hiển thị' name='title'>
-                    <Input disabled={disable} style={{ width: '100%', height: 32, borderRadius: 5 }} />
+                    <Input disabled={disable} className={cx('input')} />
                   </Form.Item>
                 </Col>
                 <Col span={12}>
                   <Form.Item label='Tag' name='tags'>
-                    <Input disabled={disable} style={{ width: '100%', height: 32, borderRadius: 5 }} />
+                    <Input disabled={disable} className={cx('input')} />
                   </Form.Item>
                 </Col>
               </Row>
@@ -755,25 +750,14 @@ const FormModal: React.FC<Props> = ({
               <div className='mb-5'>
                 <Button
                   icon={<DatabaseOutlined />}
-                  style={{
-                    background: '#ffb822',
-                    color: '#111111',
-                    minWidth: '130px',
-                    borderRadius: 5,
-                    marginRight: '5px',
-                  }}
+                  className={cx('preview-btn')}
                   onClick={handleClickPreview}
                 >
                   Xem trước
                 </Button>
                 <Button
                   icon={<ClockCircleOutlined />}
-                  style={{
-                    background: '#34bfa3',
-                    color: '#ffffff',
-                    minWidth: '130px',
-                    borderRadius: 5,
-                  }}
+                  className={cx('metadata-btn')}
                   onClick={handleClickMetadata}
                 >
                   Xem metadata
