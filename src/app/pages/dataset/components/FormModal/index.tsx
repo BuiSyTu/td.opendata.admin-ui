@@ -241,14 +241,6 @@ const FormModal: React.FC<Props> = ({
     }
   }
 
-  const handleChangeDataType = (value: string, event: any) => {
-    setDisableTablePreview(true)
-    setDisableTableMetadata(true)
-
-    dispatch(setDataTypeCode(event.code.toLowerCase()))
-    dispatch(setDisableDataTab(false))
-  }
-
   const postData = async (data: Dataset) => {
     if (!data.metadata) {
       notification.error({
@@ -660,27 +652,6 @@ const FormModal: React.FC<Props> = ({
                   </Form.Item>
                 </Col>
               </Row>
-
-              {/* <Row>
-                <Col span={12}>
-                  <Form.Item
-                    label='Loại dữ liệu'
-                    name='dataTypeId'
-                    rules={[{ required: true, message: 'Không được để trống!' }]}
-                  >
-                    <Select showSearch placeholder='Chọn loại dữ liệu'
-                      onChange={(value, event) => handleChangeDataType(value, event)}
-                    >
-                      {dataTypes.map(dataType => (
-                        <Option key={dataType.id} value={dataType.id} code={dataType.code}>
-                          {dataType.name}
-                        </Option>
-                      )
-                      )}
-                    </Select>
-                  </Form.Item>
-                </Col>
-              </Row> */}
 
               <Form.Item name='visibility' valuePropName='checked'>
                 <Checkbox>Xuất bản lên cổng</Checkbox>

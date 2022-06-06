@@ -117,6 +117,5 @@
   },
   "eslintIgnore": [
     "dist/*"
-  ],
-  "license": "unlicense"
+  ]
 }
