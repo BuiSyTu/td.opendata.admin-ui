@@ -22,7 +22,6 @@ export function MenuInner() {
           menuTrigger={`{default:'click', lg: 'hover'}`}
         >
           <MenuItem to='/dataset/webapi/list' title='Danh sách' hasBullet={true} />
-          <MenuItem to='/dataset/webapi/config' title='Cấu hình' hasBullet={true} />
           <MenuItem to='/dataset/webapi/sync-history' title='Lịch sử đồng bộ' hasBullet={true} />
           <MenuItem to='/dataset/webapi/statistic' title='Thống kê' hasBullet={true} />
         </MenuInnerWithSub>
@@ -35,22 +34,9 @@ export function MenuInner() {
           menuTrigger={`{default:'click', lg: 'hover'}`}
         >
           <MenuItem to='/dataset/excel/list' title='Danh sách' hasBullet={true} />
-          <MenuItem to='/dataset/excel/config' title='Cấu hình' hasBullet={true} />
+          {/* <MenuItem to='/dataset/excel/config' title='Cấu hình' hasBullet={true} /> */}
           <MenuItem to='/dataset/excel/sync-history' title='Lịch sử đồng bộ' hasBullet={true} />
           <MenuItem to='/dataset/excel/statistic' title='Thống kê' hasBullet={true} />
-        </MenuInnerWithSub>
-        <MenuInnerWithSub
-          title='Database'
-          to='/dataset/database'
-          hasBullet={true}
-          hasArrow={true}
-          menuPlacement='right-start'
-          menuTrigger={`{default:'click', lg: 'hover'}`}
-        >
-          <MenuItem to='/dataset/database/list' title='Danh sách' hasBullet={true} />
-          <MenuItem to='/dataset/database/config' title='Cấu hình' hasBullet={true} />
-          <MenuItem to='/dataset/database/sync-history' title='Lịch sử đồng bộ' hasBullet={true} />
-          <MenuItem to='/dataset/database/statistic' title='Thống kê' hasBullet={true} />
         </MenuInnerWithSub>
 
         <MenuInnerWithSub
@@ -79,10 +65,6 @@ export function MenuInner() {
           <MenuItem to='/dataset/approve/list' title='Đang chờ' hasBullet={true} />
           <MenuItem to='/dataset/approve/config' title='Không duyệt' hasBullet={true} />
           <MenuItem to='/dataset/approve/syc-history' title='Đã duyệt' hasBullet={true} />
-          <MenuItem to='/dataset/approve/statistic-by-category' title='Thống kê theo lĩnh vực' hasBullet={true} />
-          <MenuItem to='/dataset/approve/statistic-by-organization' title='Thống kê theo đơn vị cung cấp' hasBullet={true} />
-          <MenuItem to='/dataset/approve/statistic-by-provider-type' title='Thống kê theo loại hình thu thập' hasBullet={true} />
-          <MenuItem to='/dataset/approve/statistic' title='Thống kê duyệt dữ liệu' hasBullet={true} />
         </MenuInnerWithSub>
       </MenuInnerWithSub>
       <MenuInnerWithSub
@@ -109,6 +91,17 @@ export function MenuInner() {
         <MenuItem to='/administrative-categories/document-type' title='Loại giấy tờ' hasBullet={true} />
         <MenuItem to='/administrative-categories/mining-source' title='Nguồn khai thác' hasBullet={true} />
         <MenuItem to='/administrative-categories/data-source' title='Nguồn dữ liệu' hasBullet={true} />
+      </MenuInnerWithSub>
+
+      <MenuInnerWithSub
+        title='Quản trị hệ thống'
+        to='/admin'
+        menuPlacement='bottom-start'
+        menuTrigger='click'
+      >
+        <MenuItem to='/administrative-categories/document-type' title='Người dùng' hasBullet={true} />
+        <MenuItem to='/administrative-categories/mining-source' title='Banner' hasBullet={true} />
+        <MenuItem to='/administrative-categories/data-source' title='Footer' hasBullet={true} />
       </MenuInnerWithSub>
     </>
   )

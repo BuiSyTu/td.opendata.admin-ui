@@ -3,18 +3,11 @@ import { Route, Switch } from 'react-router-dom'
 import { lazy } from 'react'
 
 const CategoriesPage = () => {
-  const DatabaseListPage = lazy(() => import('./database/list'))
-  const DatabaseConfigPage = lazy(() => import('./database/config'))
-  const DatabaseStatisticPage = lazy(() => import('./database/statistic'))
-  const DatabaseSyncHistoryPage = lazy(() => import('./database/sync-history'))
-
   const WebApiListPage = lazy(() => import('./webapi/list'))
-  const WebApiConfigPage = lazy(() => import('./webapi/config'))
   const WebApiStatisticPage = lazy(() => import('./webapi/statistic'))
   const WebApiSyncHistoryPage = lazy(() => import('./webapi/sync-history'))
 
   const ExcelListPage = lazy(() => import('./excel/list'))
-  const ExcelConfigPage = lazy(() => import('./excel/config'))
   const ExcelStatisticPage = lazy(() => import('./excel/statistic'))
   const ExcelSyncHistoryPage = lazy(() => import('./excel/sync-history'))
 
@@ -36,19 +29,12 @@ const CategoriesPage = () => {
   return (
     <Switch>
       <Route path='/dataset/webapi/list' component={WebApiListPage}></Route>
-      <Route path='/dataset/webapi/config' component={WebApiConfigPage}></Route>
       <Route path='/dataset/webapi/statistic' component={WebApiStatisticPage}></Route>
       <Route path='/dataset/webapi/sync-history' component={WebApiSyncHistoryPage}></Route>
 
       <Route path='/dataset/excel/list' component={ExcelListPage}></Route>
-      <Route path='/dataset/excel/config' component={ExcelConfigPage}></Route>
       <Route path='/dataset/excel/statistic' component={ExcelStatisticPage}></Route>
       <Route path='/dataset/excel/sync-history' component={ExcelSyncHistoryPage}></Route>
-
-      <Route path='/dataset/database/list' component={DatabaseListPage}></Route>
-      <Route path='/dataset/database/config' component={DatabaseConfigPage}></Route>
-      <Route path='/dataset/database/statistic' component={DatabaseStatisticPage}></Route>
-      <Route path='/dataset/database/sync-history' component={DatabaseSyncHistoryPage}></Route>
 
       <Route path='/dataset/collect/list' component={CollectListPage}></Route>
       <Route path='/dataset/collect/by-category' component={CollectByCategoryPage}></Route>
@@ -63,7 +49,7 @@ const CategoriesPage = () => {
       <Route path='/dataset/approve/statistic-by-data-type' component={ApproveStatisticByDataTypePage}></Route>
       <Route path='/dataset/approve/statistic-by-organization' component={ApproveStatisticByOrganizationPage}></Route>
       <Route path='/dataset/approve/statistic-by-provider-type' component={ApproveStatisticByProviderTypePage}></Route>
-      <Route path='/dataset/approve/statistic' component={ApproveStatisticPage}></Route>      
+      <Route path='/dataset/approve/statistic' component={ApproveStatisticPage}></Route>
     </Switch>
   )
 }

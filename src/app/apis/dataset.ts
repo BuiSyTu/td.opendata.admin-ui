@@ -11,7 +11,7 @@ const authorization = `Bearer ${process.env.REACT_APP_BEAR_TOKEN}`
 
 
 const getAll = async (listFilter?: DatasetListFilter) => {
-  try {    
+  try {
     const params = toQueryString(listFilter)
     const res = await axios({
       method: 'GET',
@@ -122,7 +122,7 @@ const update = async (id: string, data: Dataset) => {
   }
 }
 
-const _delete = async(id: string) => {
+const _delete = async (id: string) => {
   try {
     const res = await axios({
       method: 'DELETE',
@@ -141,7 +141,7 @@ const _delete = async(id: string) => {
   }
 }
 
-const approved = async(id: string) => {
+const approved = async (id: string) => {
   try {
     const res = await axios({
       method: 'PATCH',
@@ -160,7 +160,7 @@ const approved = async(id: string) => {
   }
 }
 
-const rejected = async(id: string) => {
+const rejected = async (id: string) => {
   try {
     const res = await axios({
       method: 'PATCH',
@@ -179,11 +179,50 @@ const rejected = async(id: string) => {
   }
 }
 
-const syncData = async(id: string) => {
+const syncData = async (id: string) => {
   try {
     const res = await axios({
       method: 'PATCH',
       url: `${baseUrl}/syncdata/${id}`,
+      headers: {
+        'Authorization': authorization,
+        'TDAuthorization': getCookie('token'),
+      },
+      timeout: 15000,
+    })
+
+    return res?.data
+  } catch (error: any) {
+    console.error(error.response)
+    return null
+  }
+}
+
+const statsByCategory = async () => {
+  try {
+    const res = await axios({
+      method: 'GET',
+      url: `${baseUrl}/stats-by-category`,
+      headers: {
+        'Authorization': authorization,
+        'TDAuthorization': getCookie('token'),
+      },
+      timeout: 15000,
+    })
+
+    return res?.data
+  } catch (error: any) {
+    console.error(error.response)
+    return null
+  }
+}
+
+const statsByOrganization = async () => {
+  try {
+
+    const res = await axios({
+      method: 'GET',
+      url: `${baseUrl}/stats-by-organization`,
       headers: {
         'Authorization': authorization,
         'TDAuthorization': getCookie('token'),
@@ -208,4 +247,6 @@ export const datasetApi = {
   rejected,
   syncData,
   getData,
+  statsByCategory,
+  statsByOrganization,
 }

@@ -25,6 +25,26 @@ const getWidget = async () => {
   }
 }
 
+const getOverview = async () => {
+  try {
+    const res = await axios({
+      method: 'GET',
+      url: `${baseUrl}/overview`,
+      headers: {
+        'Authorization': authorization,
+        'TDAuthorization': getCookie('token'),
+      },
+      timeout: 15000,
+    })
+
+    return res?.data
+  } catch (error: any) {
+    console.error(error.response)
+    return null
+  }
+}
+
 export const statsApi = {
   getWidget,
+  getOverview,
 }

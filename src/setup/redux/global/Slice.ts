@@ -1,5 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+export interface GlobalState {
+  accessToken?: string,
+  accessTokenOld?: string,
+  refreshToken?: string,
+  userInfo?: any,
+  firstAccess?: boolean,
+}
+
 const initialState = {
   accessToken: '',
   accessTokenOld: '',
@@ -12,16 +20,16 @@ export const globalSlice = createSlice({
   name: 'global',
   initialState: initialState,
   reducers: {
-    logOut: (state, action) => {
+    logOut: (state: any, action: any) => {
       state = initialState;
     },
-    setAccessToken: (state, action) => {
+    setAccessToken: (state: any, action: any) => {
       state.accessToken = action.payload;
     },
-    setUserInfo: (state, action) => {
+    setUserInfo: (state: any, action: any) => {
       state.userInfo = action.payload;
     },
-    setFirstAccess: (state, action) => {
+    setFirstAccess: (state: any, action: any) => {
       state.firstAccess = action.payload;
     }
   },

@@ -7,12 +7,6 @@ import { useIntl } from 'react-intl'
 
 export function AsideMenuMain() {
   const intl = useIntl()
-  // const user: any = useSelector<any>((state) => state.auth.user)
-  // const userRoles = user?.roles ?? []
-
-  // const CheckRole: any = (roles: Array<string>, role: Array<string>) => {
-  //   return roles.some((v: any) => role.includes(v))
-  // }
 
   return (
     <>
@@ -33,7 +27,7 @@ export function AsideMenuMain() {
           hasBullet={true}
         >
           <AsideMenuItem to='/dataset/webapi/list' title='Danh sách' hasBullet={true} />
-          <AsideMenuItem to='/dataset/webapi/config' title='Cấu hình' hasBullet={true} />
+          {/* <AsideMenuItem to='/dataset/webapi/config' title='Cấu hình' hasBullet={true} /> */}
           <AsideMenuItem to='/dataset/webapi/sync-history' title='Lịch sử đồng bộ' hasBullet={true} />
           <AsideMenuItem to='/dataset/webapi/statistic' title='Thống kê' hasBullet={true} />
         </AsideMenuItemWithSub>
@@ -44,20 +38,9 @@ export function AsideMenuMain() {
           hasBullet={true}
         >
           <AsideMenuItem to='/dataset/excel/list' title='Danh sách' hasBullet={true} />
-          <AsideMenuItem to='/dataset/excel/config' title='Cấu hình' hasBullet={true} />
+          {/* <AsideMenuItem to='/dataset/excel/config' title='Cấu hình' hasBullet={true} /> */}
           <AsideMenuItem to='/dataset/excel/sync-history' title='Lịch sử đồng bộ' hasBullet={true} />
           <AsideMenuItem to='/dataset/excel/statistic' title='Thống kê' hasBullet={true} />
-        </AsideMenuItemWithSub>
-        <AsideMenuItemWithSub
-          to='/dataset/database'
-          title='Database'
-          fontIcon='bi-archive'
-          hasBullet={true}
-        >
-          <AsideMenuItem to='/dataset/database/list' title='Danh sách' hasBullet={true} />
-          <AsideMenuItem to='/dataset/database/config' title='Cấu hình' hasBullet={true} />
-          <AsideMenuItem to='/dataset/database/sync-history' title='Lịch sử đồng bộ' hasBullet={true} />
-          <AsideMenuItem to='/dataset/database/statistic' title='Thống kê' hasBullet={true} />
         </AsideMenuItemWithSub>
 
         <AsideMenuItemWithSub
@@ -85,10 +68,6 @@ export function AsideMenuMain() {
           <AsideMenuItem to='/dataset/approve/pending' title='Đang chờ' hasBullet={true} />
           <AsideMenuItem to='/dataset/approve/rejected' title='Không duyệt' hasBullet={true} />
           <AsideMenuItem to='/dataset/approve/approved' title='Đã duyệt' hasBullet={true} />
-          <AsideMenuItem to='/dataset/approve/statistic-by-category' title='Thống kê theo lĩnh vực' hasBullet={true} />
-          <AsideMenuItem to='/dataset/approve/statistic-by-organization' title='Thống kê theo đơn vị cung cấp' hasBullet={true} />
-          <AsideMenuItem to='/dataset/approve/statistic-by-provider-type' title='Thống kê theo loại hình thu thập' hasBullet={true} />
-          <AsideMenuItem to='/dataset/approve/statistic' title='Thống kê tổng hợp duyệt dữ liệu' hasBullet={true} />
         </AsideMenuItemWithSub>
       </AsideMenuItemWithSub>
 

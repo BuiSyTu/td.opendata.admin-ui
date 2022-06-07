@@ -4,14 +4,13 @@ import axios from 'axios'
 import { getCookie } from 'src/utils/cookies'
 import { toQueryString } from 'src/utils/common'
 
-const ver = '1'
 const controllerName = 'tags'
-const baseUrl = `${process.env.REACT_APP_API_URL}/api/v${ver}/${controllerName}`
+const baseUrl = `${process.env.REACT_APP_API_URL}/${controllerName}`
 const authorization = `Bearer ${process.env.REACT_APP_BEAR_TOKEN}`
 
 
 const getAll = async (listFilter?: TagListFilter) => {
-  try {    
+  try {
     const params = toQueryString(listFilter)
     const res = await axios({
       method: 'GET',
@@ -90,7 +89,7 @@ const update = async (id: string, data: Tag) => {
   }
 }
 
-const _delete = async(id: string) => {
+const _delete = async (id: string) => {
   try {
     const res = await axios({
       method: 'DELETE',
