@@ -1,9 +1,10 @@
-import { KTSVG, checkIsActive } from 'src/_metronic/helpers'
-
 import React from 'react'
 import classnames from 'classnames'
-import { useLayout } from 'src/_metronic/layout/core'
 import { useLocation } from 'react-router'
+
+import { Permissions } from 'src/app/constants'
+import { useLayout } from 'src/_metronic/layout/core'
+import { KTSVG, checkIsActive } from 'src/_metronic/helpers'
 
 type Props = {
   to: string
@@ -11,6 +12,8 @@ type Props = {
   icon?: string
   fontIcon?: string
   hasBullet?: boolean
+  menuPermissions?: Permissions[]
+  userPermissions?: Permissions[]
 }
 
 const AsideMenuItemWithSub: React.FC<Props> = ({
@@ -20,13 +23,17 @@ const AsideMenuItemWithSub: React.FC<Props> = ({
   icon,
   fontIcon,
   hasBullet,
+  menuPermissions = [],
+  userPermissions = [],
 }) => {
+  const hasPermission = menuPermissions.every(menuPermission => userPermissions.includes(menuPermission))
+
   const { pathname } = useLocation()
   const isActive = checkIsActive(pathname, to)
   const { config } = useLayout()
   const { aside } = config
 
-  return (
+  return hasPermission ? (
     <div
       className={classnames('menu-item', { 'here show': isActive }, 'menu-accordion')}
       data-kt-menu-trigger='click'
@@ -50,6 +57,8 @@ const AsideMenuItemWithSub: React.FC<Props> = ({
         {children}
       </div>
     </div>
+  ) : (
+    <></>
   )
 }
 

@@ -1,11 +1,11 @@
 import { Divider, Input, Popconfirm, Tag, Typography, notification } from 'antd'
-import { State, TypeModal, setDisableDataTab } from 'src/setup/redux/slices/dataset'
-import { danger, secondary, success } from 'src/app/constants/color'
+import { State, TypeModal, setDisableDataTab, setDataTypeCode } from 'src/setup/redux/slices/dataset'
+import { Colors } from 'src/app/constants/color'
 import { useEffect, useState } from 'react'
 
 import FormModal from 'src/app/pages/dataset/components/FormModal'
 import { PageTitle } from 'src/_metronic/layout/core'
-import TableList from 'src/app/components/TableList'
+import { TableList } from 'src/app/components'
 import { datasetApi } from 'src/app/apis'
 import { openJsonInNewTab } from 'src/utils/common'
 import { useDispatch } from 'react-redux'
@@ -13,7 +13,7 @@ import { useDispatch } from 'react-redux'
 const { Text } = Typography
 const { Search } = Input
 
-const ListPage = () => {
+const CategoryPage = () => {
   const dispatch = useDispatch()
 
   const [modalVisible, setModalVisible] = useState(false)
@@ -61,7 +61,7 @@ const ListPage = () => {
       width: '20%',
       render: (text: any, record: any, index: any) => {
         const getApproveState = () => {
-          let color = secondary
+          let color = Colors.secondary
           let textDisplay = 'Không xác định'
 
           switch (record?.approveState) {
@@ -69,11 +69,11 @@ const ListPage = () => {
               textDisplay = 'Chưa duyệt'
               break;
             case State.approved:
-              color = success
+              color = Colors.success
               textDisplay = 'Đã duyệt'
               break;
             case State.rejected:
-              color = danger
+              color = Colors.danger
               textDisplay = 'Bị từ chối'
               break;
             default:
@@ -88,7 +88,7 @@ const ListPage = () => {
 
         const getIsSynced = () => {
           return {
-            color: record?.isSynced ? success : secondary,
+            color: record?.isSynced ? Colors.success : Colors.secondary,
             textDisplay: record?.isSynced ? 'Đã đồng bộ' : 'Đang đồng bộ',
           }
         }
@@ -227,7 +227,10 @@ const ListPage = () => {
     const fetchData = async () => {
       try {
         setLoading(true)
-        var res = await datasetApi.getAll()
+        var res = await datasetApi.getAll({
+          dataTypeCode: 'file',
+          isPortal: true,
+        })
         setDataTable(res?.data ?? [])
         setCount(res?.totalCount ?? 0)
         setLoading(false)
@@ -241,6 +244,7 @@ const ListPage = () => {
       fetchData()
     }
     return () => { }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [update])
 
   useEffect(() => {
@@ -254,6 +258,7 @@ const ListPage = () => {
     setTypeModal(TypeModal.edit)
 
     dispatch(setDisableDataTab(false))
+    dispatch(setDataTypeCode('excel'))
   }
 
   const handleView = (id: string) => {
@@ -262,11 +267,15 @@ const ListPage = () => {
     setTypeModal(TypeModal.view)
 
     dispatch(setDisableDataTab(false))
+    dispatch(setDataTypeCode('excel'))
   }
 
   const handleAdd = () => {
     setModalVisible(true)
     setTypeModal(TypeModal.add)
+
+    dispatch(setDisableDataTab(false))
+    dispatch(setDataTypeCode('excel'))
   }
 
   const handleDelete = async (id: string) => {
@@ -407,4 +416,4 @@ const ListPage = () => {
   )
 }
 
-export default ListPage
+export default CategoryPage

@@ -1,7 +1,7 @@
 import { Form, Input, notification } from 'antd'
 import { useEffect, useState } from 'react'
 
-import CRUDModal from 'src/app/components/CRUDModal'
+import { CRUDModal } from 'src/app/components'
 import { ProviderType } from 'src/app/models'
 import { providerTypeApi } from 'src/app/apis'
 

@@ -1,15 +1,19 @@
-import { Tag, Typography } from 'antd'
 import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
+import { Tag, Typography } from 'antd'
 
-import { danger, success } from 'src/app/constants/color'
+import { Colors } from 'src/app/constants'
 import { PageTitle } from 'src/_metronic/layout/core'
-import TableList from 'src/app/components/TableList'
+import { TableList } from 'src/app/components'
 import { syncHistoryApi } from 'src/app/apis'
 import { SyncHistory } from 'src/app/models'
+import { RootState } from 'src/setup'
 
 const { Text } = Typography
 
 const SyncHistoryPage = () => {
+  const userInfo = useSelector((state: RootState) => state.global.userInfo)
+
   const [loading, setLoading] = useState(false)
   const [update, setUpdate] = useState(true)
   const [dataTable, setDataTable] = useState([])
@@ -59,9 +63,9 @@ const SyncHistoryPage = () => {
       align: 'center',
       render: (text: any, record: SyncHistory, index: any) => {
         return record?.dataset?.isSynced ? (
-          <Tag color={success}>Đã đồng bộ</Tag>
+          <Tag color={Colors.success}>Đã đồng bộ</Tag>
         ) : (
-          <Tag color={danger}>Đồng bộ lỗi</Tag>
+          <Tag color={Colors.danger}>Đồng bộ lỗi</Tag>
         )
       },
       width: '15%',
@@ -84,6 +88,7 @@ const SyncHistoryPage = () => {
         setLoading(true)
         var res = await syncHistoryApi.getAll({
           dataTypeCode: 'webapi',
+          officeCode: userInfo?.Info?.UserOffice?.GroupCode ?? '',
         })
         setDataTable(res?.data ?? [])
         setCount(res?.totalCount ?? 0)

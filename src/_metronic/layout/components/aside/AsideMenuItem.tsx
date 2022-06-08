@@ -5,6 +5,7 @@ import React from 'react'
 import classnames from 'classnames'
 import { useLayout } from 'src/_metronic/layout/core'
 import { useLocation } from 'react-router'
+import { Permissions } from 'src/app/constants'
 
 type Props = {
   to: string
@@ -12,6 +13,8 @@ type Props = {
   icon?: string
   fontIcon?: string
   hasBullet?: boolean
+  menuPermissions?: Permissions[]
+  userPermissions?: Permissions[]
 }
 
 const AsideMenuItem: React.FC<Props> = ({
@@ -21,13 +24,17 @@ const AsideMenuItem: React.FC<Props> = ({
   icon,
   fontIcon,
   hasBullet = false,
+  menuPermissions = [],
+  userPermissions = [],
 }) => {
+  const hasPermission = menuPermissions.every(menuPermission => userPermissions.includes(menuPermission))
+
   const { pathname } = useLocation()
   const isActive = checkIsActive(pathname, to)
   const { config } = useLayout()
   const { aside } = config
 
-  return (
+  return hasPermission ? (
     <div className='menu-item'>
       <Link className={classnames('menu-link without-sub', { active: isActive })} to={to}>
         {hasBullet && (
@@ -45,7 +52,10 @@ const AsideMenuItem: React.FC<Props> = ({
       </Link>
       {children}
     </div>
+  ) : (
+    <></>
   )
+
 }
 
 export { AsideMenuItem }

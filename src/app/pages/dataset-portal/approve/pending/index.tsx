@@ -1,17 +1,17 @@
-import { Divider, Input, Tag, Typography } from 'antd'
-import { danger, secondary, success } from 'src/app/constants/color'
+import { Divider, Input, Tag, Typography, notification } from 'antd'
+import { Colors } from 'src/app/constants'
 import { useEffect, useState } from 'react'
 
 import { ApproveState } from 'src/app/models'
 import { PageTitle } from 'src/_metronic/layout/core'
 import { State } from 'src/setup/redux/slices/dataset'
-import TableList from 'src/app/components/TableList'
+import { TableList } from 'src/app/components'
 import { datasetApi } from 'src/app/apis'
 
 const { Text } = Typography
 const { Search } = Input
 
-const StatisticPage = () => {
+const PendingPage = () => {
   const [loading, setLoading] = useState(false)
   const [update, setUpdate] = useState(true)
   const [inputValue, setInputValue] = useState('')
@@ -54,7 +54,7 @@ const StatisticPage = () => {
       width: '20%',
       render: (text: any, record: any, index: any) => {
         const getApproveState = () => {
-          let color = secondary
+          let color = Colors.secondary
           let textDisplay = 'Không xác định'
 
           switch (record?.approveState) {
@@ -62,11 +62,11 @@ const StatisticPage = () => {
               textDisplay = 'Chưa duyệt'
               break;
             case State.approved:
-              color = success
+              color = Colors.success
               textDisplay = 'Đã duyệt'
               break;
             case State.rejected:
-              color = danger
+              color = Colors.danger
               textDisplay = 'Bị từ chối'
               break;
             default:
@@ -81,7 +81,7 @@ const StatisticPage = () => {
 
         const getIsSynced = () => {
           return {
-            color: record?.isSynced ? success : secondary,
+            color: record?.isSynced ? Colors.success : Colors.secondary,
             textDisplay: record?.isSynced ? 'Đã đồng bộ' : 'Đang đồng bộ',
           }
         }
@@ -101,6 +101,38 @@ const StatisticPage = () => {
         );
       },
     },
+    {
+      title: 'Xét duyệt',
+      width: '15%',
+      dataIndex: '',
+      key: '',
+      align: 'center',
+      render: (text: any, record: any) => (
+        <div>
+          <button
+            className='btn btn-light-success m-btn m-btn--icon btn-sm m-btn--icon-only'
+            data-toggle='m-tooltip'
+            title='Duyệt'
+            onClick={() => {
+              handleApproved(record.id)
+            }}
+          >
+            <i className='la la-check' style={{ marginLeft: -7 }}></i>
+          </button>
+          <button
+            style={{ marginLeft: 10 }}
+            className='btn btn-light-danger m-btn m-btn--icon btn-sm m-btn--icon-only'
+            data-toggle='m-tooltip'
+            title='Từ chối'
+            onClick={() => {
+              handleRejected(record.id)
+            }}
+          >
+            <i className='la la-times' style={{ marginLeft: -7 }}></i>
+          </button>
+        </div>
+      ),
+    },
   ]
 
   useEffect(() => {
@@ -108,7 +140,8 @@ const StatisticPage = () => {
       try {
         setLoading(true)
         var res = await datasetApi.getAll({
-          approveState: ApproveState.REJECTED,
+          approveState: ApproveState.PENDING,
+          isPortal: true,
         })
         setDataTable(res?.data ?? [])
         setCount(res?.totalCount ?? 0)
@@ -129,6 +162,42 @@ const StatisticPage = () => {
     setUpdate(true)
     return () => { }
   }, [offset, size, inputValue])
+
+  const handleApproved = async (id: string) => {
+    var res = await datasetApi.approved(id)
+    if (res) {
+      notification.success({
+        message: 'Thành công!',
+        duration: 1,
+        placement: 'bottomRight',
+      })
+
+      setUpdate(true)
+    } else {
+      notification.error({
+        message: `Thất bại!`,
+        description: 'Không thành công.',
+      })
+    }
+  }
+
+  const handleRejected = async (id: string) => {
+    var res = await datasetApi.rejected(id)
+    if (res) {
+      notification.success({
+        message: 'Thành công!',
+        duration: 1,
+        placement: 'bottomRight',
+      })
+
+      setUpdate(true)
+    } else {
+      notification.error({
+        message: `Thất bại!`,
+        description: 'Không thành công.',
+      })
+    }
+  }
 
   return (
     <div>
@@ -161,4 +230,4 @@ const StatisticPage = () => {
   )
 }
 
-export default StatisticPage
+export default PendingPage

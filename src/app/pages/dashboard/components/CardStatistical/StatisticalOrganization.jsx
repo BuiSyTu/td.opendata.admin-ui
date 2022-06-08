@@ -93,7 +93,6 @@ const StatisticalOrganization = () => {
                 setOptions(option)
             })
 
-
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 

@@ -8,7 +8,7 @@ export interface GlobalState {
   firstAccess?: boolean,
 }
 
-const initialState = {
+const initialState: GlobalState = {
   accessToken: '',
   accessTokenOld: '',
   refreshToken: '',

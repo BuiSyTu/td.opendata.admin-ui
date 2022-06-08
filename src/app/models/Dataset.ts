@@ -43,6 +43,10 @@ export interface DatasetListFilter extends PaginationFilter {
   approveState?: ApproveState,
   visibility?: boolean,
   dataTypeCode?: string,
+  author?: string,
+  officeCode?: string,
+  isOffice?: boolean,
+  isPortal?: boolean,
 }
 
 export enum ApproveState {

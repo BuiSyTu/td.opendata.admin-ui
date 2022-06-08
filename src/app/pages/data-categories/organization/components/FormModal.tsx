@@ -1,7 +1,7 @@
 import { Form, Input, notification } from 'antd'
 import { useEffect, useState } from 'react'
 
-import CRUDModal from 'src/app/components/CRUDModal'
+import { CRUDModal } from 'src/app/components'
 import { Organization } from 'src/app/models'
 import { organizationApi } from 'src/app/apis'
 
@@ -113,25 +113,25 @@ const ModalCategory = (props: any) => {
       title='Tổ chức'
       typeModal={typeModal}
     >
-        <Form {...layout} form={form}>
-          <Form.Item
-            label='Tên'
-            name='name'
-            rules={[{ required: true, message: 'Không được để trống!' }]}
-          >
-            <Input disabled={disable} style={{ width: '100%', height: 32, borderRadius: 5 }} />
-          </Form.Item>
-          <Form.Item
-            label='Mã'
-            name='code'
-            rules={[{ required: true, message: 'Không được để trống!' }]}
-          >
-            <Input disabled={disable} style={{ width: '100%', height: 32, borderRadius: 5 }} />
-          </Form.Item>
-          <Form.Item label='Mô tả' name='description'>
-            <TextArea disabled={disable} rows={3} style={{ width: '100%', borderRadius: 5 }} />
-          </Form.Item>
-        </Form>
+      <Form {...layout} form={form}>
+        <Form.Item
+          label='Tên'
+          name='name'
+          rules={[{ required: true, message: 'Không được để trống!' }]}
+        >
+          <Input disabled={disable} style={{ width: '100%', height: 32, borderRadius: 5 }} />
+        </Form.Item>
+        <Form.Item
+          label='Mã'
+          name='code'
+          rules={[{ required: true, message: 'Không được để trống!' }]}
+        >
+          <Input disabled={disable} style={{ width: '100%', height: 32, borderRadius: 5 }} />
+        </Form.Item>
+        <Form.Item label='Mô tả' name='description'>
+          <TextArea disabled={disable} rows={3} style={{ width: '100%', borderRadius: 5 }} />
+        </Form.Item>
+      </Form>
     </CRUDModal>
   )
 }

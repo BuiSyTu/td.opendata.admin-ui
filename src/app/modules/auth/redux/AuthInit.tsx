@@ -1,15 +1,14 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-
-import * as actions from 'src/setup/redux/global/Actions';
 import * as auth from './AuthRedux';
 
-import {ConnectedProps, connect, useDispatch, useSelector} from 'react-redux';
-import {FC, useEffect} from 'react';
+import { ConnectedProps, connect, useDispatch } from 'react-redux';
+import { FC, useEffect } from 'react';
 import { getCookie, setCookie } from 'src/utils/cookies';
+import { sharepointApi } from 'src/app/apis';
+import { setUserInfo } from 'src/setup/redux/global/Slice';
 
-import {RootState} from 'src/setup';
+import { RootState } from 'src/setup';
 
-const mapState = (state: RootState) => ({auth: state.auth});
+const mapState = (state: RootState) => ({ auth: state.auth });
 const connector = connect(mapState, auth.actions);
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
@@ -31,8 +30,17 @@ const AuthInit: FC<PropsFromRedux> = (props) => {
 
   // We should request user by authToken before rendering the application
   useEffect(() => {
-    dispatch(actions.getUserInfo(token));
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    if (token) {
+      sharepointApi.getUserInfo(token)
+        .then((response) => {
+          dispatch(setUserInfo(response?.data ?? null))
+        })
+        .catch((error: any) => {
+          console.log(error)
+        })
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return <>{props.children}</>

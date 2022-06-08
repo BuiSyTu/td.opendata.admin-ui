@@ -1,7 +1,7 @@
 import { Form, Input, notification } from 'antd'
 import { useEffect, useState } from 'react'
 
-import CRUDModal from 'src/app/components/CRUDModal'
+import { CRUDModal } from 'src/app/components'
 import { DocumentType } from 'src/app/models'
 import { documentTypeApi } from 'src/app/apis'
 
@@ -35,7 +35,7 @@ const ModalCategory: React.FC<Props> = ({
     labelCol: { span: 4 },
     wrapperCol: { span: 20 },
   }
-  
+
   useEffect(() => {
     const fetchData = async () => {
       try {

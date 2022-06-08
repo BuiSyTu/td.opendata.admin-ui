@@ -3,9 +3,10 @@ import React, { useEffect, useRef } from 'react'
 
 import classnames from 'classnames'
 import { useLocation } from 'react-router'
+import { Permissions } from 'src/app/constants'
 
 type Props = {
-  to: string
+  to?: string
   title: string
   icon?: string
   fontIcon?: string
@@ -14,6 +15,8 @@ type Props = {
   hasArrow?: boolean
   hasBullet?: boolean
   isMega?: boolean
+  userPermissions?: Permissions[]
+  menuPermissions?: Permissions[]
 }
 
 const MenuInnerWithSub: React.FC<Props> = ({
@@ -27,7 +30,11 @@ const MenuInnerWithSub: React.FC<Props> = ({
   hasArrow = false,
   hasBullet = false,
   isMega = false,
+  userPermissions = [],
+  menuPermissions = [],
 }) => {
+  const hasPermission = menuPermissions.every(menuPermission => userPermissions.includes(menuPermission))
+
   const menuItemRef = useRef<HTMLDivElement>(null)
   const { pathname } = useLocation()
 
@@ -38,7 +45,7 @@ const MenuInnerWithSub: React.FC<Props> = ({
     }
   }, [menuTrigger, menuPlacement])
 
-  return (
+  return hasPermission ? (
     <div ref={menuItemRef} className='menu-item menu-lg-down-accordion me-lg-1'>
       <span
         className={classnames('menu-link py-3', {
@@ -77,6 +84,8 @@ const MenuInnerWithSub: React.FC<Props> = ({
         {children}
       </div>
     </div>
+  ) : (
+    <></>
   )
 }
 

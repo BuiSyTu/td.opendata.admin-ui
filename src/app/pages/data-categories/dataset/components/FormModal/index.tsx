@@ -43,6 +43,7 @@ const ModalCategory: React.FC<Props> = ({
   setTypeModal
 }) => {
   const dispatch = useDispatch()
+  const userInfo = useSelector((state: RootState) => state.global.userInfo)
 
   const tabKey = useSelector((state: RootState) => state.dataset.tabKey)
   const disableDataTab = useSelector((state: RootState) => state.dataset.disableDataTab)
@@ -226,6 +227,12 @@ const ModalCategory: React.FC<Props> = ({
       }
 
       formData.metadata = JSON.stringify(dataMetadata)
+
+      if (userInfo?.Info?.UserOffice) {
+        const { GroupCode: officeCode, GroupName: officeName } = userInfo?.Info?.UserOffice
+        formData.officeCode = officeCode
+        formData.officeName = officeName
+      }
 
       typeModal === TypeModal.edit ? putData(formData) : postData(formData)
     } catch (errorInfo) {

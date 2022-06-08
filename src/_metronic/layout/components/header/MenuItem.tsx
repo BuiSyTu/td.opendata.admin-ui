@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import React from 'react'
 import classnames from 'classnames'
 import { useLocation } from 'react-router'
+import { Permissions } from 'src/app/constants'
 
 type Props = {
   to: string
@@ -12,6 +13,8 @@ type Props = {
   fontIcon?: string
   hasArrow?: boolean
   hasBullet?: boolean
+  userPermissions?: Permissions[]
+  menuPermissions?: Permissions[]
 }
 
 const MenuItem: React.FC<Props> = ({
@@ -21,10 +24,14 @@ const MenuItem: React.FC<Props> = ({
   fontIcon,
   hasArrow = false,
   hasBullet = false,
+  userPermissions = [],
+  menuPermissions = [],
 }) => {
+  const hasPermission = menuPermissions.every(menuPermission => userPermissions.includes(menuPermission))
+
   const { pathname } = useLocation()
 
-  return (
+  return hasPermission ? (
     <div className='menu-item me-lg-1'>
       <Link
         className={classnames('menu-link py-3', {
@@ -55,6 +62,8 @@ const MenuItem: React.FC<Props> = ({
         {hasArrow && <span className='menu-arrow'></span>}
       </Link>
     </div>
+  ) : (
+    <></>
   )
 }
 

@@ -1,7 +1,7 @@
 import { Form, Input, notification } from 'antd'
 import { useEffect, useState } from 'react'
 
-import CRUDModal from 'src/app/components/CRUDModal'
+import { CRUDModal } from 'src/app/components'
 import { DataSource } from 'src/app/models'
 import { dataSourceApi } from 'src/app/apis'
 
@@ -35,7 +35,7 @@ const ModalCategory: React.FC<Props> = ({
     labelCol: { span: 4 },
     wrapperCol: { span: 20 },
   }
-  
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -119,7 +119,7 @@ const ModalCategory: React.FC<Props> = ({
     setUpdate(true)
     handleCancel()
   }
-  
+
   return (
     <CRUDModal
       modalVisible={modalVisible}
@@ -130,18 +130,18 @@ const ModalCategory: React.FC<Props> = ({
       title='Từ khóa'
       typeModal={typeModal}
     >
-        <Form {...layout} form={form}>
-          <Form.Item
-            label='Tên'
-            name='name'
-            rules={[{ required: true, message: 'Không được để trống!' }]}
-          >
-            <Input disabled={disable} style={{ width: '100%', height: 32, borderRadius: 5 }} />
-          </Form.Item>
-          <Form.Item label='Mô tả' name='description'>
-            <TextArea disabled={disable} rows={3} style={{ width: '100%', borderRadius: 5 }} />
-          </Form.Item>
-        </Form>
+      <Form {...layout} form={form}>
+        <Form.Item
+          label='Tên'
+          name='name'
+          rules={[{ required: true, message: 'Không được để trống!' }]}
+        >
+          <Input disabled={disable} style={{ width: '100%', height: 32, borderRadius: 5 }} />
+        </Form.Item>
+        <Form.Item label='Mô tả' name='description'>
+          <TextArea disabled={disable} rows={3} style={{ width: '100%', borderRadius: 5 }} />
+        </Form.Item>
+      </Form>
     </CRUDModal>
   )
 }

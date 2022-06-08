@@ -1,17 +1,22 @@
-import { Divider, Input, Tag, Typography } from 'antd'
-import { danger, secondary, success } from 'src/app/constants/color'
 import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
+
+import { Divider, Input, Tag, Typography } from 'antd'
+import { Colors } from 'src/app/constants'
 
 import { ApproveState } from 'src/app/models'
 import { PageTitle } from 'src/_metronic/layout/core'
 import { State } from 'src/setup/redux/slices/dataset'
-import TableList from 'src/app/components/TableList'
+import { TableList } from 'src/app/components'
 import { datasetApi } from 'src/app/apis'
+import { RootState } from 'src/setup'
 
 const { Text } = Typography
 const { Search } = Input
 
 const RejectedPage = () => {
+  const userInfo = useSelector((state: RootState) => state.global.userInfo)
+
   const [loading, setLoading] = useState(false)
   const [update, setUpdate] = useState(true)
   const [inputValue, setInputValue] = useState('')
@@ -54,7 +59,7 @@ const RejectedPage = () => {
       width: '20%',
       render: (text: any, record: any, index: any) => {
         const getApproveState = () => {
-          let color = secondary
+          let color = Colors.secondary
           let textDisplay = 'Không xác định'
 
           switch (record?.approveState) {
@@ -62,11 +67,11 @@ const RejectedPage = () => {
               textDisplay = 'Chưa duyệt'
               break;
             case State.approved:
-              color = success
+              color = Colors.success
               textDisplay = 'Đã duyệt'
               break;
             case State.rejected:
-              color = danger
+              color = Colors.danger
               textDisplay = 'Bị từ chối'
               break;
             default:
@@ -81,7 +86,7 @@ const RejectedPage = () => {
 
         const getIsSynced = () => {
           return {
-            color: record?.isSynced ? success : secondary,
+            color: record?.isSynced ? Colors.success : Colors.secondary,
             textDisplay: record?.isSynced ? 'Đã đồng bộ' : 'Đang đồng bộ',
           }
         }
@@ -109,6 +114,7 @@ const RejectedPage = () => {
         setLoading(true)
         var res = await datasetApi.getAll({
           approveState: ApproveState.REJECTED,
+          officeCode: userInfo?.Info?.UserOffice?.GroupCode ?? '',
         })
         setDataTable(res?.data ?? [])
         setCount(res?.totalCount ?? 0)
@@ -123,6 +129,7 @@ const RejectedPage = () => {
       fetchData()
     }
     return () => { }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [update])
 
   useEffect(() => {

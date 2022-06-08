@@ -11,4 +11,5 @@ export interface SyncHistory {
 export interface SyncHistoryListFilter extends BaseFilter {
     datasetId?: string,
     dataTypeCode?: 'webapi' | 'file',
+    officeCode?: string,
 }

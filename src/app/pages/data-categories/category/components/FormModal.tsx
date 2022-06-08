@@ -1,7 +1,7 @@
 import { Form, Input, Upload, message, notification } from 'antd'
 import { useEffect, useState } from 'react'
 
-import CRUDModal from 'src/app/components/CRUDModal'
+import { CRUDModal } from 'src/app/components'
 import { Category } from 'src/app/models'
 import { InboxOutlined } from '@ant-design/icons';
 import { categoryApi } from 'src/app/apis'

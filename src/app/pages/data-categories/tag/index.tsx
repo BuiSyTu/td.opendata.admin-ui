@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 
 import FormModal from '../providerType/components/FormModal'
 import { PageTitle } from 'src/_metronic/layout/core'
-import TableList from 'src/app/components/TableList'
+import { TableList } from 'src/app/components'
 import { tagApi } from 'src/app/apis'
 
 const { Text } = Typography
