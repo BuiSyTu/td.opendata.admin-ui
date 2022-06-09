@@ -231,7 +231,7 @@ const ListPage = () => {
         setLoading(true)
         var res = await datasetApi.getAll({
           dataTypeCode: 'webapi',
-          officeCode: userInfo?.Info?.UserOffice?.GroupCode ?? '',
+          isPortal: true,
         })
         setDataTable(res?.data ?? [])
         setCount(res?.totalCount ?? 0)

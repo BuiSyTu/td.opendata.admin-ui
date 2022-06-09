@@ -1,5 +1,5 @@
 import { Divider, Input, Popconfirm, Tag, Typography, notification } from 'antd'
-import { State, TypeModal, setDisableDataTab, setDataTypeCode } from 'src/setup/redux/slices/dataset'
+import { State, TypeModal, setDisableDataTab, setDataTypeCode, DataTypeCode } from 'src/setup/redux/slices/dataset'
 import { Colors } from 'src/app/constants/color'
 import { useEffect, useState } from 'react'
 
@@ -260,7 +260,7 @@ const CategoryPage = () => {
     setTypeModal(TypeModal.edit)
 
     dispatch(setDisableDataTab(false))
-    dispatch(setDataTypeCode('excel'))
+    dispatch(setDataTypeCode(DataTypeCode.file))
   }
 
   const handleView = (id: string) => {
@@ -269,7 +269,7 @@ const CategoryPage = () => {
     setTypeModal(TypeModal.view)
 
     dispatch(setDisableDataTab(false))
-    dispatch(setDataTypeCode('excel'))
+    dispatch(setDataTypeCode(DataTypeCode.file))
   }
 
   const handleAdd = () => {
@@ -277,7 +277,7 @@ const CategoryPage = () => {
     setTypeModal(TypeModal.add)
 
     dispatch(setDisableDataTab(false))
-    dispatch(setDataTypeCode('excel'))
+    dispatch(setDataTypeCode(DataTypeCode.file))
   }
 
   const handleDelete = async (id: string) => {

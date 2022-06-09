@@ -1,9 +1,9 @@
-export const toObject = (arr, key, value) => arr.reduce((previous, item) => ({
+export const toObject = (arr: any[], key: any, value: any) => arr.reduce((previous, item) => ({
   ...previous,
   ...(item !== null && item !== undefined && { [item[key]]: item[value] }),
 }), {})
 
-export const getBase64 = (fileBlob) => {
+export const getBase64 = (fileBlob: any) => {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.readAsDataURL(fileBlob);
@@ -14,7 +14,7 @@ export const getBase64 = (fileBlob) => {
 
 export const isDevelopmentMode = !process.env.NODE_ENV || process.env.NODE_ENV === 'development'
 
-export const openJsonInNewTab = (json) => {
+export const openJsonInNewTab = (json: any) => {
   var myjson = JSON.stringify(json, null, 2);
   var x = window.open();
   x?.document.open();
@@ -22,15 +22,15 @@ export const openJsonInNewTab = (json) => {
   x?.document.close();
 }
 
-export const toQueryString = (obj, prefix) => {
+export const toQueryString: any = (obj: any, prefix: any) => {
   var str = [],
-  p;
+    p;
   for (p in obj) {
     if (obj.hasOwnProperty(p)) {
       var k = prefix ? prefix + "[" + p + "]" : p,
         v = obj[p];
       str.push((v !== null && typeof v === "object") ?
-      toQueryString(v, k) :
+        toQueryString(v, k) :
         encodeURIComponent(k) + "=" + encodeURIComponent(v));
     }
   }

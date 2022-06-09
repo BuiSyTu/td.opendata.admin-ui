@@ -84,6 +84,7 @@ const SyncHistoryPage = () => {
         setLoading(true)
         var res = await syncHistoryApi.getAll({
           dataTypeCode: 'webapi',
+          isPortal: true,
         })
         setDataTable(res?.data ?? [])
         setCount(res?.totalCount ?? 0)
