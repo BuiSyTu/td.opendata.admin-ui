@@ -4,9 +4,8 @@ import { useIntl } from 'react-intl'
 import { PageTitle } from 'src/_metronic/layout/core'
 import CardPieChart from './components/CardPieChart';
 import CardColumnChart from './components/CardColumnChart';
-import { toAbsoluteUrl } from 'src/_metronic/helpers'
+import WidgetStatistic from './components/WidgetStatistic';
 import { datasetApi, statsApi } from 'src/app/apis';
-import { Link } from 'react-router-dom';
 
 const DashboardPage: FC = () => {
   const intl = useIntl();
@@ -103,36 +102,9 @@ const DashboardPage: FC = () => {
       <div className="row">
         {overViewData.map((item: any, index: any) => (
           <div className="col-lg-4 col-xl-4 mb-4 mb-xl-0 my-4" key={index}>
-            <div className="card shadow-sm">
-              {item.slug
-                ? (
-                  <Link to={item.slug}>
-                    <div className="card-body p-4">
-                      <div className='d-flex align-items-center justify-content-between'>
-                        <div className='d-flex align-items-start flex-column'>
-                          <h4 className='text-gray-800 fw-bold fs-5'>{item.name}</h4>
-                          <h3 className='m-0 text-danger fs-1'>{item.count}</h3>
-                        </div>
-                        <div className="statistical-thumb">
-                          <img src={toAbsoluteUrl(`/media/images/${item.icon}`)} className="w-60px" alt="" />
-                        </div>
-                      </div>
-                    </div>
-                  </Link>
-                ) : (
-                  <div className="card-body p-4">
-                    <div className='d-flex align-items-center justify-content-between'>
-                      <div className='d-flex align-items-start flex-column'>
-                        <h4 className='text-gray-800 fw-bold fs-5'>{item.name}</h4>
-                        <h3 className='m-0 text-danger fs-1'>{item.count}</h3>
-                      </div>
-                      <div className="statistical-thumb">
-                        <img src={toAbsoluteUrl(`/media/images/${item.icon}`)} className="w-60px" alt="" />
-                      </div>
-                    </div>
-                  </div>
-                )}
-            </div>
+            <WidgetStatistic
+              data={item}
+            />
           </div>
         ))}
       </div>
