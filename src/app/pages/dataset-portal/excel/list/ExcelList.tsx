@@ -13,7 +13,7 @@ import { useDispatch } from 'react-redux'
 const { Text } = Typography
 const { Search } = Input
 
-const CategoryPage = () => {
+const ExcelList = () => {
   const dispatch = useDispatch()
 
   const [modalVisible, setModalVisible] = useState(false)
@@ -416,4 +416,4 @@ const CategoryPage = () => {
   )
 }
 
-export default CategoryPage
+export default ExcelList

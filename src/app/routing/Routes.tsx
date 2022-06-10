@@ -7,12 +7,10 @@
 
 import { FC } from 'react'
 import { Switch, Route } from 'react-router-dom'
-// import { shallowEqual, useSelector } from 'react-redux'
 import { MasterLayout } from '../../_metronic/layout/MasterLayout'
 import { PrivateRoutes } from './PrivateRoutes'
 import { Logout } from '../modules/auth'
 import { ErrorsPage } from '../modules/errors/ErrorsPage'
-// import { RootState } from '../../setup'
 import { MasterInit } from '../../_metronic/layout/MasterInit'
 
 const Routes: FC = () => {

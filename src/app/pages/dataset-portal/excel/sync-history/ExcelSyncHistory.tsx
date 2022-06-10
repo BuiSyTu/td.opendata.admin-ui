@@ -9,7 +9,7 @@ import { SyncHistory } from 'src/app/models'
 
 const { Text } = Typography
 
-const SyncHistoryPage = () => {
+const ExcelSyncHistory = () => {
   const [loading, setLoading] = useState(false)
   const [update, setUpdate] = useState(true)
   const [dataTable, setDataTable] = useState([])
@@ -124,4 +124,4 @@ const SyncHistoryPage = () => {
   )
 }
 
-export default SyncHistoryPage
+export default ExcelSyncHistory
