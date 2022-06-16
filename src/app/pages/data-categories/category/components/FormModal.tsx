@@ -1,5 +1,5 @@
 import { Form, Input, Upload, message, notification } from 'antd'
-import { useEffect, useState } from 'react'
+import { memo, useEffect, useState } from 'react'
 
 import { CRUDModal } from 'src/app/components'
 import { Category } from 'src/app/models'
@@ -12,12 +12,12 @@ const { Dragger } = Upload
 
 type Props = {
   modalVisible: boolean,
-  setModalVisible: any,
   modalId: string,
-  setModalId: any,
   typeModal: string,
-  setTypeModal: any,
-  setUpdate: any,
+  setModalVisible: React.Dispatch<React.SetStateAction<boolean>>,
+  setModalId: React.Dispatch<React.SetStateAction<string>>,
+  setTypeModal: React.Dispatch<React.SetStateAction<string>>,
+  setUpdate: React.Dispatch<React.SetStateAction<boolean>>,
 }
 
 const ModalCategory: React.FC<Props> = ({
@@ -215,4 +215,4 @@ const ModalCategory: React.FC<Props> = ({
   )
 }
 
-export default ModalCategory
+export default memo(ModalCategory)

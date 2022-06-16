@@ -8,7 +8,7 @@ import { Permissions } from 'src/app/constants'
 
 export function AsideMenuMain() {
   const userInfo = useSelector((state: RootState) => state.global.userInfo)
-  const userPermissions = userInfo?.Roles?.map((role: any) => role.LoginName)
+  const userPermissions: Permissions[] | undefined = userInfo?.Roles?.map((role: any) => role.LoginName)
 
   const intl = useIntl()
 
@@ -26,11 +26,15 @@ export function AsideMenuMain() {
         to='/dataset'
         title='Dữ liệu đơn vị'
         icon='/media/icons/duotune/general/gen022.svg'
+        userPermissions={userPermissions}
+        childrenPermissions={[Permissions.ThuThapDuLieuDonVi, Permissions.KhaiThacDuLieuDonVi, Permissions.DuyetDuLieuDonVi]}
       >
         <AsideMenuItemWithSub
           to='/dataset/webapi'
           title='Web api'
           hasBullet={true}
+          userPermissions={userPermissions}
+          childrenPermissions={[Permissions.ThuThapDuLieuDonVi, Permissions.KhaiThacDuLieuDonVi]}
         >
           <AsideMenuItem
             to='/dataset/webapi/list'
@@ -60,6 +64,8 @@ export function AsideMenuMain() {
           title='File'
           fontIcon='bi-archive'
           hasBullet={true}
+          userPermissions={userPermissions}
+          childrenPermissions={[Permissions.ThuThapDuLieuDonVi, Permissions.KhaiThacDuLieuDonVi]}
         >
           <AsideMenuItem
             to='/dataset/excel/list'
@@ -90,7 +96,7 @@ export function AsideMenuMain() {
           fontIcon='bi-archive'
           hasBullet={true}
           userPermissions={userPermissions}
-          menuPermissions={[Permissions.DuyetDuLieuDonVi]}
+          childrenPermissions={[Permissions.DuyetDuLieuDonVi]}
         >
           <AsideMenuItem
             to='/dataset/approve/pending'
@@ -121,7 +127,7 @@ export function AsideMenuMain() {
         title='Danh mục dữ liệu'
         icon='/media/icons/duotune/general/gen022.svg'
         userPermissions={userPermissions}
-        menuPermissions={[Permissions.QuanTriDanhMucDuLieu]}
+        childrenPermissions={[Permissions.QuanTriDanhMucDuLieu]}
       >
         <AsideMenuItem
           to='/data-categories/data-type'
@@ -172,7 +178,7 @@ export function AsideMenuMain() {
         title='Danh mục thủ tục hành chính'
         icon='/media/icons/duotune/general/gen022.svg'
         userPermissions={userPermissions}
-        menuPermissions={[Permissions.QuanTriDanhMucThuTucHanhChinh]}
+        childrenPermissions={[Permissions.QuanTriDanhMucThuTucHanhChinh]}
       >
         <AsideMenuItem
           to='/administrative-categories/document-type'
@@ -194,6 +200,26 @@ export function AsideMenuMain() {
           hasBullet={true}
           userPermissions={userPermissions}
           menuPermissions={[Permissions.QuanTriDanhMucThuTucHanhChinh]}
+        />
+      </AsideMenuItemWithSub>
+
+      <AsideMenuItemWithSub
+        to='/configs'
+        title='Quản trị'
+        icon='/media/icons/duotune/general/gen022.svg'
+        userPermissions={userPermissions}
+      >
+        <AsideMenuItem
+          to='/configs/header'
+          title='Header'
+          hasBullet={true}
+          userPermissions={userPermissions}
+        />
+        <AsideMenuItem
+          to='/configs/footer'
+          title='Footer'
+          hasBullet={true}
+          userPermissions={userPermissions}
         />
       </AsideMenuItemWithSub>
     </>

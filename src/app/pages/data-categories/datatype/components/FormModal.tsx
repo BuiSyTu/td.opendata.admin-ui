@@ -1,5 +1,5 @@
 import { Form, Input, notification } from 'antd'
-import { useEffect, useState } from 'react'
+import { memo, useEffect, useState } from 'react'
 
 import { CRUDModal } from 'src/app/components'
 import { DataType } from 'src/app/models'
@@ -9,12 +9,12 @@ const { TextArea } = Input
 
 type Props = {
   modalVisible: boolean,
-  setModalVisible: any,
+  setModalVisible: React.Dispatch<React.SetStateAction<boolean>>,
   modalId: string,
-  setModalId: any,
+  setModalId: React.Dispatch<React.SetStateAction<string>>,
   typeModal: string,
-  setTypeModal: any,
-  setUpdate: any,
+  setTypeModal: React.Dispatch<React.SetStateAction<string>>,
+  setUpdate: React.Dispatch<React.SetStateAction<boolean>>,
 }
 
 const ModalCategory: React.FC<Props> = ({
@@ -154,4 +154,4 @@ const ModalCategory: React.FC<Props> = ({
   )
 }
 
-export default ModalCategory
+export default memo(ModalCategory)

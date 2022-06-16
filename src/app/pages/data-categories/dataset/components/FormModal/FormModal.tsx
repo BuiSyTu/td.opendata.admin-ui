@@ -1,7 +1,7 @@
 import styles from './FormModal.module.scss'
 import * as XLSX from 'xlsx'
 
-import { useEffect, useState } from 'react'
+import { memo, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Button, Checkbox, Col, Divider, Form, Input, Modal, Row, Select, Space, Spin, Table, Tabs, Typography, Upload, message, notification } from 'antd'
 import { ClockCircleOutlined, DatabaseOutlined, InboxOutlined, MinusCircleOutlined, PlusOutlined } from '@ant-design/icons'
@@ -24,13 +24,13 @@ const { Dragger } = Upload
 const cx = classNames.bind(styles)
 
 type Props = {
-  setUpdate: any,
-  modalVisible: any,
-  setModalVisible: any,
-  modalId: any,
-  setModalId: any,
-  typeModal: any,
-  setTypeModal: any,
+  setUpdate: React.Dispatch<React.SetStateAction<boolean>>,
+  modalVisible: boolean,
+  setModalVisible: React.Dispatch<React.SetStateAction<boolean>>,
+  modalId: string,
+  setModalId: React.Dispatch<React.SetStateAction<string>>,
+  typeModal: TypeModal,
+  setTypeModal: React.Dispatch<React.SetStateAction<TypeModal>>,
 }
 
 const ModalCategory: React.FC<Props> = ({
@@ -823,4 +823,4 @@ const ModalCategory: React.FC<Props> = ({
   )
 }
 
-export default ModalCategory
+export default memo(ModalCategory)

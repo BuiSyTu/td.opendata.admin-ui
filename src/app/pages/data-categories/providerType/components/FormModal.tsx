@@ -1,5 +1,5 @@
 import { Form, Input, notification } from 'antd'
-import { useEffect, useState } from 'react'
+import { memo, useEffect, useState } from 'react'
 
 import { CRUDModal } from 'src/app/components'
 import { ProviderType } from 'src/app/models'
@@ -140,4 +140,4 @@ const ModalCategory = (props: any) => {
   )
 }
 
-export default ModalCategory
+export default memo(ModalCategory)

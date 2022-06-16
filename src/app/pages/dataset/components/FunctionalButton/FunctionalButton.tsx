@@ -1,6 +1,6 @@
-import { ClockCircleOutlined, DatabaseOutlined } from '@ant-design/icons'
-
+import { memo } from 'react'
 import { Button } from 'antd'
+import { ClockCircleOutlined, DatabaseOutlined } from '@ant-design/icons'
 
 const FunctionalButton = (props: any) => {
   const { handleClickPreview, handleClickMetadata } = props
@@ -35,4 +35,4 @@ const FunctionalButton = (props: any) => {
     </>
   )
 }
-export default FunctionalButton
+export default memo(FunctionalButton)

@@ -2,7 +2,7 @@ import styles from './FormModal.module.scss'
 
 import * as XLSX from 'xlsx'
 
-import { useEffect, useState } from 'react'
+import { memo, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Button, Checkbox, Col, Divider, Form, Input, Modal, Row, Select, Space, Spin, Table, Tabs, Typography, message, notification } from 'antd'
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons'
@@ -27,13 +27,13 @@ const { TabPane } = Tabs
 const cx = classNames.bind(styles)
 
 type Props = {
-  setUpdate: any,
+  setUpdate: React.Dispatch<React.SetStateAction<boolean>>,
   modalVisible: any,
-  setModalVisible: any,
+  setModalVisible: React.Dispatch<React.SetStateAction<boolean>>,
   modalId: string,
-  setModalId: any,
+  setModalId: React.Dispatch<React.SetStateAction<string>>,
   typeModal: any,
-  setTypeModal: any,
+  setTypeModal: React.Dispatch<React.SetStateAction<string>>,
 }
 
 const FormModal: React.FC<Props> = ({
@@ -781,4 +781,4 @@ const FormModal: React.FC<Props> = ({
   )
 }
 
-export default FormModal
+export default memo(FormModal)

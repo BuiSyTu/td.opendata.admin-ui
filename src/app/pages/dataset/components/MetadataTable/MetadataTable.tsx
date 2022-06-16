@@ -1,8 +1,8 @@
 import './MetadataTable.scss'
 
-import { Button, Form, FormInstance, Input, Table } from 'antd'
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import React, { memo, useContext, useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { Button, Form, FormInstance, Input, Table } from 'antd'
 
 import { RootState } from 'src/setup'
 import { setDataMetadata } from 'src/setup/redux/slices/dataset'
@@ -45,7 +45,7 @@ const EditableCell: React.FC<EditableCellProps> = ({
   const [editing, setEditing] = useState(false)
   const inputRef = useRef<any>(null)
   const form = useContext(EditableContext)
-  
+
   useEffect(() => {
     if (editing) {
       inputRef.current.focus()
@@ -166,4 +166,4 @@ const MetadataTable = () => {
   )
 }
 
-export default MetadataTable
+export default memo(MetadataTable)

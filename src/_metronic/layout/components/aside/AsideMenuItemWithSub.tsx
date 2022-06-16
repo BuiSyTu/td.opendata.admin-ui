@@ -6,27 +6,27 @@ import { Permissions } from 'src/app/constants'
 import { useLayout } from 'src/_metronic/layout/core'
 import { KTSVG, checkIsActive } from 'src/_metronic/helpers'
 
-type Props = {
+interface AsideMenuItemWithSubProps {
   to: string
   title: string
   icon?: string
   fontIcon?: string
   hasBullet?: boolean
-  menuPermissions?: Permissions[]
   userPermissions?: Permissions[]
+  childrenPermissions?: Permissions[]
 }
 
-const AsideMenuItemWithSub: React.FC<Props> = ({
+const AsideMenuItemWithSub: React.FC<AsideMenuItemWithSubProps> = ({
   children,
   to,
   title,
   icon,
   fontIcon,
   hasBullet,
-  menuPermissions = [],
   userPermissions = [],
+  childrenPermissions = [],
 }) => {
-  const hasPermission = menuPermissions.every(menuPermission => userPermissions.includes(menuPermission))
+  const hasPermission = childrenPermissions.some(childrenPermission => userPermissions.includes(childrenPermission))
 
   const { pathname } = useLocation()
   const isActive = checkIsActive(pathname, to)
