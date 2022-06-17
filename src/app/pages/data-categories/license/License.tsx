@@ -46,11 +46,11 @@ const CategoryPage = () => {
       title: 'Mã',
       dataIndex: 'code',
       key: 'code',
-      width: '35%',
+      width: '30%',
     },
     {
       title: 'Thao tác',
-      width: '15%',
+      width: '20%',
       dataIndex: '',
       key: '',
       align: 'center',

@@ -125,7 +125,6 @@ const FooterConfig = () => {
                     </div>
                 </Form>
             </div>
-
         </>
     )
 }

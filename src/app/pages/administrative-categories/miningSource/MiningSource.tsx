@@ -40,11 +40,11 @@ const MiningSourcePage = () => {
       title: 'Tên',
       dataIndex: 'name',
       key: 'name',
-      width: '80%',
+      width: '75%',
     },
     {
       title: 'Thao tác',
-      width: '15%',
+      width: '20%',
       dataIndex: '',
       key: '',
       align: 'center',
