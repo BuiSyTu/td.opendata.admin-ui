@@ -16,7 +16,7 @@ type Props = {
   hasBullet?: boolean
   isMega?: boolean
   userPermissions?: Permissions[]
-  menuPermissions?: Permissions[]
+  childrenPermissions?: Permissions[]
 }
 
 const MenuInnerWithSub: React.FC<Props> = ({
@@ -31,9 +31,11 @@ const MenuInnerWithSub: React.FC<Props> = ({
   hasBullet = false,
   isMega = false,
   userPermissions = [],
-  menuPermissions = [],
+  childrenPermissions = [],
 }) => {
-  const hasPermission = menuPermissions.every(menuPermission => userPermissions.includes(menuPermission))
+  const hasPermission = !childrenPermissions
+    || childrenPermissions.length === 0
+    || childrenPermissions.some(childrenPermission => userPermissions.includes(childrenPermission))
 
   const menuItemRef = useRef<HTMLDivElement>(null)
   const { pathname } = useLocation()

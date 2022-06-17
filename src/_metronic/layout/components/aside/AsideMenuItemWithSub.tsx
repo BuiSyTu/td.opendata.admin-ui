@@ -26,7 +26,9 @@ const AsideMenuItemWithSub: React.FC<AsideMenuItemWithSubProps> = ({
   userPermissions = [],
   childrenPermissions = [],
 }) => {
-  const hasPermission = childrenPermissions.some(childrenPermission => userPermissions.includes(childrenPermission))
+  const hasPermission = !childrenPermissions
+    || childrenPermissions.length === 0
+    || childrenPermissions.some(childrenPermission => userPermissions.includes(childrenPermission))
 
   const { pathname } = useLocation()
   const isActive = checkIsActive(pathname, to)

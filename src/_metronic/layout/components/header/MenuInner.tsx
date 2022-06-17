@@ -8,7 +8,7 @@ import { MenuItem } from './MenuItem'
 
 export function MenuInner() {
   const userInfo = useSelector((state: RootState) => state.global.userInfo)
-  const userPermissions = userInfo?.Roles?.map((role: any) => role.LoginName)
+  const userPermissions: Permissions[] | undefined = userInfo?.Roles?.map((role: any) => role.LoginName)
 
   const intl = useIntl()
   return (
@@ -17,6 +17,7 @@ export function MenuInner() {
         title={intl.formatMessage({ id: 'MENU.DASHBOARD' })}
         to='/dashboard'
         userPermissions={userPermissions}
+        menuPermissions={[]}
       />
 
       <MenuInnerWithSub
@@ -24,6 +25,8 @@ export function MenuInner() {
         to='/dataset'
         menuPlacement='bottom-start'
         menuTrigger='click'
+        userPermissions={userPermissions}
+        childrenPermissions={[Permissions.ThuThapDuLieuDonVi, Permissions.KhaiThacDuLieuDonVi, Permissions.DuyetDuLieuDonVi]}
       >
         <MenuInnerWithSub
           title='Web api'
@@ -32,6 +35,8 @@ export function MenuInner() {
           hasArrow={true}
           menuPlacement='right-start'
           menuTrigger={`{default:'click', lg: 'hover'}`}
+          userPermissions={userPermissions}
+          childrenPermissions={[Permissions.ThuThapDuLieuDonVi, Permissions.KhaiThacDuLieuDonVi]}
         >
           <MenuItem
             to='/dataset/webapi/list'
@@ -63,6 +68,8 @@ export function MenuInner() {
           hasArrow={true}
           menuPlacement='right-start'
           menuTrigger={`{default:'click', lg: 'hover'}`}
+          userPermissions={userPermissions}
+          childrenPermissions={[Permissions.KhaiThacDuLieuDonVi, Permissions.ThuThapDuLieuDonVi]}
         >
           <MenuItem
             to='/dataset/excel/list'
@@ -94,6 +101,8 @@ export function MenuInner() {
           hasArrow={true}
           menuPlacement='right-start'
           menuTrigger={`{default:'click', lg: 'hover'}`}
+          userPermissions={userPermissions}
+          childrenPermissions={[Permissions.DuyetDuLieuDonVi]}
         >
           <MenuItem
             to='/dataset/approve/list'
@@ -124,6 +133,8 @@ export function MenuInner() {
         to='/data-categories'
         menuPlacement='bottom-start'
         menuTrigger='click'
+        userPermissions={userPermissions}
+        childrenPermissions={[Permissions.QuanTriDanhMucDuLieu]}
       >
         <MenuItem
           to='/data-categories/data-type'
@@ -175,7 +186,7 @@ export function MenuInner() {
         menuPlacement='bottom-start'
         menuTrigger='click'
         userPermissions={userPermissions}
-        menuPermissions={[Permissions.QuanTriDanhMucThuTucHanhChinh]}
+        childrenPermissions={[Permissions.QuanTriDanhMucThuTucHanhChinh]}
       >
         <MenuItem
           to='/administrative-categories/document-type'
@@ -202,22 +213,17 @@ export function MenuInner() {
 
       <MenuInnerWithSub
         title='Quản trị hệ thống'
-        to='/admin'
+        to='/configs'
         menuPlacement='bottom-start'
         menuTrigger='click'
       >
         <MenuItem
-          to='/administrative-categories/document-type'
-          title='Người dùng'
+          to='/configs/header'
+          title='Header'
           hasBullet={true}
         />
         <MenuItem
-          to='/administrative-categories/mining-source'
-          title='Banner'
-          hasBullet={true}
-        />
-        <MenuItem
-          to='/administrative-categories/data-source'
+          to='/configs/footer'
           title='Footer'
           hasBullet={true}
         />
