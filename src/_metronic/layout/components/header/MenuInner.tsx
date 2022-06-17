@@ -212,19 +212,19 @@ export function MenuInner() {
       </MenuInnerWithSub>
 
       <MenuInnerWithSub
-        title='Quản trị hệ thống'
+        title='Quản trị'
         to='/configs'
         menuPlacement='bottom-start'
         menuTrigger='click'
       >
         <MenuItem
-          to='/configs/header'
-          title='Header'
+          to='/configs/footer'
+          title='Footer'
           hasBullet={true}
         />
         <MenuItem
-          to='/configs/footer'
-          title='Footer'
+          to='/configs/banner'
+          title='Banner'
           hasBullet={true}
         />
       </MenuInnerWithSub>

@@ -1,6 +1,6 @@
-import { DocumentType, DocumentTypeListFilter } from 'src/app/models'
-
 import axios from 'axios'
+
+import { DocumentType, DocumentTypeListFilter } from 'src/app/models'
 import { getCookie } from 'src/utils/cookies'
 import { toQueryString } from 'src/utils/common'
 
@@ -9,7 +9,7 @@ const baseUrl = `${process.env.REACT_APP_API_URL}/${controllerName}`
 const authorization = `Bearer ${process.env.REACT_APP_BEAR_TOKEN}`
 
 const getAll = async (listFilter?: DocumentTypeListFilter) => {
-  try {    
+  try {
     const params = toQueryString(listFilter)
     const res = await axios({
       method: 'GET',
@@ -88,7 +88,7 @@ const update = async (id: string, data: DocumentType) => {
   }
 }
 
-const _delete = async(id: string) => {
+const _delete = async (id: string) => {
   try {
     const res = await axios({
       method: 'DELETE',

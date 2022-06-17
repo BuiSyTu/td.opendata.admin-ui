@@ -8,6 +8,7 @@ export function PrivateRoutes() {
   const DatasetPage = lazy(() => import('src/app/pages/dataset'))
   const DataCategoriesPage = lazy(() => import('src/app/pages/data-categories'))
   const AdministrativeCategoriesPage = lazy(() => import('src/app/pages/administrative-categories'))
+  const ConfigPage = lazy(() => import('src/app/pages/configs'))
 
   return (
     <Suspense fallback={<FallbackView />}>
@@ -16,6 +17,7 @@ export function PrivateRoutes() {
         <Route path='/dataset' component={DatasetPage} />
         <Route path='/data-categories' component={DataCategoriesPage} />
         <Route path='/administrative-categories' component={AdministrativeCategoriesPage} />
+        <Route path='/configs' component={ConfigPage} />
         <Redirect from='/default.aspx' to='/dashboard' />
         <Redirect from='/auth' to='/dashboard' />
         <Redirect exact from='/' to='/dashboard' />

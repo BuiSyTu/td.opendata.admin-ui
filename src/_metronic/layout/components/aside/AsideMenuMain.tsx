@@ -210,14 +210,14 @@ export function AsideMenuMain() {
         userPermissions={userPermissions}
       >
         <AsideMenuItem
-          to='/configs/header'
-          title='Header'
+          to='/configs/footer'
+          title='Footer'
           hasBullet={true}
           userPermissions={userPermissions}
         />
         <AsideMenuItem
-          to='/configs/footer'
-          title='Footer'
+          to='/configs/banner'
+          title='Banner'
           hasBullet={true}
           userPermissions={userPermissions}
         />
