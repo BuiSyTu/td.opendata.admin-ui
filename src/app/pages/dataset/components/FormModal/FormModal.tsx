@@ -27,13 +27,14 @@ const { TabPane } = Tabs
 const cx = classNames.bind(styles)
 
 type Props = {
-  setUpdate: React.Dispatch<React.SetStateAction<boolean>>,
+  setUpdate?: React.Dispatch<React.SetStateAction<boolean>>,
   modalVisible: boolean,
   setModalVisible: React.Dispatch<React.SetStateAction<boolean>>,
   modalId: string,
   setModalId: React.Dispatch<React.SetStateAction<string>>,
   typeModal: TypeModal,
   setTypeModal: React.Dispatch<React.SetStateAction<TypeModal>>,
+  isModal?: boolean,
 }
 
 const FormModal: React.FC<Props> = ({
@@ -43,7 +44,8 @@ const FormModal: React.FC<Props> = ({
   modalId,
   setModalId,
   typeModal,
-  setTypeModal
+  setTypeModal,
+  isModal = true,
 }) => {
   const dispatch = useDispatch()
   const userInfo = useSelector((state: RootState) => state.global.userInfo)
@@ -258,7 +260,7 @@ const FormModal: React.FC<Props> = ({
         description: 'Vui lòng tạo metadata trước khi thêm'
       })
 
-      return;
+      return
     }
 
     try {
@@ -279,7 +281,7 @@ const FormModal: React.FC<Props> = ({
     } catch (error) {
       setButtonLoading(false)
     }
-    setUpdate(true)
+    setUpdate && setUpdate(true)
     handleCancel()
   }
 
@@ -297,7 +299,7 @@ const FormModal: React.FC<Props> = ({
     } catch (error) {
       setButtonLoading(false)
     }
-    setUpdate(true)
+    setUpdate && setUpdate(true)
     handleCancel()
   }
 
@@ -310,7 +312,7 @@ const FormModal: React.FC<Props> = ({
     const { response } = info.file
 
     // Check xem upload đã xong hay chưa
-    if (!response) return;
+    if (!response) return
 
     const { name, type, url } = response.data[0]
 
@@ -344,7 +346,7 @@ const FormModal: React.FC<Props> = ({
           duration: 1,
         })
 
-        return;
+        return
       }
 
       if (dataSource.length === 0) {
@@ -353,7 +355,7 @@ const FormModal: React.FC<Props> = ({
           duration: 1,
         })
 
-        return;
+        return
       }
 
       setDisableTablePreview(false)
@@ -394,7 +396,7 @@ const FormModal: React.FC<Props> = ({
         data: JSON.stringify(body),
       }
 
-      const res = await forwardApi.forward(axiosOptions);
+      const res = await forwardApi.forward(axiosOptions)
 
       if (res) {
         const dataSource = res[dataKey]
@@ -409,12 +411,12 @@ const FormModal: React.FC<Props> = ({
     switch (dataTypeCode) {
       case DataTypeCode.webapi:
         handleWebApi()
-        break;
+        break
       case DataTypeCode.file:
         handleExcel()
-        break;
+        break
       default:
-        break;
+        break
     }
   }
 
@@ -433,7 +435,7 @@ const FormModal: React.FC<Props> = ({
           duration: 1,
         })
 
-        return;
+        return
       }
 
       if (dataSource.length === 0) {
@@ -442,7 +444,7 @@ const FormModal: React.FC<Props> = ({
           duration: 1,
         })
 
-        return;
+        return
       }
 
       setDisableTablePreview(true)
@@ -472,7 +474,7 @@ const FormModal: React.FC<Props> = ({
 
       if (Array.isArray(dataMetadata) && dataMetadata.length > 0) {
         handleWithoutDataSource()
-        return;
+        return
       }
 
       const { body, dataKey, headers, method, url } = formData
@@ -485,7 +487,7 @@ const FormModal: React.FC<Props> = ({
         data: JSON.stringify(body),
       }
 
-      const res = await forwardApi.forward(axiosOptions);
+      const res = await forwardApi.forward(axiosOptions)
 
       if (res) {
         let dataSource = res[dataKey]
@@ -496,7 +498,7 @@ const FormModal: React.FC<Props> = ({
     const handleExcel = () => {
       if (Array.isArray(dataMetadata) && dataMetadata.length > 0) {
         handleWithoutDataSource()
-        return;
+        return
       }
 
       handleWithDataSource(dataUpload)
@@ -504,13 +506,13 @@ const FormModal: React.FC<Props> = ({
 
     switch (dataTypeCode) {
       case DataTypeCode.webapi:
-        handleWebApi();
-        break;
+        handleWebApi()
+        break
       case DataTypeCode.file:
-        handleExcel();
-        break;
+        handleExcel()
+        break
       default:
-        break;
+        break
     }
   }
 
@@ -548,236 +550,245 @@ const FormModal: React.FC<Props> = ({
     </Button>,
   ]
 
-  return (
-    <Modal
-      width={1200}
-      visible={modalVisible}
-      title={<Text className={cx('text-modal')}>Tập dữ liệu</Text>}
-      onOk={handleOk}
-      onCancel={handleCancel}
-      closeIcon={<i className='las la-times' style={{ color: '#fff', fontSize: 20 }}></i>}
-      footer={footer}
+  const formModal = <Form
+    layout='vertical'
+    {...layout}
+    form={form}
+  >
+    <Tabs
+      activeKey={tabKey}
+      onTabClick={(key) => handleTabClick(key)}
     >
-      <Spin spinning={isLoading}>
-        <Form
-          layout='vertical'
-          {...layout}
-          form={form}
-        >
-          <Tabs
-            activeKey={tabKey}
-            onTabClick={(key) => handleTabClick(key)}
+      <TabPane tab='Thông tin' key='information'>
+        <Row>
+          <Col span={12}>
+            <Form.Item
+              label='Tên'
+              name='name'
+              rules={[{ required: true, message: 'Không được để trống!' }]}
+            >
+              <Input disabled={disable} className={cx('input')} />
+            </Form.Item>
+          </Col>
+          <Col span={12}>
+            <Form.Item label='Mã' name='code'>
+              <Input disabled={disable} className={cx('input')} />
+            </Form.Item>
+          </Col>
+        </Row>
+
+        <Row>
+          <Col span={12}>
+            <Form.Item label='Tiêu hiển thị' name='title'>
+              <Input disabled={disable} className={cx('input')} />
+            </Form.Item>
+          </Col>
+          <Col span={12}>
+            <Form.Item label='Tag' name='tags'>
+              <Input disabled={disable} className={cx('input')} />
+            </Form.Item>
+          </Col>
+        </Row>
+
+        <Row>
+          <Col span={12}>
+            <Form.Item label='Lĩnh vực' name='categoryId'>
+              <Select showSearch placeholder='Chọn lĩnh vực'>
+                {categories.map(category => (
+                  <Option key={category.id} value={category.id}>
+                    {category.name}
+                  </Option>
+                )
+                )}
+              </Select>
+            </Form.Item>
+          </Col>
+          <Col span={12}>
+            <Form.Item label='Tổ chức' name='organizationId'>
+              <Select showSearch placeholder='Chọn tổ chức'>
+                {organizations.map(organization => (
+                  <Option key={organization.id} value={organization.id}>
+                    {organization.name}
+                  </Option>
+                )
+                )}
+              </Select>
+            </Form.Item>
+          </Col>
+        </Row>
+
+        <Row>
+          <Col span={12}>
+            <Form.Item label='Hình thức cung cấp' name='providerTypeId'>
+              <Select showSearch placeholder='Chọn hình thức cung cấp'>
+                {providerTypes.map(providerType => (
+                  <Option key={providerType.id} value={providerType.id}>
+                    {providerType.name}
+                  </Option>
+                )
+                )}
+              </Select>
+            </Form.Item>
+          </Col>
+          <Col span={12}>
+            <Form.Item label='Giấy phép' name='licenseId'>
+              <Select showSearch placeholder='Chọn giấy phép'>
+                {licenses.map(license => (
+                  <Option key={license.id} value={license.id}>
+                    {license.name}
+                  </Option>
+                )
+                )}
+              </Select>
+            </Form.Item>
+          </Col>
+        </Row>
+
+        <Form.Item name='visibility' valuePropName='checked'>
+          <Checkbox>Xuất bản lên cổng</Checkbox>
+        </Form.Item>
+
+        <Form.Item label='Mô tả' name='description'>
+          <TextArea disabled={disable} rows={3} style={{ width: '100%', borderRadius: 5 }} />
+        </Form.Item>
+      </TabPane>
+
+      <TabPane tab='Dữ liệu' disabled={disableDataTab} key='data'>
+        {dataTypeCode === DataTypeCode.webapi
+          ? (
+            <>
+              <Row>
+                <Col span={3}>
+                  <Form.Item label='Phương thức' name='method'>
+                    <Select placeholder='Http action'>
+                      {httpMethods.map(httpMethod => (
+                        <Option key={httpMethod} value={httpMethod}>
+                          {httpMethod}
+                        </Option>
+                      )
+                      )}
+                    </Select>
+                  </Form.Item>
+
+                  <Form.Item label='Data Key' name='dataKey'>
+                    <Input placeholder='Nhập data key' />
+                  </Form.Item>
+                </Col>
+                <Col span={9}>
+                  <Form.Item label='Địa chỉ' name='url'>
+                    <Input
+                      placeholder='Enter request URL' />
+                  </Form.Item>
+                </Col>
+
+                <Col span={12}>
+                  <p className='mb-2'>Headers</p>
+                  <Form.List name='headers'>
+                    {(fields, { add, remove }) => (
+                      <>
+                        {fields.map(({ key, name, ...restField }) => (
+                          <Space key={key} style={{ display: 'flex', marginBottom: 8 }} align='baseline'>
+                            <Form.Item
+                              {...restField}
+                              name={[name, 'key']}
+                            >
+                              <Input placeholder='Key' />
+                            </Form.Item>
+                            <Form.Item
+                              {...restField}
+                              name={[name, 'value']}
+                            >
+                              <Input placeholder='Value' />
+                            </Form.Item>
+                            <MinusCircleOutlined onClick={() => remove(name)} />
+                          </Space>
+                        ))}
+                        <Form.Item>
+                          <Button type='dashed' onClick={() => add()} block icon={<PlusOutlined />}>
+                            Thêm header
+                          </Button>
+                        </Form.Item>
+                      </>
+                    )}
+                  </Form.List>
+                </Col>
+              </Row>
+
+              <Divider />
+
+              <Row>
+                <Col span={12}>
+                  <Form.Item label='Body' name='body'>
+                    <TextArea disabled={disable} rows={5} style={{ width: '100%', borderRadius: 5 }} />
+                  </Form.Item>
+                </Col>
+              </Row>
+            </>
+          )
+          : (
+            <>
+              <Form.Item label='File đính kèm' name='fileUrl'>
+                <UploadDragger
+                  onChange={handleChangeDragger}
+                  fileList={fileList}
+                />
+              </Form.Item>
+
+              <Col span={9}>
+                <Form.Item label='Tên sheet / data key' name='sheetName'>
+                  <Input
+                    placeholder='Điền tên sheet / data key' />
+                </Form.Item>
+              </Col>
+            </>
+          )
+        }
+        <div className='mb-5'>
+          <Button
+            icon={<DatabaseOutlined />}
+            className={cx('preview-btn')}
+            onClick={handleClickPreview}
           >
-            <TabPane tab='Thông tin' key='information'>
-              <Row>
-                <Col span={12}>
-                  <Form.Item
-                    label='Tên'
-                    name='name'
-                    rules={[{ required: true, message: 'Không được để trống!' }]}
-                  >
-                    <Input disabled={disable} className={cx('input')} />
-                  </Form.Item>
-                </Col>
-                <Col span={12}>
-                  <Form.Item label='Mã' name='code'>
-                    <Input disabled={disable} className={cx('input')} />
-                  </Form.Item>
-                </Col>
-              </Row>
+            Xem trước
+          </Button>
+          <Button
+            icon={<ClockCircleOutlined />}
+            className={cx('metadata-btn')}
+            onClick={handleClickMetadata}
+          >
+            Xem metadata
+          </Button>
+        </div>
 
-              <Row>
-                <Col span={12}>
-                  <Form.Item label='Tiêu hiển thị' name='title'>
-                    <Input disabled={disable} className={cx('input')} />
-                  </Form.Item>
-                </Col>
-                <Col span={12}>
-                  <Form.Item label='Tag' name='tags'>
-                    <Input disabled={disable} className={cx('input')} />
-                  </Form.Item>
-                </Col>
-              </Row>
+        {!disableTableMetadata && <MetadataTable />}
+        {!disableTablePreview && <Table
+          dataSource={dataPreview}
+          columns={columnPreview} />}
+      </TabPane>
+    </Tabs>
+  </Form>
 
-              <Row>
-                <Col span={12}>
-                  <Form.Item label='Lĩnh vực' name='categoryId'>
-                    <Select showSearch placeholder='Chọn lĩnh vực'>
-                      {categories.map(category => (
-                        <Option key={category.id} value={category.id}>
-                          {category.name}
-                        </Option>
-                      )
-                      )}
-                    </Select>
-                  </Form.Item>
-                </Col>
-                <Col span={12}>
-                  <Form.Item label='Tổ chức' name='organizationId'>
-                    <Select showSearch placeholder='Chọn tổ chức'>
-                      {organizations.map(organization => (
-                        <Option key={organization.id} value={organization.id}>
-                          {organization.name}
-                        </Option>
-                      )
-                      )}
-                    </Select>
-                  </Form.Item>
-                </Col>
-              </Row>
-
-              <Row>
-                <Col span={12}>
-                  <Form.Item label='Hình thức cung cấp' name='providerTypeId'>
-                    <Select showSearch placeholder='Chọn hình thức cung cấp'>
-                      {providerTypes.map(providerType => (
-                        <Option key={providerType.id} value={providerType.id}>
-                          {providerType.name}
-                        </Option>
-                      )
-                      )}
-                    </Select>
-                  </Form.Item>
-                </Col>
-                <Col span={12}>
-                  <Form.Item label='Giấy phép' name='licenseId'>
-                    <Select showSearch placeholder='Chọn giấy phép'>
-                      {licenses.map(license => (
-                        <Option key={license.id} value={license.id}>
-                          {license.name}
-                        </Option>
-                      )
-                      )}
-                    </Select>
-                  </Form.Item>
-                </Col>
-              </Row>
-
-              <Form.Item name='visibility' valuePropName='checked'>
-                <Checkbox>Xuất bản lên cổng</Checkbox>
-              </Form.Item>
-
-              <Form.Item label='Mô tả' name='description'>
-                <TextArea disabled={disable} rows={3} style={{ width: '100%', borderRadius: 5 }} />
-              </Form.Item>
-            </TabPane>
-
-            <TabPane tab='Dữ liệu' disabled={disableDataTab} key='data'>
-              {dataTypeCode === DataTypeCode.webapi
-                ? (
-                  <>
-                    <Row>
-                      <Col span={3}>
-                        <Form.Item label='Phương thức' name='method'>
-                          <Select placeholder='Http action'>
-                            {httpMethods.map(httpMethod => (
-                              <Option key={httpMethod} value={httpMethod}>
-                                {httpMethod}
-                              </Option>
-                            )
-                            )}
-                          </Select>
-                        </Form.Item>
-
-                        <Form.Item label='Data Key' name='dataKey'>
-                          <Input placeholder='Nhập data key' />
-                        </Form.Item>
-                      </Col>
-                      <Col span={9}>
-                        <Form.Item label='Địa chỉ' name='url'>
-                          <Input
-                            placeholder='Enter request URL' />
-                        </Form.Item>
-                      </Col>
-
-                      <Col span={12}>
-                        <p className='mb-2'>Headers</p>
-                        <Form.List name='headers'>
-                          {(fields, { add, remove }) => (
-                            <>
-                              {fields.map(({ key, name, ...restField }) => (
-                                <Space key={key} style={{ display: 'flex', marginBottom: 8 }} align='baseline'>
-                                  <Form.Item
-                                    {...restField}
-                                    name={[name, 'key']}
-                                  >
-                                    <Input placeholder='Key' />
-                                  </Form.Item>
-                                  <Form.Item
-                                    {...restField}
-                                    name={[name, 'value']}
-                                  >
-                                    <Input placeholder='Value' />
-                                  </Form.Item>
-                                  <MinusCircleOutlined onClick={() => remove(name)} />
-                                </Space>
-                              ))}
-                              <Form.Item>
-                                <Button type='dashed' onClick={() => add()} block icon={<PlusOutlined />}>
-                                  Thêm header
-                                </Button>
-                              </Form.Item>
-                            </>
-                          )}
-                        </Form.List>
-                      </Col>
-                    </Row>
-
-                    <Divider />
-
-                    <Row>
-                      <Col span={12}>
-                        <Form.Item label='Body' name='body'>
-                          <TextArea disabled={disable} rows={5} style={{ width: '100%', borderRadius: 5 }} />
-                        </Form.Item>
-                      </Col>
-                    </Row>
-                  </>
-                )
-                : (
-                  <>
-                    <Form.Item label='File đính kèm' name='fileUrl'>
-                      <UploadDragger
-                        onChange={handleChangeDragger}
-                        fileList={fileList}
-                      />
-                    </Form.Item>
-
-                    <Col span={9}>
-                      <Form.Item label='Tên sheet / data key' name='sheetName'>
-                        <Input
-                          placeholder='Điền tên sheet / data key' />
-                      </Form.Item>
-                    </Col>
-                  </>
-                )
-              }
-              <div className='mb-5'>
-                <Button
-                  icon={<DatabaseOutlined />}
-                  className={cx('preview-btn')}
-                  onClick={handleClickPreview}
-                >
-                  Xem trước
-                </Button>
-                <Button
-                  icon={<ClockCircleOutlined />}
-                  className={cx('metadata-btn')}
-                  onClick={handleClickMetadata}
-                >
-                  Xem metadata
-                </Button>
-              </div>
-
-              {!disableTableMetadata && <MetadataTable />}
-              {!disableTablePreview && <Table
-                dataSource={dataPreview}
-                columns={columnPreview} />}
-            </TabPane>
-          </Tabs>
-        </Form>
-      </Spin>
-    </Modal>
+  return (
+    isModal ? (
+      <Modal
+        width={1200}
+        visible={modalVisible}
+        title={<Text className={cx('text-modal')}>Tập dữ liệu</Text>}
+        onOk={handleOk}
+        onCancel={handleCancel}
+        closeIcon={<i className='las la-times' style={{ color: '#fff', fontSize: 20 }}></i>}
+        footer={footer}
+      >
+        <Spin spinning={isLoading}>
+          {formModal}
+        </Spin>
+      </Modal>
+    ) : (
+      <>
+        {formModal}
+        {footer}
+      </>
+    )
   )
 }
 

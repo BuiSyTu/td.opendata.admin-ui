@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Button, Form, Input, Typography, notification } from 'antd'
 
-import { BannerConfig } from 'src/app/models'
+// import { BannerConfig } from 'src/app/models'
 import { PageTitle } from 'src/_metronic/layout/core'
 import { bannerConfigApi } from 'src/app/apis'
 

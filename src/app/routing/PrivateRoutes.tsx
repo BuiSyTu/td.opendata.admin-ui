@@ -18,7 +18,7 @@ export function PrivateRoutes() {
         <Route path='/data-categories' component={DataCategoriesPage} />
         <Route path='/administrative-categories' component={AdministrativeCategoriesPage} />
         <Route path='/configs' component={ConfigPage} />
-        <Redirect from='/default.aspx' to='/dashboard' />
+        {/* <Redirect from='/default.aspx' to='/dashboard' /> */}
         <Redirect from='/auth' to='/dashboard' />
         <Redirect exact from='/' to='/dashboard' />
         <Redirect to='error/404' />

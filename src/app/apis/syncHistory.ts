@@ -1,4 +1,4 @@
-import { SyncHistoryListFilter } from 'src/app/models/SyncHistory';
+import { SyncHistoryListFilter } from 'src/app/models/SyncHistory'
 
 import axios from 'axios'
 import { getCookie } from 'src/utils/cookies'
@@ -48,7 +48,27 @@ const getById = async (id: string) => {
     }
 }
 
+const _delete = async (id: string) => {
+    try {
+        const res = await axios({
+            method: 'DELETE',
+            url: `${baseUrl}/${id}`,
+            headers: {
+                'Authorization': authorization,
+                'TDAuthorization': getCookie('token'),
+            },
+            timeout: 15000,
+        })
+
+        return res?.data
+    } catch (error: any) {
+        console.error(error.response)
+        return null
+    }
+}
+
 export const syncHistoryApi = {
     getAll,
     getById,
+    delete: _delete,
 }

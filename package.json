@@ -2,7 +2,7 @@
   "name": "demo1",
   "version": "8.0.31",
   "private": false,
-  "homepage": "https://quantricsdl.hanhchinhcong.net/sites/opdt/SitePages",
+  "homepage": "https://quantricsdl.hanhchinhcong.net/sites/opdt",
   "scripts": {
     "start": "set PORT=3015 && react-scripts start",
     "build": "react-scripts build",

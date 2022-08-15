@@ -69,17 +69,17 @@ const DatasetPage = () => {
           switch (record?.approveState) {
             case State.pending:
               textDisplay = 'Chưa duyệt'
-              break;
+              break
             case State.approved:
               color = Colors.success
               textDisplay = 'Đã duyệt'
-              break;
+              break
             case State.rejected:
               color = Colors.danger
               textDisplay = 'Bị từ chối'
-              break;
+              break
             default:
-              break;
+              break
           }
 
           return {
@@ -107,7 +107,7 @@ const DatasetPage = () => {
               {textSynced}
             </Tag>
           </>
-        );
+        )
       },
     },
     {
@@ -341,7 +341,7 @@ const DatasetPage = () => {
       message: 'Đang đồng bộ!',
       duration: 2,
       placement: 'bottomRight',
-    });
+    })
 
     var res = await datasetApi.syncData(id)
     if (res) {

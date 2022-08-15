@@ -57,6 +57,119 @@ export function AsideMenuMain() {
             userPermissions={userPermissions}
             menuPermissions={[Permissions.KhaiThacDuLieuDonVi]}
           />
+          <AsideMenuItemWithSub
+            to='dataset/webapi/categories'
+            title='Theo lĩnh vực'
+            hasBullet
+            userPermissions={userPermissions}
+            childrenPermissions={[Permissions.ThuThapDuLieuDonVi, Permissions.KhaiThacDuLieuDonVi]}
+          >
+            <AsideMenuItem
+              to='/dataset/webapi/categories/giao-duc-dao-tao'
+              title='Giáo dục đào tạo'
+              hasBullet={true}
+              userPermissions={userPermissions}
+              menuPermissions={[Permissions.ThuThapDuLieuDonVi]}
+            />
+            <AsideMenuItem
+              to='/dataset/webapi/categories/y-te'
+              title='Y tế'
+              hasBullet={true}
+              userPermissions={userPermissions}
+              menuPermissions={[Permissions.ThuThapDuLieuDonVi]}
+            />
+            <AsideMenuItem
+              to='/dataset/webapi/categories/lao-dong-thuong-binh-xa-hoi'
+              title='Lao động thương binh xã hội'
+              hasBullet={true}
+              userPermissions={userPermissions}
+              menuPermissions={[Permissions.ThuThapDuLieuDonVi]}
+            />
+            <AsideMenuItem
+              to='/dataset/webapi/categories/cong-thuong'
+              title='Công thương'
+              hasBullet={true}
+              userPermissions={userPermissions}
+              menuPermissions={[Permissions.ThuThapDuLieuDonVi]}
+            />
+            <AsideMenuItem
+              to='/dataset/webapi/categories/nong-lam-ngu-nghiep'
+              title='Nông lâm ngư nghiệp'
+              hasBullet={true}
+              userPermissions={userPermissions}
+              menuPermissions={[Permissions.ThuThapDuLieuDonVi]}
+            />
+            <AsideMenuItem
+              to='/dataset/webapi/categories/giao-thong-van-tai'
+              title='Giao thông vận tải'
+              hasBullet={true}
+              userPermissions={userPermissions}
+              menuPermissions={[Permissions.ThuThapDuLieuDonVi]}
+            />
+            <AsideMenuItem
+              to='/dataset/webapi/categories/thong-tin-truyen-thong'
+              title='Thông tin truyền thông'
+              hasBullet={true}
+              userPermissions={userPermissions}
+              menuPermissions={[Permissions.ThuThapDuLieuDonVi]}
+            />
+            <AsideMenuItem
+              to='/dataset/webapi/categories/noi-vu'
+              title='Nội vụ'
+              hasBullet={true}
+              userPermissions={userPermissions}
+              menuPermissions={[Permissions.ThuThapDuLieuDonVi]}
+            />
+            <AsideMenuItem
+              to='/dataset/webapi/categories/van-hoa-the-thao-du-lich'
+              title='Văn hóa thể thao du lịch'
+              hasBullet={true}
+              userPermissions={userPermissions}
+              menuPermissions={[Permissions.ThuThapDuLieuDonVi]}
+            />
+            <AsideMenuItem
+              to='/dataset/webapi/categories/ke-hoach-dau-tu'
+              title='Kế hoạch đầu tư'
+              hasBullet={true}
+              userPermissions={userPermissions}
+              menuPermissions={[Permissions.ThuThapDuLieuDonVi]}
+            />
+            <AsideMenuItem
+              to='/dataset/webapi/categories/tu-phap'
+              title='Tư pháp'
+              hasBullet={true}
+              userPermissions={userPermissions}
+              menuPermissions={[Permissions.ThuThapDuLieuDonVi]}
+            />
+            <AsideMenuItem
+              to='/dataset/webapi/categories/bao-hiem'
+              title='Bảo hiểm'
+              hasBullet={true}
+              userPermissions={userPermissions}
+              menuPermissions={[Permissions.ThuThapDuLieuDonVi]}
+            />
+            <AsideMenuItem
+              to='/dataset/webapi/categories/tai-chinh'
+              title='Tài chính'
+              hasBullet={true}
+              userPermissions={userPermissions}
+              menuPermissions={[Permissions.ThuThapDuLieuDonVi]}
+            />
+            <AsideMenuItem
+              to='/dataset/webapi/categories/khoa-hoc-cong-nghe'
+              title='Khoa học công nghệ'
+              hasBullet={true}
+              userPermissions={userPermissions}
+              menuPermissions={[Permissions.ThuThapDuLieuDonVi]}
+            />
+            <AsideMenuItem
+              to='/dataset/webapi/categories/xay-dung'
+              title='Xây dựng'
+              hasBullet={true}
+              userPermissions={userPermissions}
+              menuPermissions={[Permissions.ThuThapDuLieuDonVi]}
+            />
+          </AsideMenuItemWithSub>
         </AsideMenuItemWithSub>
 
         <AsideMenuItemWithSub
