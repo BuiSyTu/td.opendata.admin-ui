@@ -8,7 +8,9 @@ import { Permissions } from 'src/app/constants'
 
 export function AsideMenuMain() {
   const userInfo = useSelector((state: RootState) => state.global.userInfo)
-  const userPermissions: Permissions[] | undefined = userInfo?.Roles?.map((role: any) => role.LoginName)
+  const userPermissions: Permissions[] | undefined = userInfo?.Roles?.map(
+    (role: any) => role.LoginName
+  )
 
   const intl = useIntl()
 
@@ -27,7 +29,11 @@ export function AsideMenuMain() {
         title='Dữ liệu đơn vị'
         icon='/media/icons/duotune/general/gen022.svg'
         userPermissions={userPermissions}
-        childrenPermissions={[Permissions.ThuThapDuLieuDonVi, Permissions.KhaiThacDuLieuDonVi, Permissions.DuyetDuLieuDonVi]}
+        childrenPermissions={[
+          Permissions.ThuThapDuLieuDonVi,
+          Permissions.KhaiThacDuLieuDonVi,
+          Permissions.DuyetDuLieuDonVi,
+        ]}
       >
         <AsideMenuItemWithSub
           to='/dataset/webapi'
@@ -57,7 +63,7 @@ export function AsideMenuMain() {
             userPermissions={userPermissions}
             menuPermissions={[Permissions.KhaiThacDuLieuDonVi]}
           />
-          <AsideMenuItemWithSub
+          {/* <AsideMenuItemWithSub
             to='dataset/webapi/categories'
             title='Theo lĩnh vực'
             hasBullet
@@ -169,7 +175,7 @@ export function AsideMenuMain() {
               userPermissions={userPermissions}
               menuPermissions={[Permissions.ThuThapDuLieuDonVi]}
             />
-          </AsideMenuItemWithSub>
+          </AsideMenuItemWithSub> */}
         </AsideMenuItemWithSub>
 
         <AsideMenuItemWithSub

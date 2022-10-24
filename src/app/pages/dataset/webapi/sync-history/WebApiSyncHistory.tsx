@@ -12,7 +12,11 @@ import FormModal from './FormModal'
 
 const { Text } = Typography
 
-const SyncHistoryPage = () => {
+interface SyncHistoryPageProps {
+  dataTypeCode: string
+}
+
+const SyncHistoryPage: React.FC<SyncHistoryPageProps> = ({ dataTypeCode }) => {
   const userInfo = useSelector((state: RootState) => state.global.userInfo)
 
   const [loading, setLoading] = useState(false)
@@ -30,7 +34,7 @@ const SyncHistoryPage = () => {
       try {
         setLoading(true)
         var res = await syncHistoryApi.getAll({
-          dataTypeCode: 'webapi',
+          dataTypeCode,
           officeCode: userInfo?.Info?.UserOffice?.GroupCode ?? '',
         })
         setDataTable(res?.data ?? [])
@@ -44,13 +48,13 @@ const SyncHistoryPage = () => {
     if (update) {
       fetchData()
     }
-    return () => { }
+    return () => {}
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [update])
 
   useEffect(() => {
     setUpdate(true)
-    return () => { }
+    return () => {}
   }, [offset, size])
 
   const columns = [

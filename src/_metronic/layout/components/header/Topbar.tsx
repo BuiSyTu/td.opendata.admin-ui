@@ -16,12 +16,11 @@ const Topbar: FC = () => {
   return (
     <div className='d-flex align-items-stretch flex-shrink-0'>
       {/* Search */}
-      <div className={classnames('d-flex align-items-stretch', toolbarButtonMarginClass)}>
+      {/* <div className={classnames('d-flex align-items-stretch', toolbarButtonMarginClass)}>
         <Search />
-      </div>
+      </div> */}
       {/* Activities */}
-      <div className={classnames('d-flex align-items-center', toolbarButtonMarginClass)}>
-        {/* begin::Drawer toggle */}
+      {/* <div className={classnames('d-flex align-items-center', toolbarButtonMarginClass)}>
         <div
           className={classnames('btn btn-icon btn-active-light-primary', toolbarButtonHeightClass)}
           id='kt_activities_toggle'
@@ -31,11 +30,9 @@ const Topbar: FC = () => {
             className={toolbarButtonIconSizeClass}
           />
         </div>
-        {/* end::Drawer toggle */}
-      </div>
+      </div> */}
       {/* Quick links */}
-      <div className={classnames('d-flex align-items-center', toolbarButtonMarginClass)}>
-        {/* begin::Menu wrapper */}
+      {/* <div className={classnames('d-flex align-items-center', toolbarButtonMarginClass)}>
         <div
           className={classnames('btn btn-icon btn-active-light-primary', toolbarButtonHeightClass)}
           data-kt-menu-trigger='click'
@@ -49,12 +46,10 @@ const Topbar: FC = () => {
           />
         </div>
         <QuickLinks />
-        {/* end::Menu wrapper */}
-      </div>
+      </div> */}
 
       {/* CHAT */}
-      <div className={classnames('d-flex align-items-center', toolbarButtonMarginClass)}>
-        {/* begin::Menu wrapper */}
+      {/* <div className={classnames('d-flex align-items-center', toolbarButtonMarginClass)}>
         <div
           className={classnames(
             'btn btn-icon btn-active-light-primary position-relative',
@@ -69,12 +64,10 @@ const Topbar: FC = () => {
 
           <span className='bullet bullet-dot bg-success h-6px w-6px position-absolute translate-middle top-0 start-50 animation-blink'></span>
         </div>
-        {/* end::Menu wrapper */}
-      </div>
+      </div> */}
 
       {/* NOTIFICATIONS */}
-      <div className={classnames('d-flex align-items-center', toolbarButtonMarginClass)}>
-        {/* begin::Menu- wrapper */}
+      {/* <div className={classnames('d-flex align-items-center', toolbarButtonMarginClass)}>
         <div
           className={classnames(
             'btn btn-icon btn-active-light-primary position-relative',
@@ -91,8 +84,7 @@ const Topbar: FC = () => {
           />
         </div>
         <HeaderNotificationsMenu />
-        {/* end::Menu wrapper */}
-      </div>
+      </div> */}
 
       {/* begin::User */}
       <div
@@ -121,7 +113,10 @@ const Topbar: FC = () => {
             className='btn btn-icon btn-active-light-primary w-30px h-30px w-md-40px h-md-40px'
             id='kt_header_menu_mobile_toggle'
           >
-            <KTSVG path='/media/icons/duotune/text/txt001.svg' className='svg-icon-1 svg-icon-white' />
+            <KTSVG
+              path='/media/icons/duotune/text/txt001.svg'
+              className='svg-icon-1 svg-icon-white'
+            />
           </div>
         </div>
       )}

@@ -2,13 +2,13 @@ import { FC, useState, useEffect } from 'react'
 import { useIntl } from 'react-intl'
 
 import { PageTitle } from 'src/_metronic/layout/core'
-import CardPieChart from './components/CardPieChart';
-import CardColumnChart from './components/CardColumnChart';
-import WidgetStatistic from './components/WidgetStatistic';
-import { datasetApi, statsApi } from 'src/app/apis';
+import CardPieChart from './components/CardPieChart'
+import CardColumnChart from './components/CardColumnChart'
+import WidgetStatistic from './components/WidgetStatistic'
+import { datasetApi, statsApi } from 'src/app/apis'
 
 const DashboardPage: FC = () => {
-  const intl = useIntl();
+  const intl = useIntl()
 
   const [overViewData, setOverViewData] = useState<any>([])
   const [dataByOrganization, setDataByOrganization] = useState([])
@@ -21,7 +21,7 @@ const DashboardPage: FC = () => {
 
       const data = responseOverView?.data
       if (!data) {
-        return;
+        return
       }
 
       const template: any = {
@@ -99,23 +99,18 @@ const DashboardPage: FC = () => {
     <>
       <PageTitle breadcrumbs={[]}>{intl.formatMessage({ id: 'MENU.DASHBOARD' })}</PageTitle>
 
-      <div className="row">
+      <div className='row widget'>
         {overViewData.map((item: any, index: any) => (
-          <div className="col-lg-4 col-xl-4 mb-4 mb-xl-0 my-4" key={index}>
-            <WidgetStatistic
-              data={item}
-            />
+          <div className='col-lg-4 col-xl-4 mb-4 mb-xl-0 my-4' key={index}>
+            <WidgetStatistic data={item} />
           </div>
         ))}
       </div>
-      <div className="row mt-5">
-        <div className="col-12 col-xl-6 mb-4 mb-xl-0">
-          <CardPieChart
-            data={dataByOrganization}
-            title='Dữ liệu mở theo tổ chức'
-          />
+      <div className='row mt-5'>
+        <div className='col-12 col-xl-6 mb-4 mb-xl-0'>
+          <CardPieChart data={dataByOrganization} title='Dữ liệu mở theo tổ chức' />
         </div>
-        <div className="col-12 col-xl-6">
+        <div className='col-12 col-xl-6'>
           <CardColumnChart
             data={dataByCategory}
             maxValue={maxValueCategory}
@@ -126,6 +121,5 @@ const DashboardPage: FC = () => {
     </>
   )
 }
-
 
 export default DashboardPage

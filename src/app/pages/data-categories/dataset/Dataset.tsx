@@ -14,6 +14,8 @@ import { RootState } from 'src/setup'
 const { Text } = Typography
 const { Search } = Input
 
+const DatasetPageProps = {}
+
 const DatasetPage = () => {
   const dispatch = useDispatch()
   const userInfo = useSelector((state: RootState) => state.global.userInfo)
@@ -84,7 +86,7 @@ const DatasetPage = () => {
 
           return {
             color,
-            textDisplay
+            textDisplay,
           }
         }
 
@@ -100,12 +102,8 @@ const DatasetPage = () => {
 
         return (
           <>
-            <Tag color={colorApproveState}>
-              {textApproveState}
-            </Tag>
-            <Tag color={colorSynced}>
-              {textSynced}
-            </Tag>
+            <Tag color={colorApproveState}>{textApproveState}</Tag>
+            <Tag color={colorSynced}>{textSynced}</Tag>
           </>
         )
       },
@@ -252,13 +250,13 @@ const DatasetPage = () => {
     if (update) {
       fetchData()
     }
-    return () => { }
+    return () => {}
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [update])
 
   useEffect(() => {
     setUpdate(true)
-    return () => { }
+    return () => {}
   }, [offset, size, inputValue])
 
   const handleEdit = (id: string) => {

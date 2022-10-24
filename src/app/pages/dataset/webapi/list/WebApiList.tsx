@@ -1,5 +1,10 @@
 import { Divider, Input, Popconfirm, Tag, Typography, notification } from 'antd'
-import { State, TypeModal, setDisableDataTab, setDataTypeCode } from 'src/setup/redux/slices/dataset'
+import {
+  State,
+  TypeModal,
+  setDisableDataTab,
+  setDataTypeCode,
+} from 'src/setup/redux/slices/dataset'
 import { Colors } from 'src/app/constants'
 import { useEffect, useState } from 'react'
 
@@ -14,7 +19,11 @@ import { RootState } from 'src/setup'
 const { Text } = Typography
 const { Search } = Input
 
-const ListPage = () => {
+interface ListPageProps {
+  dataTypeCode: string
+}
+
+const ListPage: React.FC<ListPageProps> = ({ dataTypeCode }) => {
   const dispatch = useDispatch()
   const userInfo = useSelector((state: RootState) => state.global.userInfo)
 
@@ -69,22 +78,22 @@ const ListPage = () => {
           switch (record?.approveState) {
             case State.pending:
               textDisplay = 'Chưa duyệt'
-              break;
+              break
             case State.approved:
               color = Colors.success
               textDisplay = 'Đã duyệt'
-              break;
+              break
             case State.rejected:
               color = Colors.danger
               textDisplay = 'Bị từ chối'
-              break;
+              break
             default:
-              break;
+              break
           }
 
           return {
             color,
-            textDisplay
+            textDisplay,
           }
         }
 
@@ -100,14 +109,10 @@ const ListPage = () => {
 
         return (
           <>
-            <Tag color={colorApproveState}>
-              {textApproveState}
-            </Tag>
-            <Tag color={colorSynced}>
-              {textSynced}
-            </Tag>
+            <Tag color={colorApproveState}>{textApproveState}</Tag>
+            <Tag color={colorSynced}>{textSynced}</Tag>
           </>
-        );
+        )
       },
     },
     {
@@ -230,7 +235,7 @@ const ListPage = () => {
       try {
         setLoading(true)
         var res = await datasetApi.getAll({
-          dataTypeCode: 'webapi',
+          dataTypeCode,
           officeCode: userInfo?.Info?.UserOffice?.GroupCode ?? '',
         })
         setDataTable(res?.data ?? [])
@@ -245,13 +250,13 @@ const ListPage = () => {
     if (update) {
       fetchData()
     }
-    return () => { }
+    return () => {}
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [update])
 
   useEffect(() => {
     setUpdate(true)
-    return () => { }
+    return () => {}
   }, [offset, size, inputValue])
 
   const handleEdit = (id: string) => {
@@ -260,7 +265,7 @@ const ListPage = () => {
     setTypeModal(TypeModal.edit)
 
     dispatch(setDisableDataTab(false))
-    dispatch(setDataTypeCode('webapi'))
+    dispatch(setDataTypeCode(dataTypeCode))
   }
 
   const handleView = (id: string) => {
@@ -269,7 +274,7 @@ const ListPage = () => {
     setTypeModal(TypeModal.view)
 
     dispatch(setDisableDataTab(false))
-    dispatch(setDataTypeCode('webapi'))
+    dispatch(setDataTypeCode(dataTypeCode))
   }
 
   const handleAdd = () => {
@@ -277,7 +282,7 @@ const ListPage = () => {
     setTypeModal(TypeModal.add)
 
     dispatch(setDisableDataTab(false))
-    dispatch(setDataTypeCode('webapi'))
+    dispatch(setDataTypeCode(dataTypeCode))
   }
 
   const handleDelete = async (id: string) => {
@@ -339,7 +344,7 @@ const ListPage = () => {
       message: 'Đang đồng bộ!',
       duration: 2,
       placement: 'bottomRight',
-    });
+    })
 
     var res = await datasetApi.syncData(id)
     if (res) {
