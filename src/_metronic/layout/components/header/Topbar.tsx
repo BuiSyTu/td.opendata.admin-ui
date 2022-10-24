@@ -1,14 +1,15 @@
-import { HeaderNotificationsMenu, HeaderUserMenu, QuickLinks, Search } from 'src/_metronic/partials'
+// import { HeaderNotificationsMenu, HeaderUserMenu, QuickLinks, Search } from 'src/_metronic/partials'
+import { HeaderUserMenu } from 'src/_metronic/partials'
 import { KTSVG, toAbsoluteUrl } from 'src/_metronic/helpers'
 import React, { FC } from 'react'
 
 import classnames from 'classnames'
 import { useLayout } from 'src/_metronic/layout/core'
 
-const toolbarButtonMarginClass = 'ms-1 ms-lg-3',
-  toolbarButtonHeightClass = 'w-30px h-30px w-md-40px h-md-40px',
-  toolbarUserAvatarHeightClass = 'symbol-30px symbol-md-40px',
-  toolbarButtonIconSizeClass = 'svg-icon-1 svg-icon-white'
+const toolbarButtonMarginClass = 'ms-1 ms-lg-3'
+// const toolbarButtonHeightClass = 'w-30px h-30px w-md-40px h-md-40px'
+const toolbarUserAvatarHeightClass = 'symbol-30px symbol-md-40px'
+// const toolbarButtonIconSizeClass = 'svg-icon-1 svg-icon-white'
 
 const Topbar: FC = () => {
   const { config } = useLayout()

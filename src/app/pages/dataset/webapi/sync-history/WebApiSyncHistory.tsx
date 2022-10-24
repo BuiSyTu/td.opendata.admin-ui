@@ -13,7 +13,7 @@ import FormModal from './FormModal'
 const { Text } = Typography
 
 interface SyncHistoryPageProps {
-  dataTypeCode: string
+  dataTypeCode?: 'webapi' | 'file'
 }
 
 const SyncHistoryPage: React.FC<SyncHistoryPageProps> = ({ dataTypeCode }) => {

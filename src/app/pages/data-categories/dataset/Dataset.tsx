@@ -14,8 +14,6 @@ import { RootState } from 'src/setup'
 const { Text } = Typography
 const { Search } = Input
 
-const DatasetPageProps = {}
-
 const DatasetPage = () => {
   const dispatch = useDispatch()
   const userInfo = useSelector((state: RootState) => state.global.userInfo)
