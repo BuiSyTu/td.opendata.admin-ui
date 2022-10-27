@@ -38,6 +38,7 @@ import {
     Organization,
     ProviderType,
     Dataset,
+    ViewMode,
 } from 'src/app/models'
 import {
     categoryApi,
@@ -82,6 +83,7 @@ type Props = {
     typeModal: TypeModal
     setTypeModal: React.Dispatch<React.SetStateAction<TypeModal>>
     isModal?: boolean
+    viewModes: ViewMode[]
 }
 
 const FormModal: React.FC<Props> = ({
@@ -92,12 +94,17 @@ const FormModal: React.FC<Props> = ({
     setModalId,
     typeModal,
     setTypeModal,
+    viewModes,
     isModal = true,
 }) => {
     const dispatch = useDispatch()
     const userInfo = useSelector((state: RootState) => state.global.userInfo)
 
-    const tabKey = useSelector((state: RootState) => state.dataset.tabKey)
+    const tabKey = useSelector((state: RootState) =>
+        viewModes.includes(ViewMode.CONFIG) && !viewModes.includes(ViewMode.INFO)
+            ? TabKey.data
+            : state.dataset.tabKey
+    )
     const disableDataTab = useSelector((state: RootState) => state.dataset.disableDataTab)
     const dataTypeCode = useSelector((state: RootState) => state.dataset.dataTypeCode)
     const dataPreview = useSelector((state: RootState) => state.dataset.dataPreview)
@@ -256,50 +263,57 @@ const FormModal: React.FC<Props> = ({
             await form.validateFields()
             const formData = form.getFieldsValue(true)
 
-            const headerObject = Array.isArray(formData.headers)
-                ? toObject(formData.headers, 'key', 'value')
-                : {}
+            if (viewModes.includes(ViewMode.CONFIG)) {
+                if (dataTypeCode === DataTypeCode.file) {
+                    // Khi file thay đổi, 3 thuộc tính này mới hết empty
+                    if (fileType && fileName && fileUrl) {
+                        const datasetFileConfig: DatasetFileConfig = {
+                            fileType,
+                            fileName,
+                            fileUrl,
+                            sheetName: formData?.sheetName ?? '',
+                        }
 
-            if (dataTypeCode === DataTypeCode.file) {
-                // Khi file thay đổi, 3 thuộc tính này mới hết empty
-                if (fileType && fileName && fileUrl) {
-                    const datasetFileConfig: DatasetFileConfig = {
-                        fileType,
-                        fileName,
-                        fileUrl,
-                        sheetName: formData?.sheetName ?? '',
+                        formData.datasetFileConfig = datasetFileConfig
+                    }
+                }
+
+                if (dataTypeCode === DataTypeCode.webapi) {
+                    const headerObject = Array.isArray(formData.headers)
+                        ? toObject(formData.headers, 'key', 'value')
+                        : {}
+
+                    const datasetAPIConfig: DatasetAPIConfig = {
+                        method: formData?.method ?? '',
+                        url: formData?.url ?? '',
+                        headers:
+                            Object.keys(headerObject).length > 0
+                                ? JSON.stringify(headerObject)
+                                : '',
+                        dataKey: formData?.dataKey ?? '',
+                        data: formData?.data ?? '',
                     }
 
-                    formData.datasetFileConfig = datasetFileConfig
-                }
-            }
-
-            if (dataTypeCode === DataTypeCode.webapi) {
-                const datasetAPIConfig: DatasetAPIConfig = {
-                    method: formData?.method ?? '',
-                    url: formData?.url ?? '',
-                    headers:
-                        Object.keys(headerObject).length > 0 ? JSON.stringify(headerObject) : '',
-                    dataKey: formData?.dataKey ?? '',
-                    data: formData?.data ?? '',
+                    formData.datasetAPIConfig = datasetAPIConfig
                 }
 
-                formData.datasetAPIConfig = datasetAPIConfig
+                formData.metadata = JSON.stringify(dataMetadata)
             }
 
-            formData.metadata = JSON.stringify(dataMetadata)
+            if (viewModes.includes(ViewMode.INFO)) {
+                const tmpDataType = dataTypes.filter(
+                    (dataType) => dataType.code?.toLowerCase() === dataTypeCode
+                )
+                if (tmpDataType && Array.isArray(tmpDataType) && tmpDataType.length > 0) {
+                    formData.dataTypeId = tmpDataType[0].id
+                }
 
-            const tmpDataType = dataTypes.filter(
-                (dataType) => dataType.code?.toLowerCase() === dataTypeCode
-            )
-            if (tmpDataType && Array.isArray(tmpDataType) && tmpDataType.length > 0) {
-                formData.dataTypeId = tmpDataType[0].id
-            }
-
-            if (userInfo?.Info?.UserOffice) {
-                const { GroupCode: officeCode, GroupName: officeName } = userInfo?.Info?.UserOffice
-                formData.officeCode = officeCode
-                formData.officeName = officeName
+                if (userInfo?.Info?.UserOffice) {
+                    const { GroupCode: officeCode, GroupName: officeName } =
+                        userInfo?.Info?.UserOffice
+                    formData.officeCode = officeCode
+                    formData.officeName = officeName
+                }
             }
 
             typeModal === TypeModal.edit ? putData(formData) : postData(formData)
@@ -309,15 +323,6 @@ const FormModal: React.FC<Props> = ({
     }
 
     const postData = async (data: Dataset) => {
-        if (!data.metadata) {
-            notification.error({
-                message: 'Bạn chưa tạo metadata',
-                description: 'Vui lòng tạo metadata trước khi thêm',
-            })
-
-            return
-        }
-
         try {
             setButtonLoading(true)
             var res = await datasetApi.add(data)
@@ -608,221 +613,214 @@ const FormModal: React.FC<Props> = ({
         </Button>,
     ]
 
+    const informationTabPane = (
+        <TabPane tab='Thông tin' key='information'>
+            <Row>
+                <Col span={12}>
+                    <Form.Item
+                        label='Tên'
+                        name='name'
+                        rules={[{ required: true, message: 'Không được để trống!' }]}
+                    >
+                        <Input disabled={disable} className={cx('input')} />
+                    </Form.Item>
+                </Col>
+                <Col span={12}>
+                    <Form.Item label='Mã' name='code'>
+                        <Input disabled={disable} className={cx('input')} />
+                    </Form.Item>
+                </Col>
+            </Row>
+
+            <Row>
+                <Col span={12}>
+                    <Form.Item label='Tiêu hiển thị' name='title'>
+                        <Input disabled={disable} className={cx('input')} />
+                    </Form.Item>
+                </Col>
+                <Col span={12}>
+                    <Form.Item label='Tag' name='tags'>
+                        <Input disabled={disable} className={cx('input')} />
+                    </Form.Item>
+                </Col>
+            </Row>
+
+            <Row>
+                <Col span={12}>
+                    <Form.Item label='Lĩnh vực' name='categoryId'>
+                        <Select showSearch placeholder='Chọn lĩnh vực'>
+                            {categories.map((category) => (
+                                <Option key={category.id} value={category.id}>
+                                    {category.name}
+                                </Option>
+                            ))}
+                        </Select>
+                    </Form.Item>
+                </Col>
+                <Col span={12}>
+                    <Form.Item label='Tổ chức' name='organizationId'>
+                        <Select showSearch placeholder='Chọn tổ chức'>
+                            {organizations.map((organization) => (
+                                <Option key={organization.id} value={organization.id}>
+                                    {organization.name}
+                                </Option>
+                            ))}
+                        </Select>
+                    </Form.Item>
+                </Col>
+            </Row>
+
+            <Row>
+                <Col span={12}>
+                    <Form.Item label='Hình thức cung cấp' name='providerTypeId'>
+                        <Select showSearch placeholder='Chọn hình thức cung cấp'>
+                            {providerTypes.map((providerType) => (
+                                <Option key={providerType.id} value={providerType.id}>
+                                    {providerType.name}
+                                </Option>
+                            ))}
+                        </Select>
+                    </Form.Item>
+                </Col>
+                <Col span={12}>
+                    <Form.Item label='Giấy phép' name='licenseId'>
+                        <Select showSearch placeholder='Chọn giấy phép'>
+                            {licenses.map((license) => (
+                                <Option key={license.id} value={license.id}>
+                                    {license.name}
+                                </Option>
+                            ))}
+                        </Select>
+                    </Form.Item>
+                </Col>
+            </Row>
+
+            <Form.Item name='visibility' valuePropName='checked'>
+                <Checkbox>Xuất bản lên cổng</Checkbox>
+            </Form.Item>
+
+            <Form.Item label='Mô tả' name='description'>
+                <TextArea disabled={disable} rows={3} style={{ width: '100%', borderRadius: 5 }} />
+            </Form.Item>
+        </TabPane>
+    )
+
+    const configTabPane = (
+        <TabPane tab='Dữ liệu' disabled={disableDataTab} key='data'>
+            {dataTypeCode === DataTypeCode.webapi ? (
+                <>
+                    <Row>
+                        <Col span={3}>
+                            <Form.Item label='Phương thức' name='method'>
+                                <Select placeholder='Http action'>
+                                    {httpMethods.map((httpMethod) => (
+                                        <Option key={httpMethod} value={httpMethod}>
+                                            {httpMethod}
+                                        </Option>
+                                    ))}
+                                </Select>
+                            </Form.Item>
+
+                            <Form.Item label='Data Key' name='dataKey'>
+                                <Input placeholder='Nhập data key' />
+                            </Form.Item>
+                        </Col>
+                        <Col span={9}>
+                            <Form.Item label='Địa chỉ' name='url'>
+                                <Input placeholder='Enter request URL' />
+                            </Form.Item>
+                        </Col>
+
+                        <Col span={12}>
+                            <p className='mb-2'>Headers</p>
+                            <Form.List name='headers'>
+                                {(fields, { add, remove }) => (
+                                    <>
+                                        {fields.map(({ key, name, ...restField }) => (
+                                            <Space
+                                                key={key}
+                                                style={{ display: 'flex', marginBottom: 8 }}
+                                                align='baseline'
+                                            >
+                                                <Form.Item {...restField} name={[name, 'key']}>
+                                                    <Input placeholder='Key' />
+                                                </Form.Item>
+                                                <Form.Item {...restField} name={[name, 'value']}>
+                                                    <Input placeholder='Value' />
+                                                </Form.Item>
+                                                <MinusCircleOutlined onClick={() => remove(name)} />
+                                            </Space>
+                                        ))}
+                                        <Form.Item>
+                                            <Button
+                                                type='dashed'
+                                                onClick={() => add()}
+                                                block
+                                                icon={<PlusOutlined />}
+                                            >
+                                                Thêm header
+                                            </Button>
+                                        </Form.Item>
+                                    </>
+                                )}
+                            </Form.List>
+                        </Col>
+                    </Row>
+
+                    <Divider />
+
+                    <Row>
+                        <Col span={12}>
+                            <Form.Item label='Body' name='body'>
+                                <TextArea
+                                    disabled={disable}
+                                    rows={5}
+                                    style={{ width: '100%', borderRadius: 5 }}
+                                />
+                            </Form.Item>
+                        </Col>
+                    </Row>
+                </>
+            ) : (
+                <>
+                    <Form.Item label='File đính kèm' name='fileUrl'>
+                        <UploadDragger onChange={handleChangeDragger} fileList={fileList} />
+                    </Form.Item>
+
+                    <Col span={9}>
+                        <Form.Item label='Tên sheet / data key' name='sheetName'>
+                            <Input placeholder='Điền tên sheet / data key' />
+                        </Form.Item>
+                    </Col>
+                </>
+            )}
+            <div className='mb-5'>
+                <Button
+                    icon={<DatabaseOutlined />}
+                    className={cx('preview-btn')}
+                    onClick={handleClickPreview}
+                >
+                    Xem trước
+                </Button>
+                <Button
+                    icon={<ClockCircleOutlined />}
+                    className={cx('metadata-btn')}
+                    onClick={handleClickMetadata}
+                >
+                    Xem metadata
+                </Button>
+            </div>
+
+            {!disableTableMetadata && <MetadataTable />}
+            {!disableTablePreview && <Table dataSource={dataPreview} columns={columnPreview} />}
+        </TabPane>
+    )
+
     const formModal = (
         <Form layout='vertical' {...layout} form={form}>
             <Tabs activeKey={tabKey} onTabClick={(key) => handleTabClick(key)}>
-                <TabPane tab='Thông tin' key='information'>
-                    <Row>
-                        <Col span={12}>
-                            <Form.Item
-                                label='Tên'
-                                name='name'
-                                rules={[{ required: true, message: 'Không được để trống!' }]}
-                            >
-                                <Input disabled={disable} className={cx('input')} />
-                            </Form.Item>
-                        </Col>
-                        <Col span={12}>
-                            <Form.Item label='Mã' name='code'>
-                                <Input disabled={disable} className={cx('input')} />
-                            </Form.Item>
-                        </Col>
-                    </Row>
-
-                    <Row>
-                        <Col span={12}>
-                            <Form.Item label='Tiêu hiển thị' name='title'>
-                                <Input disabled={disable} className={cx('input')} />
-                            </Form.Item>
-                        </Col>
-                        <Col span={12}>
-                            <Form.Item label='Tag' name='tags'>
-                                <Input disabled={disable} className={cx('input')} />
-                            </Form.Item>
-                        </Col>
-                    </Row>
-
-                    <Row>
-                        <Col span={12}>
-                            <Form.Item label='Lĩnh vực' name='categoryId'>
-                                <Select showSearch placeholder='Chọn lĩnh vực'>
-                                    {categories.map((category) => (
-                                        <Option key={category.id} value={category.id}>
-                                            {category.name}
-                                        </Option>
-                                    ))}
-                                </Select>
-                            </Form.Item>
-                        </Col>
-                        <Col span={12}>
-                            <Form.Item label='Tổ chức' name='organizationId'>
-                                <Select showSearch placeholder='Chọn tổ chức'>
-                                    {organizations.map((organization) => (
-                                        <Option key={organization.id} value={organization.id}>
-                                            {organization.name}
-                                        </Option>
-                                    ))}
-                                </Select>
-                            </Form.Item>
-                        </Col>
-                    </Row>
-
-                    <Row>
-                        <Col span={12}>
-                            <Form.Item label='Hình thức cung cấp' name='providerTypeId'>
-                                <Select showSearch placeholder='Chọn hình thức cung cấp'>
-                                    {providerTypes.map((providerType) => (
-                                        <Option key={providerType.id} value={providerType.id}>
-                                            {providerType.name}
-                                        </Option>
-                                    ))}
-                                </Select>
-                            </Form.Item>
-                        </Col>
-                        <Col span={12}>
-                            <Form.Item label='Giấy phép' name='licenseId'>
-                                <Select showSearch placeholder='Chọn giấy phép'>
-                                    {licenses.map((license) => (
-                                        <Option key={license.id} value={license.id}>
-                                            {license.name}
-                                        </Option>
-                                    ))}
-                                </Select>
-                            </Form.Item>
-                        </Col>
-                    </Row>
-
-                    <Form.Item name='visibility' valuePropName='checked'>
-                        <Checkbox>Xuất bản lên cổng</Checkbox>
-                    </Form.Item>
-
-                    <Form.Item label='Mô tả' name='description'>
-                        <TextArea
-                            disabled={disable}
-                            rows={3}
-                            style={{ width: '100%', borderRadius: 5 }}
-                        />
-                    </Form.Item>
-                </TabPane>
-
-                <TabPane tab='Dữ liệu' disabled={disableDataTab} key='data'>
-                    {dataTypeCode === DataTypeCode.webapi ? (
-                        <>
-                            <Row>
-                                <Col span={3}>
-                                    <Form.Item label='Phương thức' name='method'>
-                                        <Select placeholder='Http action'>
-                                            {httpMethods.map((httpMethod) => (
-                                                <Option key={httpMethod} value={httpMethod}>
-                                                    {httpMethod}
-                                                </Option>
-                                            ))}
-                                        </Select>
-                                    </Form.Item>
-
-                                    <Form.Item label='Data Key' name='dataKey'>
-                                        <Input placeholder='Nhập data key' />
-                                    </Form.Item>
-                                </Col>
-                                <Col span={9}>
-                                    <Form.Item label='Địa chỉ' name='url'>
-                                        <Input placeholder='Enter request URL' />
-                                    </Form.Item>
-                                </Col>
-
-                                <Col span={12}>
-                                    <p className='mb-2'>Headers</p>
-                                    <Form.List name='headers'>
-                                        {(fields, { add, remove }) => (
-                                            <>
-                                                {fields.map(({ key, name, ...restField }) => (
-                                                    <Space
-                                                        key={key}
-                                                        style={{ display: 'flex', marginBottom: 8 }}
-                                                        align='baseline'
-                                                    >
-                                                        <Form.Item
-                                                            {...restField}
-                                                            name={[name, 'key']}
-                                                        >
-                                                            <Input placeholder='Key' />
-                                                        </Form.Item>
-                                                        <Form.Item
-                                                            {...restField}
-                                                            name={[name, 'value']}
-                                                        >
-                                                            <Input placeholder='Value' />
-                                                        </Form.Item>
-                                                        <MinusCircleOutlined
-                                                            onClick={() => remove(name)}
-                                                        />
-                                                    </Space>
-                                                ))}
-                                                <Form.Item>
-                                                    <Button
-                                                        type='dashed'
-                                                        onClick={() => add()}
-                                                        block
-                                                        icon={<PlusOutlined />}
-                                                    >
-                                                        Thêm header
-                                                    </Button>
-                                                </Form.Item>
-                                            </>
-                                        )}
-                                    </Form.List>
-                                </Col>
-                            </Row>
-
-                            <Divider />
-
-                            <Row>
-                                <Col span={12}>
-                                    <Form.Item label='Body' name='body'>
-                                        <TextArea
-                                            disabled={disable}
-                                            rows={5}
-                                            style={{ width: '100%', borderRadius: 5 }}
-                                        />
-                                    </Form.Item>
-                                </Col>
-                            </Row>
-                        </>
-                    ) : (
-                        <>
-                            <Form.Item label='File đính kèm' name='fileUrl'>
-                                <UploadDragger onChange={handleChangeDragger} fileList={fileList} />
-                            </Form.Item>
-
-                            <Col span={9}>
-                                <Form.Item label='Tên sheet / data key' name='sheetName'>
-                                    <Input placeholder='Điền tên sheet / data key' />
-                                </Form.Item>
-                            </Col>
-                        </>
-                    )}
-                    <div className='mb-5'>
-                        <Button
-                            icon={<DatabaseOutlined />}
-                            className={cx('preview-btn')}
-                            onClick={handleClickPreview}
-                        >
-                            Xem trước
-                        </Button>
-                        <Button
-                            icon={<ClockCircleOutlined />}
-                            className={cx('metadata-btn')}
-                            onClick={handleClickMetadata}
-                        >
-                            Xem metadata
-                        </Button>
-                    </div>
-
-                    {!disableTableMetadata && <MetadataTable />}
-                    {!disableTablePreview && (
-                        <Table dataSource={dataPreview} columns={columnPreview} />
-                    )}
-                </TabPane>
+                {viewModes.includes(ViewMode.INFO) && informationTabPane}
+                {viewModes.includes(ViewMode.CONFIG) && configTabPane}
             </Tabs>
         </Form>
     )

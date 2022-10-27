@@ -26,6 +26,7 @@ const ByCategoryPage: React.FC<ByCategoryPageProps> = ({ datasetId, title }) => 
                     setTypeModal={setTypeModal}
                     modalVisible={modalVisible}
                     isModal={false}
+                    viewModes={[]}
                 />
             </div>
         </>

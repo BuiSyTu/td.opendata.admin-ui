@@ -1,20 +1,35 @@
 import { Route, Switch } from 'react-router-dom'
 
 import { lazy } from 'react'
-import { ApproveState } from 'src/app/models'
+import { ApproveState, ViewMode } from 'src/app/models'
 
 const DatasetOfficePage = () => {
     const DatasetListPage = lazy(() => import('./list'))
     const DatasetStatisticPage = lazy(() => import('./statistic'))
     const DatasetSyncHistoryPage = lazy(() => import('./sync-history'))
-    const DataApprovePage = lazy(() => import('./approve/approved'))
     const DatasetByCategoryPage = lazy(() => import('./by-category'))
 
     return (
         <Switch>
             <Route
                 path='/dataset/webapi/list'
-                render={() => <DatasetListPage dataTypeCode='webapi' isPortal={false} />}
+                render={() => (
+                    <DatasetListPage
+                        dataTypeCode='webapi'
+                        isPortal={false}
+                        viewModes={[ViewMode.INFO]}
+                    />
+                )}
+            ></Route>
+            <Route
+                path='/dataset/webapi/config'
+                render={() => (
+                    <DatasetListPage
+                        dataTypeCode='webapi'
+                        isPortal={false}
+                        viewModes={[ViewMode.CONFIG]}
+                    />
+                )}
             ></Route>
             <Route
                 path='/dataset/webapi/statistic'
@@ -72,7 +87,23 @@ const DatasetOfficePage = () => {
 
             <Route
                 path='/dataset/excel/list'
-                render={() => <DatasetListPage dataTypeCode='file' isPortal={false} />}
+                render={() => (
+                    <DatasetListPage
+                        dataTypeCode='file'
+                        isPortal={false}
+                        viewModes={[ViewMode.INFO]}
+                    />
+                )}
+            ></Route>
+            <Route
+                path='/dataset/excel/list'
+                render={() => (
+                    <DatasetListPage
+                        dataTypeCode='file'
+                        isPortal={false}
+                        viewModes={[ViewMode.CONFIG]}
+                    />
+                )}
             ></Route>
             <Route
                 path='/dataset/excel/statistic'
@@ -86,19 +117,31 @@ const DatasetOfficePage = () => {
             <Route
                 path='/dataset/approve/approved'
                 render={() => (
-                    <DataApprovePage approveState={ApproveState.APPROVED} isPortal={false} />
+                    <DatasetListPage
+                        approveState={ApproveState.APPROVED}
+                        isPortal={false}
+                        viewModes={[ViewMode.APPROVE]}
+                    />
                 )}
             ></Route>
             <Route
                 path='/dataset/approve/rejected'
                 render={() => (
-                    <DataApprovePage approveState={ApproveState.REJECTED} isPortal={false} />
+                    <DatasetListPage
+                        approveState={ApproveState.REJECTED}
+                        isPortal={false}
+                        viewModes={[ViewMode.APPROVE]}
+                    />
                 )}
             ></Route>
             <Route
                 path='/dataset/approve/pending'
                 render={() => (
-                    <DataApprovePage approveState={ApproveState.PENDING} isPortal={false} />
+                    <DatasetListPage
+                        approveState={ApproveState.PENDING}
+                        isPortal={false}
+                        viewModes={[ViewMode.APPROVE]}
+                    />
                 )}
             ></Route>
         </Switch>
