@@ -4,17 +4,12 @@ import { TypeModal } from 'src/setup/redux/slices/dataset'
 import { PageTitle } from 'src/_metronic/layout/core'
 import FormModal from '../components/FormModal'
 
-
-
 interface ByCategoryPageProps {
-    datasetId: string,
-    title: string,
+    datasetId: string
+    title: string
 }
 
-const ByCategoryPage: React.FC<ByCategoryPageProps> = ({
-    datasetId,
-    title
-}) => {
+const ByCategoryPage: React.FC<ByCategoryPageProps> = ({ datasetId, title }) => {
     const [modalId, setModalId] = useState(datasetId)
     const [typeModal, setTypeModal] = useState<TypeModal>(TypeModal.edit)
     const [modalVisible, setModalVisible] = useState(true)
@@ -26,10 +21,10 @@ const ByCategoryPage: React.FC<ByCategoryPageProps> = ({
                 <FormModal
                     modalId={modalId}
                     setModalId={setModalId}
+                    setModalVisible={setModalVisible}
                     typeModal={typeModal}
                     setTypeModal={setTypeModal}
                     modalVisible={modalVisible}
-                    setModalVisible={setModalVisible}
                     isModal={false}
                 />
             </div>

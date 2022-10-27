@@ -1,53 +1,108 @@
 import { Route, Switch } from 'react-router-dom'
 
 import { lazy } from 'react'
+import { ApproveState } from 'src/app/models'
 
 const DatasetOfficePage = () => {
-  const WebApiListPage = lazy(() => import('./webapi/list'))
-  const WebApiStatisticPage = lazy(() => import('./webapi/statistic'))
-  const WebApiSyncHistoryPage = lazy(() => import('./webapi/sync-history'))
+    const DatasetListPage = lazy(() => import('./list'))
+    const DatasetStatisticPage = lazy(() => import('./statistic'))
+    const DatasetSyncHistoryPage = lazy(() => import('./sync-history'))
+    const DataApprovePage = lazy(() => import('./approve/approved'))
+    const DatasetByCategoryPage = lazy(() => import('./by-category'))
 
-  const ExcelListPage = lazy(() => import('./excel/list'))
-  const ExcelStatisticPage = lazy(() => import('./excel/statistic'))
-  const ExcelSyncHistoryPage = lazy(() => import('./excel/sync-history'))
+    return (
+        <Switch>
+            <Route
+                path='/dataset/webapi/list'
+                render={() => <DatasetListPage dataTypeCode='webapi' isPortal={false} />}
+            ></Route>
+            <Route
+                path='/dataset/webapi/statistic'
+                render={() => <DatasetStatisticPage dataTypeCode='webapi' isPortal={false} />}
+            ></Route>
+            <Route
+                path='/dataset/webapi/sync-history'
+                render={() => <DatasetSyncHistoryPage dataTypeCode='webapi' isPortal={false} />}
+            ></Route>
+            <Route
+                path='/dataset/webapi/categories/giao-duc-dao-tao'
+                render={() => (
+                    <DatasetByCategoryPage
+                        title='Giáo dục đào tạo'
+                        datasetId='6b0f0000-8df8-549b-2f17-08da63db22a5'
+                    />
+                )}
+            />
+            <Route
+                path='/dataset/webapi/categories/y-te'
+                render={() => (
+                    <DatasetByCategoryPage
+                        title='Y tế'
+                        datasetId='6b0f0000-8df8-549b-4ed7-08da63dc4430'
+                    />
+                )}
+            />
+            <Route
+                path='/dataset/webapi/categories/lao-dong-thuong-binh-xa-hoi'
+                render={() => (
+                    <DatasetByCategoryPage
+                        title='Lao động thương binh xã hội'
+                        datasetId='6b0f0000-8df8-549b-1c68-08da63dc90ea'
+                    />
+                )}
+            />
+            <Route
+                path='/dataset/webapi/categories/cong-thuong'
+                render={() => (
+                    <DatasetByCategoryPage
+                        title='Công thương'
+                        datasetId='6b0f0000-8df8-549b-f146-08da63dcb228'
+                    />
+                )}
+            />
+            <Route
+                path='/dataset/webapi/categories/nong-lam-ngu-nghiep'
+                render={() => (
+                    <DatasetByCategoryPage
+                        title='Nông lâm ngư nghiệp'
+                        datasetId='6b0f0000-8df8-549b-70d2-08da63dcbf07'
+                    />
+                )}
+            />
 
-  const ApprovedPage = lazy(() => import('./approve/approved'))
-  const PendingPage = lazy(() => import('./approve/pending'))
-  const RejectedPage = lazy(() => import('./approve/rejected'))
+            <Route
+                path='/dataset/excel/list'
+                render={() => <DatasetListPage dataTypeCode='file' isPortal={false} />}
+            ></Route>
+            <Route
+                path='/dataset/excel/statistic'
+                render={() => <DatasetStatisticPage dataTypeCode='file' isPortal={false} />}
+            ></Route>
+            <Route
+                path='/dataset/excel/sync-history'
+                render={() => <DatasetSyncHistoryPage dataTypeCode='file' isPortal={false} />}
+            ></Route>
 
-  const ByCategoryPage = lazy(() => import('./by-category'))
-
-  return (
-    <Switch>
-      <Route path='/dataset/webapi/list' component={WebApiListPage}></Route>
-      <Route path='/dataset/webapi/statistic' component={WebApiStatisticPage}></Route>
-      <Route path='/dataset/webapi/sync-history' component={WebApiSyncHistoryPage}></Route>
-      <Route path='/dataset/webapi/categories/giao-duc-dao-tao' render={() => (
-        <ByCategoryPage title='Giáo dục đào tạo' datasetId='6b0f0000-8df8-549b-2f17-08da63db22a5' />
-      )} />
-      <Route path='/dataset/webapi/categories/y-te' render={() => (
-        <ByCategoryPage title='Y tế' datasetId='6b0f0000-8df8-549b-4ed7-08da63dc4430' />
-      )} />
-      <Route path='/dataset/webapi/categories/lao-dong-thuong-binh-xa-hoi' render={() => (
-        <ByCategoryPage title='Lao động thương binh xã hội' datasetId='6b0f0000-8df8-549b-1c68-08da63dc90ea' />
-      )} />
-      <Route path='/dataset/webapi/categories/cong-thuong' render={() => (
-        <ByCategoryPage title='Công thương' datasetId='6b0f0000-8df8-549b-f146-08da63dcb228' />
-      )} />
-      <Route path='/dataset/webapi/categories/nong-lam-ngu-nghiep' render={() => (
-        <ByCategoryPage title='Nông lâm ngư nghiệp' datasetId='6b0f0000-8df8-549b-70d2-08da63dcbf07' />
-      )} />
-
-      <Route path='/dataset/excel/list' component={ExcelListPage}></Route>
-      <Route path='/dataset/excel/statistic' component={ExcelStatisticPage}></Route>
-      <Route path='/dataset/excel/sync-history' component={ExcelSyncHistoryPage}></Route>
-
-      <Route path='/dataset/approve/approved' component={ApprovedPage}></Route>
-      <Route path='/dataset/approve/rejected' component={RejectedPage}></Route>
-      <Route path='/dataset/approve/pending' component={PendingPage}></Route>
-
-    </Switch>
-  )
+            <Route
+                path='/dataset/approve/approved'
+                render={() => (
+                    <DataApprovePage approveState={ApproveState.APPROVED} isPortal={false} />
+                )}
+            ></Route>
+            <Route
+                path='/dataset/approve/rejected'
+                render={() => (
+                    <DataApprovePage approveState={ApproveState.REJECTED} isPortal={false} />
+                )}
+            ></Route>
+            <Route
+                path='/dataset/approve/pending'
+                render={() => (
+                    <DataApprovePage approveState={ApproveState.PENDING} isPortal={false} />
+                )}
+            ></Route>
+        </Switch>
+    )
 }
 
 export default DatasetOfficePage

@@ -136,7 +136,6 @@ const ModalCategory: React.FC<Props> = ({
   }
 
   const handleImageUrl = (data: Category) => {
-    debugger
     const imageUrlResponseData = data?.imageUrlResponse?.file?.response?.data
 
     if (imageUrlResponseData && Array.isArray(imageUrlResponseData)) {
