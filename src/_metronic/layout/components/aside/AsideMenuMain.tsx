@@ -26,7 +26,7 @@ export function AsideMenuMain() {
 
             <AsideMenuItemWithSub
                 to='/dataset'
-                title='Dữ liệu đơn vị'
+                title='Thu thập dữ liệu'
                 icon='/media/icons/duotune/general/gen022.svg'
                 userPermissions={userPermissions}
                 childrenPermissions={[
@@ -68,6 +68,167 @@ export function AsideMenuMain() {
                     />
                     <AsideMenuItem
                         to='/dataset/webapi/statistic'
+                        title='Thống kê'
+                        hasBullet={true}
+                        userPermissions={userPermissions}
+                        menuPermissions={[Permissions.KhaiThacDuLieuDonVi]}
+                    />
+
+                    <AsideMenuItem
+                        to='/dataset/webapi/giao-duc-dao-tao'
+                        title='Lĩnh vực giáo dục đào tạo'
+                        hasBullet={true}
+                        userPermissions={userPermissions}
+                        menuPermissions={[Permissions.KhaiThacDuLieuDonVi]}
+                    />
+
+                    <AsideMenuItem
+                        to='/dataset/webapi/y-te'
+                        title='Lĩnh vực y tế'
+                        hasBullet={true}
+                        userPermissions={userPermissions}
+                        menuPermissions={[Permissions.KhaiThacDuLieuDonVi]}
+                    />
+
+                    <AsideMenuItem
+                        to='/dataset/webapi/lao-dong-thuong-binh-xa-hoi'
+                        title='Lĩnh vực lao động thương binh xã hội'
+                        hasBullet={true}
+                        userPermissions={userPermissions}
+                        menuPermissions={[Permissions.KhaiThacDuLieuDonVi]}
+                    />
+
+                    <AsideMenuItem
+                        to='/dataset/webapi/cong-thuong'
+                        title='Lĩnh vực công thương'
+                        hasBullet={true}
+                        userPermissions={userPermissions}
+                        menuPermissions={[Permissions.KhaiThacDuLieuDonVi]}
+                    />
+
+                    <AsideMenuItem
+                        to='/dataset/webapi/nong-nghiep'
+                        title='Lĩnh vực nông nghiệp'
+                        hasBullet={true}
+                        userPermissions={userPermissions}
+                        menuPermissions={[Permissions.KhaiThacDuLieuDonVi]}
+                    />
+
+                    <AsideMenuItem
+                        to='/dataset/webapi/giao-thong-van-tai'
+                        title='Lĩnh vực giao thông vận tải'
+                        hasBullet={true}
+                        userPermissions={userPermissions}
+                        menuPermissions={[Permissions.KhaiThacDuLieuDonVi]}
+                    />
+
+                    <AsideMenuItem
+                        to='/dataset/webapi/thong-tin-truyen-thong'
+                        title='Lĩnh vực thông tin truyền thông'
+                        hasBullet={true}
+                        userPermissions={userPermissions}
+                        menuPermissions={[Permissions.KhaiThacDuLieuDonVi]}
+                    />
+
+                    <AsideMenuItem
+                        to='/dataset/webapi/noi-vu'
+                        title='Lĩnh vực nội vụ'
+                        hasBullet={true}
+                        userPermissions={userPermissions}
+                        menuPermissions={[Permissions.KhaiThacDuLieuDonVi]}
+                    />
+
+                    <AsideMenuItem
+                        to='/dataset/webapi/van-hoa-the-thao-du-lich'
+                        title='Lĩnh vực văn hóa thể thao du lịch'
+                        hasBullet={true}
+                        userPermissions={userPermissions}
+                        menuPermissions={[Permissions.KhaiThacDuLieuDonVi]}
+                    />
+
+                    <AsideMenuItem
+                        to='/dataset/webapi/ke-hoach-dau-tu'
+                        title='Lĩnh vực kế hoạch đầu tư'
+                        hasBullet={true}
+                        userPermissions={userPermissions}
+                        menuPermissions={[Permissions.KhaiThacDuLieuDonVi]}
+                    />
+
+                    <AsideMenuItem
+                        to='/dataset/webapi/tu-phap'
+                        title='Lĩnh vực tư pháp'
+                        hasBullet={true}
+                        userPermissions={userPermissions}
+                        menuPermissions={[Permissions.KhaiThacDuLieuDonVi]}
+                    />
+
+                    <AsideMenuItem
+                        to='/dataset/webapi/bao-hiem'
+                        title='Lĩnh vực bảo hiểm'
+                        hasBullet={true}
+                        userPermissions={userPermissions}
+                        menuPermissions={[Permissions.KhaiThacDuLieuDonVi]}
+                    />
+
+                    <AsideMenuItem
+                        to='/dataset/webapi/tai-chinh'
+                        title='Lĩnh vực tài chính'
+                        hasBullet={true}
+                        userPermissions={userPermissions}
+                        menuPermissions={[Permissions.KhaiThacDuLieuDonVi]}
+                    />
+
+                    <AsideMenuItem
+                        to='/dataset/webapi/khoa-hoc-cong-nghe'
+                        title='Lĩnh vực khoa học công nghệ'
+                        hasBullet={true}
+                        userPermissions={userPermissions}
+                        menuPermissions={[Permissions.KhaiThacDuLieuDonVi]}
+                    />
+
+                    <AsideMenuItem
+                        to='/dataset/webapi/xay-dung'
+                        title='Lĩnh vực xây dựng'
+                        hasBullet={true}
+                        userPermissions={userPermissions}
+                        menuPermissions={[Permissions.KhaiThacDuLieuDonVi]}
+                    />
+                </AsideMenuItemWithSub>
+
+                <AsideMenuItemWithSub
+                    to='/dataset/database'
+                    title='Database'
+                    fontIcon='bi-archive'
+                    hasBullet={true}
+                    userPermissions={userPermissions}
+                    childrenPermissions={[
+                        Permissions.ThuThapDuLieuDonVi,
+                        Permissions.KhaiThacDuLieuDonVi,
+                    ]}
+                >
+                    <AsideMenuItem
+                        to='/dataset/database/list'
+                        title='Danh sách'
+                        hasBullet={true}
+                        userPermissions={userPermissions}
+                        menuPermissions={[Permissions.ThuThapDuLieuDonVi]}
+                    />
+                    <AsideMenuItem
+                        to='/dataset/database/config'
+                        title='Cấu hình'
+                        hasBullet={true}
+                        userPermissions={userPermissions}
+                        menuPermissions={[Permissions.ThuThapDuLieuDonVi]}
+                    />
+                    <AsideMenuItem
+                        to='/dataset/database/sync-history'
+                        title='Lịch sử đồng bộ'
+                        hasBullet={true}
+                        userPermissions={userPermissions}
+                        menuPermissions={[Permissions.KhaiThacDuLieuDonVi]}
+                    />
+                    <AsideMenuItem
+                        to='/dataset/database/statistic'
                         title='Thống kê'
                         hasBullet={true}
                         userPermissions={userPermissions}
@@ -117,6 +278,98 @@ export function AsideMenuMain() {
                 </AsideMenuItemWithSub>
 
                 <AsideMenuItemWithSub
+                    to='/dataset/manage'
+                    title='Quản lý'
+                    fontIcon='bi-archive'
+                    hasBullet={true}
+                    userPermissions={userPermissions}
+                    childrenPermissions={[
+                        Permissions.ThuThapDuLieuDonVi,
+                        Permissions.KhaiThacDuLieuDonVi,
+                    ]}
+                >
+                    <AsideMenuItem
+                        to='/dataset/manage/list'
+                        title='Danh sách'
+                        hasBullet={true}
+                        userPermissions={userPermissions}
+                        menuPermissions={[Permissions.ThuThapDuLieuDonVi]}
+                    />
+
+                    <AsideMenuItem
+                        to='/dataset/manage/by-category'
+                        title='Theo lĩnh vực'
+                        hasBullet={true}
+                        userPermissions={userPermissions}
+                        menuPermissions={[Permissions.ThuThapDuLieuDonVi]}
+                    />
+
+                    <AsideMenuItem
+                        to='/dataset/manage/by-datatype'
+                        title='Theo hình thức thu thập'
+                        hasBullet={true}
+                        userPermissions={userPermissions}
+                        menuPermissions={[Permissions.ThuThapDuLieuDonVi]}
+                    />
+
+                    <AsideMenuItem
+                        to='/dataset/manage/pending'
+                        title='Dữ liệu chờ duyệt'
+                        hasBullet={true}
+                        userPermissions={userPermissions}
+                        menuPermissions={[Permissions.ThuThapDuLieuDonVi]}
+                    />
+
+                    <AsideMenuItem
+                        to='/dataset/manage/rejected'
+                        title='Dữ liệu không duyệt'
+                        hasBullet={true}
+                        userPermissions={userPermissions}
+                        menuPermissions={[Permissions.ThuThapDuLieuDonVi]}
+                    />
+
+                    <AsideMenuItem
+                        to='/dataset/manage/approved'
+                        title='Dữ liệu đã duyệt'
+                        hasBullet={true}
+                        userPermissions={userPermissions}
+                        menuPermissions={[Permissions.ThuThapDuLieuDonVi]}
+                    />
+
+                    <AsideMenuItem
+                        to='/dataset/manage/statistic-by-status'
+                        title='Thống kê tổng hợp theo trạng thái'
+                        hasBullet={true}
+                        userPermissions={userPermissions}
+                        menuPermissions={[Permissions.ThuThapDuLieuDonVi]}
+                    />
+
+                    <AsideMenuItem
+                        to='/dataset/manage/statistic-by-category'
+                        title='Thống kê tổng hợp theo lĩnh vực'
+                        hasBullet={true}
+                        userPermissions={userPermissions}
+                        menuPermissions={[Permissions.ThuThapDuLieuDonVi]}
+                    />
+
+                    <AsideMenuItem
+                        to='/dataset/manage/statistic-by-organization'
+                        title='Thống kê tổng hợp theo đơn vị cung cấp'
+                        hasBullet={true}
+                        userPermissions={userPermissions}
+                        menuPermissions={[Permissions.ThuThapDuLieuDonVi]}
+                    />
+
+                    <AsideMenuItem
+                        to='/dataset/manage/statistic-by-datatype'
+                        title='Thống kê tổng hợp theo loại hình thu thập'
+                        hasBullet={true}
+                        userPermissions={userPermissions}
+                        menuPermissions={[Permissions.ThuThapDuLieuDonVi]}
+                    />
+                </AsideMenuItemWithSub>
+
+                <AsideMenuItemWithSub
                     to='/dataset/approve'
                     title='Duyệt dữ liệu'
                     fontIcon='bi-archive'
@@ -141,6 +394,34 @@ export function AsideMenuMain() {
                     <AsideMenuItem
                         to='/dataset/approve/approved'
                         title='Đã duyệt'
+                        hasBullet={true}
+                        userPermissions={userPermissions}
+                        menuPermissions={[Permissions.DuyetDuLieuDonVi]}
+                    />
+                    <AsideMenuItem
+                        to='/dataset/approve/statistic-by-category'
+                        title='Thống kê theo lĩnh vực'
+                        hasBullet={true}
+                        userPermissions={userPermissions}
+                        menuPermissions={[Permissions.DuyetDuLieuDonVi]}
+                    />
+                    <AsideMenuItem
+                        to='/dataset/approve/statistic-by-organization'
+                        title='Thống kê theo đơn vị cung cấp'
+                        hasBullet={true}
+                        userPermissions={userPermissions}
+                        menuPermissions={[Permissions.DuyetDuLieuDonVi]}
+                    />
+                    <AsideMenuItem
+                        to='/dataset/approve/statistic-by-datatype'
+                        title='Thống kê theo loại hình thu thập'
+                        hasBullet={true}
+                        userPermissions={userPermissions}
+                        menuPermissions={[Permissions.DuyetDuLieuDonVi]}
+                    />
+                    <AsideMenuItem
+                        to='/dataset/approve/statistic-by-datatype'
+                        title='Thống kê tổng hợp'
                         hasBullet={true}
                         userPermissions={userPermissions}
                         menuPermissions={[Permissions.DuyetDuLieuDonVi]}
