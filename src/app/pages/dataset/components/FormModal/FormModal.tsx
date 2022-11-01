@@ -139,36 +139,36 @@ const FormModal: React.FC<Props> = ({
 
     useEffect(() => {
         const fetchCategories = async () => {
-            const res = await categoryApi.getAll()
-            if (res?.data) {
+            const [status, res] = await categoryApi.getAll()
+            if (status === 200 && res?.data) {
                 setCategories(res?.data)
             }
         }
 
         const fetchOrganizations = async () => {
-            const res = await organizationApi.getAll()
-            if (res?.data) {
+            const [status, res] = await organizationApi.getAll()
+            if (status === 200) {
                 setOrganizations(res?.data)
             }
         }
 
         const fetchProviderTypes = async () => {
-            const res = await providerTypeApi.getAll()
-            if (res?.data) {
+            const [status, res] = await providerTypeApi.getAll()
+            if (status === 200) {
                 setProviderTypes(res?.data)
             }
         }
 
         const fetchDataTypes = async () => {
-            const res = await dataTypeApi.getAll()
-            if (res?.data) {
+            const [status, res] = await dataTypeApi.getAll()
+            if (status === 200) {
                 setDataTypes(res?.data)
             }
         }
 
         const fetchLicenses = async () => {
-            const res = await licenseApi.getAll()
-            if (res?.data) {
+            const [status, res] = await licenseApi.getAll()
+            if (status === 200) {
                 setLicenses(res?.data)
             }
         }
@@ -185,7 +185,7 @@ const FormModal: React.FC<Props> = ({
         const fetchData = async () => {
             try {
                 setIsLoading(true)
-                var res = await datasetApi.getById(modalId)
+                const res = await datasetApi.getById(modalId)
 
                 if (res?.data?.datasetAPIConfig) {
                     res.data = {
@@ -325,7 +325,7 @@ const FormModal: React.FC<Props> = ({
     const postData = async (data: Dataset) => {
         try {
             setButtonLoading(true)
-            var res = await datasetApi.add(data)
+            const res = await datasetApi.add(data)
             if (res) {
                 notification.success({
                     message: 'Thêm mới thành công!',
@@ -348,7 +348,7 @@ const FormModal: React.FC<Props> = ({
     const putData = async (data: Dataset) => {
         try {
             setButtonLoading(true)
-            var res = await datasetApi.update(modalId, data)
+            const res = await datasetApi.update(modalId, data)
             if (res) {
                 notification.success({
                     message: 'Cập nhập thành công!',
@@ -387,8 +387,8 @@ const FormModal: React.FC<Props> = ({
             const workbook = XLSX.read(data, { type: 'binary' })
 
             const firstSheetName = workbook.SheetNames[0]
-            var XL_row_object = XLSX.utils.sheet_to_json(workbook.Sheets[firstSheetName])
-            var json_object = JSON.stringify(XL_row_object)
+            const XL_row_object = XLSX.utils.sheet_to_json(workbook.Sheets[firstSheetName])
+            const json_object = JSON.stringify(XL_row_object)
             dispatch(setDataUpload(JSON.parse(json_object)))
         }
 

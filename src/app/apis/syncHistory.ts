@@ -8,7 +8,6 @@ const controllerName = 'synchistories'
 const baseUrl = `${process.env.REACT_APP_API_URL}/${controllerName}`
 const authorization = `Bearer ${process.env.REACT_APP_BEAR_TOKEN}`
 
-
 const getAll = async (listFilter?: SyncHistoryListFilter) => {
     try {
         const params = toQueryString(listFilter)
@@ -16,16 +15,15 @@ const getAll = async (listFilter?: SyncHistoryListFilter) => {
             method: 'GET',
             url: `${baseUrl}?${params}`,
             headers: {
-                'Authorization': authorization,
-                'TDAuthorization': getCookie('token'),
+                Authorization: authorization,
+                TDAuthorization: getCookie('token'),
             },
             timeout: 15000,
         })
 
-        return res?.data
+        return [res?.status, res?.data]
     } catch (error: any) {
-        console.error(error.response)
-        return null
+        return [error.response?.status, null]
     }
 }
 
@@ -35,16 +33,15 @@ const getById = async (id: string) => {
             method: 'GET',
             url: `${baseUrl}/${id}`,
             headers: {
-                'Authorization': authorization,
-                'TDAuthorization': getCookie('token'),
+                Authorization: authorization,
+                TDAuthorization: getCookie('token'),
             },
             timeout: 15000,
         })
 
-        return res?.data
+        return [res?.status, res?.data]
     } catch (error: any) {
-        console.error(error.response)
-        return null
+        return [error.response?.status, null]
     }
 }
 
@@ -54,16 +51,15 @@ const _delete = async (id: string) => {
             method: 'DELETE',
             url: `${baseUrl}/${id}`,
             headers: {
-                'Authorization': authorization,
-                'TDAuthorization': getCookie('token'),
+                Authorization: authorization,
+                TDAuthorization: getCookie('token'),
             },
             timeout: 15000,
         })
 
-        return res?.data
+        return [res?.status, res?.data]
     } catch (error: any) {
-        console.error(error.response)
-        return null
+        return [error.response?.status, null]
     }
 }
 

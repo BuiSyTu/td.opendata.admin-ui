@@ -13,16 +13,15 @@ const get = async () => {
             method: 'GET',
             url: `${baseUrl}`,
             headers: {
-                'Authorization': authorization,
-                'TDAuthorization': getCookie('token'),
+                Authorization: authorization,
+                TDAuthorization: getCookie('token'),
             },
             timeout: 15000,
         })
 
-        return res?.data
+        return [res?.status, res?.data]
     } catch (error: any) {
-        console.error(error?.response)
-        return null
+        return [error.response?.status, null]
     }
 }
 
@@ -32,17 +31,16 @@ const update = async (data: BannerConfig) => {
             method: 'PUT',
             url: `${baseUrl}`,
             headers: {
-                'Authorization': authorization,
-                'TDAuthorization': getCookie('token'),
+                Authorization: authorization,
+                TDAuthorization: getCookie('token'),
             },
             data,
             timeout: 15000,
         })
 
-        return res?.data
+        return [res?.status, res?.data]
     } catch (error: any) {
-        console.error(error?.response)
-        return null
+        return [error.response?.status, null]
     }
 }
 

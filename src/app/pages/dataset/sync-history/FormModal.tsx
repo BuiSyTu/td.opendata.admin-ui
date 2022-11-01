@@ -6,18 +6,13 @@ import { syncHistoryApi } from 'src/app/apis'
 const { Text } = Typography
 
 type Props = {
-    modalVisible: boolean,
-    setModalVisible: React.Dispatch<React.SetStateAction<boolean>>,
-    modalId: string,
-    setModalId: React.Dispatch<React.SetStateAction<string>>,
+    modalVisible: boolean
+    setModalVisible: React.Dispatch<React.SetStateAction<boolean>>
+    modalId: string
+    setModalId: React.Dispatch<React.SetStateAction<string>>
 }
 
-const ModalCategory: React.FC<Props> = ({
-    modalVisible,
-    setModalVisible,
-    modalId,
-    setModalId,
-}) => {
+const ModalCategory: React.FC<Props> = ({ modalVisible, setModalVisible, modalId, setModalId }) => {
     const [form] = Form.useForm()
     const [isLoading, setIsLoading] = useState(false)
 
@@ -28,25 +23,21 @@ const ModalCategory: React.FC<Props> = ({
 
     useEffect(() => {
         const fetchData = async () => {
-            try {
-                setIsLoading(true)
-                var res = await syncHistoryApi.getById(modalId)
-                if (res?.data) {
-                    const formData = res?.data
+            setIsLoading(true)
+            const [status, res] = await syncHistoryApi.getById(modalId)
+            if (status === 200) {
+                const formData = res?.data
 
-                    formData.syncStatus = formData?.dataset?.isSynced ? 'Đã đồng bộ' : 'Đồng bộ lỗi'
-                    form.setFieldsValue(res?.data)
-                }
-                setIsLoading(false)
-            } catch (error) {
-                setIsLoading(false)
+                formData.syncStatus = formData?.dataset?.isSynced ? 'Đã đồng bộ' : 'Đồng bộ lỗi'
+                form.setFieldsValue(res?.data)
             }
+            setIsLoading(false)
         }
 
         if (modalId !== '') {
             fetchData()
         }
-        return () => { }
+        return () => {}
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [modalId])
 
@@ -72,12 +63,9 @@ const ModalCategory: React.FC<Props> = ({
                 handleCancel()
             }}
         >
-            <Text style={{ color: '#757575', paddingLeft: 5 }}>
-                Đóng
-            </Text>
-        </Button>
+            <Text style={{ color: '#757575', paddingLeft: 5 }}>Đóng</Text>
+        </Button>,
     ]
-
 
     return (
         <Modal
@@ -107,7 +95,6 @@ const ModalCategory: React.FC<Props> = ({
                     </Form.Item>
                 </Form>
             </Spin>
-
         </Modal>
     )
 }

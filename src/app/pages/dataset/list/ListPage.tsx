@@ -283,7 +283,7 @@ const ListPage: React.FC<ListPageProps> = ({
         const fetchData = async () => {
             try {
                 setLoading(true)
-                var res = await datasetApi.getAll({
+                const res = await datasetApi.getAll({
                     isPortal,
                     ...(dataTypeCode && { dataTypeCode }),
                     ...(!isPortal && { officeCode: userInfo?.Info?.UserOffice?.GroupCode ?? '' }),
@@ -337,7 +337,7 @@ const ListPage: React.FC<ListPageProps> = ({
     }
 
     const handleDelete = async (id: string) => {
-        var res = await datasetApi.delete(id)
+        const res = await datasetApi.delete(id)
         if (res) {
             notification.success({
                 message: 'Xóa thành công!',
@@ -355,7 +355,7 @@ const ListPage: React.FC<ListPageProps> = ({
     }
 
     const handleApproved = async (id: string) => {
-        var res = await datasetApi.approved(id)
+        const res = await datasetApi.approved(id)
         if (res) {
             notification.success({
                 message: 'Thành công!',
@@ -373,7 +373,7 @@ const ListPage: React.FC<ListPageProps> = ({
     }
 
     const handleRejected = async (id: string) => {
-        var res = await datasetApi.rejected(id)
+        const res = await datasetApi.rejected(id)
         if (res) {
             notification.success({
                 message: 'Thành công!',
@@ -397,7 +397,7 @@ const ListPage: React.FC<ListPageProps> = ({
             placement: 'bottomRight',
         })
 
-        var res = await datasetApi.syncData(id)
+        const res = await datasetApi.syncData(id)
         if (res) {
             notification.success({
                 message: 'Thành công!',
@@ -415,7 +415,7 @@ const ListPage: React.FC<ListPageProps> = ({
     }
 
     const handleGetData = async (id: string) => {
-        var res = await datasetApi.getData(id)
+        const res = await datasetApi.getData(id)
         if (res) {
             openJsonInNewTab(res)
         } else {

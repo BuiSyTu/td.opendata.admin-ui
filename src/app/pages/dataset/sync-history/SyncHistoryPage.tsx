@@ -32,19 +32,18 @@ const SyncHistoryPage: React.FC<SyncHistoryPageProps> = ({ dataTypeCode, isPorta
 
     useEffect(() => {
         const fetchData = async () => {
-            try {
-                setLoading(true)
-                var res = await syncHistoryApi.getAll({
-                    dataTypeCode,
-                    isPortal,
-                    ...(!isPortal && { officeCode: userInfo?.Info?.UserOffice?.GroupCode ?? '' }),
-                })
+            setLoading(true)
+            const [status, res] = await syncHistoryApi.getAll({
+                dataTypeCode,
+                isPortal,
+                ...(!isPortal && { officeCode: userInfo?.Info?.UserOffice?.GroupCode ?? '' }),
+            })
+
+            if (status === 200) {
                 setDataTable(res?.data ?? [])
                 setCount(res?.totalCount ?? 0)
-                setLoading(false)
-            } catch (error) {
-                setLoading(false)
             }
+            setLoading(false)
             setUpdate(false)
         }
         if (update) {
@@ -157,8 +156,8 @@ const SyncHistoryPage: React.FC<SyncHistoryPageProps> = ({ dataTypeCode, isPorta
     ]
 
     const handleDelete = async (id: string) => {
-        var res = await syncHistoryApi.delete(id)
-        if (res) {
+        const [status] = await syncHistoryApi.delete(id)
+        if (status === 200) {
             notification.success({
                 message: 'Xóa thành công!',
                 duration: 1,

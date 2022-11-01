@@ -13,9 +13,9 @@ const BannerConfigPage = () => {
 
     useEffect(() => {
         const fetchBannerConfig = async () => {
-            const res = await bannerConfigApi.get()
+            const [status, res] = await bannerConfigApi.get()
 
-            if (res) {
+            if (status === 200) {
                 form.setFieldsValue(res?.data)
             }
         }
@@ -30,54 +30,39 @@ const BannerConfigPage = () => {
     }
 
     const handleOk = async () => {
-        try {
-            setButtonLoading(true)
+        setButtonLoading(true)
 
-            await form.validateFields()
-            const formData = form.getFieldsValue(true)
+        await form.validateFields()
+        const formData = form.getFieldsValue(true)
 
-            const res = await bannerConfigApi.update(formData)
-            if (res) {
-                notification.success({
-                    message: 'Cập nhật thành công!',
-                    duration: 1,
-                })
-            } else {
-                notification.error({
-                    message: `Lỗi ${res}`,
-                    description: `${res}`,
-                })
-            }
-
-            setButtonLoading(false)
-        } catch (error: any) {
-            setButtonLoading(false)
+        const [status] = await bannerConfigApi.update(formData)
+        if (status === 200) {
+            notification.success({
+                message: 'Cập nhật thành công!',
+                duration: 1,
+            })
+        } else {
+            notification.error({
+                message: `Không thành công`,
+                description: `Đã có lỗi xảy ra trong quá trình thực hiện!`,
+            })
         }
+        setButtonLoading(false)
     }
 
     return (
         <>
             <PageTitle breadcrumbs={[]}>Cấu hình footer</PageTitle>
             <div className='card mb-5 mt-5 mb-xl-12 p-10 mw-1000px'>
-                <Form
-                    className='mt-5'
-                    {...layout}
-                    form={form}
-                >
-                    <Form.Item
-                        label='Dòng 1'
-                        name='line1'
-                    >
+                <Form className='mt-5' {...layout} form={form}>
+                    <Form.Item label='Dòng 1' name='line1'>
                         <Input style={{ width: '100%', height: 32, borderRadius: 5 }} />
                     </Form.Item>
-                    <Form.Item
-                        label='Dòng 2'
-                        name='line2'
-                    >
+                    <Form.Item label='Dòng 2' name='line2'>
                         <Input style={{ width: '100%', height: 32, borderRadius: 5 }} />
                     </Form.Item>
 
-                    <div className="ant-modal-footer">
+                    <div className='ant-modal-footer'>
                         <Button
                             key='Ok'
                             type='primary'
@@ -100,7 +85,6 @@ const BannerConfigPage = () => {
                     </div>
                 </Form>
             </div>
-
         </>
     )
 }

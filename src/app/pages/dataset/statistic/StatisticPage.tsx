@@ -22,9 +22,9 @@ const StatisticPage: React.FC<StatisticPageProps> = ({ dataTypeCode, isPortal })
 
     useEffect(() => {
         const fetchCategories = async () => {
-            const res = await categoryApi.getAll()
+            const [status, res] = await categoryApi.getAll()
 
-            if (res) {
+            if (status === 200 && res) {
                 setCategories(res?.data ?? [])
             }
         }

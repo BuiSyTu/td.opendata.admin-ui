@@ -12,9 +12,9 @@ const FooterConfig = () => {
 
     useEffect(() => {
         const fetchFooterConfig = async () => {
-            const res = await footerConfigApi.get()
+            const [status, res] = await footerConfigApi.get()
 
-            if (res) {
+            if (status === 200) {
                 form.setFieldsValue(res?.data)
             }
         }
@@ -29,80 +29,52 @@ const FooterConfig = () => {
     }
 
     const handleOk = async () => {
-        try {
-            setButtonLoading(true)
-
-            await form.validateFields()
-            const formData = form.getFieldsValue(true)
-            const res = await footerConfigApi.update(formData)
-
-            if (res) {
-                notification.success({
-                    message: 'Cập nhật thành công!',
-                    duration: 1,
-                })
-            } else {
-                notification.error({
-                    message: `Lỗi ${res}`,
-                    description: `${res}`,
-                })
-            }
-
-            setButtonLoading(false)
-        } catch (error: any) {
-            setButtonLoading(false)
+        setButtonLoading(true)
+        await form.validateFields()
+        const formData = form.getFieldsValue(true)
+        const [status] = await footerConfigApi.update(formData)
+        if (status !== 200) {
+            notification.success({
+                message: 'Cập nhật thành công!',
+                duration: 1,
+            })
+        } else {
+            notification.error({
+                message: 'Cập nhật không thành công!',
+                duration: 1,
+            })
         }
+        setButtonLoading(false)
     }
 
     return (
         <>
             <PageTitle breadcrumbs={[]}>Cấu hình footer</PageTitle>
             <div className='card mb-5 mt-5 mb-xl-12 p-10 mw-1000px'>
-                <Form
-                    className='mt-5'
-                    {...layout}
-                    form={form}
-                >
-                    <Form.Item
-                        label='Tên phần mềm'
-                        name='softwareName'
-                    >
+                <Form className='mt-5' {...layout} form={form}>
+                    <Form.Item label='Tên phần mềm' name='softwareName'>
                         <Input style={{ width: '100%', height: 32, borderRadius: 5 }} />
                     </Form.Item>
-                    <Form.Item
-                        label='Tên công ty'
-                        name='companyName'
-                    >
+                    <Form.Item label='Tên công ty' name='companyName'>
                         <Input style={{ width: '100%', height: 32, borderRadius: 5 }} />
                     </Form.Item>
-                    <Form.Item
-                        label='Địa chỉ'
-                        name='address'
-                    >
+                    <Form.Item label='Địa chỉ' name='address'>
                         <Input style={{ width: '100%', height: 32, borderRadius: 5 }} />
                     </Form.Item>
-                    <Form.Item
-                        label='Số điện thoại'
-                        name='phoneNumber'>
+                    <Form.Item label='Số điện thoại' name='phoneNumber'>
                         <Input style={{ width: '100%', height: 32, borderRadius: 5 }} />
                     </Form.Item>
-                    <Form.Item
-                        label='Fax'
-                        name='fax'>
+                    <Form.Item label='Fax' name='fax'>
                         <Input style={{ width: '100%', height: 32, borderRadius: 5 }} />
                     </Form.Item>
-                    <Form.Item
-                        label='Hotline'
-                        name='hotLine'>
+                    <Form.Item label='Hotline' name='hotLine'>
                         <Input style={{ width: '100%', height: 32, borderRadius: 5 }} />
                     </Form.Item>
-                    <Form.Item
-                        label='Email'
-                        name='email'>
+                    <Form.Item label='Email' name='email'>
                         <Input style={{ width: '100%', height: 32, borderRadius: 5 }} />
                     </Form.Item>
 
-                    <div className="ant-modal-footer">
+                    <div className='ant-modal-footer'>
                         <Button
                             key='Ok'
                             type='primary'

@@ -1,37 +1,32 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react'
 
-import { Widget } from 'src/app/models';
-import { statsApi } from 'src/app/apis';
+import { Widget } from 'src/app/models'
+import { statsApi } from 'src/app/apis'
 
-const _color = ['#1976d2', '#FF9800', '#7cb342', '#f44336', '#9C27B0', '#009688'];
+const _color = ['#1976d2', '#FF9800', '#7cb342', '#f44336', '#9C27B0', '#009688']
 
 type Props = {
-    className?: string,
+    className?: string
     title?: string
 }
 
-const Widget1 : React.FC<Props> = ({
-    title,
-    className
-}) => {
+const Widget1: React.FC<Props> = ({ title, className }) => {
     const [data, setData] = useState<Widget | null>(null)
-
 
     useEffect(() => {
         const fetchData = async () => {
+            const [status, res] = await statsApi.getWidget()
 
-            const res = await statsApi.getWidget();
+            if (status === 200) {
+                setData(res.data)
+            }
+        }
 
-            if (res && res.data) {
-                setData(res.data);
-            } 
-        };
-
-        fetchData();
-        return () => { };
-    }, []);
+        fetchData()
+        return () => {}
+    }, [])
 
     //GetNhacViec
     return (
@@ -70,7 +65,11 @@ const Widget1 : React.FC<Props> = ({
                             </div>
                             <div
                                 className='d-flex align-items-center justify-content-center rounded-circle'
-                                style={{ backgroundColor: 'rgba(247, 247, 247, 0.25)', width: 60, height: 60 }}
+                                style={{
+                                    backgroundColor: 'rgba(247, 247, 247, 0.25)',
+                                    width: 60,
+                                    height: 60,
+                                }}
                             >
                                 <i className='fas fa-code fs-1 text-white'></i>
                             </div>
@@ -99,7 +98,11 @@ const Widget1 : React.FC<Props> = ({
                             </div>
                             <div
                                 className='d-flex align-items-center justify-content-center rounded-circle'
-                                style={{ backgroundColor: 'rgba(247, 247, 247, 0.25)', width: 60, height: 60 }}
+                                style={{
+                                    backgroundColor: 'rgba(247, 247, 247, 0.25)',
+                                    width: 60,
+                                    height: 60,
+                                }}
                             >
                                 <i className='fas fa-file-excel fs-1 text-white'></i>
                             </div>
@@ -128,7 +131,11 @@ const Widget1 : React.FC<Props> = ({
                             </div>
                             <div
                                 className='d-flex align-items-center justify-content-center rounded-circle'
-                                style={{ backgroundColor: 'rgba(247, 247, 247, 0.25)', width: 60, height: 60 }}
+                                style={{
+                                    backgroundColor: 'rgba(247, 247, 247, 0.25)',
+                                    width: 60,
+                                    height: 60,
+                                }}
                             >
                                 <i className='fas fa-database fs-1 text-white'></i>
                             </div>
@@ -142,7 +149,7 @@ const Widget1 : React.FC<Props> = ({
             </div>
             {/* end::Body */}
         </div>
-    );
-};
+    )
+}
 
 export default Widget1
