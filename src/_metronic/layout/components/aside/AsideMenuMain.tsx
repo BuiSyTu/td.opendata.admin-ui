@@ -25,6 +25,26 @@ export function AsideMenuMain() {
             />
 
             <AsideMenuItemWithSub
+                to='/common-categories'
+                title='Danh mục chung'
+                icon='/media/icons/duotune/general/gen022.svg'
+                userPermissions={userPermissions}
+                childrenPermissions={[
+                    Permissions.ThuThapDuLieuDonVi,
+                    Permissions.KhaiThacDuLieuDonVi,
+                    Permissions.DuyetDuLieuDonVi,
+                ]}
+            >
+                <AsideMenuItem
+                    to='/common-categories/trinh-do-hoc-van'
+                    title='Trình độ học vấn'
+                    hasBullet={true}
+                    userPermissions={userPermissions}
+                    menuPermissions={[Permissions.ThuThapDuLieuDonVi]}
+                />
+            </AsideMenuItemWithSub>
+
+            <AsideMenuItemWithSub
                 to='/dataset'
                 title='Thu thập dữ liệu'
                 icon='/media/icons/duotune/general/gen022.svg'

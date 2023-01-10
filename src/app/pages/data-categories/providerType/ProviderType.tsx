@@ -104,8 +104,8 @@ const CategoryPage = () => {
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true)
-            const res = await providerTypeApi.getAll()
-            if (res === 200) {
+            const [status, res] = await providerTypeApi.getAll()
+            if (status === 200) {
                 setDataTable(res?.data ?? [])
                 setCount(res?.totalCount ?? 0)
             }

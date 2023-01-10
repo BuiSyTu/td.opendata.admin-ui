@@ -10,6 +10,7 @@ export function PrivateRoutes() {
     const AdministrativeCategoriesPage = lazy(
         () => import('src/app/pages/administrative-categories')
     )
+    const CommonCategoriesPage = lazy(() => import('src/app/pages/common-categories'))
     const ConfigPage = lazy(() => import('src/app/pages/configs'))
 
     return (
@@ -19,6 +20,7 @@ export function PrivateRoutes() {
                 <Route path='/dataset' component={DatasetPage} />
                 <Route path='/data-categories' component={DataCategoriesPage} />
                 <Route path='/administrative-categories' component={AdministrativeCategoriesPage} />
+                <Route path='/common-categories' component={CommonCategoriesPage} />
                 <Route path='/configs' component={ConfigPage} />
                 <Redirect from='/auth' to='/dashboard' />
                 <Redirect exact from='/' to='/dashboard' />

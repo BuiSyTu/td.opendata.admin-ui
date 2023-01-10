@@ -178,52 +178,52 @@ const ModalCategory: React.FC<Props> = ({
 
     useEffect(() => {
         const fetchData = async () => {
-            try {
-                setIsLoading(true)
-                const res = await datasetApi.getById(modalId)
-
-                if (res?.data?.datasetAPIConfig) {
-                    res.data = {
-                        ...res.data,
-                        ...res.data.datasetAPIConfig,
-                    }
-
-                    try {
-                        const headersObj = JSON.parse(res.data.datasetAPIConfig?.headers)
-                        res.data.headers = Object.keys(headersObj).map((key) => ({
-                            key: key,
-                            value: headersObj[key],
-                        }))
-                    } catch (err) {
-                        console.error(err)
-                    }
-                }
-
-                if (res?.data?.datasetFileConfig) {
-                    res.data = {
-                        ...res.data,
-                        ...res.data.datasetFileConfig,
-                    }
-
-                    setFileList([
-                        {
-                            url: `${process.env.REACT_APP_API_URL}/${res.data.datasetFileConfig.fileUrl}`,
-                            name: res.data.datasetFileConfig.fileName,
-                            uid: uuidv4(),
-                        },
-                    ])
-                }
-
-                if (res?.data) {
-                    form.setFieldsValue(res?.data)
-
-                    dispatch(setDataTypeCode(res?.data?.dataType?.code?.toLowerCase()))
-                    dispatch(setDataMetadata(JSON.parse(res?.data?.metadata)))
-                }
+            setIsLoading(true)
+            const [status, res] = await datasetApi.getById(modalId)
+            if (status !== 200) {
                 setIsLoading(false)
-            } catch (error) {
-                setIsLoading(false)
+                return
             }
+
+            if (res?.data?.datasetAPIConfig) {
+                res.data = {
+                    ...res.data,
+                    ...res.data.datasetAPIConfig,
+                }
+
+                try {
+                    const headersObj = JSON.parse(res.data.datasetAPIConfig?.headers)
+                    res.data.headers = Object.keys(headersObj).map((key) => ({
+                        key: key,
+                        value: headersObj[key],
+                    }))
+                } catch (err) {
+                    console.error(err)
+                }
+            }
+
+            if (res?.data?.datasetFileConfig) {
+                res.data = {
+                    ...res.data,
+                    ...res.data.datasetFileConfig,
+                }
+
+                setFileList([
+                    {
+                        url: `${process.env.REACT_APP_API_URL}/${res.data.datasetFileConfig.fileUrl}`,
+                        name: res.data.datasetFileConfig.fileName,
+                        uid: uuidv4(),
+                    },
+                ])
+            }
+
+            if (res?.data) {
+                form.setFieldsValue(res?.data)
+
+                dispatch(setDataTypeCode(res?.data?.dataType?.code?.toLowerCase()))
+                dispatch(setDataMetadata(JSON.parse(res?.data?.metadata)))
+            }
+            setIsLoading(false)
         }
 
         setDisable(typeModal === TypeModal.view ? true : false)
@@ -318,42 +318,39 @@ const ModalCategory: React.FC<Props> = ({
             return
         }
 
-        try {
-            setButtonLoading(true)
-            const res = await datasetApi.add(data)
-            if (res) {
-                notification.success({
-                    message: 'Thêm mới thành công!',
-                    duration: 1,
-                })
-            } else {
-                notification.error({
-                    message: `Lỗi khi thêm`,
-                    description: `${res}`,
-                })
-            }
-            setButtonLoading(false)
-        } catch (error) {
-            setButtonLoading(false)
+        setButtonLoading(true)
+        const [status] = await datasetApi.add(data)
+        if (status === 200) {
+            notification.success({
+                message: 'Thêm mới thành công!',
+                duration: 1,
+            })
+        } else {
+            notification.error({
+                message: 'Lỗi khi thêm',
+                description: 'Vui lòng kiểm tra lại!',
+            })
         }
+        setButtonLoading(false)
         setUpdate(true)
         handleCancel()
     }
 
     const putData = async (data: Dataset) => {
-        try {
-            setButtonLoading(true)
-            const res = await datasetApi.update(modalId, data)
-            if (res) {
-                notification.success({
-                    message: 'Cập nhập thành công!',
-                    duration: 1,
-                })
-            }
-            setButtonLoading(false)
-        } catch (error) {
-            setButtonLoading(false)
+        setButtonLoading(true)
+        const [status] = await datasetApi.update(modalId, data)
+        if (status === 200) {
+            notification.success({
+                message: 'Cập nhập thành công!',
+                duration: 1,
+            })
+        } else {
+            notification.error({
+                message: 'Lỗi khi thêm',
+                description: 'Vui lòng kiểm tra lại!',
+            })
         }
+        setButtonLoading(false)
         setUpdate(true)
         handleCancel()
     }

@@ -4,12 +4,12 @@ import { useEffect, useState } from 'react'
 import FormModal from './components/FormModal'
 import { PageTitle } from 'src/_metronic/layout/core'
 import { TableList } from 'src/app/components'
-import { documentTypeApi } from 'src/app/apis'
+import { trinhDoHocVanApi } from 'src/app/apis'
 
 const { Text } = Typography
 const { Search } = Input
 
-const DocumentTypePage = () => {
+const TrinhDoHocVanPage = () => {
     const [loading, setLoading] = useState(false)
     const [modalVisible, setModalVisible] = useState(false)
     const [update, setUpdate] = useState(true)
@@ -42,7 +42,13 @@ const DocumentTypePage = () => {
             title: 'Tên',
             dataIndex: 'name',
             key: 'name',
-            width: '75%',
+            width: '45%',
+        },
+        {
+            title: 'Mã',
+            dataIndex: 'code',
+            key: 'code',
+            width: '30%',
         },
         {
             title: 'Thao tác',
@@ -98,16 +104,17 @@ const DocumentTypePage = () => {
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true)
-            const [status, res] = await documentTypeApi.getAll()
+            const [status, res] = await trinhDoHocVanApi.getAll()
             if (status === 200) {
                 setDataTable(res?.data ?? [])
                 setCount(res?.totalCount ?? 0)
             } else {
                 notification.error({
-                    message: `Lấy dữ liệu thất bại!`,
-                    description: 'Xảy ra lỗi trong quá trình thực hiện!',
+                    message: 'Có lỗi xảy ra',
+                    description: 'Vui lòng kiểm tra lại quá trình thực hiện',
                 })
             }
+
             setLoading(false)
             setUpdate(false)
         }
@@ -135,7 +142,7 @@ const DocumentTypePage = () => {
     }
 
     const handleDelete = async (id: string) => {
-        const [status] = await documentTypeApi.delete(id)
+        const [status] = await trinhDoHocVanApi.delete(id)
         if (status === 200) {
             notification.success({
                 message: 'Xóa thành công!',
@@ -153,7 +160,7 @@ const DocumentTypePage = () => {
 
     return (
         <div>
-            <PageTitle breadcrumbs={[]}>Danh sách loại giấy tờ</PageTitle>
+            <PageTitle breadcrumbs={[]}>Danh sách trình độ học vấn</PageTitle>
             <div className='card mb-5 mb-xl-12 p-10'>
                 <div className='d-flex row justify-content-between align-items-center px-5'>
                     <div className='col-xl-8 d-flex align-items-center'>
@@ -201,4 +208,4 @@ const DocumentTypePage = () => {
     )
 }
 
-export default DocumentTypePage
+export default TrinhDoHocVanPage

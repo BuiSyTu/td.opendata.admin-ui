@@ -281,20 +281,19 @@ const ListPage: React.FC<ListPageProps> = ({
 
     useEffect(() => {
         const fetchData = async () => {
-            try {
-                setLoading(true)
-                const res = await datasetApi.getAll({
-                    isPortal,
-                    ...(dataTypeCode && { dataTypeCode }),
-                    ...(!isPortal && { officeCode: userInfo?.Info?.UserOffice?.GroupCode ?? '' }),
-                    ...(approveState && { approveState }),
-                })
+            setLoading(true)
+            const [status, res] = await datasetApi.getAll({
+                isPortal,
+                ...(dataTypeCode && { dataTypeCode }),
+                ...(!isPortal && { officeCode: userInfo?.Info?.UserOffice?.GroupCode ?? '' }),
+                ...(approveState && { approveState }),
+            })
+
+            if (status === 200) {
                 setDataTable(res?.data ?? [])
                 setCount(res?.totalCount ?? 0)
-                setLoading(false)
-            } catch (error) {
-                setLoading(false)
             }
+            setLoading(false)
             setUpdate(false)
         }
 
@@ -337,8 +336,8 @@ const ListPage: React.FC<ListPageProps> = ({
     }
 
     const handleDelete = async (id: string) => {
-        const res = await datasetApi.delete(id)
-        if (res) {
+        const [status] = await datasetApi.delete(id)
+        if (status === 200) {
             notification.success({
                 message: 'Xóa thành công!',
                 duration: 1,
@@ -355,8 +354,8 @@ const ListPage: React.FC<ListPageProps> = ({
     }
 
     const handleApproved = async (id: string) => {
-        const res = await datasetApi.approved(id)
-        if (res) {
+        const [status] = await datasetApi.approved(id)
+        if (status === 200) {
             notification.success({
                 message: 'Thành công!',
                 duration: 1,
@@ -373,8 +372,8 @@ const ListPage: React.FC<ListPageProps> = ({
     }
 
     const handleRejected = async (id: string) => {
-        const res = await datasetApi.rejected(id)
-        if (res) {
+        const [status] = await datasetApi.rejected(id)
+        if (status === 200) {
             notification.success({
                 message: 'Thành công!',
                 duration: 1,
@@ -397,8 +396,8 @@ const ListPage: React.FC<ListPageProps> = ({
             placement: 'bottomRight',
         })
 
-        const res = await datasetApi.syncData(id)
-        if (res) {
+        const [status] = await datasetApi.syncData(id)
+        if (status === 200) {
             notification.success({
                 message: 'Thành công!',
                 duration: 1,
@@ -415,8 +414,8 @@ const ListPage: React.FC<ListPageProps> = ({
     }
 
     const handleGetData = async (id: string) => {
-        const res = await datasetApi.getData(id)
-        if (res) {
+        const [status, res] = await datasetApi.getData(id)
+        if (status === 200) {
             openJsonInNewTab(res)
         } else {
             notification.error({

@@ -68,8 +68,8 @@ const DashboardPage: FC = () => {
         }
 
         const fetchDataByOrganization = async () => {
-            const data = await datasetApi.statsByCategory()
-            if (!data) {
+            const [status, data] = await datasetApi.statsByCategory()
+            if (status !== 200) {
                 return
             }
 
@@ -78,8 +78,8 @@ const DashboardPage: FC = () => {
         }
 
         const fetchDataByCategory = async () => {
-            const data = await datasetApi.statsByOrganization()
-            if (!data) {
+            const [status, data] = await datasetApi.statsByOrganization()
+            if (status !== 200) {
                 return
             }
 

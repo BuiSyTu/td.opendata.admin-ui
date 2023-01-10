@@ -2,7 +2,6 @@ import { Dataset, DatasetListFilter } from 'src/app/models'
 
 import axios from 'axios'
 import { getCookie } from 'src/utils/cookies'
-import { notification } from 'antd'
 import { toQueryString } from 'src/utils/common'
 
 const controllerName = 'datasets'
@@ -22,10 +21,9 @@ const getAll = async (listFilter?: DatasetListFilter) => {
             timeout: 15000,
         })
 
-        return res?.data
+        return [res?.status, res?.data]
     } catch (error: any) {
-        console.error(error.response)
-        return null
+        return [error.response?.status, null]
     }
 }
 
@@ -43,10 +41,9 @@ const add = async (data: Dataset) => {
             timeout: 15000,
         })
 
-        return res?.data
+        return [res?.status, res?.data]
     } catch (error: any) {
-        console.error(error.response)
-        return null
+        return [error.response?.status, null]
     }
 }
 
@@ -62,10 +59,9 @@ const getById = async (id: string) => {
             timeout: 15000,
         })
 
-        return res?.data
+        return [res?.status, res?.data]
     } catch (error: any) {
-        console.error(error.response)
-        return null
+        return [error.response?.status, null]
     }
 }
 
@@ -81,10 +77,9 @@ const getData = async (id: string) => {
             timeout: 15000,
         })
 
-        return res?.data
+        return [res?.status, res?.data]
     } catch (error: any) {
-        console.error(error.response)
-        return null
+        return [error.response?.status, null]
     }
 }
 
@@ -101,23 +96,9 @@ const update = async (id: string, data: Dataset) => {
             timeout: 15000,
         })
 
-        return res?.data
+        return [res?.status, res?.data]
     } catch (error: any) {
-        const { status } = error.response
-
-        if (status === 406) {
-            notification.warning({
-                message: 'Thất bại!',
-                description: 'Không có thông tin nào thay đổi',
-            })
-        } else {
-            notification.error({
-                message: 'Thất bại!',
-                description: 'Xảy ra lỗi trong quá trình thực hiện!',
-            })
-        }
-
-        return null
+        return [error.response?.status, null]
     }
 }
 
@@ -133,10 +114,9 @@ const _delete = async (id: string) => {
             timeout: 15000,
         })
 
-        return res?.data
+        return [res?.status, res?.data]
     } catch (error: any) {
-        console.error(error.response)
-        return null
+        return [error.response?.status, null]
     }
 }
 
@@ -152,10 +132,9 @@ const approved = async (id: string) => {
             timeout: 15000,
         })
 
-        return res?.data
+        return [res?.status, res?.data]
     } catch (error: any) {
-        console.error(error.response)
-        return null
+        return [error.response?.status, null]
     }
 }
 
@@ -171,10 +150,9 @@ const rejected = async (id: string) => {
             timeout: 15000,
         })
 
-        return res?.data
+        return [res?.status, res?.data]
     } catch (error: any) {
-        console.error(error.response)
-        return null
+        return [error.response?.status, null]
     }
 }
 
@@ -190,10 +168,9 @@ const syncData = async (id: string) => {
             timeout: 15000,
         })
 
-        return res?.data
+        return [res?.status, res?.data]
     } catch (error: any) {
-        console.error(error.response)
-        return null
+        return [error.response?.status, null]
     }
 }
 
@@ -209,10 +186,9 @@ const statsByCategory = async () => {
             timeout: 15000,
         })
 
-        return res?.data
+        return [res?.status, res?.data]
     } catch (error: any) {
-        console.error(error.response)
-        return null
+        return [error.response?.status, null]
     }
 }
 
@@ -228,10 +204,9 @@ const statsByOrganization = async () => {
             timeout: 15000,
         })
 
-        return res?.data
+        return [res?.status, res?.data]
     } catch (error: any) {
-        console.error(error.response)
-        return null
+        return [error.response?.status, null]
     }
 }
 
